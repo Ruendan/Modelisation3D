@@ -1,15 +1,9 @@
 package test;
 
-public class Test extends Object{
-	
-	
+public class Test {
 	private boolean joke;
-	
-	public Test() {
-		
-	}
 	public void testmethode(){
-		joke = false;
 		joke = true;
+		joke = false;
 	}
 }
