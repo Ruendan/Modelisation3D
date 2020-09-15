@@ -6,7 +6,7 @@ public class Test {
 	public void testmethode(){
 		joke = true;
 		joke = false;
-		int a = 1;
+		if(joke) System.out.println("");
 		String aligator = "tata";
 		System.out.println(aligator);
 	}
