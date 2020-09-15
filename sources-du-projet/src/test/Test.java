@@ -7,7 +7,7 @@ public class Test {
 		joke = true;
 		joke = false;
 		int a = 1;
-		String aligator = "";
+		String aligator = "titi";
 		System.out.println(aligator);
 	}
 }
