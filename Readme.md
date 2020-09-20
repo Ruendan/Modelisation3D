@@ -1,8 +1,8 @@
 - Liste des étudiant·es (nom, prénom, groupe)
-    > Dubois Quentin, Groupe G
-    > Devigne Nathan, Groupe G
-    > Hottin Lucas, Groupe G
-    > Camus Sylvain, Groupe G
+    - Dubois Quentin, Groupe G
+    - Devigne Nathan, Groupe G
+    - Hottin Lucas, Groupe G
+    - Camus Sylvain, Groupe G
 
 - Description des activités/responsabilités de chaque membre de l'équipe (rappel: les responsabilités doivent être équilibrées)
     #TODO
