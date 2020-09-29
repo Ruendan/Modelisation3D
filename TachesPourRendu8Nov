@@ -1,7 +1,5 @@
 8 novembre :
 
-importer une lib de modèles 3D depuis un lien en paramètre
-
 affichage de la liste (noms, nb faces, reste facultatif(sujet))
 
 message d'erreur (non respect du format, points ou segments manquants etc)
