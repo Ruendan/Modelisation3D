@@ -5,27 +5,32 @@ import java.util.List;
 public class Ply {
 	
 	private String type; //ply
-	private String format; //Ascii 
+	private String format; //ASCII 
 	
-	//NdPoints
+	//NbPoints
 	private int vertex;
+	//NbFaces
+	private int face;
 	
-	private float x; // l'abscisse du point sur l'axe des x
-	private float y; // l'ordonnée du point sur l'axe des y
-	private float z; // la cote sur l'axe des z
+	// Abcisse du point sur X, Y et Z
+	private float x; 
+	private float y; 
+	private float z; 
 	
-	private float nx; // la normale a x
-	private float ny; // la normale a x
-	private float nz; // la normale a x
+	/* Normale a : X, Y, Z*/
+	private float nx; 
+	private float ny; 
+	private float nz; 
 	
-	private String red; // le rouge du code RGB
-	private String green; // le vert
-	private String blue; // le bleu
-	private String alpha; // la transparence
-	private int face;  // Cette ligne signifie qu'il y a 1000 faces
+	// Codes RGB + Transparency
+	private String red; 
+	private String green; 
+	private String blue;
+	private String alpha;
 	
 	private int vertex_indice_elem;
-	private List<Integer> vertex_indices; // liste des nombres de points qui vont se trouver dans chaque facette
+	private List<Integer> vertex_indices; 
+	
 	
 	private List<Point> points;
 	private List<Face> faces;
@@ -33,7 +38,7 @@ public class Ply {
 	public Ply(String type, String format, int vertex, int face, float x, float y, float z, 
 			float nx, float ny, float nz,
 			String red, String green, String blue, String alpha, int vertex_indice_elem,
-			List<Integer> vertex_indices) {
+			List<Integer> vertex_indices, List<Face> faces, List<Point> points) {
 		super();
 		this.type = type;
 		this.format = format;
@@ -51,9 +56,80 @@ public class Ply {
 		this.alpha = alpha;
 		this.vertex_indice_elem = vertex_indice_elem;
 		this.vertex_indices = vertex_indices;
+		this.faces=faces;
+		this.points=points;
 	}
 
-	
+	public String getType() {
+		return type;
+	}
 
+	public String getFormat() {
+		return format;
+	}
+
+	public int getVertex() {
+		return vertex;
+	}
+
+	public int getFace() {
+		return face;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
+	public float getNx() {
+		return nx;
+	}
+
+	public float getNy() {
+		return ny;
+	}
+
+	public float getNz() {
+		return nz;
+	}
+
+	public String getRed() {
+		return red;
+	}
+
+	public String getGreen() {
+		return green;
+	}
+
+	public String getBlue() {
+		return blue;
+	}
+
+	public String getAlpha() {
+		return alpha;
+	}
+
+	public int getVertex_indice_elem() {
+		return vertex_indice_elem;
+	}
+
+	public List<Integer> getVertex_indices() {
+		return vertex_indices;
+	}
+
+	public List<Point> getPoints() {
+		return points;
+	}
+
+	public List<Face> getFaces() {
+		return faces;
+	}
 
 }

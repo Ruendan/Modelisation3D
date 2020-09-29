@@ -10,4 +10,12 @@ public class Face {
 		this.nbPoints=nbPoints;
 		this.points=points;
 	}
+
+	public int getNbPoints() {
+		return nbPoints;
+	}
+
+	public List<Point> getPoints() {
+		return points;
+	}
 }
