@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Ply {
 	
-	private String type;
-	private String format;
+	private String type; //ply
+	private String format; //Ascii 
 	
 	//NdPoints
 	private int vertex;
