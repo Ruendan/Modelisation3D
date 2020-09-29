@@ -1,8 +1,13 @@
 package modele;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ply {
+	
+	private static String url = "ressources/plys/";
 	
 	private String type; //ply
 	private String format; //ASCII 
@@ -35,30 +40,6 @@ public class Ply {
 	private List<Point> points;
 	private List<Face> faces;
 	
-	public Ply(String type, String format, int vertex, int face, float x, float y, float z, 
-			float nx, float ny, float nz,
-			String red, String green, String blue, String alpha, int vertex_indice_elem,
-			List<Integer> vertex_indices, List<Face> faces, List<Point> points) {
-		super();
-		this.type = type;
-		this.format = format;
-		this.vertex = vertex;
-		this.face = face;
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.nx = nx;
-		this.ny = ny;
-		this.nz = nz;
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-		this.alpha = alpha;
-		this.vertex_indice_elem = vertex_indice_elem;
-		this.vertex_indices = vertex_indices;
-		this.faces=faces;
-		this.points=points;
-	}
 
 	public String getType() {
 		return type;
@@ -130,6 +111,26 @@ public class Ply {
 
 	public List<Face> getFaces() {
 		return faces;
+	}
+	
+	
+	
+	public static Ply loadPly(String nom) {
+		Ply res = new Ply();
+		
+		try(Scanner sc = new Scanner(new File(url + nom + ".ply"))){
+			while(sc.hasNextLine()) {
+				System.out.println(sc.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		loadPly("cube");
 	}
 
 }
