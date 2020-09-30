@@ -1,13 +1,9 @@
 package modele;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
 public class Ply {
 	
-	private static String url = "ressources/plys/";
 	/*
 	private String type; //ply
 	private String format; //ASCII 
@@ -18,15 +14,15 @@ public class Ply {
 	private int face;
 	/*
 	// Abcisse du point sur X, Y et Z
-	private float x; 
-	private float y; 
-	private float z; 
+	private double x; 
+	private double y; 
+	private double z; 
 	
 	// Normale a : X, Y, Z
 	private float nx; 
 	private float ny; 
 	private float nz; 
-	
+
 	// Codes RGB + Transparency
 	private String red; 
 	private String green; 
@@ -58,28 +54,29 @@ public class Ply {
 	public int getFace() {
 		return face;
 	}
+	
 	/*
-	public float getX() {
+	public double getX() {
 		return x;
 	}
 
-	public float getY() {
+	public double getY() {
 		return y;
 	}
 
-	public float getZ() {
+	public double getZ() {
 		return z;
 	}
 
-	public float getNx() {
+	public double getNx() {
 		return nx;
 	}
 
-	public float getNy() {
+	public double getNy() {
 		return ny;
 	}
 
-	public float getNz() {
+	public double getNz() {
 		return nz;
 	}
 
@@ -115,7 +112,6 @@ public class Ply {
 		return faces;
 	}
 	
-	
 	public void setFaces(List<Face> faces) {
 		this.faces = faces;
 	}
@@ -127,15 +123,17 @@ public class Ply {
 	public void setFace(int face) {
 		this.face = face;
 	}
+	
+	public void setVertex(int vertex) {
+		this.vertex = vertex;
+	}
+
 	/*
 	public void setFormat(String format) {
 		this.format = format;
 	}
 	*/
-	public void setVertex(int vertex) {
-		this.vertex = vertex;
-	}
-
+	
 	public Ply(int vertex, int face, List<Point> points, List<Face> faces) {
 		this.vertex = vertex;
 		this.face = face;
