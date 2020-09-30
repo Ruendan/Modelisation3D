@@ -12,6 +12,7 @@ public class Matrix {
 			
 		return calculMatrice(matrice,point2);
 	}
+	
 	public static Point rotateX(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
