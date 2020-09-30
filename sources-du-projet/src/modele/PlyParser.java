@@ -61,7 +61,7 @@ public class PlyParser {
 				}
 				
 				if(headCorrect) {
-					line = nextOne(sc);
+					line = nextOne(sc); 
 					if(line==null||(!line.equals("property float32 y")&&!line.equals("property float y")))headCorrect = false;
 				}
 				
