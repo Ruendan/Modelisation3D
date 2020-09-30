@@ -14,43 +14,46 @@ public class Vue extends Application{
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-
+	
+	private List<Double[]> point;
+	private List<Integer[]> faces;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		int vertex = 5;
 		int face = 6;
 		Polygon[] pol= new Polygon[face]; 
-		List<Double[]> point = new ArrayList<>();
-		point.add(new Double[] {0.0,0.0,0.0});//0
-		point.add(new Double[] {1.0,0.0,0.0});//1
-		point.add(new Double[] {1.0,1.0,0.0});//2
-		point.add(new Double[] {0.0,1.0,0.0});//3
-		point.add(new Double[] {0.5,0.5,1.6});//4
+		point = new ArrayList<>();
+		point.add(new Double[] {-1.0, -1.0, -1.0});//0
+		point.add(new Double[] {1.0, -1.0, -1.0});//1
+		point.add(new Double[] {1.0, 1.0, -1.0 });//2
+		point.add(new Double[] {-1.0, 1.0, -1.0});//3
+		point.add(new Double[] {-1.0, -1.0, 1.0 });//4
+		point.add(new Double[] {1.0, -1.0, 1.0 });//5
+		point.add(new Double[] {1.0, 1.0, 1.0 });//6
+		point.add(new Double[] {-1.0, 1.0, 1.0 });//7
 		Group root = new Group();
 		
-		List<Integer[]> faces = new ArrayList<>();
-		faces.add(new Integer[] {3 ,1, 0 ,3});
-		faces.add(new Integer[] {3 ,1, 3 ,2});
-		faces.add(new Integer[] {3 ,0, 1 ,4});
-		faces.add(new Integer[] {3 ,0, 4 ,3});
-		faces.add(new Integer[] {3 ,3, 4 ,2});
-		faces.add(new Integer[] {3 ,1, 2 ,4});
-		
+		faces = new ArrayList<>();
+		faces.add(new Integer[] {4, 0, 1, 2, 3 });
+		faces.add(new Integer[] {4, 5, 4, 7, 6 });
+		faces.add(new Integer[] {4, 6, 2, 1, 5 });
+		faces.add(new Integer[] {4, 3, 7, 4, 0 });
+		faces.add(new Integer[] {4, 7, 3, 2, 6 });
+		faces.add(new Integer[] {4, 5, 1, 0, 4 });
 		
 		for(int i=0;i<point.size();i++) {
-			point.set(i, rotateZ(point.get(i),-20));
-			point.set(i, rotateX(point.get(i),100));
-			point.set(i, rotateY(point.get(i),-15));
+			point.set(i, rotateZ(point.get(i),45));//O
+			point.set(i, rotateX(point.get(i),45));//|
+			point.set(i, rotateY(point.get(i),0));//-
 			point.set(i, agrandir(point.get(i)));
 			
 		}
-		
+		tri();
 		for(int i=0; i<faces.size();i++) {
-			Double[] coord = convert3d2d(faces.get(i),point);	
+			Double[] coord = convert3d2d(faces.get(i));	
 			pol[i] = getPolygon(coord);
-			System.out.println("test");
 		}
-		System.out.println("done");
 	
 		root.getChildren().addAll(pol);
 		Scene scene = new Scene(root,1000,1000);
@@ -69,18 +72,17 @@ public class Vue extends Application{
 
 	private Polygon getPolygon(Double[] coord) {
 		Polygon poly = new Polygon();
-		poly.setFill(Color.rgb(135,206,250,0.5));
+		poly.setFill(Color.rgb(135,206,250,0.7));
 		poly.getPoints().setAll(coord);
 		poly.setStroke(Color.BLACK);
 		poly.setStrokeWidth(2);
 		return poly;
 	}
 
-	private Double[] convert3d2d(Integer[] face, List<Double[]> point) {
+	private Double[] convert3d2d(Integer[] face) {
 		Double[] coord = new Double[(face[0]*2)];
 		for(int j=1; j<face.length;j++) {
 			Double[] test = transformation(point.get((int)(double) face[j]));
-			System.out.println((j-1)+"\n"+test[0]+"\n"+test[1]);
 			coord[(j-1)*2]= test[0];
 			coord[(j-1)*2+1] = test[1];
 		}
@@ -138,5 +140,39 @@ public class Vue extends Application{
 			
 		}
 		return res;
+	}
+	
+	public double getZ(int i) {
+		return point.get(i)[2];
+	}
+	
+	public double moyenneZ(Integer[] face) {
+		double res=0;
+		for(int i = 1; i<=face[0];i++) {
+			res+=getZ(face[i]);
+		}
+		return res/face[0];
+	}
+	
+	public void tri() {
+		List<Double> moyennesZ = new ArrayList<Double>();
+		for(Integer[] f : faces) {
+			moyennesZ.add(moyenneZ(f));
+		}
+		Integer[] tempInt;
+		double tempDouble;
+		for(int i = 0; i< moyennesZ.size();i++) {
+			for(int j = i+1 ; j<moyennesZ.size();j++) {
+				if(moyennesZ.get(i)>moyennesZ.get(j)) {
+					tempInt = faces.get(i);
+					faces.set(i, faces.get(j));
+					faces.set(j, tempInt);
+					
+					tempDouble = moyennesZ.get(i);
+					moyennesZ.set(i, moyennesZ.get(j));
+					moyennesZ.set(j, tempDouble);
+				}
+			}
+		}
 	}
 }
