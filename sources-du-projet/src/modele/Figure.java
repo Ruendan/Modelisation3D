@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import modele.modelisation.Matrix;
@@ -11,6 +12,26 @@ public class Figure {
 	
 	public Figure(Ply ply){
 		this.figure = ply;
+	}
+	
+	public Figure() {
+		figure = new Ply();
+		figure.getPoints().add(new Point(-1.0, -1.0, -1.0));
+		figure.getPoints().add(new Point(1.0, -1.0, -1.0));
+		figure.getPoints().add(new Point(1.0, 1.0, -1.0 ));
+		figure.getPoints().add(new Point(-1.0, 1.0, -1.0));
+		figure.getPoints().add(new Point(-1.0, -1.0, 1.0 ));
+		figure.getPoints().add(new Point(1.0, -1.0, 1.0 ));
+		figure.getPoints().add(new Point(1.0, 1.0, 1.0 ));
+		figure.getPoints().add(new Point(-1.0, 1.0, 1.0 ));
+
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {0, 1, 2, 3 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {5, 4, 7, 6 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {6, 2, 1, 5 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {3, 7, 4, 0 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {7, 3, 2, 6 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {5, 1, 0, 4 })));
+
 	}
 	
 	public List<Face> initialisation() {
