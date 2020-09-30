@@ -8,21 +8,21 @@ import java.util.Scanner;
 public class Ply {
 	
 	private static String url = "ressources/plys/";
-	
+	/*
 	private String type; //ply
 	private String format; //ASCII 
-	
+	*/
 	//NbPoints (sommets)
 	private int vertex;
 	//NbFaces
 	private int face;
-	
+	/*
 	// Abcisse du point sur X, Y et Z
 	private float x; 
 	private float y; 
 	private float z; 
 	
-	/* Normale a : X, Y, Z*/
+	// Normale a : X, Y, Z
 	private float nx; 
 	private float ny; 
 	private float nz; 
@@ -33,14 +33,16 @@ public class Ply {
 	private String blue;
 	private String alpha;
 	
-	private int vertex_indice_elem;
-	private List<Integer> vertex_indices; 
 	
+	private int vertex_indice_elem;
+	
+	private List<Integer> vertex_indices; 
+	*/
 	
 	private List<Point> points;
 	private List<Face> faces;
 	
-
+	/*
 	public String getType() {
 		return type;
 	}
@@ -48,7 +50,7 @@ public class Ply {
 	public String getFormat() {
 		return format;
 	}
-
+    */
 	public int getVertex() {
 		return vertex;
 	}
@@ -56,7 +58,7 @@ public class Ply {
 	public int getFace() {
 		return face;
 	}
-
+	/*
 	public float getX() {
 		return x;
 	}
@@ -104,7 +106,7 @@ public class Ply {
 	public List<Integer> getVertex_indices() {
 		return vertex_indices;
 	}
-
+	*/
 	public List<Point> getPoints() {
 		return points;
 	}
@@ -114,23 +116,33 @@ public class Ply {
 	}
 	
 	
-	
-	public static Ply loadPly(String nom) {
-		Ply res = new Ply();
-		
-		try(Scanner sc = new Scanner(new File(url + nom + ".ply"))){
-			while(sc.hasNextLine()) {
-				System.out.println(sc.nextLine());
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	public static void main(String[] args) {
-		loadPly("cube");
+	public void setFaces(List<Face> faces) {
+		this.faces = faces;
 	}
 
+	public void setPoints(List<Point> points) {
+		this.points = points;
+	}
+
+	public void setFace(int face) {
+		this.face = face;
+	}
+	/*
+	public void setFormat(String format) {
+		this.format = format;
+	}
+	*/
+	public void setVertex(int vertex) {
+		this.vertex = vertex;
+	}
+
+	public Ply(int vertex, int face, List<Point> points, List<Face> faces) {
+		this.vertex = vertex;
+		this.face = face;
+		this.points = points;
+		this.setFaces(faces);
+	}
+
+	public Ply() {}
+	
 }
