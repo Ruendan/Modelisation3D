@@ -18,14 +18,14 @@ public class Ply {
 	private int face;
 	
 	// Abcisse du point sur X, Y et Z
-	private float x; 
-	private float y; 
-	private float z; 
+	private double x; 
+	private double y; 
+	private double z; 
 	
 	/* Normale a : X, Y, Z*/
-	private float nx; 
-	private float ny; 
-	private float nz; 
+	private double nx; 
+	private double ny; 
+	private double nz; 
 	
 	// Codes RGB + Transparency
 	private String red; 
@@ -39,7 +39,6 @@ public class Ply {
 	
 	private List<Point> points;
 	private List<Face> faces;
-	
 
 	public String getType() {
 		return type;
@@ -57,27 +56,27 @@ public class Ply {
 		return face;
 	}
 
-	public float getX() {
+	public double getX() {
 		return x;
 	}
 
-	public float getY() {
+	public double getY() {
 		return y;
 	}
 
-	public float getZ() {
+	public double getZ() {
 		return z;
 	}
 
-	public float getNx() {
+	public double getNx() {
 		return nx;
 	}
 
-	public float getNy() {
+	public double getNy() {
 		return ny;
 	}
 
-	public float getNz() {
+	public double getNz() {
 		return nz;
 	}
 
@@ -117,7 +116,6 @@ public class Ply {
 	
 	public static Ply loadPly(String nom) {
 		Ply res = new Ply();
-		
 		try(Scanner sc = new Scanner(new File(url + nom + ".ply"))){
 			while(sc.hasNextLine()) {
 				System.out.println(sc.nextLine());
