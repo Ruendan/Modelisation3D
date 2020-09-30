@@ -1,4 +1,4 @@
-package oneClass.vue;
+package vue;
 
 import java.util.ArrayList;
 import java.util.List;

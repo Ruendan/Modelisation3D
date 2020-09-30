@@ -12,7 +12,7 @@ public class Ply {
 	private String type; //ply
 	private String format; //ASCII 
 	
-	//NbPoints
+	//NbPoints (sommets)
 	private int vertex;
 	//NbFaces
 	private int face;
