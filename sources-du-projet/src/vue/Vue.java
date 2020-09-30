@@ -28,44 +28,26 @@ public class Vue extends Application{
 		point.add(new Double[] {0.5,0.5,1.6});//4
 		Group root = new Group();
 		
-		List<Double[]> faces = new ArrayList<>();
-		faces.add(new Double[] {3.0 ,1.0, 0.0 ,3.0});
-		faces.add(new Double[] {3.0 ,1.0, 3.0 ,2.0});
-		faces.add(new Double[] {3.0 ,0.0, 1.0 ,4.0});
-		faces.add(new Double[] {3.0 ,0.0, 4.0 ,3.0});
-		faces.add(new Double[] {3.0 ,3.0, 4.0 ,2.0});
-		faces.add(new Double[] {3.0 ,1.0, 2.0 ,4.0});
+		List<Integer[]> faces = new ArrayList<>();
+		faces.add(new Integer[] {3 ,1, 0 ,3});
+		faces.add(new Integer[] {3 ,1, 3 ,2});
+		faces.add(new Integer[] {3 ,0, 1 ,4});
+		faces.add(new Integer[] {3 ,0, 4 ,3});
+		faces.add(new Integer[] {3 ,3, 4 ,2});
+		faces.add(new Integer[] {3 ,1, 2 ,4});
 		
 		
 		for(int i=0;i<point.size();i++) {
-			point.set(i, rotateZ(point.get(i),22.5));
+			point.set(i, rotateZ(point.get(i),-20));
 			point.set(i, rotateX(point.get(i),100));
-			point.set(i, rotateY(point.get(i),22.5));
-			for(int j=0;j<point.get(i).length;j++) {
-				point.get(i)[j] *= 100;
-				point.get(i)[j] +=300;
-			} 
-		}
-		for(int i=0; i<faces.size();i++) {
-			Double[] coord = new Double[(int) (faces.get(i)[0]*2)];
-			System.out.println(i);
-			for(int j=1; j<faces.get(i).length;j++) {
-//				System.out.println(i);
-//				System.out.println(j);
-				
-				Double[] test = calculMatrice(point.get((int)(double) faces.get(i)[j]));
-				System.out.println((j-1)+"\n"+test[0]+"\n"+test[1]);
-				coord[(j-1)*2]= test[0];
-				coord[(j-1)*2+1] = test[1];
-			}
-			Polygon square = new Polygon();
-			//square.setFill(Color.LIGHTSKYBLUE);
-			square.getPoints().setAll(coord);
-			square.setStroke(Color.BLACK);
-			square.setStrokeWidth(2);
+			point.set(i, rotateY(point.get(i),-15));
+			point.set(i, agrandir(point.get(i)));
 			
-			square.setFill(null);
-			pol[i] = square;
+		}
+		
+		for(int i=0; i<faces.size();i++) {
+			Double[] coord = convert3d2d(faces.get(i),point);	
+			pol[i] = getPolygon(coord);
 			System.out.println("test");
 		}
 		System.out.println("done");
@@ -76,64 +58,84 @@ public class Vue extends Application{
 		primaryStage.show();
 	}
 	
-	public static Double[] calculMatrice(Double[] integers) {
-		Double[][] matrice = new Double[][] {{1.0,0.0,0.0},{0.0,1.0,0.0}};
-		Double[] res = new Double[2];
-		for(int i=0; i<matrice.length;i++) {
-			res[i]=0.0;
-			for(int j = 0 ; j<integers.length;j++) {
-				res[i]+=integers[j]*matrice[i][j];
-			}
+	
+	private Double[] agrandir(Double[] point) {
+		for(int j=0;j<point.length;j++) {
+			point[j] *= 100;
+			point[j] +=300;
+		} 
+		return point;
+	}
+
+	private Polygon getPolygon(Double[] coord) {
+		Polygon poly = new Polygon();
+		poly.setFill(Color.rgb(135,206,250,0.5));
+		poly.getPoints().setAll(coord);
+		poly.setStroke(Color.BLACK);
+		poly.setStrokeWidth(2);
+		return poly;
+	}
+
+	private Double[] convert3d2d(Integer[] face, List<Double[]> point) {
+		Double[] coord = new Double[(face[0]*2)];
+		for(int j=1; j<face.length;j++) {
+			Double[] test = transformation(point.get((int)(double) face[j]));
+			System.out.println((j-1)+"\n"+test[0]+"\n"+test[1]);
+			coord[(j-1)*2]= test[0];
+			coord[(j-1)*2+1] = test[1];
 		}
-		return res;
+		return coord;
+	}
+
+	public static Double[] transformation(Double[] valeurs) {
+		Double[][] matrice = new Double[][] {
+			{1.0,	0.0,	0.0},
+			{0.0,	1.0,	0.0}};
+			
+		return calculMatrice(matrice,valeurs);
+
 	}
 	
-	public static Double[] rotateZ(Double[] integers,double theta) {
-		Double[] valeurs = new Double[] {(double) integers[0],(double) integers[1],(double) integers[2]};
+	
+	public static Double[] rotateZ(Double[] valeurs,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
 			{Math.cos(theta),	-Math.sin(theta),	0.0},
 			{Math.sin(theta),	Math.cos(theta),	0.0},
 			{0.0,				0.0,				1.0}};	
-		Double[] res = new Double[3];
+			
+		return calculMatrice(matrice,valeurs);
+	}
+	public static Double[] rotateX(Double[] valeurs,double theta) {
+		theta = Math.toRadians(theta);
+		Double[][] matrice = new Double[][] {
+			{1.0,				0.0,						0.0},
+			{0.0,				Math.cos(theta),			-Math.sin(theta)},
+			{0.0,				Math.sin(theta),			Math.cos(theta)}};
+			
+		return calculMatrice(matrice,valeurs);
+	}
+	
+	
+	public static Double[] rotateY(Double[] valeurs,double theta) {
+		theta = Math.toRadians(theta);
+		Double[][] matrice = new Double[][] {
+			{Math.cos(theta),		0.0,		-Math.sin(theta)},
+			{0.0,					1.0,		0.0},
+			{Math.sin(theta),		0.0,		Math.cos(theta)}};
+			
+		return calculMatrice(matrice,valeurs);
+
+	}
+	
+	public static Double[] calculMatrice(Double[][] matrice, Double[] valeurs) {
+		Double[] res = new Double[matrice.length];
 		for(int i=0; i<matrice.length;i++) {
 			res[i]=0.0;
 			for(int j = 0 ; j<valeurs.length;j++) {
 				res[i]+=(valeurs[j])*matrice[i][j];
 			}
 			
-		}
-		return res;
-	}
-	public static Double[] rotateX(Double[] integers,double theta) {
-		Double[] valeurs = new Double[] {(double) integers[0],(double) integers[1],(double) integers[2]};
-		theta = Math.toRadians(theta);
-		Double[][] matrice = new Double[][] {
-			{1.0,				0.0,				0.0},
-			{0.0,				Math.cos(theta),	-Math.sin(theta)},
-			{0.0,				Math.sin(theta),	Math.cos(theta)}};
-		Double[] res = new Double[3];
-		for(int i=0; i<matrice.length;i++) {
-			res[i]=0.0;
-			for(int j = 0 ; j<valeurs.length;j++) {
-				res[i]+=(valeurs[j])*matrice[i][j];
-			}
-		}
-		return res;
-	}
-	public static Double[] rotateY(Double[] integers,double theta) {
-		Double[] valeurs = new Double[] {(double) integers[0],(double) integers[1],(double) integers[2]};
-		theta = Math.toRadians(theta);
-		Double[][] matrice = new Double[][] {
-			{Math.cos(theta),	0.0,				-Math.sin(theta)},
-			{0.0,				1.0,				0.0},
-			{Math.sin(theta),	0.0,	Math.cos(theta)}};
-		Double[] res = new Double[3];
-		for(int i=0; i<matrice.length;i++) {
-			res[i]=0.0;
-			for(int j = 0 ; j<valeurs.length;j++) {
-				res[i]+=(valeurs[j])*matrice[i][j];
-			}
 		}
 		return res;
 	}
