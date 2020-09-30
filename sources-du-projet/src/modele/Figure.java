@@ -16,6 +16,7 @@ public class Figure {
 	
 	public Figure() {
 		figure = new Ply();
+		figure.setPoints(new ArrayList<Point>()); 
 		figure.getPoints().add(new Point(-1.0, -1.0, -1.0));
 		figure.getPoints().add(new Point(1.0, -1.0, -1.0));
 		figure.getPoints().add(new Point(1.0, 1.0, -1.0 ));
@@ -25,12 +26,13 @@ public class Figure {
 		figure.getPoints().add(new Point(1.0, 1.0, 1.0 ));
 		figure.getPoints().add(new Point(-1.0, 1.0, 1.0 ));
 
+		figure.setFaces(new ArrayList<Face>());
 		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {0, 1, 2, 3 })));
 		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {5, 4, 7, 6 })));
 		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {6, 2, 1, 5 })));
 		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {3, 7, 4, 0 })));
 		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {7, 3, 2, 6 })));
-		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {5, 1, 0, 4 })));
+		figure.getFaces().add(new Face(4, Arrays.asList(new Integer[] {5, 1, 0, 4 })))	;
 
 	}
 	
