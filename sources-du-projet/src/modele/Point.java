@@ -46,4 +46,9 @@ public class Point {
 	public boolean isDim2() {
 		return dim2;
 	}
+
+	@Override
+	public String toString() {
+		return "x:" + x + "y:" + y + "z:" + z + ";";
+	}
 }

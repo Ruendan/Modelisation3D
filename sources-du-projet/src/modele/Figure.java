@@ -9,6 +9,7 @@ import modele.modelisation.Matrix;
 public class Figure {
 	private Ply figure;
 	
+	private final int PAUL_DURAND = 10000;
 	
 	public Figure(Ply ply){
 		this.figure = ply;
@@ -38,9 +39,9 @@ public class Figure {
 	
 	public List<Face> initialisation() {
 		for(int i=0;i<figure.getPoints().size();i++) {
-			figure.getPoints().set(i, Matrix.rotateZ(figure.getPoints().get(i),45));//O
-			figure.getPoints().set(i, Matrix.rotateX(figure.getPoints().get(i),45));//|
-			figure.getPoints().set(i, Matrix.rotateY(figure.getPoints().get(i),0));//-
+			figure.getPoints().set(i, Matrix.rotateX(figure.getPoints().get(i),/*45*/210));//|
+			figure.getPoints().set(i, Matrix.rotateY(figure.getPoints().get(i),180));//-
+			figure.getPoints().set(i, Matrix.rotateZ(figure.getPoints().get(i),/*45*/0));//O
 			figure.getPoints().set(i, agrandir(figure.getPoints().get(i)));
 			
 		}
@@ -49,8 +50,8 @@ public class Figure {
 	}
 	
 	private Point agrandir(Point point2) {
-		point2.agrandir(100);
-		point2.deplacer(300, 300, 300);
+		point2.agrandir(PAUL_DURAND-4000);
+		point2.deplacer(500, 800, 500);
 		
 		return point2;
 	}

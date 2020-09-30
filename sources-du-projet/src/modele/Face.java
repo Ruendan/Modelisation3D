@@ -18,4 +18,9 @@ public class Face {
 	public List<Integer> getPoints() {
 		return points;
 	}
+
+	@Override
+	public String toString() {
+		return "Face [nbPoints=" + nbPoints + ", points=" + points + "]";
+	}
 }

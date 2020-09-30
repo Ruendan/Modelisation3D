@@ -16,8 +16,6 @@ public class PlyParser {
 	private List<Point> points;
 	private List<Face> faces;
 	
-	private Scanner sc;
-	
 	public static Ply loadPly(String nom) {
 		PlyParser pp = new PlyParser();
 		Ply ply = new Ply();
@@ -26,7 +24,8 @@ public class PlyParser {
 	}
 	
 	public void loadPly(Ply res,String filename) {
-		loadPly(res,new File(url+filename));
+		loadPly(res,new File(url+filename+".ply"));
+		System.out.println(res);
 	}
 	
 	public void loadPly(Ply res,File fichier) {
@@ -42,16 +41,16 @@ public class PlyParser {
 					if(checkFormat(line)) {
 						headCorrect = true;
 						//res.setFormat("ascii 1.0");
-					}
-					headCorrect = false;
+					} else headCorrect = false;
 				}
-				
 				if(headCorrect) {
 					line = nextOne(sc);
 					if(line==null)headCorrect = false;
 					else if(line.contains("element vertex")) {
 						int vert = checkVertex(line);
-						if(vert>0)res.setVertex(vert);
+						if(vert>0) {
+							res.setVertex(vert);
+						}
 						else headCorrect = false;
 					}
 				}
@@ -76,14 +75,19 @@ public class PlyParser {
 					if(line==null)headCorrect = false;
 					else if(line.contains("element face")) {
 						int face = checkFace(line);
-						if(face>0)res.setFace(face);
+						if(face>0) {
+							System.out.println(face);
+							res.setFace(face);
+						}
 						else headCorrect = false;
 					}
 				}
 				
 				while(header&&headCorrect) {
 					line = nextOne(sc);
-					if(line==null||!line.equals("property list uint8 int32 vertex_indices"))headCorrect = false;
+					System.out.println(line);
+					if(line==null)headCorrect = false;
+					if(line.equals("end_header"))header = false;
 				}
 			}
 			if(!header&&headCorrect) {
@@ -99,7 +103,7 @@ public class PlyParser {
 		
 	}
 	
-	private boolean fillFace(Scanner sc2, Ply ply) {
+	private boolean fillFace(Scanner sc, Ply ply) {
 		faces= new ArrayList<Face>();
 		String line;
 		for (int i = 0; i < ply.getFace(); i++) {
@@ -112,22 +116,18 @@ public class PlyParser {
 	}
 
 	private boolean addFaces(String line) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < nbPointInFace; i++) {
-			sb.append("([0-9]+)");
-			if(i<nbPointInFace-1)sb.append("\\s");
-		}
-		if(!line.matches(sb.toString()))return false;
-		int deb = line.indexOf(" ")+1;
-		int space = 0;
-		ArrayList<Integer> pointss = new ArrayList<Integer>();
-		for (int i = 0; i < nbPointInFace; i++) {
-			if(i<nbPointInFace-1) {
-				space = line.indexOf(" ", deb);
-				pointss.add(Integer.parseInt(line.substring(deb, space)));
-			} else {
-				pointss.add(Integer.parseInt(line.substring(deb)));
+		String tab[] = line.split(" ");
+		for (String string : tab) {
+			try{
+				Integer.parseInt(string);
+			}catch(Exception e) {
+				return false;
 			}
+		}
+		ArrayList<Integer> pointss = new ArrayList<Integer>();
+		nbPointInFace = Integer.parseInt(tab[0]);
+		for (int i = 1; i < nbPointInFace+1; i++) {
+			pointss.add(Integer.parseInt(tab[i]));
 		}
 		return addFace(new Face(nbPointInFace, pointss));	 
 	}
@@ -137,7 +137,8 @@ public class PlyParser {
 	}
 
 	private boolean fillPoint(Scanner sc,Ply ply) {
-		points= new ArrayList<Point>();
+		
+		points = new ArrayList<Point>();
 		String line;
 		for (int i = 0; i < ply.getVertex(); i++) {
 			if(sc.hasNextLine()) {
@@ -149,16 +150,15 @@ public class PlyParser {
 	}
 
 	private boolean addPoint(String line) {
-		if(line.matches("([0-9]+)(.([0-9]+)?)\\s([0-9]+)(.([0-9]+)?)\\s([0-9]+)(.([0-9]+)?)")) {
-			int space = line.indexOf(" ");
-			double x = Double.parseDouble(line.substring(0, space));
-			int deb = space+1;
-			space = line.indexOf(" ", deb);
-			double y = Double.parseDouble(line.substring(deb,space));
-			deb = space +1;
-			double z = Double.parseDouble(line.substring(deb));
-			return addPoint(new Point(x, y, z));
-		} return false;
+		String tab[] = line.split(" ");
+		for (String string : tab) {
+			try{
+				Double.parseDouble(string);
+			}catch(Exception e) {
+				return false;
+			}
+		}
+		return addPoint(new Point(Double.parseDouble(tab[0]), Double.parseDouble(tab[1]), Double.parseDouble(tab[2])));
 	}
 
 	private boolean addPoint(Point point) {
@@ -178,7 +178,7 @@ public class PlyParser {
 	}
 
 	private boolean checkFormat(String line) {
-		return line.substring(7,12).equals("ascii 1.0");
+		return line.substring(7,16).equals("ascii 1.0");
 	}
 
 	private String nextOne(Scanner sc) {
@@ -194,6 +194,7 @@ public class PlyParser {
 		String line;
 		if(headCorrect&&sc.hasNextLine()) {
 			line = sc.nextLine();
+			System.out.println(line);
 			if(line.equals("ply"))return true;
 			else return false;
 		} else return false;

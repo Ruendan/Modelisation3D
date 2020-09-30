@@ -142,5 +142,12 @@ public class Ply {
 	}
 
 	public Ply() {}
+
+	@Override
+	public String toString() {
+		return "Ply [vertex=" + vertex + ", face=" + face + ", points=" + points + ", faces=" + faces + "]";
+	}
+	
+	
 	
 }

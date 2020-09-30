@@ -33,7 +33,7 @@ public class Vue extends Stage{
 	
 	private Polygon getPolygon(Double[] coord) {
 		Polygon poly = new Polygon();
-		poly.setFill(Color.rgb(135,206,250,0.7));
+		poly.setFill(Color.rgb(135,206,250,1));
 		poly.getPoints().setAll(coord);
 		poly.setStroke(Color.BLACK);
 		poly.setStrokeWidth(2);
