@@ -25,7 +25,6 @@ public class PlyParser {
 	
 	public void loadPly(Ply res,String filename) {
 		loadPly(res,new File(url+filename+".ply"));
-		System.out.println(res);
 	}
 	
 	public void loadPly(Ply res,File fichier) {
@@ -76,7 +75,6 @@ public class PlyParser {
 					else if(line.contains("element face")) {
 						int face = checkFace(line);
 						if(face>0) {
-							System.out.println(face);
 							res.setFace(face);
 						}
 						else headCorrect = false;
@@ -85,7 +83,6 @@ public class PlyParser {
 				
 				while(header&&headCorrect) {
 					line = nextOne(sc);
-					System.out.println(line);
 					if(line==null)headCorrect = false;
 					if(line.equals("end_header"))header = false;
 				}
@@ -194,7 +191,6 @@ public class PlyParser {
 		String line;
 		if(headCorrect&&sc.hasNextLine()) {
 			line = sc.nextLine();
-			System.out.println(line);
 			if(line.equals("ply"))return true;
 			else return false;
 		} else return false;
