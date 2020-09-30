@@ -57,17 +57,17 @@ public class PlyParser {
 				
 				if(headCorrect) {
 					line = nextOne(sc);
-					if(line==null||!line.equals("property float32 x"))headCorrect = false;
+					if(line==null||(!line.equals("property float32 x")&&!line.equals("property float x")))headCorrect = false;
 				}
 				
 				if(headCorrect) {
 					line = nextOne(sc);
-					if(line==null||!line.equals("property float32 y"))headCorrect = false;
+					if(line==null||(!line.equals("property float32 y")&&!line.equals("property float y")))headCorrect = false;
 				}
 				
 				if(headCorrect) {
 					line = nextOne(sc);
-					if(line==null||!line.equals("property float32 z"))headCorrect = false;
+					if(line==null||(!line.equals("property float32 z")&&!line.equals("property float z")))headCorrect = false;
 				}
 				
 				if(headCorrect) {
