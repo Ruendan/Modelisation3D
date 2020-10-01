@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Figure;
 import modele.PlyParser;
-import vue.TestVue;
+import vue.Vue;
 
 public class Main extends Application {
 	
@@ -16,7 +16,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Figure fig = new Figure(PlyParser.loadPly("cube"));
 		//Figure fig = new Figure();
-		new TestVue(fig);
+		new Vue(fig);
 
 	}
 }

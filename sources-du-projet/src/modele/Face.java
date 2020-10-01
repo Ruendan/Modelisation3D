@@ -23,4 +23,5 @@ public class Face {
 	public String toString() {
 		return "Face [nbPoints=" + nbPoints + ", points=" + points + "]";
 	}
+	
 }
