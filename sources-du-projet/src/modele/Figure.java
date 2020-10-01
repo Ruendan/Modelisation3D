@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Figure {
+	
 	private Ply figure;
 	private Point center;
 	
@@ -14,7 +15,7 @@ public class Figure {
 		System.out.println(center);
 	}
 
-	public Figure() {
+	public Figure() {   // destiné aux tests, charge le cube en ply
 		figure = new Ply();
 		figure.setPoints(new ArrayList<Point>());
 		figure.getPoints().add(new Point(-1.0, -1.0, -1.0));
@@ -40,7 +41,7 @@ public class Figure {
 	
 	public List<Face> initialisation() {
 		if(!initialisation) {
-			deplacer(-center.getX(), -center.getY(), -center.getZ());
+			deplacer(-center.getX(), -center.getY(), -center.getZ()); //TODO
 			for (int i = 0; i < figure.getPoints().size(); i++) {
 				figure.getPoints().get(i).rotate(0 , 0, 0);
 				figure.getPoints().get(i).agrandir(50);
@@ -53,7 +54,6 @@ public class Figure {
 		return figure.getFaces();
 	}
 
-	
 	public void deplacer(double x, double y, double z) {
 		for(int i = 0; i < figure.getPoints().size() ; i++) {
 			figure.getPoints().get(i).deplacer(x, y, z);
@@ -68,24 +68,6 @@ public class Figure {
 			figure.getPoints().get(i).agrandir(zoom);
 		}
 		deplacer(temp.getX(), temp.getY(), temp.getZ());
-	}
-
-	public double getZ(int i) {
-		return figure.getPoints().get(i).getZ();
-	}
-	public double getY(int i) {
-		return figure.getPoints().get(i).getY();
-	}
-	public double getX(int i) {
-		return figure.getPoints().get(i).getX();
-	}
-
-	public double moyenneZ(Face f) {
-		double res = 0;
-		for (int i = 0; i < f.getNbPoints(); i++) {
-			res += getZ(f.getPoints().get(i));
-		}
-		return res / f.getNbPoints();
 	}
 
 	public void tri() {
@@ -111,11 +93,14 @@ public class Figure {
 		}
 	}
 
-	public Ply getPly() {
-		// TODO Auto-generated method stub
-		return this.figure;
+	public double moyenneZ(Face f) {
+		double res = 0;
+		for (int i = 0; i < f.getNbPoints(); i++) {
+			res += getZ(f.getPoints().get(i));
+		}
+		return res / f.getNbPoints();
 	}
-
+	
 	public void rotate( double thetaX, double thetaY, double thetaZ) {
 		Point temp = new Point(center.getX(), center.getY(), center.getZ());
 		deplacer(-center.getX(), -center.getY(), -center.getZ());
@@ -152,4 +137,18 @@ public class Figure {
 		return new Point(x/f.getNbPoints(),y/f.getNbPoints(),z/f.getNbPoints());
 	}
 	
+	public double getZ(int i) {
+		return figure.getPoints().get(i).getZ();
+	}
+	public double getY(int i) {
+		return figure.getPoints().get(i).getY();
+	}
+	public double getX(int i) {
+		return figure.getPoints().get(i).getX();
+	}
+
+	public Ply getPly() {
+		return this.figure;
+	}
+
 }

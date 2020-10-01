@@ -18,6 +18,7 @@ public class GroupedVue extends Group {
 
 	Figure fig;
 	Timeline timeline;
+	
 	public GroupedVue(Figure figure) {
 		this.fig = figure;
 		this.getChildren().addAll(this.getPolygone());
@@ -30,15 +31,6 @@ public class GroupedVue extends Group {
 		timeline.setAutoReverse(true);
 		timeline.play();
     	
-	}
-
-	private Polygon getPolygon(Double[] coord) {
-		Polygon poly = new Polygon();
-		poly.setFill(Color.rgb(135, 206, 250, 1));
-		poly.getPoints().setAll(coord);
-		poly.setStroke(Color.BLACK);
-		poly.setStrokeWidth(0.5);
-		return poly;
 	}
 
 	private Double[] convert3d2d(Face face) {
@@ -64,4 +56,14 @@ public class GroupedVue extends Group {
 		}
 		return pol;
 	}
+	
+	private Polygon getPolygon(Double[] coord) {
+		Polygon poly = new Polygon();
+		poly.setFill(Color.rgb(135, 206, 250, 1));
+		poly.getPoints().setAll(coord);
+		poly.setStroke(Color.BLACK);
+		poly.setStrokeWidth(0.5);
+		return poly;
+	}
+	
 }
