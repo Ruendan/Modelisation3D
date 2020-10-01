@@ -2,15 +2,15 @@ package modele;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestTested {
 	
 	Tested t;
 	
-	@Before
+	@BeforeEach
 	public void initialize() {
 		t = new Tested();
 	}
@@ -43,7 +43,7 @@ public class TestTested {
 		assertFalse(t.isRunning());
 	}
 	
-	@After
+	@AfterEach
 	public void finish() {
 		t=null;
 	}
