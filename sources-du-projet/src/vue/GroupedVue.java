@@ -21,9 +21,10 @@ public class GroupedVue extends Group {
 	public GroupedVue(Figure figure) {
 		this.fig = figure;
 		this.getChildren().addAll(this.getPolygone());
-		timeline= new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
+		timeline= new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
+			
 			fig.rotate(1, 1, 1);
-			this.getChildren().remove(0);
+			this.getChildren().clear();
 			this.getChildren().addAll(this.getPolygone());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
