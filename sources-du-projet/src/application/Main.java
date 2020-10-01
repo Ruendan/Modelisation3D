@@ -3,9 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Figure;
-import modele.Ply;
 import modele.PlyParser;
-import vue.TestVue;
 import vue.Vue;
 
 public class Main extends Application {
