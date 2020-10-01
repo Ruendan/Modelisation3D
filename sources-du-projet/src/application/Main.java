@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Figure;
 import modele.PlyParser;
-import vue.Vue;
+import vue.TestVue;
 
 public class Main extends Application {
 	
@@ -14,8 +14,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Figure fig = new Figure(PlyParser.loadPly("mug"));
+		Figure fig = new Figure(PlyParser.loadPly("cube"));
 		//Figure fig = new Figure();
-		new Vue(fig);
+		new TestVue(fig);
+
 	}
 }
