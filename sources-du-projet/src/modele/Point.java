@@ -6,7 +6,6 @@ public class Point {
 	private double x;
 	private double y;
 	private double z;
-	private boolean dim2;
 	
 	public double getX() {
 		return x;
@@ -36,17 +35,11 @@ public class Point {
 		this.x=x;
 		this.y=y;
 		this.z=z;
-		this.dim2=false;
 	}
 	public Point(double x, double y) {
 		this.x=x;
 		this.y=y;
 		this.z=0;
-		this.dim2=true;
-	}
-
-	public boolean isDim2() {
-		return dim2;
 	}
 
 	@Override
@@ -64,9 +57,5 @@ public class Point {
 	public void rotate(double thetaX, double thetaY, double thetaZ) {
 		this.setPoint(Matrix.rotateX(Matrix.rotateY(Matrix.rotateZ(this, thetaZ), thetaY), thetaX));		
 	}
-
-	
-
-
 
 }
