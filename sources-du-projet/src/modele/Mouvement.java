@@ -15,6 +15,7 @@ public class Mouvement {
 		this.deplacer(f,temp.getX(), temp.getY(), temp.getZ());
 	}
 	
+	
 	public void deplacer(Figure f, double x, double y, double z) {
 		for(Point p : f.getPoints()) {
 			p.deplacer(x, y, z);

@@ -16,6 +16,9 @@ public class Figure {
 		this.center = center();
 		this.nbFaces=faces.size();
 		System.out.println(center);
+		System.out.println(faces.get(0).getPoints().get(0).hashCode());
+		System.out.println(points.get(0).hashCode());
+		System.out.println(nbFaces);
 	}
 
 	public Figure() {
