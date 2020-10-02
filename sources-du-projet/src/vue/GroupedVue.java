@@ -1,5 +1,8 @@
 package vue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -51,16 +54,13 @@ public class GroupedVue extends Group {
 		return coord;
 	}
 	
-	public Figure getFigure() {
-		return this.fig;
-	}
-	
-	public Polygon[] getPolygone() {
+	public List<Polygon> getPolygone() {
 		fig.initialisation();
-		Polygon[] pol = new Polygon[fig.getNbFaces()];
-		for (int i = 0; i < fig.getNbFaces(); i++) {
-			Double[] coord = convert3d2d((fig.getFaces().get(i)));
-			pol[i] = getPolygon(coord);
+		List<Polygon> pol = new ArrayList<Polygon>();
+		
+		for(Face f : fig.getFaces()) {
+			Double[] coord = convert3d2d((f));
+			pol.add(getPolygon(coord));
 		}
 		return pol;
 	}
