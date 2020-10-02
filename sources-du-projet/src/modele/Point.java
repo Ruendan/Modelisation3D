@@ -57,5 +57,17 @@ public class Point {
 	public void rotate(double thetaX, double thetaY, double thetaZ) {
 		this.setPoint(Matrix.rotateX(Matrix.rotateY(Matrix.rotateZ(this, thetaZ), thetaY), thetaX));		
 	}
+	
+	public void deplacerX(double x) {
+		this.x+=x;
+	}
+	
+	public void deplacerY(double y) {
+		this.y+=y;
+	}
+	
+	public void deplacerZ(double z) {
+		this.z+=z;
+	}
 
 }

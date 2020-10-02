@@ -21,7 +21,7 @@ public class GroupedVue extends Group {
 	public GroupedVue(Figure figure) {
 		this.fig = figure;
 		this.getChildren().addAll(this.getPolygone());
-		timeline= new Timeline(new KeyFrame(Duration.seconds(0.03333), e -> {
+		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
 			fig.rotate(1, 1, 1);
 			this.getChildren().clear();
 			this.getChildren().addAll(this.getPolygone());
@@ -56,7 +56,6 @@ public class GroupedVue extends Group {
 	}
 	
 	public Polygon[] getPolygone() {
-		fig.rotate(70, 50, 45);
 		List<Face> allCoord = this.fig.initialisation();
 		Polygon[] pol = new Polygon[allCoord.size()];
 		for (int i = 0; i < allCoord.size(); i++) {
