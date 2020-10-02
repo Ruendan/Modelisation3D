@@ -22,13 +22,13 @@ public class GroupedVue extends Group {
 		this.fig = figure;
 		this.getChildren().addAll(this.getPolygone());
 		timeline= new Timeline(new KeyFrame(Duration.seconds(0.03333), e -> {
-			fig.rotate(0.5, 0.5, 0.5);
+			fig.rotate(1, 1, 1);
 			this.getChildren().clear();
 			this.getChildren().addAll(this.getPolygone());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(true);
-		timeline.play();
+		//timeline.play();
     	
 	}
 
@@ -37,7 +37,7 @@ public class GroupedVue extends Group {
 		poly.setFill(Color.rgb(135, 206, 250, 1));
 		poly.getPoints().setAll(coord);
 		poly.setStroke(Color.BLACK);
-		poly.setStrokeWidth(0.5);
+		poly.setStrokeWidth(0.2);
 		return poly;
 	}
 
@@ -56,6 +56,7 @@ public class GroupedVue extends Group {
 	}
 	
 	public Polygon[] getPolygone() {
+		fig.rotate(70, 50, 45);
 		List<Face> allCoord = this.fig.initialisation();
 		Polygon[] pol = new Polygon[allCoord.size()];
 		for (int i = 0; i < allCoord.size(); i++) {

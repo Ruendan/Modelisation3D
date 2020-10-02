@@ -43,7 +43,7 @@ public class Figure {
 			deplacer(-center.getX(), -center.getY(), -center.getZ());
 			for (int i = 0; i < figure.getPoints().size(); i++) {
 				figure.getPoints().get(i).rotate(0 , 0, 0);
-				figure.getPoints().get(i).agrandir(50);
+				figure.getPoints().get(i).agrandir(100);
 				figure.getPoints().get(i).deplacer(250, 250, 250);
 			}
 			center.deplacer(250, 250, 250);
