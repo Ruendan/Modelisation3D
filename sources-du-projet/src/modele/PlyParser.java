@@ -75,7 +75,7 @@ public class PlyParser {
 					else if(line.contains("element face")) {
 						int face = checkFace(line);
 						if(face>0) {
-							res.setFace(face);
+							res.setNbFace(face);
 						}
 						else headCorrect = false;
 					}
@@ -103,7 +103,7 @@ public class PlyParser {
 	private boolean fillFace(Scanner sc, Ply ply) {
 		faces= new ArrayList<Face>();
 		String line;
-		for (int i = 0; i < ply.getFace(); i++) {
+		for (int i = 0; i < ply.getNbFace(); i++) {
 			if(sc.hasNextLine()) {
 				line = sc.nextLine();
 				if(!addFaces(line))return false;
@@ -121,10 +121,10 @@ public class PlyParser {
 				return false;
 			}
 		}
-		ArrayList<Integer> pointss = new ArrayList<Integer>();
+		ArrayList<Point> pointss = new ArrayList<Point>();
 		nbPointInFace = Integer.parseInt(tab[0]);
 		for (int i = 1; i < nbPointInFace+1; i++) {
-			pointss.add(Integer.parseInt(tab[i]));
+			pointss.add(points.get(Integer.parseInt(tab[i])));
 		}
 		return addFace(new Face(nbPointInFace, pointss));	 
 	}

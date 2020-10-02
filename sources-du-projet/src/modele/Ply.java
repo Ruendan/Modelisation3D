@@ -11,7 +11,7 @@ public class Ply {
 	//NbPoints (sommets)
 	private int vertex;
 	//NbFaces
-	private int face;
+	private int nbFace;
 	/*
 	// Abcisse du point sur X, Y et Z
 	private double x; 
@@ -51,8 +51,8 @@ public class Ply {
 		return vertex;
 	}
 
-	public int getFace() {
-		return face;
+	public int getNbFace() {
+		return nbFace;
 	}
 	
 	/*
@@ -119,13 +119,13 @@ public class Ply {
 	public void setPoints(List<Point> points) {
 		this.points = points;
 	}
-
-	public void setFace(int face) {
-		this.face = face;
-	}
 	
 	public void setVertex(int vertex) {
 		this.vertex = vertex;
+	}
+	
+	public void setNbFace(int nbFace) {
+		this.nbFace = nbFace;
 	}
 
 	/*
@@ -134,18 +134,18 @@ public class Ply {
 	}
 	*/
 	
-	public Ply(int vertex, int face, List<Point> points, List<Face> faces) {
+	public Ply(int vertex, int nbFace, List<Point> points, List<Face> faces) {
 		this.vertex = vertex;
-		this.face = face;
+		this.nbFace = nbFace;
 		this.points = points;
-		this.setFaces(faces);
+		this.faces = faces;
 	}
 
 	public Ply() {}
 
 	@Override
 	public String toString() {
-		return "Ply [vertex=" + vertex + ", face=" + face + ", points=" + points + ", faces=" + faces + "]";
+		return "Ply [vertex=" + vertex + ", face=" + nbFace + ", points=" + points + ", faces=" + faces + "]";
 	}
 	
 	

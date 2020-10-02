@@ -12,11 +12,15 @@ import org.junit.jupiter.api.Test;
 class FaceTest {
 
 	private Face classique;
-	private List<Integer> classiqueList = Arrays.asList(new Integer[] {0,1,2,3});
+	private List<Point> classiqueList = Arrays.asList(new Point[] {
+			new Point(0,0,0),
+			new Point(0,1,0),
+			new Point(1,0,0),
+			new Point(1,1,0)});
 	
 	private Face nulle;
 	
-	private List<Integer> videList = Arrays.asList(new Integer[] {});
+	private List<Point> videList = Arrays.asList(new Point[] {});
 	private Face vide;
 	
 	@BeforeEach

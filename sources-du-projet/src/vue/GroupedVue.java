@@ -1,7 +1,5 @@
 package vue;
 
-import java.util.List;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,6 +9,7 @@ import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 import modele.Face;
 import modele.Figure;
+import modele.Mouvement;
 import modele.Point;
 import modele.modelisation.Matrix;
 
@@ -18,17 +17,18 @@ public class GroupedVue extends Group {
 
 	Figure fig;
 	Timeline timeline;
+	
 	public GroupedVue(Figure figure) {
 		this.fig = figure;
 		this.getChildren().addAll(this.getPolygone());
 		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
-			fig.rotate(1, 1, 1);
+			new Mouvement().rotate(fig, 1, 1, 1);
 			this.getChildren().clear();
 			this.getChildren().addAll(this.getPolygone());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(true);
-		//timeline.play();
+		timeline.play();
     	
 	}
 
@@ -44,10 +44,10 @@ public class GroupedVue extends Group {
 	private Double[] convert3d2d(Face face) {
 		Double[] coord = new Double[(face.getNbPoints() * 2)];
 		for (int j = 0; j < face.getPoints().size(); j++) {
-			Point test = Matrix.transformation(fig.getPly().getPoints().get((int) (double) face.getPoints().get(j)));
+			Point test = Matrix.transformation(fig.getPoints().get(j));
 			coord[j * 2] = test.getX();
 			coord[j * 2 + 1] = test.getY();
-		}
+		}	
 		return coord;
 	}
 	
@@ -56,10 +56,10 @@ public class GroupedVue extends Group {
 	}
 	
 	public Polygon[] getPolygone() {
-		List<Face> allCoord = this.fig.initialisation();
-		Polygon[] pol = new Polygon[allCoord.size()];
-		for (int i = 0; i < allCoord.size(); i++) {
-			Double[] coord = convert3d2d((fig.getPly().getFaces().get(i)));
+		fig.initialisation();
+		Polygon[] pol = new Polygon[fig.getNbFaces()];
+		for (int i = 0; i < fig.getNbFaces(); i++) {
+			Double[] coord = convert3d2d((fig.getFaces().get(i)));
 			pol[i] = getPolygon(coord);
 		}
 		return pol;
