@@ -90,5 +90,10 @@ class FaceTest {
 	public void test_moyenneZ_vide() {
 		assertEquals(0, vide.moyenneZ());
 	}
+	
+	@Test
+	public void test_compareTo_classique() {
+		fail("C'est pas encore implémenté. Il faut qu'on se pose calmement dessus");
+	}
 
 }
