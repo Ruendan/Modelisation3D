@@ -3,6 +3,8 @@ package modele;
 import java.util.Collections;
 import java.util.List;
 
+import modele.parser.PlyParser;
+
 public class Figure {
 	
 	private List<Face> faces;
