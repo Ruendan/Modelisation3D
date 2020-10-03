@@ -17,6 +17,5 @@ public class Main extends Application {
 		Figure fig = new Figure(PlyParser.loadPly("cube-wtriangle"));
 		//Figure fig = new Figure();
 		new Vue(fig);
-
 	}
 }
