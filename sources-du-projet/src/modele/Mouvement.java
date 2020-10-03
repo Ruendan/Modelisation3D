@@ -1,11 +1,8 @@
 package modele;
 
 public class Mouvement {
-	
-	public Mouvement() {
-	}
-	
-	public void rotate(Figure f, double thetaX, double thetaY, double thetaZ) {		
+
+	public static void rotate(Figure f, double thetaX, double thetaY, double thetaZ) {		
 		Point temp = new Point(f.getCenter().getX(), f.getCenter().getY(), f.getCenter().getZ());
 		deplacer(f, -f.getCenter().getX(), -f.getCenter().getY(), -f.getCenter().getZ());
 		for(int i = 0; i < f.getPoints().size() ; i++) {
@@ -16,7 +13,7 @@ public class Mouvement {
 	}
 	
 	
-	public void deplacer(Figure f, double x, double y, double z) {
+	public static void deplacer(Figure f, double x, double y, double z) {
 		for(int i = 0; i < f.getPoints().size() ; i++) {
 			f.getPoints().get(i).deplacer(x, y, z);
 		}

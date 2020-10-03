@@ -1,6 +1,6 @@
 package modele;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Figure {
@@ -46,48 +46,30 @@ public class Figure {
 	 * IL FAUT METTRE TOUTES LES VALEURS DANS DES VARIABLES
 	 */
 	private void initialisation() {
-		new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 		for(Point p : this.getPoints()) {
-			p.rotate(30,  70,  20);
-			p.agrandir(40);
+			p.rotate(180,  180,  0);
+			p.agrandir(50);
 			p.deplacer(250, 250, 250);
 		}
 		center.deplacer(250, 250, 250);
-		this.zoom(4);
+		//this.zoom(0);
 		tri();
 	}
 
 
 	public void zoom(double zoom) {
 		Point temp = new Point(center.getX(), center.getY(), center.getZ());
-		new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 		for(int i = 0; i < this.getPoints().size() ; i++) {
 			this.getPoints().get(i).agrandir(zoom);
 		}
-		new Mouvement().deplacer(this, temp.getX(), temp.getY(), temp.getZ());
+		Mouvement.deplacer(this, temp.getX(), temp.getY(), temp.getZ());
 	}
 
 
 	public void tri() {
-		List<Double> moyennesZ = new ArrayList<Double>();
-		for (Face f : faces) {
-			moyennesZ.add(f.moyenneZ());
-		}
-		Face tempInt;
-		double tempDouble;
-		for (int i = 0; i < moyennesZ.size(); i++) {
-			for (int j = i + 1; j < moyennesZ.size(); j++) {
-				if (moyennesZ.get(i) > moyennesZ.get(j)) {
-					tempInt = faces.get(i);
-					faces.set(i, faces.get(j));
-					faces.set(j, tempInt);
-
-					tempDouble = moyennesZ.get(i);
-					moyennesZ.set(i, moyennesZ.get(j));
-					moyennesZ.set(j, tempDouble);
-				}
-			}
-		}
+		Collections.sort(faces);
 	}
 
 	public Point center() {

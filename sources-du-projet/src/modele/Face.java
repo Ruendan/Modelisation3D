@@ -2,7 +2,7 @@ package modele;
 
 import java.util.List;
 
-public class Face {
+public class Face implements Comparable<Face> {
 	private int nbPoints;
 	private List<Point> points;
 	
@@ -42,6 +42,13 @@ public class Face {
 			res+=p.getZ();
 		}
 		return res/nbPoints;
+	}
+
+	@Override
+	public int compareTo(Face o) {
+		Double moy1 = this.moyenneZ();
+		Double moy2 = o.moyenneZ();
+		return moy1.compareTo(moy2);
 	}
 	
 }

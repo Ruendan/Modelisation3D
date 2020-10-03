@@ -27,17 +27,18 @@ public class GroupedVue extends Group {
 		
 		this.getChildren().addAll(this.getPolygone());
 		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
-			new Mouvement().rotate(fig, 1, 1, 1);
+			fig.tri();
+			Mouvement.rotate(fig, 1, 1, 1);
 			this.getChildren().clear();
 			this.getChildren().addAll(this.getPolygone());
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(true);
 		
-		new Mouvement().rotate(fig, 1, 1, 1);
+		Mouvement.rotate(fig, 1, 1, 1);
 		this.getChildren().clear();
 		this.getChildren().addAll(this.getPolygone());
-		//timeline.play();
+		timeline.play();
     	
 	}
 
