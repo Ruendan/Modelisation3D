@@ -15,10 +15,6 @@ public class Figure {
 		this.points = ply.getPoints();
 		this.center = center();
 		this.nbFaces=faces.size();
-		System.out.println(center);
-		System.out.println(faces.get(0).getPoints().get(0).hashCode());
-		System.out.println(points.get(0).hashCode());
-		System.out.println(nbFaces);
 	}
 
 	public Figure() {
@@ -54,24 +50,25 @@ public class Figure {
 			new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 			for(Point p : this.getPoints()) {
 				p.rotate(30,  70,  20);
-				p.agrandir(100);
+				p.agrandir(40);
 				p.deplacer(250, 250, 250);
 			}
 			center.deplacer(250, 250, 250);
+			this.zoom(4);
 			initialisation= !initialisation;
 		}
 		tri();
 	}
 
 
-//	public void zoom(double zoom) {
-//		Point temp = new Point(center.getX(), center.getY(), center.getZ());
-//		deplacer(-center.getX(), -center.getY(), -center.getZ());
-//		for(int i = 0; i < figure.getPoints().size() ; i++) {
-//			figure.getPoints().get(i).agrandir(zoom);
-//		}
-//		deplacer(temp.getX(), temp.getY(), temp.getZ());
-//	}
+	public void zoom(double zoom) {
+		Point temp = new Point(center.getX(), center.getY(), center.getZ());
+		new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		for(int i = 0; i < this.getPoints().size() ; i++) {
+			this.getPoints().get(i).agrandir(zoom);
+		}
+		new Mouvement().deplacer(this, temp.getX(), temp.getY(), temp.getZ());
+	}
 
 
 	public void tri() {
@@ -115,7 +112,5 @@ public class Figure {
 		return "Figure [faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points
 				+ ", initialisation=" + initialisation + "]";
 	}
-	
-	
-	
+
 }

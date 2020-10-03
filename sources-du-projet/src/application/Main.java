@@ -14,9 +14,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Figure fig = new Figure(PlyParser.loadPly("cube"));
+		Figure fig = new Figure(PlyParser.loadPly("bethoveen"));
 		//Figure fig = new Figure();
-		System.out.println(fig);
 		new Vue(fig);
 
 	}

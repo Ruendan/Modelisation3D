@@ -33,7 +33,11 @@ public class GroupedVue extends Group {
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(true);
-		timeline.play();
+		
+		new Mouvement().rotate(fig, 1, 1, 1);
+		this.getChildren().clear();
+		this.getChildren().addAll(this.getPolygone());
+		//timeline.play();
     	
 	}
 
@@ -49,12 +53,14 @@ public class GroupedVue extends Group {
 	private Double[] convert3d2d(Face face) {
 		Double[] coord = new Double[(face.getNbPoints() * 2)];
 		for (int j = 0; j < face.getPoints().size(); j++) {
-			Point test = Matrix.transformation(fig.getPoints().get(j));
+			Point test = Matrix.transformation(face.getPoints().get(j));
 			coord[j * 2] = test.getX();
 			coord[j * 2 + 1] = test.getY();
 		}	
 		return coord;
 	}
+	
+	
 	
 	public List<Polygon> getPolygone() {
 		fig.initialisation();

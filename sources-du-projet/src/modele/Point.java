@@ -44,7 +44,7 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "[x:" + x + " y:" + y + " z:" + z + "]";
+		return "x:" + x + "y:" + y + "z:" + z + ";";
 	}
 
 	public void setPoint(Point point) {
