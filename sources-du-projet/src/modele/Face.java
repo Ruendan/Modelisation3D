@@ -79,7 +79,7 @@ public class Face implements Comparable<Face> {
 		Double moyX1 = this.moyenneX();
 		Double moyX2 = o.moyenneX();
 		
-		return -moyZ1.compareTo(moyZ2)/moyX1.compareTo(moyX2)/moyY1.compareTo(moyY2);
+		return -moyZ1.compareTo(moyZ2)-moyX1.compareTo(moyX2)-moyY1.compareTo(moyY2);//TODO a corriger
 	}
  
 	public void setId(int id) {

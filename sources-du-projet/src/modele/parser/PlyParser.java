@@ -54,13 +54,9 @@ public class PlyParser {
 		if(!(lines.length<12)) {
 			if(handleHeader(lines)&&handleBody(lines)) {
 				res.setVertex(vertex);
-				System.out.println(res.getVertex());
 				res.setNbFace(face);
-				System.out.println(res.getNbFace());
 				res.setPoints(points);
-				System.out.println(res.getPoints());
 				res.setFaces(faces);
-				System.out.println(res.getFaces());
 				res.setComment(comment);
 			}
 		}
