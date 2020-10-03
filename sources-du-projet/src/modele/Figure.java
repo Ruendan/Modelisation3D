@@ -48,8 +48,8 @@ public class Figure {
 	private void initialisation() {
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 		for(Point p : this.getPoints()) {
-			p.rotate(180,  180,  0);
-			p.agrandir(50);
+			p.rotate(70,  0,  70);
+			p.agrandir(100);
 			p.deplacer(250, 250, 250);
 		}
 		center.deplacer(250, 250, 250);
@@ -70,6 +70,11 @@ public class Figure {
 
 	public void tri() {
 		Collections.sort(faces);
+		int i=0;
+		for(Face f : faces) {
+			f.setId(i);
+			i++;
+		}
 	}
 
 	public Point center() {
