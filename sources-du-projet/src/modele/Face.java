@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Face implements Comparable<Face> {
@@ -10,7 +11,8 @@ public class Face implements Comparable<Face> {
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
-		this.points=points;
+		if(points==null) this.points = new ArrayList<Point>();
+		else this.points=points;
 		id=ID;
 		ID++;
 	}
@@ -82,6 +84,36 @@ public class Face implements Comparable<Face> {
  
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((points == null) ? 0 : points.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Face other = (Face) obj;
+		
+		
+		if (points == null) {
+			if (other.points != null)
+				return false;
+		} else {
+			for(int i=0; i<points.size(); i++) {
+				if(!this.points.get(i).equals(other.getPoints().get(i))) return false;
+			}
+		}
+		return true;
 	}
 	
 }

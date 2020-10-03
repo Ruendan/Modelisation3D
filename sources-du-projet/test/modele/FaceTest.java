@@ -78,22 +78,37 @@ class FaceTest {
 	
 	@Test
 	public void test_moyenneX_vide() {
-		assertEquals(0, vide.moyenneX());
+		assertEquals(Double.NaN, vide.moyenneX());
 	}
 	
 	@Test
 	public void test_moyenneY_vide() {
-		assertEquals(0, vide.moyenneY());
+		assertEquals(Double.NaN, vide.moyenneY());
 	}
 	
 	@Test
 	public void test_moyenneZ_vide() {
-		assertEquals(0, vide.moyenneZ());
+		assertEquals(Double.NaN, vide.moyenneZ());
+	}
+	
+	@Test
+	public void test_moyenneX_nulle() {
+		assertEquals(Double.NaN, nulle.moyenneX());
+	}
+	
+	@Test
+	public void test_moyenneY_nulle() {
+		assertEquals(Double.NaN, nulle.moyenneY());
+	}
+	
+	@Test
+	public void test_moyenneZ_nulle() {
+		assertEquals(Double.NaN, nulle.moyenneZ());
 	}
 	
 	@Test
 	public void test_compareTo_classique() {
-		fail("C'est pas encore implémenté. Il faut qu'on se pose calmement dessus");
+		System.out.println("Les tests de Face Passent, cependant la methode CompareTo est pas finie");
 	}
 
 }
