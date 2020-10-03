@@ -74,12 +74,7 @@ public class Face implements Comparable<Face> {
 	public int compareTo(Face o) {
 		Double moyZ1 = this.moyenneZ();
 		Double moyZ2 = o.moyenneZ();
-		Double moyY1 = this.moyenneY();
-		Double moyY2 = o.moyenneY();
-		Double moyX1 = this.moyenneX();
-		Double moyX2 = o.moyenneX();
-		
-		return -moyZ1.compareTo(moyZ2)-moyX1.compareTo(moyX2)-moyY1.compareTo(moyY2);//TODO a corriger
+		return Z1.compareTo(Z2);
 	}
  
 	public void setId(int id) {
