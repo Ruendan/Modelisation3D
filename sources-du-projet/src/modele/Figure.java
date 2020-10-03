@@ -15,6 +15,7 @@ public class Figure {
 		this.points = ply.getPoints();
 		this.center = center();
 		this.nbFaces=faces.size();
+		this.initialisation();
 	}
 
 	public Figure() {
@@ -41,22 +42,18 @@ public class Figure {
 		return faces;
 	}
 	
-	
-	
-	boolean initialisation = false; //TODO
-	
-	public void initialisation() {
-		if(!initialisation) {
-			new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-			for(Point p : this.getPoints()) {
-				p.rotate(30,  70,  20);
-				p.agrandir(40);
-				p.deplacer(250, 250, 250);
-			}
-			center.deplacer(250, 250, 250);
-			this.zoom(4);
-			initialisation= !initialisation;
+	/**
+	 * IL FAUT METTRE TOUTES LES VALEURS DANS DES VARIABLES
+	 */
+	private void initialisation() {
+		new Mouvement().deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		for(Point p : this.getPoints()) {
+			p.rotate(30,  70,  20);
+			p.agrandir(40);
+			p.deplacer(250, 250, 250);
 		}
+		center.deplacer(250, 250, 250);
+		this.zoom(4);
 		tri();
 	}
 
@@ -109,8 +106,7 @@ public class Figure {
 
 	@Override
 	public String toString() {
-		return "Figure [faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points
-				+ ", initialisation=" + initialisation + "]";
+		return "Figure [faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points;
 	}
 
 }

@@ -63,7 +63,6 @@ public class GroupedVue extends Group {
 	
 	
 	public List<Polygon> getPolygone() {
-		fig.initialisation();
 		List<Polygon> pol = new ArrayList<Polygon>();
 		
 		for(Face f : fig.getFaces()) {
