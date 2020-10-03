@@ -1,11 +1,7 @@
 package vue;
 
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
-public class Buttons extends Stage {
-	
-	public Buttons() {
+public class Buttons extends HBox{
 		
-	}
-	
 }

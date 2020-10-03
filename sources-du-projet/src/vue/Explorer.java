@@ -1,16 +1,9 @@
 package vue;
 
-import javafx.application.Application;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import modele.Ply;
 
-public class Explorer extends Application {
-
-	@Override
-	public void start(Stage primaryStage) {
-		
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+public class Explorer extends ListView<Ply> {
+	
 }

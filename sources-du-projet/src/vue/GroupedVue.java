@@ -17,7 +17,7 @@ import modele.Mouvement;
 import modele.Point;
 import modele.modelisation.Matrix;
 
-public class GroupedVue extends Group {
+public class GroupedVue extends Group{
 
 	Figure fig;
 	Timeline timeline;
