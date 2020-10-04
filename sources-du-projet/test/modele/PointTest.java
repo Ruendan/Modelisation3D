@@ -66,12 +66,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_classique_X() {
-		//classique.rotateX(1);
+		classique.rotateX(1);
 		assertEquals(0.0, classique.getX(), 0.01);
 		assertEquals(0.96, classique.getY(), 0.01);
 		assertEquals(2.01, classique.getZ(), 0.01);
 		
-		//classique.rotateX(-1);
+		classique.rotateX(-1);
 		assertEquals(0.00, classique.getX(), 0.01);
 		assertEquals(1.03, classique.getY(), 0.01);
 		assertEquals(1.98, classique.getZ(), 0.01);
@@ -79,12 +79,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_classique_Y() {
-		//classique.rotateY(2);
+		classique.rotateY(2);
 		assertEquals(-0.06, classique.getX(), 0.01);
 		assertEquals(1.0, classique.getY(), 0.01);
 		assertEquals(1.99, classique.getZ(), 0.01);
 		
-		//classique.rotateY(-1);
+		classique.rotateY(-1);
 		assertEquals(-0.03, classique.getX(), 0.01);
 		assertEquals(1.0, classique.getY(), 0.01);
 		assertEquals(1.99, classique.getZ(), 0.01);
@@ -92,12 +92,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_classique_Z() {
-		//classique.rotateZ(2);
+		classique.rotateZ(2);
 		assertEquals(-0.03, classique.getX(), 0.01);
 		assertEquals(0.99, classique.getY(), 0.01);
 		assertEquals(0, classique.getZ(), 0.01);
 		
-		//classique.rotateZ(-1);
+		classique.rotateZ(-1);
 		assertEquals(-0.01, classique.getX(), 0.01);
 		assertEquals(0.99, classique.getY(), 0.01);
 		assertEquals(0, classique.getZ(), 0.01);
@@ -105,12 +105,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_vide_X() {
-		//classique.rotateX(4);
+		classique.rotateX(4);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
 		
-		//classique.rotateX(-1);
+		classique.rotateX(-1);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
@@ -118,12 +118,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_vide_Y() {
-		//classique.rotateY(1);
+		classique.rotateY(1);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
 		
-		//classique.rotateY(-3);
+		classique.rotateY(-3);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
@@ -131,12 +131,12 @@ class PointTest {
 	
 	@Test
 	public void test_rotate_vide_Z() {
-		//classique.rotateZ(1);
+		classique.rotateZ(1);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
 		
-		//classique.rotateZ(-2);
+		classique.rotateZ(-2);
 		assertEquals(0.0, vide.getX(), 0.01);
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
