@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.List;
+
 public class Vecteur {
 
 	private double dirX;
@@ -20,6 +22,10 @@ public class Vecteur {
 	
 	public Vecteur(Point a,Point b) {
 		this(b.getX()-a.getX(),b.getY()-a.getY(),b.getZ()-a.getZ());
+	}
+	
+	public static Vecteur getNormal(List<Point> liste) {
+		return getNormal(liste.get(0), liste.get(1), liste.get(2));
 	}
 	
 	public static Vecteur getNormal(Point a,Point b, Point c) {
