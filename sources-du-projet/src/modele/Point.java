@@ -7,15 +7,15 @@ public class Point {
 	private double y;
 	private double z;
 	
-	public double getX() {
+	public Double getX() {
 		return x;
 	}
 
-	public double getY() {
+	public Double getY() {
 		return y;
 	}
 
-	public double getZ() {
+	public Double getZ() {
 		return z;
 	}
 	
@@ -55,7 +55,21 @@ public class Point {
 	
 	
 	public void rotate(double thetaX, double thetaY, double thetaZ) {
-		this.setPoint(Matrix.rotateX(Matrix.rotateY(Matrix.rotateZ(this, thetaZ), thetaY), thetaX));		
+		Matrix.rotateX(this, thetaX);
+		Matrix.rotateY(this, thetaY);
+		Matrix.rotateZ(this, thetaZ);		
+	}
+	
+	public void rotateX(double theta) {
+		Matrix.rotateX(this, theta);
+	}
+	
+	public void rotateY(double theta) {
+		Matrix.rotateY(this, theta);
+	}
+	
+	public void rotateZ(double theta) {
+		Matrix.rotateZ(this, theta);
 	}
 	
 	public void deplacerX(double x) {
@@ -102,6 +116,12 @@ public class Point {
 		return true;
 	}
 	
+	public void setPoint(Double x, Double y, Double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
 	
+
 
 }

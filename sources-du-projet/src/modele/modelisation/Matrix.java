@@ -3,36 +3,42 @@ package modele.modelisation;
 import modele.Point;
 
 public class Matrix {
-	public static Point rotateZ(Point point2,double theta) {
+	
+	private Double[][] matrice;
+	
+	public Matrix(Point p){
+		this.matrice = new Double[][]{{p.getX(), p.getY(), p.getZ()}};
+	}
+	
+	public static void rotateZ(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
 			{Math.cos(theta),	-Math.sin(theta),	0.0},
 			{Math.sin(theta),	Math.cos(theta),	0.0},
 			{0.0,				0.0,				1.0}};	
 			
-		return calculMatrice(matrice,point2);
+		point2.setPoint(calculMatrice(matrice,point2));
 	}
 	
-	public static Point rotateX(Point point2,double theta) {
+	public static void rotateX(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}};
 			
-		return calculMatrice(matrice,point2);
-	}
+			point2.setPoint(calculMatrice(matrice,point2));
+		}
 	
 	
-	public static Point rotateY(Point point2,double theta) {
+	public static void rotateY(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
 			{Math.cos(theta),		0.0,		-Math.sin(theta)},
 			{0.0,					1.0,		0.0},
 			{Math.sin(theta),		0.0,		Math.cos(theta)}};
 			
-		return calculMatrice(matrice,point2);
-
+			point2.setPoint(calculMatrice(matrice,point2));
 	}
 	
 	public static Point calculMatrice(Double[][] matrice, Point point2) {
