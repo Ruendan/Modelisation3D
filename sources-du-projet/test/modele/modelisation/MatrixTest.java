@@ -93,14 +93,14 @@ class MatrixTest {
 		//System.out.println(Matrix.rotateY(Matrix.rotateY(centre, 2), -1));
 		//C'est censé etre un void
 		Matrix.rotateY(centre, 2);
-		assertEquals(3.78, centre.getX(), 0.01);
-		assertEquals(5.0, centre.getY(), 0.01);
-		assertEquals(6.13, centre.getZ(), 0.01);
+		assertEquals(0.0, centre.getX(), 0.01);
+		assertEquals(0.0, centre.getY(), 0.01);
+		assertEquals(0.0, centre.getZ(), 0.01);
 
 		Matrix.rotateY(centre, -1);
-		assertEquals(3.89, centre.getX(), 0.01);
-		assertEquals(5.0, centre.getY(), 0.01);
-		assertEquals(6.06, centre.getZ(), 0.01);
+		assertEquals(0.0, centre.getX(), 0.01);
+		assertEquals(0.0, centre.getY(), 0.01);
+		assertEquals(0.0, centre.getZ(), 0.01);
 	}
 	
 	@Test
