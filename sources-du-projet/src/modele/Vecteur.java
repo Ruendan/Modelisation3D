@@ -26,26 +26,43 @@ public class Vecteur {
 		double x,y,z;
 		Vecteur ab = new Vecteur(a,b);
 		Vecteur ac = new Vecteur(a,c);
-		removeZ(ab,ac);
-		simplAC(ab,ac);
-		return null;
+		x = ab.dirY*ac.dirZ-ab.dirZ*ac.dirY;
+		y = ab.dirZ*ac.dirX-ab.dirX*ac.dirZ;
+		z = ab.dirX*ac.dirY-ab.dirY*ac.dirX;
+		Vecteur vn = new Vecteur(x, y, z);
+		return new Vecteur(vn.dirX/vn.norm, vn.dirY/vn.norm, vn.dirZ/vn.norm);
 	}
 	
-	private static Vecteur simplAC(Vecteur ab, Vecteur ac) {
-		double y = ac.dirX;
-		double x = -(ac.dirY);
-		double z = (ab.dirX*x+ab.dirY*y)/ab.dirZ;//TODO
-		return new Vecteur(ab.dirX,ab.dirY,ab.dirZ);
+	public double getDirX() {
+		return dirX;
 	}
 
-	private static void removeZ(Vecteur ab, Vecteur ac) {
-		double facteur = Math.abs(ac.dirZ)/Math.abs(ab.dirZ);
-		ab.dirX*=facteur;
-		ab.dirY*=facteur;
-		ab.dirZ*=facteur;
-		ac.dirX+=ab.dirX;
-		ac.dirY+=ab.dirY;
-		ac.dirZ+=ab.dirZ;
+	public void setDirX(double dirX) {
+		this.dirX = dirX;
+	}
+
+	public double getDirY() {
+		return dirY;
+	}
+
+	public void setDirY(double dirY) {
+		this.dirY = dirY;
+	}
+
+	public double getDirZ() {
+		return dirZ;
+	}
+
+	public void setDirZ(double dirZ) {
+		this.dirZ = dirZ;
+	}
+
+	public double getNorm() {
+		return norm;
+	}
+
+	public void setNorm(double norm) {
+		this.norm = norm;
 	}
 
 	public String toString() {
