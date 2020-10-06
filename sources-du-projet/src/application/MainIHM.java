@@ -15,6 +15,8 @@ public class MainIHM extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		new View();
+		Figure fig = new Figure(PlyParser.loadPly("cube-wtriangle"));
+		//Figure fig = new Figure();
+		new View(fig);
 	}
 }
