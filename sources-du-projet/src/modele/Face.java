@@ -16,7 +16,7 @@ public class Face implements Comparable<Face> {
 		else this.points=points;
 		id=ID;
 		ID++;
-		normal = Vecteur.getNormal(points);
+		setNormal();
 	}
 
 	
@@ -55,6 +55,10 @@ public class Face implements Comparable<Face> {
 			res+=p.getX();
 		}
 		return res/nbPoints;
+	}
+	
+	public void setNormal() {
+		normal = Vecteur.getNormal(points);
 	}
 	
 	@Override
