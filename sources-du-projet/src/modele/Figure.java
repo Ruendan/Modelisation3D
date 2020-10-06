@@ -71,6 +71,9 @@ public class Figure {
 
 
 	public void tri() {
+		for(Face f : faces) {
+			f.setNormal();
+		}
 		Collections.sort(faces);
 		int i=0;
 		for(Face f : faces) {

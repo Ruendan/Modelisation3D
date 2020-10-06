@@ -8,6 +8,7 @@ public class Face implements Comparable<Face> {
 	private List<Point> points;
 	private int id;
 	private static int ID=0;
+	private Vecteur normal;
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -15,24 +16,10 @@ public class Face implements Comparable<Face> {
 		else this.points=points;
 		id=ID;
 		ID++;
+		setNormal();
 	}
 
-	public int getNbPoints() {
-		return nbPoints;
-	}
 	
-	public List<Point> getPoints() {
-		return points;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public String toString() {
-		return "Face [nbPoints=" + nbPoints + ", points:(" + points + ")";
-	}
 	
 	public Point pointMoyen() {
 		double x = 0;
@@ -70,15 +57,47 @@ public class Face implements Comparable<Face> {
 		return res/nbPoints;
 	}
 	
+	public void setNormal() {
+		normal = Vecteur.getNormal(points);
+	}
+	
 	@Override
 	public int compareTo(Face o) {
+		
+		/*
 		Double moyZ1 = this.moyenneZ();
 		Double moyZ2 = o.moyenneZ();
+		*/
+		
+		Double moyZ1 = normal.getDirZ();
+		Double moyZ2= o.getNormal().getDirZ();
+		
 		return moyZ1.compareTo(moyZ2);
 	}
  
+	public Vecteur getNormal() {
+		return this.normal;
+	}
+	
+	public int getNbPoints() {
+		return nbPoints;
+	}
+	
+	public List<Point> getPoints() {
+		return points;
+	}
+
+	public int getId() {
+		return id;
+	}
+
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Face [nbPoints=" + nbPoints + ", points:(" + points + ")";
 	}
 	
 	@Override
