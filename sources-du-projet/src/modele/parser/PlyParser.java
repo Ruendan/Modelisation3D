@@ -16,7 +16,13 @@ public class PlyParser {
 	boolean headCorrect;
 	
 	
-	private int xyz;
+	private int pointPos;
+	private int xpos;
+	private int ypos;
+	private int zpos;
+	private boolean midHeader;
+	private int extraElements;
+	
 	private int idx;
 	private int extraPropertys;
 	
@@ -39,7 +45,7 @@ public class PlyParser {
 	}
 	
 	public void loadPly(Ply res,File fichier) {
-		xyz = 0;
+		pointPos = 0;
 		idx = 0;
 		vertex = -1;
 		face = -1;
@@ -66,6 +72,10 @@ public class PlyParser {
 		boolean endHeader = false;
 		comment = new ArrayList<String>();
 		extraPropertys = 0;
+		extraElements = 0;
+		xpos = -1;
+		ypos = -1;
+		zpos = -1;
 		
 		if(!checkType(lines[0]))return false;
 		if(!checkFormat(lines[1]))return false;
@@ -110,6 +120,9 @@ public class PlyParser {
 			vertex = handleVertex(line[2]);
 		} else if(line.length==3&&line[1].equals("face")&&Integer.parseInt(line[2])>0) {
 			face = handleFace(line[2]);
+		} else if(midHeader && line.length==3) {
+			extraElements += Integer.parseInt(line[2]);
+			extraPropertys++;
 		} else {
 			System.out.println("Les propriétés \"element\" ne sont pas conformes.");
 			return false;
@@ -118,8 +131,11 @@ public class PlyParser {
 	}
 
 	private int handleVertex(String vert) {
-		if(vert.matches("[0-9]+"))return Integer.parseInt(vert);
-		else return -1;
+		if(vert.matches("[0-9]+")) {
+			pointPos = idx;
+			return Integer.parseInt(vert);
+		}
+		return -1;
 	}
 	
 	private int handleFace(String face) {
@@ -129,28 +145,31 @@ public class PlyParser {
 
 	private boolean handleProperty(String[] line) {
 		if(line.length==3&&(line[1].equals("float")||line[1].equals("float32"))) {
-			if(line[2].equals("x")&&xyz!=1)xyz+=1;
-			else if(line[2].equals("y")&&xyz!=2)xyz+=2;
-			else if(line[2].equals("z")&&xyz!=4)xyz+=4;
+			if(line[2].equals("x")&&xpos==-1)xpos=idx-pointPos-1;
+			else if(line[2].equals("y")&&ypos==-1)ypos=idx-pointPos-1;
+			else if(line[2].equals("z")&&zpos==-1)zpos=idx-pointPos-1;
 			else {
-				System.out.println("Les propriétés \"property\" ne sont pas conformes.");
+				System.out.println("Les propriétés \"property\" ne sont pas conformes.(xyz)");
 				return false;
 			}
-		} else if((line.length>3&&line[1].equals("list"))||line.length==3) {
+		} else if(line.length==3&&!midHeader){
 			extraPropertys++;
-		} else {
-			System.out.println("Les propriétés \"property\" ne sont pas conformes.");
+		} else if(line.length>3&&line[1].equals("list")&&!midHeader) {
+			midHeader = true;
+		} else if(midHeader)extraPropertys++; 
+		else {
+			System.out.println("Les propriétés \"property\" ne sont pas conformes.(header)");
 			return false;
 		} 
 		return true;
 	}
 
 	private boolean checkHeader(String[] lines) {
-		if(lines.length!=(vertex+face+8+comment.size()+extraPropertys)) {
-			System.out.println("Le format de ce fichier n'est pas supporté.");
+		if(lines.length!=(vertex+face+9+comment.size()+extraPropertys+extraElements)) {
+			System.out.println("Le format de ce fichier n'est pas supporté. (total)"+vertex+face+9+comment.size()+extraPropertys+extraElements);
 			return false;
 		}
-		if(xyz!=7) {
+		if(xpos==-1||ypos==-1||zpos==-1) {
 			System.out.println("Les propriétés \"property\" ne sont pas conformes.");
 			return false;
 		}
@@ -164,11 +183,11 @@ public class PlyParser {
 	
 	private boolean handleBody(String[] lines) {
 		if(!handlePoint(lines)) {
-			System.out.println("Le format de ce fichier n'est pas supporté.");
+			System.out.println("Le format de ce fichier n'est pas supporté. (points)");
 			return false;
 		}
 		if(!handleFace(lines)) {
-			System.out.println("Le format de ce fichier n'est pas supporté.");
+			System.out.println("Le format de ce fichier n'est pas supporté. (faces)");
 			return false;
 		}
 		return true;
@@ -192,9 +211,9 @@ public class PlyParser {
 				return false;
 			}
 		}
-		double x = Double.parseDouble(tab[0]);
-		double y = Double.parseDouble(tab[1]);
-		double z = Double.parseDouble(tab[2]);
+		double x = Double.parseDouble(tab[xpos]);
+		double y = Double.parseDouble(tab[ypos]);
+		double z = Double.parseDouble(tab[zpos]);
 		return addPoint(new Point(x,y,z));
 	}
 
@@ -225,6 +244,10 @@ public class PlyParser {
 		}
 		ArrayList<Point> pointss = new ArrayList<Point>();
 		nbPointInFace = Integer.parseInt(tab[0]);
+		if(nbPointInFace==2) {
+			face--;
+			return true;
+		}
 		for (int i = 1; i < nbPointInFace+1; i++) {
 			pointss.add(points.get(Integer.parseInt(tab[i])));
 		}
