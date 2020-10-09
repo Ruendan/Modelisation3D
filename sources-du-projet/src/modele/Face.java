@@ -9,6 +9,7 @@ public class Face implements Comparable<Face> {
 	private int id;
 	private static int ID=0;
 	private Vecteur normal;
+	private Double closest;
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -57,24 +58,36 @@ public class Face implements Comparable<Face> {
 		return res/nbPoints;
 	}
 	
-	public void setNormal() {
+	public void preSort() {
+		setNormal();
+		setClosest();
+	}
+	
+	private void setNormal() {
 		normal = Vecteur.getNormal(points);
 	}
 	
 	@Override
 	public int compareTo(Face o) {
 		
-		/*
-		Double moyZ1 = this.moyenneZ();
-		Double moyZ2 = o.moyenneZ();
-		*/
-		
+		int point = this.closest.compareTo(o.closest);
+		if(point!=0)return point;
 		Double moyZ1 = normal.getDirZ();
 		Double moyZ2= o.getNormal().getDirZ();
 		
 		return moyZ1.compareTo(moyZ2);
 	}
  
+	public void setClosest() {
+		double petit = points.get(0).getZ();
+		for (Point point : points) {
+			if(point.getZ()<petit)petit=point.getZ();
+		}
+		this.closest = petit;
+	}
+
+
+
 	public Vecteur getNormal() {
 		return this.normal;
 	}
