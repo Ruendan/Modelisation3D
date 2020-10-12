@@ -10,6 +10,10 @@ public class Matrix {
 		this.matrice = new Double[][]{{p.getX(), p.getY(), p.getZ()}};
 	}
 	
+	public Matrix(Double[][] matrice){
+		this.matrice = matrice;
+	}
+	
 	public static void rotateZ(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Double[][] matrice = new Double[][] {
@@ -58,9 +62,9 @@ public class Matrix {
 	}
 	
 	public static Point transformation(Point point2) {
-		Double[][] matrice = new Double[][] {
+		Matrix matrice = new Matrix( new Double[][]{
 			{1.0,	0.0,	0.0},
-			{0.0,	1.0,	0.0}};
+			{0.0,	1.0,	0.0}});
 			
 		return calculMatrice(matrice,point2);
 
