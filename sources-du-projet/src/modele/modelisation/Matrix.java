@@ -16,7 +16,7 @@ public class Matrix {
 	
 	public static void rotateZ(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Double[][] matrice = new Double[][] {
+		Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),	-Math.sin(theta),	0.0},
 			{Math.sin(theta),	Math.cos(theta),	0.0},
 			{0.0,				0.0,				1.0}};	
@@ -26,7 +26,7 @@ public class Matrix {
 	
 	public static void rotateX(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Double[][] matrice = new Double[][] {
+		Matrix matrice = new Matrix(new Double[][]{
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}};
@@ -37,10 +37,10 @@ public class Matrix {
 	
 	public static void rotateY(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Double[][] matrice = new Double[][] {
+		Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),		0.0,		-Math.sin(theta)},
 			{0.0,					1.0,		0.0},
-			{Math.sin(theta),		0.0,		Math.cos(theta)}};
+			{Math.sin(theta),		0.0,		Math.cos(theta)}});
 			
 			point2.setPoint(calculMatrice(matrice,point2));
 	}
