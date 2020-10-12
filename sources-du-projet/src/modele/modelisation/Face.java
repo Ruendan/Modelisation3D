@@ -64,7 +64,7 @@ public class Face implements Comparable<Face> {
 	}
 	
 	private void setNormal() {
-		normal = Vecteur.getNormal(points);
+		if(points!=null) if(!points.isEmpty())normal = Vecteur.getNormal(points);
 	}
 	
 	@Override
