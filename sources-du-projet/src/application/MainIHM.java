@@ -3,9 +3,8 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import modele.Figure;
-import modele.PlyParser;
+import modele.parser.PlyParser;
 import vue.View;
-import vue.Vue;
 
 public class MainIHM extends Application {
 	
