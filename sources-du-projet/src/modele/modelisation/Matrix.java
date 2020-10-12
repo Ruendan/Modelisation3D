@@ -14,12 +14,21 @@ public class Matrix {
 		this.matrice = matrice;
 	}
 	
+	public int length() {
+		return matrice.length;
+	}
+	
+	public Double[][] getMatrix(){
+		return matrice;
+	}
+	
+	
 	public static void rotateZ(Point point2,double theta) {
 		theta = Math.toRadians(theta);
 		Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),	-Math.sin(theta),	0.0},
 			{Math.sin(theta),	Math.cos(theta),	0.0},
-			{0.0,				0.0,				1.0}};	
+			{0.0,				0.0,				1.0}});	
 			
 		point2.setPoint(calculMatrice(matrice,point2));
 	}
@@ -29,7 +38,7 @@ public class Matrix {
 		Matrix matrice = new Matrix(new Double[][]{
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
-			{0.0,				Math.sin(theta),			Math.cos(theta)}};
+			{0.0,				Math.sin(theta),			Math.cos(theta)}});
 			
 			point2.setPoint(calculMatrice(matrice,point2));
 		}
@@ -45,14 +54,16 @@ public class Matrix {
 			point2.setPoint(calculMatrice(matrice,point2));
 	}
 	
-	public static Point calculMatrice(Double[][] matrice, Point point2) {
+	public static Point calculMatrice(Matrix matrice, Point point2) {
 		Point rep;
-		Double[] res = new Double[matrice.length];
+		Double[] res = new Double[matrice.length()];
 		Double[] p = new Double[] {point2.getX(),point2.getY(),point2.getZ()};
-		for(int i=0; i<matrice.length;i++) {
+		
+		
+		for(int i=0; i<matrice.length();i++) {
 			res[i]=0.0;
 			for(int j = 0 ; j<p.length;j++) {
-				res[i]+=(p[j])*matrice[i][j];
+				res[i]+=(p[j])*matrice.getMatrix()[i][j];
 			}
 			
 		}
