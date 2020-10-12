@@ -12,15 +12,14 @@ public class View extends Stage{
 	
 	public View(Figure fig) {
 		HBox buttons = new Buttons();
-		//Label explorer = new Label("Explorer"); explorer.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
-		Explorer explorer = new Explorer();
+		Explorer models = new Explorer();
 		Group display = new GroupedVue(fig);
 		
 		VBox right = new VBox(); right.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
 		right.getChildren().addAll(display, buttons);
 		
 		BorderPane bb = new BorderPane();		
-		bb.setLeft(explorer);
+		bb.setLeft(models);
 		bb.setRight(right);		
 		
 		
