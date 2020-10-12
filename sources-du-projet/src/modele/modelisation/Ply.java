@@ -5,6 +5,8 @@ import java.util.Set;
 
 public class Ply {
 	
+	private String name;
+	
 	private int vertex;
 	
 	private int nbFace;
@@ -12,6 +14,14 @@ public class Ply {
 	private List<String> comment;
 	private Set<Point> points;
 	private List<Face> faces;
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	public int getVertex() {
 		return vertex;
