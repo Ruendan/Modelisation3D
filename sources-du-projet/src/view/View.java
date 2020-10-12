@@ -11,7 +11,7 @@ import modele.modelisation.Figure;
 public class View extends Stage{
 	
 	public View(Figure fig) {
-		HBox buttons = new Buttons();
+		HBox buttons = new Buttons(fig);
 		Explorer models = new Explorer();
 		Group display = new GroupedVue(fig);
 		

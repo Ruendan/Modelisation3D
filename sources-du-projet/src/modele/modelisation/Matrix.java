@@ -38,8 +38,8 @@ public class Matrix {
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}});
 			
-			point2.setPoint(calculMatrice(matrice,point2));
-		}
+		point2.setPoint(calculMatrice(matrice,point2));
+	}
 	
 	
 	public static void rotateY(Point point2,double theta) {
@@ -49,7 +49,7 @@ public class Matrix {
 			{0.0,					1.0,		0.0},
 			{Math.sin(theta),		0.0,		Math.cos(theta)}});
 			
-			point2.setPoint(calculMatrice(matrice,point2));
+		point2.setPoint(calculMatrice(matrice,point2));
 	}
 	
 	public static Point calculMatrice(Matrix matrice, Point point2) {

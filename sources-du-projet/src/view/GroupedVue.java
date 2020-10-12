@@ -1,42 +1,43 @@
 package view;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.util.Duration;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
-import modele.modelisation.Mouvement;
 import modele.modelisation.Point;
+import utils.Observer;
+import utils.Subject;
 
-public class GroupedVue extends Group{
+public class GroupedVue extends Group implements Observer{
 
 	Figure fig;
 	Timeline timeline;
 	
 	public GroupedVue(Figure figure) {
+		figure.attach(this);
 		this.fig = figure;
 		
 		
-		this.getChildren().addAll(this.getFigure());
-		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
-			fig.tri();
-			Mouvement.rotate(fig, 1, 1, 1);
-			this.getChildren().clear();
-			this.getChildren().addAll(this.getFigure());
-		}));
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(true);
 		
-		timeline.play();
+		this.getChildren().addAll(this.getFigure());
+		
+//		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
+//			fig.tri();
+//			Mouvement.rotate(fig, 1, 1, 1);
+//			this.getChildren().clear();
+//			this.getChildren().addAll(this.getFigure());
+//		}));
+//		timeline.setCycleCount(Animation.INDEFINITE);
+//		timeline.setAutoReverse(true);
+//		
+//		timeline.play();
+
     	
 	}
 
@@ -78,5 +79,19 @@ public class GroupedVue extends Group{
 			pol.add(getPolygon(coord,f));
 		}
 		return pol;
+	}
+
+	@Override
+	public void update(Subject subj) {
+		fig.tri();
+		this.getChildren().clear();
+		this.getChildren().addAll(this.getFigure());
+	}
+
+	@Override
+	public void update(Subject subj, Object data) {
+		fig.tri();
+		this.getChildren().clear();
+		this.getChildren().addAll(this.getFigure());
 	}
 }

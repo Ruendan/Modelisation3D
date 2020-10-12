@@ -6,8 +6,9 @@ import java.util.Set;
 
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
+import utils.Subject;
 
-public class Figure {
+public class Figure extends Subject {
 	
 	private String name;
 	private List<Face> faces;
@@ -109,6 +110,26 @@ public class Figure {
 	@Override
 	public String toString() {
 		return "Figure [faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points;
+	}
+
+	public void rotate(int i, int j, int k) {
+		Mouvement.rotate(this, i, j, k);
+		this.notifyObservers();
+	}
+	
+	public void rotateX(int i) {
+		Mouvement.rotateX(this, i);
+		this.notifyObservers();
+	}
+
+	public void rotateY(int i) {
+		Mouvement.rotateY(this, i);
+		this.notifyObservers();
+	}
+
+	public void rotateZ(int i) {
+		Mouvement.rotateZ(this, i);
+		this.notifyObservers();
 	}
 
 }
