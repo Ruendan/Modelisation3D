@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import modele.parser.PlyParser;
+import modele.parser.exception.PlyParserException;
 
 public class Figure {
 	
@@ -21,11 +22,11 @@ public class Figure {
 		this.initialisation();
 	}
 
-	public Figure() {
+	public Figure() throws PlyParserException {
 		this(PlyParser.loadPly("cube"));
 	}
 	
-	public Figure(String nom) {
+	public Figure(String nom) throws PlyParserException {
 		this(PlyParser.loadPly(nom));
 	}
 	

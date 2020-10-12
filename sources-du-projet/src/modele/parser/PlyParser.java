@@ -11,6 +11,11 @@ import java.util.Set;
 import modele.modelisation.Face;
 import modele.modelisation.Ply;
 import modele.modelisation.Point;
+import modele.parser.exception.ElementPropertiesError;
+import modele.parser.exception.UnsupportedFileFormat;
+import modele.parser.exception.NotPlyFileException;
+import modele.parser.exception.PlyParserException;
+import modele.parser.exception.PropertyPropertiesError;
 
 public class PlyParser {
 	
@@ -36,7 +41,7 @@ public class PlyParser {
 	private List<Point> pointsTotaux;
 	private List<Face> faces;
 	
-	public static Ply loadPly(String nom) {
+	public static Ply loadPly(String nom) throws PlyParserException {
 		PlyParser pp = new PlyParser();
 		Ply ply = new Ply();
 		ply.setName(nom);
@@ -44,11 +49,11 @@ public class PlyParser {
 		return ply;
 	}
 	
-	public void loadPly(Ply res,String filename) {
+	public void loadPly(Ply res,String filename) throws PlyParserException {
 		loadPly(res,new File(url+filename+".ply"));
 	}
 	
-	public void loadPly(Ply res,File fichier) {
+	public void loadPly(Ply res,File fichier) throws PlyParserException {
 		pointPos = 0;
 		idx = 0;
 		vertex = -1;
@@ -72,7 +77,7 @@ public class PlyParser {
 		}
 	}
 	
-	private boolean handleHeader(String[] lines) {
+	private boolean handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
 		comment = new ArrayList<String>();
 		extraPropertys = 0;
@@ -105,21 +110,19 @@ public class PlyParser {
 		return checkHeader(lines);
 	}
 
-	private boolean checkType(String line) {
+	private boolean checkType(String line) throws NotPlyFileException{
 		if(line.equals("ply"))return true;
 		else {
-			System.out.println("Le fichier lu ne correspond pas à un fichier de polygones (.ply).");
-			return false;
+			throw new NotPlyFileException();
 		}
 	}
 	
-	private boolean checkFormat(String line) {
+	private boolean checkFormat(String line) throws UnsupportedFileFormat {
 		if(line.equals("format ascii 1.0"))return true;
-		System.out.println("Le format de ce fichier n'est pas supporté.");
-		return false;
+		throw new UnsupportedFileFormat();
 	}
 	
-	private boolean handleElement(String[] line) {
+	private boolean handleElement(String[] line) throws ElementPropertiesError {
 		if(line.length==3&&line[1].equals("vertex")&&Integer.parseInt(line[2])>2) {
 			vertex = handleVertex(line[2]);
 		} else if(line.length==3&&line[1].equals("face")&&Integer.parseInt(line[2])>0) {
@@ -128,8 +131,7 @@ public class PlyParser {
 			extraElements += Integer.parseInt(line[2]);
 			extraPropertys++;
 		} else {
-			System.out.println("Les propriétés \"element\" ne sont pas conformes.");
-			return false;
+			throw new ElementPropertiesError();
 		}
 		return true;
 	}
@@ -147,14 +149,13 @@ public class PlyParser {
 		else return -1;
 	}
 
-	private boolean handleProperty(String[] line) {
+	private boolean handleProperty(String[] line) throws PropertyPropertiesError {
 		if(line.length==3&&(line[1].equals("float")||line[1].equals("float32"))) {
 			if(line[2].equals("x")&&xpos==-1)xpos=idx-pointPos-1;
 			else if(line[2].equals("y")&&ypos==-1)ypos=idx-pointPos-1;
 			else if(line[2].equals("z")&&zpos==-1)zpos=idx-pointPos-1;
 			else {
-				System.out.println("Les propriétés \"property\" ne sont pas conformes.(xyz)");
-				return false;
+				throw new PropertyPropertiesError("xyz");
 			}
 		} else if(line.length==3&&!midHeader){
 			extraPropertys++;
@@ -162,37 +163,31 @@ public class PlyParser {
 			midHeader = true;
 		} else if(midHeader)extraPropertys++; 
 		else {
-			System.out.println("Les propriétés \"property\" ne sont pas conformes.(header)");
-			return false;
+			throw new PropertyPropertiesError("header");
 		} 
 		return true;
 	}
 
-	private boolean checkHeader(String[] lines) {
+	private boolean checkHeader(String[] lines) throws UnsupportedFileFormat, PropertyPropertiesError, ElementPropertiesError {
 		if(lines.length!=(vertex+face+9+comment.size()+extraPropertys+extraElements)) {
-			System.out.println("Le format de ce fichier n'est pas supporté. (total)"+vertex+face+9+comment.size()+extraPropertys+extraElements);
-			return false;
+			throw new UnsupportedFileFormat("total"+vertex+face+9+comment.size()+extraPropertys+extraElements);
 		}
 		if(xpos==-1||ypos==-1||zpos==-1) {
-			System.out.println("Les propriétés \"property\" ne sont pas conformes.");
-			return false;
+			throw new PropertyPropertiesError();
 		}
 		if(vertex==-1||face==-1) {
-			System.out.println("Les propriétés \"element\" ne sont pas conformes.");
-			return false;
+			throw new ElementPropertiesError();
 		}
 		return true;
 	}
 	
 	
-	private boolean handleBody(String[] lines) {
+	private boolean handleBody(String[] lines) throws UnsupportedFileFormat {
 		if(!handlePoint(lines)) {
-			System.out.println("Le format de ce fichier n'est pas supporté. (points)");
-			return false;
+			throw new UnsupportedFileFormat("points");
 		}
 		if(!handleFace(lines)) {
-			System.out.println("Le format de ce fichier n'est pas supporté. (faces)");
-			return false;
+			throw new UnsupportedFileFormat("faces");
 		}
 		return true;
 	}
