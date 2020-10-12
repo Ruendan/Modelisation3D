@@ -1,12 +1,10 @@
 package vue;
 
 import java.io.File;
-import javafx.scene.control.ListView;
-import modele.modelisation.Ply;
 
 public class Explorer{
 	
-	File lib = new File("C:\\Users\\natht\\eclipse-workspace\\projetmode-g1\\sources-du-projet\\ressources\\plys");
+	File lib = new File("ressources/plys");
 	String[] files = lib.list();
 	
 	

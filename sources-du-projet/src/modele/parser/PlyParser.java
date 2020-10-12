@@ -39,6 +39,7 @@ public class PlyParser {
 	public static Ply loadPly(String nom) {
 		PlyParser pp = new PlyParser();
 		Ply ply = new Ply();
+		ply.setName(nom);
 		pp.loadPly(ply, nom);
 		return ply;
 	}
