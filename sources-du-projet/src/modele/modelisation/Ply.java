@@ -1,6 +1,7 @@
-package modele;
+package modele.modelisation;
 
 import java.util.List;
+import java.util.Set;
 
 public class Ply {
 	
@@ -9,7 +10,7 @@ public class Ply {
 	private int nbFace;
 	
 	private List<String> comment;
-	private List<Point> points;
+	private Set<Point> points;
 	private List<Face> faces;
 	
 	public int getVertex() {
@@ -28,11 +29,11 @@ public class Ply {
 		this.nbFace = nbFace;
 	}
 	
-	public List<Point> getPoints() {
+	public Set<Point> getPoints() {
 		return points;
 	}
 
-	public void setPoints(List<Point> points) {
+	public void setPoints(Set<Point> points) {
 		this.points = points;
 	}
 	
@@ -52,7 +53,7 @@ public class Ply {
 		this.comment = comment;
 	}
 
-	public Ply(int vertex, int nbFace, List<Point> points, List<Face> faces) {
+	public Ply(int vertex, int nbFace, Set<Point> points, List<Face> faces) {
 		this.vertex = vertex;
 		this.nbFace = nbFace;
 		this.points = points;

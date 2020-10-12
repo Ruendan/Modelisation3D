@@ -3,12 +3,14 @@ package modele.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
-import modele.Face;
-import modele.Ply;
-import modele.Point;
+import modele.modelisation.Face;
+import modele.modelisation.Ply;
+import modele.modelisation.Point;
 
 public class PlyParser {
 	
@@ -30,7 +32,8 @@ public class PlyParser {
 	private int face;
 	
 	private ArrayList<String> comment;
-	private List<Point> points;
+	private Set<Point> points;
+	private List<Point> pointsTotaux;
 	private List<Face> faces;
 	
 	public static Ply loadPly(String nom) {
@@ -194,7 +197,8 @@ public class PlyParser {
 	}
 	
 	private boolean handlePoint(String[] lines) {
-		points = new ArrayList<Point>();
+		points = new HashSet<Point>();
+		pointsTotaux = new ArrayList<Point>();
 		for (int i = 0; i < vertex; i++) {
 			if(!addPoint(lines[idx]))return false;
 			idx++;
@@ -218,7 +222,7 @@ public class PlyParser {
 	}
 
 	private boolean addPoint(Point point) {
-		return points.add(point);
+		return points.add(point) && pointsTotaux.add(point);
 	}
 	
 	
@@ -249,7 +253,7 @@ public class PlyParser {
 			return true;
 		}
 		for (int i = 1; i < nbPointInFace+1; i++) {
-			pointss.add(points.get(Integer.parseInt(tab[i])));
+			pointss.add(pointsTotaux.get(Integer.parseInt(tab[i])));
 		}
 		return addFace(new Face(nbPointInFace, pointss));	 
 	}

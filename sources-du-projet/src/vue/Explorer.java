@@ -2,7 +2,7 @@ package vue;
 
 import java.io.File;
 import javafx.scene.control.ListView;
-import modele.Ply;
+import modele.modelisation.Ply;
 
 public class Explorer{
 	

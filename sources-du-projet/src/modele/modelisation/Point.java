@@ -1,6 +1,4 @@
-package modele;
-
-import modele.modelisation.Matrix;
+package modele.modelisation;
 
 public class Point {
 	private double x;

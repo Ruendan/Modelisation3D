@@ -1,7 +1,8 @@
-package modele;
+package modele.modelisation;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import modele.parser.PlyParser;
 
@@ -10,7 +11,7 @@ public class Figure {
 	private List<Face> faces;
 	private int nbFaces;
 	private Point center;
-	private List<Point> points;
+	private Set<Point> points;
 	
 	public Figure(Ply ply) {
 		this.faces = ply.getFaces();
@@ -28,7 +29,7 @@ public class Figure {
 		this(PlyParser.loadPly(nom));
 	}
 	
-	public List<Point> getPoints(){
+	public Set<Point> getPoints(){
 		return points;
 	}
 	
@@ -63,9 +64,11 @@ public class Figure {
 	public void zoom(double zoom) {
 		Point temp = new Point(center.getX(), center.getY(), center.getZ());
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-		for(int i = 0; i < this.getPoints().size() ; i++) {
-			this.getPoints().get(i).agrandir(zoom);
-		}
+//		for(int i = 0; i < this.getPoints().size() ; i++) {
+//			this.getPoints().get(i).agrandir(zoom);
+//		}
+		for(Point p : this.getPoints()) p.agrandir(zoom);
+		
 		Mouvement.deplacer(this, temp.getX(), temp.getY(), temp.getZ());
 	}
 
