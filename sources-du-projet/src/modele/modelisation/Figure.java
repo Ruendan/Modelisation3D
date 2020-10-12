@@ -9,12 +9,14 @@ import modele.parser.exception.PlyParserException;
 
 public class Figure {
 	
+	private String name;
 	private List<Face> faces;
 	private int nbFaces;
 	private Point center;
 	private Set<Point> points;
 	
 	public Figure(Ply ply) {
+		this.name = ply.getName();
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
 		this.center = center();
@@ -44,6 +46,10 @@ public class Figure {
 	
 	public List<Face> getFaces(){
 		return faces;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	/**
