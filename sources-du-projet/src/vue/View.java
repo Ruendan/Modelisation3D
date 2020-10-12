@@ -2,7 +2,6 @@ package vue;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,7 +12,8 @@ public class View extends Stage{
 	
 	public View(Figure fig) {
 		HBox buttons = new Buttons();
-		Label explorer = new Label("Explorer"); explorer.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
+		//Label explorer = new Label("Explorer"); explorer.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
+		Explorer explorer = new Explorer();
 		Group display = new GroupedVue(fig);
 		
 		VBox right = new VBox(); right.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
