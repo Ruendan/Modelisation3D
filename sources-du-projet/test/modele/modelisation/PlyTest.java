@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modele.parser.PlyParser;
+import modele.parser.exception.PlyParserException;
 
 
 public class PlyTest {
@@ -22,7 +23,11 @@ public class PlyTest {
 	@BeforeEach
 	public void initialize() {
 		tested = new Ply();
-		tested = PlyParser.loadPly("cube");
+		try {
+			tested = PlyParser.loadPly("cube");
+		} catch (PlyParserException e) {
+			e.printStackTrace();
+		}
 		
 		expectedPoints = new ArrayList<Point>(); 
 		expectedPoints.add(new Point(-1.0,-1.0,-1.0)); // -1 -1 -1

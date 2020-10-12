@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import modele.modelisation.Face;
 import modele.modelisation.Ply;
 import modele.modelisation.Point;
+import modele.parser.exception.PlyParserException;
 
 class PlyParserTest {
 
@@ -26,7 +27,11 @@ class PlyParserTest {
 	
 	@BeforeEach
 	public void initialise() {
-		tested = PlyParser.loadPly("cube");
+		try {
+			tested = PlyParser.loadPly("cube");
+		} catch (PlyParserException e) {
+			e.printStackTrace();
+		}
 		
 		expectedListPoints = Arrays.asList(new Point[] {
 			new Point(-1.0,-1.0,-1.0),
