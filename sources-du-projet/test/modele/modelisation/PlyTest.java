@@ -10,9 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import modele.modelisation.Face;
-import modele.modelisation.Ply;
-import modele.modelisation.Point;
 import modele.parser.PlyParser;
 
 

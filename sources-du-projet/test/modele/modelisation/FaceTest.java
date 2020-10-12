@@ -1,6 +1,6 @@
 package modele.modelisation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,9 +8,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import modele.modelisation.Face;
-import modele.modelisation.Point;
 
 class FaceTest {
 

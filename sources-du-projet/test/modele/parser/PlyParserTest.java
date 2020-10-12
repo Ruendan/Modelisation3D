@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import modele.modelisation.Face;
 import modele.modelisation.Ply;
 import modele.modelisation.Point;
-import modele.parser.PlyParser;
 
 class PlyParserTest {
 
