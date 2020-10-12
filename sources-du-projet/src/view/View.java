@@ -25,6 +25,7 @@ public class View extends Stage{
 		
 		Scene mainScene = new Scene(bb, 1000, 800);
 		this.setScene(mainScene);
+		this.setTitle("Modélisation");
 		this.show();
 	}
 }
