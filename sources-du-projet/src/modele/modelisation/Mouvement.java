@@ -1,4 +1,4 @@
-package modele;
+package modele.modelisation;
 
 public class Mouvement {
 

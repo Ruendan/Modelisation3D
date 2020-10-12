@@ -2,7 +2,7 @@ package application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import modele.Figure;
+import modele.modelisation.Figure;
 import modele.parser.PlyParser;
 import vue.Vue;
 

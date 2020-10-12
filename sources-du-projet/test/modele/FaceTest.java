@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import modele.modelisation.Face;
+import modele.modelisation.Point;
+
 class FaceTest {
 
 	private Face classique;

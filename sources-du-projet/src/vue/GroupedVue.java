@@ -11,11 +11,11 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
-import modele.Face;
-import modele.Figure;
-import modele.Mouvement;
-import modele.Point;
+import modele.modelisation.Face;
+import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
+import modele.modelisation.Mouvement;
+import modele.modelisation.Point;
 
 public class GroupedVue extends Group{
 

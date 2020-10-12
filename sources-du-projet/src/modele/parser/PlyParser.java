@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import modele.Face;
-import modele.Ply;
-import modele.Point;
+import modele.modelisation.Face;
+import modele.modelisation.Ply;
+import modele.modelisation.Point;
 
 public class PlyParser {
 	

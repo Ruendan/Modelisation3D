@@ -1,7 +1,5 @@
 package modele.modelisation;
 
-import modele.Point;
-
 public class Matrix {
 	
 	private Double[][] matrice;

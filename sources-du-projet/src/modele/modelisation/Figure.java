@@ -1,4 +1,4 @@
-package modele;
+package modele.modelisation;
 
 import java.util.Collections;
 import java.util.List;
