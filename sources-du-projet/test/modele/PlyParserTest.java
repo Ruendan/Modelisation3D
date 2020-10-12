@@ -1,6 +1,7 @@
 package modele;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,15 +11,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import modele.parser.PlyParser;
 
 class PlyParserTest {
 
 	private Ply tested;
-	private Ply expected;
 	private List<Point> expectedListPoints;
 	private Set<Point> expectedSetPoints;
 	
@@ -50,7 +48,7 @@ class PlyParserTest {
 				new Face(4, Arrays.asList(new Point[] {expectedListPoints.get(7), expectedListPoints.get(3), expectedListPoints.get(2), expectedListPoints.get(6)})),
 				new Face(4, Arrays.asList(new Point[] {expectedListPoints.get(5), expectedListPoints.get(1), expectedListPoints.get(0), expectedListPoints.get(4)}))
 		}));
-		expected = new Ply(8, 6, expectedSetPoints, expectedListFaces);
+		//expected = new Ply(8, 6, expectedSetPoints, expectedListFaces);
 		
 	}
 	
