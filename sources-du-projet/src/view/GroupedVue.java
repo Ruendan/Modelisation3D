@@ -27,33 +27,24 @@ public class GroupedVue extends Group implements Observer{
 		
 		this.getChildren().addAll(this.getFigure());
 		
-//		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
-//			fig.tri();
-//			Mouvement.rotate(fig, 1, 1, 1);
-//			this.getChildren().clear();
-//			this.getChildren().addAll(this.getFigure());
-//		}));
-//		timeline.setCycleCount(Animation.INDEFINITE);
-//		timeline.setAutoReverse(true);
-//		
-//		timeline.play();
-
+		/*
+		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
+			fig.tri();
+			Mouvement.rotate(fig, 1, 1, 1);
+			this.getChildren().clear();
+			this.getChildren().addAll(this.getFigure());
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.setAutoReverse(true);
+		
+		timeline.play();
+		*/
     	
 	}
 
 	private Polygon getPolygon(Double[] coord,  Face f) {
 		Polygon poly = new Polygon();
-//		if(f.getId() == 5) {
-//			poly.setFill(Color.YELLOW);
-//			System.out.println("moyenne5X = "+f.moyenneX());
-//			System.out.println("moyenne5Y = "+f.moyenneY());
-//			System.out.println("moyenne5Z = "+f.moyenneZ());
-//		} else if(f.getId() == 7){
-//			poly.setFill(Color.RED);
-//			System.out.println("moyenne7X = "+f.moyenneX());
-//			System.out.println("moyenne7Y = "+f.moyenneY());
-//			System.out.println("moyenne7Z = "+f.moyenneZ());
-//		}else 
+
 		poly.setFill(Color.rgb(135, 206, 250, 1));
 		poly.getPoints().setAll(coord);
 		poly.setStroke(Color.BLACK);

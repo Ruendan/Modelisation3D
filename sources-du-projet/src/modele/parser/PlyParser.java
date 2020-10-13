@@ -59,13 +59,14 @@ public class PlyParser {
 		vertex = -1;
 		face = -1;
 		
-		String[] lines = new String[0];
+		// !!!!!   !!!!!   !!!!   !!!!   !!!!
+		// ICI NATHAN !!!!! VVVVVV
 		
-		try(Scanner sc = new Scanner(fichier)) {
-			StringBuilder content = new StringBuilder();
-			while(sc.hasNextLine())content.append(sc.nextLine()+"\n");
-			lines = content.toString().split(""+'\n');
-		} catch (FileNotFoundException e) {e.printStackTrace();}
+		String[] lines = getLines(fichier);
+		
+		//^^^^^^^^^^^^^^^^^^^^^^
+		// okokokokokokokok Let's GO !!!
+		
 		if(!(lines.length<12)) {
 			if(handleHeader(lines)&&handleBody(lines)) {
 				res.setVertex(vertex);
@@ -76,7 +77,17 @@ public class PlyParser {
 			}
 		}
 	}
+
+	private String[] getLines(File fichier) {
+		try(Scanner sc = new Scanner(fichier)) {
+			StringBuilder content = new StringBuilder();
+			while(sc.hasNextLine())content.append(sc.nextLine()+System.lineSeparator());
+			return content.toString().split(""+System.lineSeparator());
+		} catch (FileNotFoundException e) {e.printStackTrace();}
+		return null;
+	}
 	
+
 	private boolean handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
 		comment = new ArrayList<String>();
