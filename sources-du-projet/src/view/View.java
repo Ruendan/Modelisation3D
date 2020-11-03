@@ -11,7 +11,7 @@ import modele.modelisation.Figure;
 public class View extends Stage{
 	
 	public View(Figure fig) {
-		HBox buttons = new Buttons(fig);
+		Buttons buttons = new Buttons(fig);
 		Explorer models = new Explorer();
 		Group display = new GroupedVue(fig);
 		
@@ -25,7 +25,7 @@ public class View extends Stage{
 		
 		Scene mainScene = new Scene(bb, 1000, 800);
 		this.setScene(mainScene);
-		this.setTitle("Modélisation");
+		this.setTitle("Visionneuse PLY 3D");
 		this.show();
 	}
 }
