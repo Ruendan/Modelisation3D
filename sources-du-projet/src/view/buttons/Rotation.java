@@ -14,6 +14,9 @@ public class Rotation extends VBox{
 	
 	public Rotation(Figure fig){
 		
+		Label title = new Label("Rotation");
+		title.setStyle("-fx-text-fill: white;");
+		
 		this.Xup = new Button("↑");
 		Xup.setOnAction(e ->{
 			fig.rotateX(VALEUR_DE_ROTATION);
@@ -43,7 +46,7 @@ public class Rotation extends VBox{
 			fig.rotateZ(-VALEUR_DE_ROTATION);
 		});
 		
-		this.getChildren().addAll(new Label("Rotation"),new HBox(Xup,Xdown),new HBox(Yup,Ydown),new HBox(Zup,Zdown));		
+		this.getChildren().addAll(title,new HBox(Xup,Xdown),new HBox(Yup,Ydown),new HBox(Zup,Zdown));		
 		this.setStyle("-fx-border-width: 2px; -fx-border-color: red;");
 	}
 }

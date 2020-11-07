@@ -14,6 +14,9 @@ public class Zoom extends VBox{
 	
 	public Zoom(Figure fig){
 		
+		Label title = new Label("Zoom");
+		title.setStyle("-fx-text-fill: white;");
+		
 		this.In = new Button("+");
 		In.setOnAction(e->{
 			fig.zoom(1+VALEUR_DE_ZOOM);
@@ -24,7 +27,7 @@ public class Zoom extends VBox{
 			fig.zoom(1-VALEUR_DE_ZOOM);
 		});
 		
-		this.getChildren().addAll(new Label("Zoom"),new HBox(In,Out));
+		this.getChildren().addAll(title,new HBox(In,Out));
 		this.setStyle("-fx-border-width: 2px; -fx-border-color: red;");
 	}
 }

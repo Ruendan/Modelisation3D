@@ -14,6 +14,9 @@ public class Translation extends VBox{
 	
 	public Translation(Figure fig){
 		
+		Label title = new Label("Translation");
+		title.setStyle("-fx-text-fill: white;");
+		
 		this.up = new Button("↑");
 		up.setOnAction(e->{
 			fig.VDeplace(-VALEUR_DE_DEPLACEMENT);;
@@ -34,7 +37,7 @@ public class Translation extends VBox{
 			fig.HDeplace(VALEUR_DE_DEPLACEMENT);
 		});
 		
-		this.getChildren().addAll(new Label("Translation"),new HBox(up,down), new HBox(left,right));
+		this.getChildren().addAll(title,new HBox(up,down), new HBox(left,right));
 		this.setStyle("-fx-border-width: 2px; -fx-border-color: red;");
 	}
 }
