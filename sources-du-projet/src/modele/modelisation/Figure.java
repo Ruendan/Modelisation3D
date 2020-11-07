@@ -77,11 +77,15 @@ public class Figure extends Subject {
 	}
 
 	public void HDeplace(double value) {
+		center.deplacerX(value);
 		Mouvement.deplacer(this, value, 0, 0);
+		notifyObservers();
 	}
 	
 	public void VDeplace(double value){
+		center.deplacerY(value);
 		Mouvement.deplacer(this, 0, value, 0);
+		notifyObservers();
 	}
 
 	public void tri() {
