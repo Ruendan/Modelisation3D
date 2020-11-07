@@ -13,6 +13,8 @@ import view.buttons.Zoom;
 
 public class View extends Stage{
 	
+	Figure fig;
+	
 	public View(Figure fig) {
 		
 		Rotation buttons_rotation = new Rotation(fig);
@@ -21,6 +23,7 @@ public class View extends Stage{
 		
 		
 		Explorer modelsList = new Explorer();
+		
 		Canvas display = new Canva(fig,500.0,500.0);
 		HBox buttons = new HBox();
 		buttons.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));

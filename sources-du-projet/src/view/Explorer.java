@@ -5,6 +5,7 @@ import java.io.File;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ListView;
+import modele.modelisation.Figure;
 import modele.modelisation.Ply;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
@@ -26,12 +27,7 @@ public class Explorer extends ListView<String>{
 				e.printStackTrace();
 			}
 		}
-		this.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		        System.out.println("newValue = " + newValue);
-		    }
-		});
+		
 	}
 }
 

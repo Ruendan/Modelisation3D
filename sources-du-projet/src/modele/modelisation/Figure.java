@@ -8,7 +8,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Subject;
 
-public class Figure extends Subject {
+public class Figure extends Subject{
 	
 	private String name;
 	private List<Face> faces;
