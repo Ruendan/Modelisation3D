@@ -3,6 +3,9 @@ package modele.modelisation;
 public class Matrix {
 	
 	private Double[][] matrice;
+	public static final Matrix matriceTransformation = new Matrix( new Double[][]{
+		{1.0,	0.0,	0.0},
+		{0.0,	1.0,	0.0}});
 	
 	public Matrix(Point p){
 		this.matrice = new Double[][]{{p.getX(), p.getY(), p.getZ()}};
@@ -28,7 +31,7 @@ public class Matrix {
 			{Math.sin(theta),	Math.cos(theta),	0.0},
 			{0.0,				0.0,				1.0}});	
 			
-		point2.setPoint(calculMatrice(matrice,point2));
+		multiplyMatrice(matrice,point2);
 	}
 	
 	public static void rotateX(Point point2,double theta) {
@@ -37,8 +40,8 @@ public class Matrix {
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}});
-			
-		point2.setPoint(calculMatrice(matrice,point2));
+		
+		multiplyMatrice(matrice,point2);
 	}
 	
 	
@@ -48,12 +51,11 @@ public class Matrix {
 			{Math.cos(theta),		0.0,		-Math.sin(theta)},
 			{0.0,					1.0,		0.0},
 			{Math.sin(theta),		0.0,		Math.cos(theta)}});
-			
-		point2.setPoint(calculMatrice(matrice,point2));
+		
+		multiplyMatrice(matrice,point2);
 	}
 	
-	public static Point calculMatrice(Matrix matrice, Point point2) {
-		Point rep;
+	private static void multiplyMatrice(Matrix matrice, Point point2) {
 		Double[] res = new Double[matrice.length()];
 		Double[] p = new Double[] {point2.getX(),point2.getY(),point2.getZ()};
 		
@@ -65,18 +67,13 @@ public class Matrix {
 			}
 			
 		}
-		if(res.length==2) rep = new Point(res[0],res[1]) ; 
-		else rep = new Point(res[0],res[1],res[2]);
-		return rep;
+		point2.setX(res[0]);
+		point2.setY(res[1]);
+		if(res.length==3) point2.setZ(res[2]); 
 	}
 	
-	public static Point transformation(Point point2) {
-		Matrix matrice = new Matrix( new Double[][]{
-			{1.0,	0.0,	0.0},
-			{0.0,	1.0,	0.0}});
-			
-		return calculMatrice(matrice,point2);
-
+	public static void transformation(Point point2) {
+		multiplyMatrice(matriceTransformation,point2);
 	}
 	
 	
