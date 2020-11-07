@@ -78,6 +78,7 @@ public class Figure extends Subject {
 		for(Point p : this.getPoints()) p.agrandir(zoom);
 		
 		Mouvement.deplacer(this, temp.getX(), temp.getY(), temp.getZ());
+		this.notifyObservers();
 	}
 
 
