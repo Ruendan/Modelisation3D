@@ -10,19 +10,18 @@ public class Zoom extends VBox{
 	
 	private Button In,Out;
 	
-	private static final double VALEUR_DE_ZOOM_IN = 1.05;
-	private static final double VALEUR_DE_ZOOM_OUT = 0.95;
+	private static final double VALEUR_DE_ZOOM = 0.05;
 	
 	public Zoom(Figure fig){
 		
 		this.In = new Button("+");
 		In.setOnAction(e->{
-			fig.zoom(VALEUR_DE_ZOOM_IN);
+			fig.zoom(1+VALEUR_DE_ZOOM);
 		});
 		
 		this.Out = new Button("-");
 		Out.setOnAction(e->{
-			fig.zoom(VALEUR_DE_ZOOM_OUT);
+			fig.zoom(1-VALEUR_DE_ZOOM);
 		});
 		
 		this.getChildren().addAll(new Label("Zoom"),new HBox(In,Out));

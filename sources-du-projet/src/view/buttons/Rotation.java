@@ -10,38 +10,37 @@ public class Rotation extends VBox{
 	
 	private Button Xup,Xdown,Yup,Ydown,Zup,Zdown;
 	
-	private static final int VALEUR_DE_ROTATION_UP = 10;
-	private static final int VALEUR_DE_ROTATION_DOWN = -10;
+	private static final int VALEUR_DE_ROTATION = 10;
 	
 	public Rotation(Figure fig){
 		
 		this.Xup = new Button("↑");
 		Xup.setOnAction(e ->{
-			fig.rotateX(VALEUR_DE_ROTATION_UP);
+			fig.rotateX(VALEUR_DE_ROTATION);
 		});
 		this.Xdown = new Button("↓");
 		Xdown.setOnAction(e ->{
-			fig.rotateX(VALEUR_DE_ROTATION_DOWN);
+			fig.rotateX(-VALEUR_DE_ROTATION);
 		});
 		
 		
 		this.Yup = new Button("←");
 		Yup.setOnAction(e ->{
-			fig.rotateY(VALEUR_DE_ROTATION_UP);
+			fig.rotateY(VALEUR_DE_ROTATION);
 		});
 		this.Ydown = new Button("→");
 		Ydown.setOnAction(e ->{
-			fig.rotateY(VALEUR_DE_ROTATION_DOWN);
+			fig.rotateY(-VALEUR_DE_ROTATION);
 		});
 		
 		
 		this.Zup = new Button("↷");
 		Zup.setOnAction(e ->{
-			fig.rotateZ(VALEUR_DE_ROTATION_UP);
+			fig.rotateZ(VALEUR_DE_ROTATION);
 		});
 		this.Zdown = new Button("↶");
 		Zdown.setOnAction(e ->{
-			fig.rotateZ(VALEUR_DE_ROTATION_DOWN);
+			fig.rotateZ(-VALEUR_DE_ROTATION);
 		});
 		
 		this.getChildren().addAll(new Label("Rotation"),new HBox(Xup,Xdown),new HBox(Yup,Ydown),new HBox(Zup,Zdown));		
