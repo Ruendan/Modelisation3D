@@ -9,7 +9,7 @@ import modele.modelisation.Matrix;
 import utils.Observer;
 import utils.Subject;
 
-public class GroupedVue extends Canvas implements Observer{
+public class Canva extends Canvas implements Observer{
 
 	private Figure fig;
 	//private Timeline timeline;
@@ -18,7 +18,7 @@ public class GroupedVue extends Canvas implements Observer{
 	
 	private double[][] coord;
 	
-	public GroupedVue(Figure figure, double width, double height) {
+	public Canva(Figure figure, double width, double height) {
 		this.setWidth(width);
 		this.setHeight(height);
 		figure.attach(this);
