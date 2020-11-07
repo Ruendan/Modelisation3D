@@ -1,7 +1,7 @@
 package view;
 
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,7 +21,7 @@ public class View extends Stage{
 		
 		
 		Explorer modelsList = new Explorer();
-		Group display = new GroupedVue(fig);
+		Canvas display = new GroupedVue(fig,500.0,500.0);
 		HBox buttons = new HBox();
 		buttons.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));
 		

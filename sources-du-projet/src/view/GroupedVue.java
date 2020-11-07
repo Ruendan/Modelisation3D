@@ -1,33 +1,33 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
 import utils.Observer;
 import utils.Subject;
 
-public class GroupedVue extends Group implements Observer{
+public class GroupedVue extends Canvas implements Observer{
 
 	private Figure fig;
 	//private Timeline timeline;
 	
-	private List<Polygon> pol;
+	private GraphicsContext gc;
 	
-	public GroupedVue(Figure figure) {
+	private double[][] coord;
+	
+	public GroupedVue(Figure figure, double width, double height) {
+		this.setWidth(width);
+		this.setHeight(height);
 		figure.attach(this);
 		this.fig = figure;
+		coord = new double[1][1];
 		
-		this.pol = new ArrayList<Polygon>();
+		this.gc = this.getGraphicsContext2D();
 		
-		
-		
-		this.getChildren().addAll(this.getFigure());
+		this.printFigure();
 		
 		/*
 		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
@@ -44,55 +44,58 @@ public class GroupedVue extends Group implements Observer{
     	
 	}
 
-	private Polygon getPolygon(Double[] coord,  Face f) {
-		Polygon poly = new Polygon();
-
-		poly.setFill(Color.rgb(135, 206, 250, 1));
+	private void printPolygon(double[][] coord,  Face f) {
+		this.gc.setFill(Color.rgb(135, 206, 250, 1));
+		this.gc.setStroke(Color.BLACK);
+		this.gc.setLineWidth(0.2);
+		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
+		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
+		
+		/*poly.setFill(Color.rgb(135, 206, 250, 1));
 		poly.getPoints().setAll(coord);
 		poly.setStroke(Color.BLACK);
-		poly.setStrokeWidth(0.2);
-		return poly;
+		poly.setStrokeWidth(0.2);*/
 	}
 
-	private Double[] convert3d2d(Face face) {
+	private void convert3d2d(Face face) {
 		/*
 		 * 
 		 */
-		
-		Double[] coord = new Double[(face.getNbPoints() * 2)];
+		if((double) face.getNbPoints()!=coord[0].length)
+			coord = new double[2][face.getNbPoints()];
 		for (int j = 0; j < face.getPoints().size(); j++) {
 			Matrix.transformation(face.getPoints().get(j));
-			coord[j * 2] = face.getPoints().get(j).getX();
-			coord[j * 2 + 1] = face.getPoints().get(j).getY();
+			coord[0][j] = face.getPoints().get(j).getX();
+			coord[1][j] = face.getPoints().get(j).getY();
 		}	
-		return coord;
 	}
 	
-	public List<Polygon> getFigure() {
+	public void printFigure() {
 		/*
 		 * CA DOIT MODIFIER ET NON CHANGER LE POLYGONE
 		 */
-		pol.clear();
 		
 		for(Face f : fig.getFaces()) {
-			Double[] coord = convert3d2d((f));
-			pol.add(getPolygon(coord,f));
+			convert3d2d((f));
+			printPolygon(coord,f);
 		}
-		return pol;
 	}
 
 	@Override
 	public void update(Subject subj) {
 		fig.tri();
-		this.getChildren().clear();
-		this.getChildren().addAll(this.getFigure());
+		this.clear();
+		this.printFigure();
 	}
 
 	@Override
 	public void update(Subject subj, Object data) {
-		fig.tri();
-		this.getChildren().clear();
-		this.getChildren().addAll(this.getFigure());
+		update(subj);
+	}
+	
+	private void clear() {
+		this.gc.setFill(Color.WHITE);
+		this.gc.fillRect(0,0,this.getWidth(),this.getHeight());
 
 	}
 }

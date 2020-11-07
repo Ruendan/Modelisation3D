@@ -70,14 +70,9 @@ public class Figure extends Subject {
 
 
 	public void zoom(double zoom) {
-		Point temp = new Point(center.getX(), center.getY(), center.getZ());
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-//		for(int i = 0; i < this.getPoints().size() ; i++) {
-//			this.getPoints().get(i).agrandir(zoom);
-//		}
+		toOrigin();
 		for(Point p : this.getPoints()) p.agrandir(zoom);
-		
-		Mouvement.deplacer(this, temp.getX(), temp.getY(), temp.getZ());
+		toCenter();
 		this.notifyObservers();
 	}
 
@@ -121,23 +116,39 @@ public class Figure extends Subject {
 	}
 
 	public void rotate(int i, int j, int k) {
+		toOrigin();
 		Mouvement.rotate(this, i, j, k);
+		toCenter();
 		this.notifyObservers();
 	}
 	
 	public void rotateX(int i) {
+		toOrigin();
 		Mouvement.rotateX(this, i);
+		toCenter();
 		this.notifyObservers();
 	}
 
 	public void rotateY(int i) {
+		toOrigin();
 		Mouvement.rotateY(this, i);
+		toCenter();
 		this.notifyObservers();
 	}
 
 	public void rotateZ(int i) {
+		toOrigin();
 		Mouvement.rotateZ(this, i);
+		toCenter();
 		this.notifyObservers();
+	}
+	
+	private void toOrigin() {
+		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+	}
+	
+	private void toCenter() {
+		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
 	}
 
 }
