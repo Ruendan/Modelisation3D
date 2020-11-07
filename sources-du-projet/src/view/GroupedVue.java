@@ -3,25 +3,27 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
-import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
 
 public class GroupedVue extends Group implements Observer{
 
-	Figure fig;
-	Timeline timeline;
+	private Figure fig;
+	//private Timeline timeline;
+	
+	private List<Polygon> pol;
 	
 	public GroupedVue(Figure figure) {
 		figure.attach(this);
 		this.fig = figure;
+		
+		this.pol = new ArrayList<Polygon>();
 		
 		
 		
@@ -53,17 +55,23 @@ public class GroupedVue extends Group implements Observer{
 	}
 
 	private Double[] convert3d2d(Face face) {
+		/*
+		 * 
+		 */
+		
 		Double[] coord = new Double[(face.getNbPoints() * 2)];
 		for (int j = 0; j < face.getPoints().size(); j++) {
-			Point test = Matrix.transformation(face.getPoints().get(j));
-			coord[j * 2] = test.getX();
-			coord[j * 2 + 1] = test.getY();
+			Matrix.transformation(face.getPoints().get(j));
+			coord[j * 2] = face.getPoints().get(j).getX();
+			coord[j * 2 + 1] = face.getPoints().get(j).getY();
 		}	
 		return coord;
 	}
 	
 	public List<Polygon> getFigure() {
-		List<Polygon> pol = new ArrayList<Polygon>();
+		/*
+		 * CA DOIT MODIFIER ET NON CHANGER LE POLYGONE
+		 */
 		
 		for(Face f : fig.getFaces()) {
 			Double[] coord = convert3d2d((f));

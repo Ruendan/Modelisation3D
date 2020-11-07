@@ -81,6 +81,13 @@ public class Figure extends Subject {
 		this.notifyObservers();
 	}
 
+	public void HDeplace(double value) {
+		Mouvement.deplacer(this, value, 0, 0);
+	}
+	
+	public void VDeplace(double value){
+		Mouvement.deplacer(this, 0, value, 0);
+	}
 
 	public void tri() {
 		for(Face f : faces) {
