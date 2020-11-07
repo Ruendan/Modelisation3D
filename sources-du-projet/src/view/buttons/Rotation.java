@@ -35,11 +35,11 @@ public class Rotation extends VBox{
 		});
 		
 		
-		this.Zup = new Button("↶");
+		this.Zup = new Button("↷");
 		Zup.setOnAction(e ->{
 			fig.rotateZ(VALEUR_DE_ROTATION_UP);
 		});
-		this.Zdown = new Button("↷");
+		this.Zdown = new Button("↶");
 		Zdown.setOnAction(e ->{
 			fig.rotateZ(VALEUR_DE_ROTATION_DOWN);
 		});

@@ -14,7 +14,6 @@ import view.buttons.Zoom;
 public class View extends Stage{
 	
 	public View(Figure fig) {
-		//Buttons buttons = new Buttons(fig);
 		
 		Rotation buttons_rotation = new Rotation(fig);
 		Translation buttons_translation = new Translation(fig);
