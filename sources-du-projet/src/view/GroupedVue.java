@@ -1,13 +1,8 @@
 package view;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
@@ -101,5 +96,6 @@ public class GroupedVue extends Canvas implements Observer{
 	private void clear() {
 		this.gc.setFill(Color.WHITE);
 		this.gc.fillRect(0,0,this.getWidth(),this.getHeight());
+
 	}
 }
