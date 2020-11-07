@@ -72,6 +72,7 @@ public class GroupedVue extends Group implements Observer{
 		/*
 		 * CA DOIT MODIFIER ET NON CHANGER LE POLYGONE
 		 */
+		pol.clear();
 		
 		for(Face f : fig.getFaces()) {
 			Double[] coord = convert3d2d((f));
@@ -92,5 +93,6 @@ public class GroupedVue extends Group implements Observer{
 		fig.tri();
 		this.getChildren().clear();
 		this.getChildren().addAll(this.getFigure());
+
 	}
 }

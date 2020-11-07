@@ -20,7 +20,7 @@ public class Rotation extends VBox{
 			fig.rotateX(VALEUR_DE_ROTATION_UP);
 		});
 		this.Xdown = new Button("↓");
-		Xup.setOnAction(e ->{
+		Xdown.setOnAction(e ->{
 			fig.rotateX(VALEUR_DE_ROTATION_DOWN);
 		});
 		
@@ -30,7 +30,7 @@ public class Rotation extends VBox{
 			fig.rotateY(VALEUR_DE_ROTATION_UP);
 		});
 		this.Ydown = new Button("→");
-		Yup.setOnAction(e ->{
+		Ydown.setOnAction(e ->{
 			fig.rotateY(VALEUR_DE_ROTATION_DOWN);
 		});
 		
@@ -40,7 +40,7 @@ public class Rotation extends VBox{
 			fig.rotateZ(VALEUR_DE_ROTATION_UP);
 		});
 		this.Zdown = new Button("↷");
-		Zup.setOnAction(e ->{
+		Zdown.setOnAction(e ->{
 			fig.rotateZ(VALEUR_DE_ROTATION_DOWN);
 		});
 		
