@@ -20,8 +20,8 @@ public class View extends Stage{
 		Zoom buttons_zoom = new Zoom(fig);
 		
 		
-		Explorer modelsList = new Explorer();
-		Canvas display = new Canva(fig,500.0,500.0);
+		Explorer modelsList = new Explorer(fig);
+		Canvas display = new Canva(fig,700.0,500.0);
 		HBox buttons = new HBox();
 		buttons.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));
 		

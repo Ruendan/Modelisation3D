@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import com.sun.javafx.scene.traversal.WeightedClosestCorner;
+
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Subject;
@@ -58,11 +60,8 @@ public class Figure extends Subject {
 	 */
 	private void initialisation() {
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-		for(Point p : this.getPoints()) {
-			p.rotate(180,  180,  0);
-			p.agrandir(50);
-			p.deplacer(250, 250, 250);
-		}
+		Mouvement.rotate(this, 180, 180, 0);
+		zoom(50);
 		center.deplacer(250, 250, 250);
 		//this.zoom(0);
 		tri();
@@ -153,6 +152,10 @@ public class Figure extends Subject {
 	
 	private void toCenter() {
 		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
+	}
+
+	public void centerFigure(double width, double height) {
+		Mouvement.deplacer(this, width/2, height/2, 0);
 	}
 
 }
