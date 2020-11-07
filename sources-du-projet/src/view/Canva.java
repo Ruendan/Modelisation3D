@@ -24,23 +24,11 @@ public class Canva extends Canvas implements Observer{
 		figure.attach(this);
 		this.fig = figure;
 		coord = new double[1][1];
+		this.fig.centerFigure(width,height);
 		
 		this.gc = this.getGraphicsContext2D();
 		
 		this.printFigure();
-		
-		/*
-		timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
-			fig.tri();
-			Mouvement.rotate(fig, 1, 1, 1);
-			this.getChildren().clear();
-			this.getChildren().addAll(this.getFigure());
-		}));
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(true);
-		
-		timeline.play();
-		*/
     	
 	}
 
@@ -51,10 +39,6 @@ public class Canva extends Canvas implements Observer{
 		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
 		
-		/*poly.setFill(Color.rgb(135, 206, 250, 1));
-		poly.getPoints().setAll(coord);
-		poly.setStroke(Color.BLACK);
-		poly.setStrokeWidth(0.2);*/
 	}
 
 	private void convert3d2d(Face face) {
@@ -98,4 +82,18 @@ public class Canva extends Canvas implements Observer{
 		this.gc.fillRect(0,0,this.getWidth(),this.getHeight());
 
 	}
+	
+	/*
+	 * CODE POUR LA TIMELINE 
+	timeline= new Timeline(new KeyFrame(Duration.seconds(0.033333), e -> {
+		fig.tri();
+		Mouvement.rotate(fig, 1, 1, 1);
+		this.getChildren().clear();
+		this.getChildren().addAll(this.getFigure());
+	}));
+	timeline.setCycleCount(Animation.INDEFINITE);
+	timeline.setAutoReverse(true);
+	
+	timeline.play();
+	*/
 }
