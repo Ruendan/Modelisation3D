@@ -19,14 +19,14 @@ public class Canva extends Canvas implements Observer{
 	private double[][] coord;
 	
 	public Canva(Figure figure, double width, double height) {
+		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
 		figure.attach(this);
 		this.fig = figure;
-		coord = new double[1][1];
+		coord = new double[2][1];
 		this.fig.centerFigure(width,height);
 		
-		this.gc = this.getGraphicsContext2D();
 		
 		this.printFigure();
     	
