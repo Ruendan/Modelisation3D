@@ -5,6 +5,7 @@
     - Camus Sylvain, Groupe G
 
 - Description des activités/responsabilités de chaque membre de l'équipe (rappel: les responsabilités doivent être équilibrées)
+
     Dubois Quentin : 
         Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modele du MVC.
         Je me suis aussi occupé de la Rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
