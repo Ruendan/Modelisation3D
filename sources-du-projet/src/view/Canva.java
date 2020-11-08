@@ -78,7 +78,7 @@ public class Canva extends Canvas implements Observer{
 	}
 	
 	private void clear() {
-		this.gc.setFill(Color.WHITE);
+		this.gc.setFill(Color.BLACK);
 		this.gc.fillRect(0,0,this.getWidth(),this.getHeight());
 
 	}
