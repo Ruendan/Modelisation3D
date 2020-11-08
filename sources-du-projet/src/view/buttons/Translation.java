@@ -1,12 +1,12 @@
 package view.buttons;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 
-public class Translation extends VBox{
+public class Translation extends GridPane{
 	
 	private Button up,down,left,right;
 	
@@ -15,6 +15,11 @@ public class Translation extends VBox{
 	private static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 20 arial;";
 	
 	public Translation(Figure fig){
+		
+		this.setPadding(new Insets(10,0,10,10));
+		this.setHgap(10);
+		this.setVgap(10);
+		//this.setGridLinesVisible(true);
 		
 		Label title = new Label("   Translation   ");
 		title.setStyle("-fx-text-fill: white; -fx-font: 16 arial; -fx-font-weight:bold; -fx-border-width:3px; -fx-border-color:white; -fx-border-radius:5");
@@ -45,10 +50,14 @@ public class Translation extends VBox{
 		this.left.setStyle(BUTTON_STYLE);
 		this.right.setStyle(BUTTON_STYLE);
 		
-		this.getChildren().addAll(title,new HBox(up,down), new HBox(left,right));
+		this.add(title, 1, 0);
+		this.add(up, 0, 1);
+		this.add(down, 2, 1);
+		this.add(left, 0, 2);
+		this.add(right, 2, 2);
 		
 		this.setStyle("-fx-border-width: 4px; -fx-border-color: black; -fx-background-color: slategrey; -fx-background-radius: 25;");		
-		this.setPrefWidth(200);
+		this.setPrefWidth(260);
 	}
 }
 

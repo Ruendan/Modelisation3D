@@ -74,7 +74,7 @@ public class Rotation extends GridPane{
 		this.add(Zup, 0, 3);
 		this.add(Zdown, 2, 3);
 		
-		this.setStyle("-fx-border-width: 4px; -fx-border-color: black; -fx-background-color: slategrey; -fx-background-radius: 50;");		
+		this.setStyle("-fx-border-width: 4px; -fx-border-color: black; -fx-background-color: slategrey; -fx-background-radius: 25;");		
 		this.setPrefSize(250,220);
 	}
 }

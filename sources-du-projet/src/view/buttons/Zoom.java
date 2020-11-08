@@ -3,15 +3,11 @@ package view.buttons;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import modele.modelisation.Figure;
 
-public class Zoom extends VBox{
+public class Zoom extends GridPane{
 	
 	private Button In,Out;
 	
@@ -20,6 +16,11 @@ public class Zoom extends VBox{
 	private static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 20 arial;";
 	
 	public Zoom(Figure fig){
+		
+		this.setPadding(new Insets(22,0,0,15));
+		this.setHgap(10);
+		this.setVgap(10);
+		//this.setGridLinesVisible(true);
 		
 		Label title = new Label("   Zoom   ");
 		title.setStyle("-fx-text-fill: white; -fx-font: 16 arial; -fx-font-weight:bold; -fx-border-width:3px; -fx-border-color:white; -fx-border-radius:5");
@@ -39,7 +40,7 @@ public class Zoom extends VBox{
 		this.Out.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
 		this.Out.setStyle(BUTTON_STYLE);
 		
-		this.getChildren().addAll(title,new HBox(In,Out));
+		this.add(title, 1, 0);
 		
 		this.setStyle("-fx-border-width: 4px; -fx-border-color: black; -fx-background-color: firebrick; -fx-background-radius: 25;");		
 		this.setPrefWidth(200);
