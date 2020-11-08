@@ -5,7 +5,13 @@
     - Camus Sylvain, Groupe G
 
 - Description des activités/responsabilités de chaque membre de l'équipe (rappel: les responsabilités doivent être équilibrées)
-    Dubois Quentin : Rédaction des tests
+    Dubois Quentin : 
+        Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modele du MVC.
+        Je me suis aussi occupé de la Rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
+        les autres fonctions intermediaires. (Ces fonctions se trouvant dans les Classes "Matrix" et "Deplacements" qui constituent les
+        concepts Mathématiques.).
+        J'ai finalement implémenté le modèle Observer/Observé (La vue Observant le Modele, et donc les elements de la vue sont des 
+        observers de la classe Figure principalement).
 
     Devigne Nathan : 
         Je me suis premièrement occupé de la conceptualisation de l'interface de notre projet afin que l'on ait un modèle en accord avec tout les membres du projet
