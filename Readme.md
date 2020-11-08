@@ -22,10 +22,10 @@
         J'ai également passé un peu de temps sur le style des différents éléments afin de commencer à rendre l'interface ergonomique.
         
     Hottin Lucas : 
-        Je me suis initialement occupé de de la conceptualisation de la figure dans la classe Figure et de l'affichage du modele 3D, j'ai donc fait les fonctions de Translation, de Rotation et de zoom.
-        Au fur et à mesure j'ai creer avec Quentin des nouvelles classes Matrix et Mouvement pour alleger la classe Figure.
-        Avec Sylvain on a bossé sur l'ordre d'affichage, je me suis donc aidé de la classe Vecteur pour les faires.
-        J'ai aussi aidé dans le changement de modèle.
+        Je me suis initialement occupé de la conceptualisation de la figure dans la classe Figure et de l'affichage du modèle 3D, j'ai donc fais les fonctions de Translation, de Rotation et de Zoom.
+        Au fur et à mesure j'ai créé avec Quentin de nouvelles classes "Matrix" et "Mouvement" pour alléger la classe Figure.
+        Avec Sylvain on a travaillé sur l'ordre d'affichage, je me suis donc aidé de la classe Vecteur pour les faire.
+        J'ai aussi aidé dans le changement de modèle de l'explorateur.
 
     Camus Sylvain : Réalisation du Parser des fichiers ply
 
