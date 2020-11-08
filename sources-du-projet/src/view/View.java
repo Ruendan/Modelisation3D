@@ -2,7 +2,6 @@ package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -26,14 +25,20 @@ public class View extends Stage implements Observer{
 	
 	private CustomChangeListener gg;
 	
+	private Canva display;
+	
 	public View(Figure fig) {
 		
 		gg = new CustomChangeListener(fig);
 		gg.attach(this);
 
 		Explorer modelsList = new Explorer(gg);
+		
+		display = new Canva(700.0, 500.0);
 		right = createRight(fig);
 		right.prefWidthProperty().bind((this.widthProperty().multiply(0.3)));
+		
+		
 		
 		bb = new BorderPane();		
 		bb.setLeft(modelsList);
@@ -52,9 +57,8 @@ public class View extends Stage implements Observer{
 	private VBox createRight(Figure fig) {
 		VBox res = new VBox();
 		
-		HBox buttons = new Buttons(fig);
-		
-		Canvas display = new Canva(fig,700.0,500.0);
+		display.setFigure(fig);
+		HBox buttons = new Buttons(display);
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		res.getChildren().addAll(display, buttons);

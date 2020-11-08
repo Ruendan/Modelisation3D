@@ -13,37 +13,66 @@ public class Canva extends Canvas implements Observer {
 
 	private Figure fig;
 	// private Timeline timeline;
+	
+	private Color canvaFillColor = Color.rgb(135, 206, 250, 1);
+	
+	private Color figureFillColor = Color.rgb(135, 206, 250, 1);
+	private Color figureStrokeColor = Color.BLACK;
+	private double figureLineWidth = 0.2;
 
 	private GraphicsContext gc;
 
 	private double[][] coord;
 
-	public Canva(Figure figure, double width, double height) {
+	public Canva(double width, double height) {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
-		figure.attach(this);
-		this.fig = figure;
 		coord = new double[2][1];
-		this.fig.centerFigure(width, height);
-
+	}
+	
+	public void setCanvaFillColor(Color rgba) {
+		this.canvaFillColor = rgba;
+		this.clear();
 		this.printFigure();
-
+	}
+	
+	public Color getCanvaFillColor() {
+		return canvaFillColor;
+	}
+	
+	public void setFigureFillColor(Color rgba) {
+		this.figureFillColor=rgba;
+		this.clear();
+		this.printFigure();
+	}
+	
+	public Color getFigureFillColor() {
+		return figureFillColor;
+	}
+	
+	public Figure getFigure() {
+		return this.fig;
+	}
+	
+	public void setFigure(Figure fig) {
+		if(this.fig!=null)this.fig.detach(this);
+		this.fig = fig;
+		this.fig.attach(this);
+		this.fig.centerFigure(this.getWidth(), this.getHeight());
+		this.printFigure();
 	}
 
 	private void printPolygon(double[][] coord, Face f) {
-		this.gc.setFill(Color.rgb(135, 206, 250, 1));
-		this.gc.setStroke(Color.BLACK);
-		this.gc.setLineWidth(0.2);
+		this.gc.setFill(figureFillColor);
+		this.gc.setStroke(figureStrokeColor);
+		this.gc.setLineWidth(figureLineWidth);
 		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
 
 	}
 
 	private void convert3d2d(Face face) {
-		/*
-		 * 
-		 */
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
 		for (int j = 0; j < face.getPoints().size(); j++) {
@@ -54,10 +83,6 @@ public class Canva extends Canvas implements Observer {
 	}
 
 	public void printFigure() {
-		/*
-		 * CA DOIT MODIFIER ET NON CHANGER LE POLYGONE
-		 */
-
 		for (Face f : fig.getFaces()) {
 			convert3d2d((f));
 			printPolygon(coord, f);
@@ -77,10 +102,15 @@ public class Canva extends Canvas implements Observer {
 	}
 
 	private void clear() {
-		this.gc.setFill(Color.BLACK);
+		this.gc.setFill(canvaFillColor);
 		this.gc.fillRect(0, 0, this.getWidth(), this.getHeight());
-
 	}
+
+	
+
+	
+
+	
 
 	/*
 	 * CODE POUR LA TIMELINE timeline= new Timeline(new
