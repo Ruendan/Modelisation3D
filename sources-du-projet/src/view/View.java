@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.Window;
-
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -64,11 +62,11 @@ public class View extends Stage implements Observer{
 		
 		HBox buttons = new HBox();
 		buttons.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));
-		buttons.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
+		//buttons.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		
 		Canvas display = new Canva(fig,700.0,500.0);
 		
-		res.setStyle("-fx-border-width: 2px; -fx-border-color: black;");
+		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		res.getChildren().addAll(display, buttons);
 		
 		return res;

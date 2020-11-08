@@ -60,9 +60,9 @@ public class Figure extends Subject{
 	 */
 	private void initialisation() {
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		center.deplacer(-center.getX(), -center.getY(), -center.getZ());
 		Mouvement.rotate(this, 180, 180, 0);
 		zoom(50);
-		center.deplacer(250, 250, 250);
 		//this.zoom(0);
 		tri();
 	}
@@ -156,6 +156,7 @@ public class Figure extends Subject{
 
 	public void centerFigure(double width, double height) {
 		Mouvement.deplacer(this, width/2, height/2, 0);
+		center.deplacer(width/2, height/2, 0);
 	}
 
 }
