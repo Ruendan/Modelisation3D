@@ -56,7 +56,7 @@ public class Translation extends GridPane{
 		this.add(left, 0, 2);
 		this.add(right, 2, 2);
 		
-		this.setStyle("-fx-border-width: 4px; -fx-border-color: black; -fx-background-color: slategrey; -fx-background-radius: 25;");		
+		this.setStyle("-fx-border-width: 4px; -fx-border-color: white; -fx-background-color: slategrey; -fx-background-radius: 25; -fx-border-radius:25;");		
 		this.setPrefWidth(260);
 	}
 }
