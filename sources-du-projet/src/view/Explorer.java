@@ -2,9 +2,7 @@ package view;
 
 import java.io.File;
 
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ListView;
-import modele.modelisation.Figure;
 import modele.modelisation.Ply;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;

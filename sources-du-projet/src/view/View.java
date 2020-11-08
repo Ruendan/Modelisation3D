@@ -16,15 +16,11 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Observer;
 import utils.Subject;
-import view.buttons.Rotation;
-import view.buttons.Translation;
-import view.buttons.Zoom;
+import view.buttons.Buttons;
 
 public class View extends Stage implements Observer{
 	
-	private Rotation buttons_rotation;
-	private Translation buttons_translation;
-	private Zoom buttons_zoom;
+
 	private VBox right;
 	private BorderPane bb;
 	
@@ -56,13 +52,7 @@ public class View extends Stage implements Observer{
 	private VBox createRight(Figure fig) {
 		VBox res = new VBox();
 		
-		this.buttons_rotation = new Rotation(fig);
-		this.buttons_translation = new Translation(fig);
-		this.buttons_zoom = new Zoom(fig);
-		
-		HBox buttons = new HBox();
-		buttons.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));
-		//buttons.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
+		HBox buttons = new Buttons(fig);
 		
 		Canvas display = new Canva(fig,700.0,500.0);
 		
@@ -71,6 +61,8 @@ public class View extends Stage implements Observer{
 		
 		return res;
 	} 
+	
+	
 	
 
 	@Override
