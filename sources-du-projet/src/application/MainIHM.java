@@ -15,7 +15,7 @@ public class MainIHM extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Figure fig = new Figure(PlyParser.loadPly("bethoveen"));
-		//Figure fig = new Figure();
+
 		new View(fig);
 	}
 }

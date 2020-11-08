@@ -6,8 +6,9 @@ import java.util.Set;
 
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
+import utils.Subject;
 
-public class Figure {
+public class Figure extends Subject{
 	
 	private String name;
 	private List<Face> faces;
@@ -57,28 +58,30 @@ public class Figure {
 	 */
 	private void initialisation() {
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-		for(Point p : this.getPoints()) {
-			p.rotate(180,  180,  0);
-			p.agrandir(50);
-			p.deplacer(250, 250, 250);
-		}
-		center.deplacer(250, 250, 250);
-		//this.zoom(0);
+		center.deplacer(-center.getX(), -center.getY(), -center.getZ());
+		Mouvement.rotate(this, 180, 180, 0);
 		tri();
 	}
 
 
 	public void zoom(double zoom) {
-		Point temp = new Point(center.getX(), center.getY(), center.getZ());
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
-//		for(int i = 0; i < this.getPoints().size() ; i++) {
-//			this.getPoints().get(i).agrandir(zoom);
-//		}
+		toOrigin();
 		for(Point p : this.getPoints()) p.agrandir(zoom);
-		
-		Mouvement.deplacer(this, temp.getX(), temp.getY(), temp.getZ());
+		toCenter();
+		this.notifyObservers();
 	}
 
+	public void HDeplace(double value) {
+		center.deplacerX(value);
+		Mouvement.deplacer(this, value, 0, 0);
+		notifyObservers();
+	}
+	
+	public void VDeplace(double value){
+		center.deplacerY(value);
+		Mouvement.deplacer(this, 0, value, 0);
+		notifyObservers();
+	}
 
 	public void tri() {
 		for(Face f : faces) {
@@ -94,16 +97,23 @@ public class Figure {
 
 	public Point center() {
 		
-		double x = 0;
-		double y = 0;
-		double z = 0;
-		for(Face f : faces) {
-			Point c = f.pointMoyen();
-			x += c.getX();
-			z += c.getY();
-			y += c.getZ();
-		}
-		return new Point(x/faces.size(),y/faces.size(),z/faces.size());
+//		double x = 0;
+//		double y = 0;
+//		double z = 0;
+//		for(Face f : faces) {
+//			Point c = f.pointMoyen();
+//			x += c.getX();
+//			z += c.getY();
+//			y += c.getZ();
+//		}
+//		return new Point(x/faces.size(),y/faces.size(),z/faces.size());
+		
+
+		double[] extreme = getExtremePoint();
+		double x = (extreme[0]+extreme[1])/2;
+		double y = (extreme[2]+extreme[3])/2;
+		double z = (extreme[4]+extreme[5])/2;
+		return new Point(x, y, z);
 	}
 
 	@Override
@@ -111,4 +121,67 @@ public class Figure {
 		return "Figure [faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points;
 	}
 
+	public void rotate(int i, int j, int k) {
+		toOrigin();
+		Mouvement.rotate(this, i, j, k);
+		toCenter();
+		this.notifyObservers();
+	}
+	
+	public void rotateX(int i) {
+		toOrigin();
+		Mouvement.rotateX(this, i);
+		toCenter();
+		this.notifyObservers();
+	}
+
+	public void rotateY(int i) {
+		toOrigin();
+		Mouvement.rotateY(this, i);
+		toCenter();
+		this.notifyObservers();
+	}
+
+	public void rotateZ(int i) {
+		toOrigin();
+		Mouvement.rotateZ(this, i);
+		toCenter();
+		this.notifyObservers();
+	}
+	
+	private void toOrigin() {
+		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+	}
+	
+	private void toCenter() {
+		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
+	}
+
+	public void centerFigure(double width, double height) {
+		double[] extreme = getExtremePoint();
+		double ext = 0;
+		for (int i = 0; i < extreme.length-2; i++) {
+			if(ext<Math.abs(extreme[i])) ext = Math.abs(extreme[i]);
+		}
+		zoom((height/3)/ext);
+		Mouvement.deplacer(this, width/2, height/2, 0);
+		center.deplacer(width/2, height/2, 0);
+		notifyObservers();
+	}
+
+	private double[] getExtremePoint() {
+		double[] extreme = new double[6];
+		for(int i = 0 ; i < extreme.length ; i++) {
+			extreme[i] = 0;
+		}
+		for(Point p : points) {
+			if(extreme[0]>p.getX()) extreme[0] = p.getX(); 
+			if(extreme[1]<p.getX()) extreme[1] = p.getX();
+			if(extreme[2]>p.getY()) extreme[2] = p.getY(); 
+			if(extreme[3]<p.getY()) extreme[3] = p.getY();
+			if(extreme[4]>p.getZ()) extreme[4] = p.getZ(); 
+			if(extreme[5]<p.getZ()) extreme[5] = p.getZ();
+		}
+		return extreme;
+	}
 }
