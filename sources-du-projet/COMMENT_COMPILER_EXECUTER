@@ -1,8 +1,0 @@
-Ce fichier doit contenir 
-- quelle version de java utiliser pour compiler/exécuter : Qu'importe, nous utilisons des versions entre java 1.8 et 1.13.
-
-
-
-- ligne de commande pour exécuter le projet (en supposant qu'on se trouve dans le répertoire de ce fichier)
-Run Configuration : ajouter cette ligne :  
-		--module-path "lib/javafx-sdk-Windows/lib" --add-modules javafx.controls,javafx.fxml
