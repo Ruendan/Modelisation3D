@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
+import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
 
@@ -22,6 +23,9 @@ public class Canva extends Canvas implements Observer {
 
 	private GraphicsContext gc;
 
+	private static final double DEFAULT_WIDTH = 700;
+	private static final double DEFAULT_HEIGHT = 500;
+
 	private double[][] coord;
 
 	public Canva(double width, double height) {
@@ -31,10 +35,13 @@ public class Canva extends Canvas implements Observer {
 		coord = new double[2][1];
 	}
 	
+	public Canva() {
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	}
+	
 	public void setCanvaFillColor(Color rgba) {
 		this.canvaFillColor = rgba;
-		this.clear();
-		this.printFigure();
+		visualUpdateLite();
 	}
 	
 	public Color getCanvaFillColor() {
@@ -43,8 +50,7 @@ public class Canva extends Canvas implements Observer {
 	
 	public void setFigureFillColor(Color rgba) {
 		this.figureFillColor=rgba;
-		this.clear();
-		this.printFigure();
+		visualUpdateLite();
 	}
 	
 	public Color getFigureFillColor() {
@@ -56,14 +62,25 @@ public class Canva extends Canvas implements Observer {
 	}
 	
 	public void setFigure(Figure fig) {
-		if(this.fig!=null)this.fig.detach(this);
+		if(this.fig!=null)
+			this.fig.detach(this);
+		
 		this.fig = fig;
 		this.fig.attach(this);
-		this.fig.centerFigure(this.getWidth(), this.getHeight());
+		this.centerFigure();
 		this.printFigure();
 	}
+	
+	public double getFigureLineWidth() {
+		return this.figureLineWidth;
+	}
+	
+	public void setFigureLineWidth(double value) {
+		this.figureLineWidth = value;
+		visualUpdateLite();
+	}
 
-	private void printPolygon(double[][] coord, Face f) {
+	private void printFace(Face f) {
 		this.gc.setFill(figureFillColor);
 		this.gc.setStroke(figureStrokeColor);
 		this.gc.setLineWidth(figureLineWidth);
@@ -71,29 +88,37 @@ public class Canva extends Canvas implements Observer {
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
 
 	}
-
-	private void convert3d2d(Face face) {
-		if ((double) face.getNbPoints() != coord[0].length)
+	
+	private void convert3d2d() {
+		for (Point p : fig.getPoints()) Matrix.transformation(p);
+	}
+	
+	public void initialiseCoordsFromFace(Face face) {
+		if ((double) face.getNbPoints() != coord[0].length) 
 			coord = new double[2][face.getNbPoints()];
+		
 		for (int j = 0; j < face.getPoints().size(); j++) {
-			Matrix.transformation(face.getPoints().get(j));
 			coord[0][j] = face.getPoints().get(j).getX();
 			coord[1][j] = face.getPoints().get(j).getY();
 		}
 	}
 
 	public void printFigure() {
+		convert3d2d();
+		printFigureLite();
+	}
+	
+	public void printFigureLite() {
 		for (Face f : fig.getFaces()) {
-			convert3d2d((f));
-			printPolygon(coord, f);
+			initialiseCoordsFromFace(f);
+			printFace(f);
 		}
 	}
 
 	@Override
 	public void update(Subject subj) {
 		fig.tri();
-		this.clear();
-		this.printFigure();
+		visualUpdate();
 	}
 
 	@Override
@@ -107,10 +132,27 @@ public class Canva extends Canvas implements Observer {
 	}
 
 	
-
+	private void visualUpdate() {
+		clear();
+		printFigure();
+	}
 	
-
+	private void visualUpdateLite() {
+		clear();
+		printFigureLite();
+	}
 	
+	public void centerFigure() {
+		double[] extreme = fig.getExtremePoint();
+		double ext = 0;
+		for (int i = 0; i < extreme.length-2; i++) {
+			if(ext<Math.abs(extreme[i])) ext = Math.abs(extreme[i]);
+		}
+		fig.zoom((this.getHeight()/3)/ext);
+		
+		fig.deplace(this.getWidth()/2, this.getHeight()/2, 0);
+		
+	}
 
 	/*
 	 * CODE POUR LA TIMELINE timeline= new Timeline(new

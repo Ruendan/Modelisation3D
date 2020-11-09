@@ -10,6 +10,7 @@ public class Buttons extends HBox {
 	private Translation buttons_translation;
 	private Zoom buttons_zoom;
 	private ColorPane bouttons_couleur;
+	private LineWidthPane bouttons_eppaisseur;
 	
 	
 	public Buttons(Canva canva) {
@@ -17,10 +18,10 @@ public class Buttons extends HBox {
 		this.buttons_translation = new Translation(canva.getFigure());
 		this.buttons_zoom = new Zoom(canva.getFigure());
 		this.bouttons_couleur = new ColorPane(canva);
+		this.bouttons_eppaisseur = new LineWidthPane(canva);
 
-		this.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom, bouttons_couleur));
+		this.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom, bouttons_couleur, bouttons_eppaisseur));
 		//this.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 
 	}
-
 }

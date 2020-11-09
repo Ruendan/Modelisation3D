@@ -157,19 +157,7 @@ public class Figure extends Subject{
 		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
 	}
 
-	public void centerFigure(double width, double height) {
-		double[] extreme = getExtremePoint();
-		double ext = 0;
-		for (int i = 0; i < extreme.length-2; i++) {
-			if(ext<Math.abs(extreme[i])) ext = Math.abs(extreme[i]);
-		}
-		zoom((height/3)/ext);
-		Mouvement.deplacer(this, width/2, height/2, 0);
-		center.deplacer(width/2, height/2, 0);
-		notifyObservers();
-	}
-
-	private double[] getExtremePoint() {
+	public double[] getExtremePoint() {
 		double[] extreme = new double[6];
 		for(int i = 0 ; i < extreme.length ; i++) {
 			extreme[i] = 0;
@@ -183,5 +171,11 @@ public class Figure extends Subject{
 			if(extreme[5]<p.getZ()) extreme[5] = p.getZ();
 		}
 		return extreme;
+	}
+
+	public void deplace(double x, double y, double z) {
+		Mouvement.deplacer(this, x, y, z);
+		center.deplacer(x, y, z);
+		notifyObservers();
 	}
 }

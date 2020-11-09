@@ -21,36 +21,48 @@ public class View extends Stage implements Observer{
 	
 
 	private VBox right;
-	private BorderPane bb;
+	private BorderPane layout;
 	
-	private CustomChangeListener gg;
+	private CustomChangeListener ccl;
 	
 	private Canva display;
+
+	private static final double SCENE_WIDTH = 1000;
+	private static final double SCENE_HEIGHT = 800;
+	
+	private static final double WIDTH_MULTIPLY = 0.3;
+	
+	private static final String TITRE = "Visionneuse PLY 3D";
+	
+	private static final String DEFAULT_MODEL = "cube";
+
+	private static final Color BACKGROUND_COLOR = Color.BLACK;
+	private static final CornerRadii BACKGROUND_CORNER_RADII = CornerRadii.EMPTY;
+	private static final Insets BACKGROUND_INSETS = Insets.EMPTY;
 	
 	public View(Figure fig) {
 		
-		gg = new CustomChangeListener(fig);
-		gg.attach(this);
+		ccl = new CustomChangeListener(fig);
+		ccl.attach(this);
 
-		Explorer modelsList = new Explorer(gg);
+		Explorer modelsList = new Explorer(ccl);
 		
-		display = new Canva(700.0, 500.0);
+		display = new Canva();
 		right = createRight(fig);
-		right.prefWidthProperty().bind((this.widthProperty().multiply(0.3)));
+		right.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
+		
+		
+		layout = new BorderPane();		
+		layout.setLeft(modelsList);
+		layout.setRight(right);	
 		
 		
 		
-		bb = new BorderPane();		
-		bb.setLeft(modelsList);
-		bb.setRight(right);		
+		layout.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR,BACKGROUND_CORNER_RADII, BACKGROUND_INSETS)));
 		
-		
-		
-		bb.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY, Insets.EMPTY)));
-		
-		Scene mainScene = new Scene(bb, 1000, 800);
+		Scene mainScene = new Scene(layout, SCENE_WIDTH, SCENE_HEIGHT);
 		this.setScene(mainScene);
-		this.setTitle("Visionneuse PLY 3D");
+		this.setTitle(TITRE);
 		this.show();
 	}
 	
@@ -72,8 +84,8 @@ public class View extends Stage implements Observer{
 	@Override
 	public void update(Subject subj){
 		try {
-			right = createRight(new Figure(PlyParser.loadPly("cube")));
-			bb.setRight(right);
+			right = createRight(new Figure(PlyParser.loadPly(DEFAULT_MODEL)));
+			layout.setRight(right);
 		} catch (PlyParserException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +95,7 @@ public class View extends Stage implements Observer{
 	@Override
 	public void update(Subject subj, Object data) {
 		right = createRight((Figure) data);
-		bb.setRight(right);
+		layout.setRight(right);
 		
 	}
 }
