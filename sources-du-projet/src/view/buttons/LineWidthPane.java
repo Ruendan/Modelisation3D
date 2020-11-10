@@ -1,27 +1,36 @@
 package view.buttons;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import view.Canva;
 
-public class LineWidthPane extends BorderPane{
+public class LineWidthPane extends GridPane implements Buttons_control{
 	
 	private Slider thicken;
-	private Label thickenLabel;
-	
-	private static final String TEXT = "Thicken the line";
+	private Label title;
+
 	private static final double MIN_WIDTH = 0.1;
 	private static final double MAX_WIDTH = 1.0;
 
 	public LineWidthPane(Canva canva) {
+		
+		title = new Label("  Epaisseur du trait  ");
+		title.setStyle(LABEL_STYLE);
+		
+		this.setPadding(new Insets(10,0,10,30));
+		this.setHgap(10);
+		this.setVgap(10);
+		
 		this.thicken = new Slider(MIN_WIDTH,MAX_WIDTH, canva.getFigureLineWidth());
 		thicken.setShowTickMarks(true);
 		thicken.valueProperty().addListener((observable, oldValue, newValue) -> canva.setFigureLineWidth((double)newValue));
-
-		this.thickenLabel = new Label(TEXT);
 		
-		this.setLeft(thickenLabel);
-		this.setCenter(thicken);
+		this.add(title, 1, 0);
+		this.add(thicken, 1, 1);
+		
+		this.setStyle(PANE_STYLE);
+		this.setPrefWidth(250);
 	}
 }
