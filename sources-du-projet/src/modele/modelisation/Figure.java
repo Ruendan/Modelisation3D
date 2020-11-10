@@ -41,6 +41,10 @@ public class Figure extends Subject{
 		return center;
 	}
 	
+	public int getNbPoint() {
+		return points.size();
+	}
+	
 	public int getNbFaces() {
 		return nbFaces;
 	}
