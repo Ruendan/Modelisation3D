@@ -27,12 +27,10 @@ public class ButtonFactory {
 		
 		switch(type) {
 		
-		/*
 		case "Color":
-			return new ColorPane(fig);
+			return new ColorPane(canv);
 		case "Thickness":
-			return new LineWidthPane(fig);
-		*/
+			return new LineWidthPane(canv);
 		
 		default:
 			System.out.println("Veuillez insérer un type de bouton correct");

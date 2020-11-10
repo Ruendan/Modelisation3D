@@ -9,6 +9,7 @@ import modele.modelisation.Figure;
 public class Zoom extends GridPane implements Buttons_control{
 	
 	private Button In,Out;
+	private Label title;
 	
 	public Zoom(Figure fig){
 		
@@ -16,9 +17,8 @@ public class Zoom extends GridPane implements Buttons_control{
 		this.setHgap(10);
 		this.setVgap(10);
 		
-		Label title = new Label("   Zoom   ");
+		title = new Label("   Zoom   ");
 		title.setStyle(LABEL_STYLE);
-		
 		
 		this.In = new Button("+");
 		In.setOnAction(e->{
