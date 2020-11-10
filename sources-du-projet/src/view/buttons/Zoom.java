@@ -13,10 +13,6 @@ public class Zoom extends GridPane implements Buttons_control{
 	
 	public Zoom(Figure fig){
 		
-		this.setPadding(new Insets(10,0,10,30));
-		this.setHgap(10);
-		this.setVgap(10);
-		
 		title = new Label("   Zoom   ");
 		title.setStyle(LABEL_STYLE);
 		
@@ -33,6 +29,11 @@ public class Zoom extends GridPane implements Buttons_control{
 		});
 		this.Out.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
 		this.Out.setStyle(BUTTON_STYLE);
+		
+		
+		this.setPadding(new Insets(10,0,10,30));
+		this.setHgap(10);
+		this.setVgap(10);
 		
 		this.add(title, 1, 0);
 		this.add(In, 0, 1);

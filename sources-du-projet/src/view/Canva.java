@@ -27,7 +27,7 @@ public class Canva extends Canvas implements Observer {
 
 	private GraphicsContext gc;
 
-	private static final double DEFAULT_WIDTH = 700;
+	private static final double DEFAULT_WIDTH = 800;
 	private static final double DEFAULT_HEIGHT = 500;
 
 	private double[][] coord;
