@@ -1,11 +1,10 @@
 package view.buttons;
 
-
 import javafx.scene.control.ColorPicker;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import view.Canva;
 
-public class ColorPane extends BorderPane{
+public class ColorPane extends GridPane{
 	
 	private ColorPicker figureColorPicker;
 	private ColorPicker canvaColorPicker;
@@ -16,10 +15,7 @@ public class ColorPane extends BorderPane{
 		this.figureColorPicker = new ColorPicker(canva.getFigureFillColor());
 		figureColorPicker.setOnAction(e -> canva.setFigureFillColor(figureColorPicker.getValue()));
 		
-		this.setLeft(figureColorPicker);
-		this.setRight(canvaColorPicker);
+		this.add(canvaColorPicker, 1, 0);
+		this.add(figureColorPicker, 1, 1);
 	}
-	
-	
-	
 }

@@ -6,14 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 
-public class Rotation extends GridPane{
+public class Rotation extends GridPane implements Buttons_control{
 	
 	private Button Xup,Xdown,Yup,Ydown,Zup,Zdown;
-	
-	private static final int VALEUR_DE_ROTATION = 10;
-	private static final int BUTTON_SIZE_WIDTH = 48;
-	private static final int BUTTON_SIZE_HEIGHT = 48;
-	private static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 20 arial;";
 	
 	public Rotation(Figure fig){
 		
@@ -22,7 +17,7 @@ public class Rotation extends GridPane{
 		this.setVgap(20);
 		
 		Label title = new Label("   Rotation   ");
-		title.setStyle("-fx-text-fill: white; -fx-font: 16 arial; -fx-font-weight:bold; -fx-border-width:3px; -fx-border-color:white; -fx-border-radius:5");
+		title.setStyle(LABEL_STYLE);
 		
 		this.Xup = new Button("↑");
 		Xup.setOnAction(e ->{
@@ -32,8 +27,8 @@ public class Rotation extends GridPane{
 		Xdown.setOnAction(e ->{
 			fig.rotateX(-VALEUR_DE_ROTATION);
 		});
-		this.Xup.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
-		this.Xdown.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
+		this.Xup.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
+		this.Xdown.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
 		this.Xup.setStyle(BUTTON_STYLE);
 		this.Xdown.setStyle(BUTTON_STYLE);
 		
@@ -46,8 +41,8 @@ public class Rotation extends GridPane{
 		Ydown.setOnAction(e ->{
 			fig.rotateY(-VALEUR_DE_ROTATION);
 		});
-		this.Yup.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
-		this.Ydown.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
+		this.Yup.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
+		this.Ydown.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
 		this.Yup.setStyle(BUTTON_STYLE);
 		this.Ydown.setStyle(BUTTON_STYLE);
 		
@@ -60,8 +55,8 @@ public class Rotation extends GridPane{
 		Zdown.setOnAction(e ->{
 			fig.rotateZ(-VALEUR_DE_ROTATION);
 		});
-		this.Zup.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
-		this.Zdown.setPrefSize(BUTTON_SIZE_WIDTH,BUTTON_SIZE_HEIGHT);
+		this.Zup.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
+		this.Zdown.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
 		this.Zup.setStyle(BUTTON_STYLE);
 		this.Zdown.setStyle(BUTTON_STYLE);
 		
@@ -73,7 +68,7 @@ public class Rotation extends GridPane{
 		this.add(Zup, 0, 3);
 		this.add(Zdown, 2, 3);
 		
-		this.setStyle("-fx-border-width: 4px; -fx-border-color: white; -fx-background-color: slategrey; -fx-background-radius: 25; -fx-border-radius:25;");		
+		this.setStyle(PANE_STYLE);		
 		this.setPrefSize(250,220);
 	}
 }
