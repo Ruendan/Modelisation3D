@@ -27,8 +27,8 @@ public class LineWidthPane extends GridPane implements Buttons_control{
 		thicken.setShowTickMarks(true);
 		thicken.valueProperty().addListener((observable, oldValue, newValue) -> canva.setFigureLineWidth((double)newValue));
 		
-		this.add(title, 0, 0);
-		this.add(thicken, 0, 1);
+		this.add(title, 1, 0);
+		this.add(thicken, 1, 1);
 		
 		this.setStyle(PANE_STYLE);
 		this.setPrefWidth(250);

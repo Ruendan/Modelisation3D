@@ -19,7 +19,6 @@ import view.buttons.Buttons;
 
 public class View extends Stage implements Observer{
 	
-
 	private VBox right;
 	private BorderPane layout;
 	
@@ -27,10 +26,10 @@ public class View extends Stage implements Observer{
 	
 	private Canva display;
 
-	private static final double SCENE_WIDTH = 1000;
+	private static final double SCENE_WIDTH = 1100;
 	private static final double SCENE_HEIGHT = 800;
 	
-	private static final double SCENE_MIN_WIDTH = 500;
+	private static final double SCENE_MIN_WIDTH = 700;
 	private static final double SCENE_MIN_HEIGHT = 400;
 	
 	private static final double WIDTH_MULTIPLY = 0.3;
