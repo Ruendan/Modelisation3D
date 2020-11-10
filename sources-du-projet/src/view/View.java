@@ -30,6 +30,9 @@ public class View extends Stage implements Observer{
 	private static final double SCENE_WIDTH = 1000;
 	private static final double SCENE_HEIGHT = 800;
 	
+	private static final double SCENE_MIN_WIDTH = 500;
+	private static final double SCENE_MIN_HEIGHT = 400;
+	
 	private static final double WIDTH_MULTIPLY = 0.3;
 	
 	private static final String TITRE = "Visionneuse PLY 3D";
@@ -48,20 +51,21 @@ public class View extends Stage implements Observer{
 		Explorer modelsList = new Explorer(ccl);
 		
 		display = new Canva();
+		
 		right = createRight(fig);
 		right.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
 		
 		
 		layout = new BorderPane();		
 		layout.setLeft(modelsList);
-		layout.setRight(right);	
-		
-		
-		
+		layout.setRight(right);
 		layout.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR,BACKGROUND_CORNER_RADII, BACKGROUND_INSETS)));
 		
 		Scene mainScene = new Scene(layout, SCENE_WIDTH, SCENE_HEIGHT);
 		this.setScene(mainScene);
+		
+		this.setMinWidth(SCENE_MIN_WIDTH);
+		this.setMinHeight(SCENE_MIN_HEIGHT);
 		this.setTitle(TITRE);
 		this.show();
 	}
