@@ -61,28 +61,62 @@ class FigureTest {
 	
 	@Test
 	void test_HDeplacer() {
-		double moyenneBefore = 0;
-		for(Point p : cube.getPoints()) moyenneBefore+=p.getY();
-		
 		cube.HDeplace(10);
 		
 		double moyenneAfter = 0;
-		for(Point p : cube.getPoints())  moyenneAfter+=p.getY();
+		for(Point p : cube.getPoints())
+			moyenneAfter+=p.getX();
 		
-		assertEquals(moyenneBefore, moyenneAfter);
+		assertEquals(10, moyenneAfter/cube.getNbPoint());
 	}
 	
 	@Test
 	void test_VDeplacer() {
-		double moyenneBefore = 0;
-		for(Point p : cube.getPoints()) moyenneBefore+=p.getZ();
-		
 		cube.VDeplace(10);
 		
 		double moyenneAfter = 0;
-		for(Point p : cube.getPoints())  moyenneAfter+=p.getZ();
+		for(Point p : cube.getPoints())
+			moyenneAfter+=p.getY();
 		
-		assertEquals(moyenneBefore*10, moyenneAfter);
+		assertEquals(10, moyenneAfter/cube.getNbPoint());
+	}
+	
+	@Test
+	void test_rotateAll() {
+	}
+	
+	@Test
+	void test_rotateX() {
+		
+	}
+	
+	@Test
+	void test_rotateY() {
+		
+	}
+	
+	@Test
+	void test_rotateZ() {
+		
+	}
+	
+	@Test
+	void test_deplaceAll() {
+		cube.deplace(10, 10, 10);
+
+		double moyenneX=0;
+		double moyenneY=0;
+		double moyenneZ=0;
+		
+		for(Point p : cube.getPoints()) {
+			moyenneX+=p.getX();
+			moyenneY+=p.getY();
+			moyenneZ+=p.getZ();
+		}
+		
+		assertEquals(10, moyenneX/cube.getNbPoint());
+		assertEquals(10, moyenneY/cube.getNbPoint());
+		assertEquals(10, moyenneZ/cube.getNbPoint());
 	}
 
 }
