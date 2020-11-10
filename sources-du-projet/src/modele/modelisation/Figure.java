@@ -88,26 +88,9 @@ public class Figure extends Subject{
 			f.preSort();
 		}
 		Collections.sort(faces);
-		int i=0;
-		for(Face f : faces) {
-			f.setId(i);
-			i++;
-		}
 	}
 
 	public Point center() {
-		
-//		double x = 0;
-//		double y = 0;
-//		double z = 0;
-//		for(Face f : faces) {
-//			Point c = f.pointMoyen();
-//			x += c.getX();
-//			z += c.getY();
-//			y += c.getZ();
-//		}
-//		return new Point(x/faces.size(),y/faces.size(),z/faces.size());
-		
 
 		double[] extreme = getExtremePoint();
 		double x = (extreme[0]+extreme[1])/2;
