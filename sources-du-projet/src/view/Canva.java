@@ -10,7 +10,6 @@ import javafx.util.Duration;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
-import modele.modelisation.Mouvement;
 import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
@@ -75,7 +74,7 @@ public class Canva extends Canvas implements Observer {
 		this.centerFigure();
 		this.printFigure();
 		timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {
-			Mouvement.rotate(fig, 1, 1, 1);
+			fig.rotate(5, 5 ,5);
 			visualUpdate();
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);

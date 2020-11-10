@@ -6,13 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 
-public class Translation extends GridPane{
+public class Translation extends GridPane implements Buttons_control{
 	
 	private Button up,down,left,right;
-	
-	private static final int VALEUR_DE_DEPLACEMENT = 10;
-	private static final int BUTTON_SIZE = 48;
-	private static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 20 arial;";
 	
 	public Translation(Figure fig){
 		
@@ -22,7 +18,7 @@ public class Translation extends GridPane{
 		//this.setGridLinesVisible(true);
 		
 		Label title = new Label("   Translation   ");
-		title.setStyle("-fx-text-fill: white; -fx-font: 16 arial; -fx-font-weight:bold; -fx-border-width:3px; -fx-border-color:white; -fx-border-radius:5");
+		title.setStyle(LABEL_STYLE);
 		
 		this.up = new Button("↑");
 		up.setOnAction(e->{
@@ -56,7 +52,7 @@ public class Translation extends GridPane{
 		this.add(left, 0, 2);
 		this.add(right, 2, 2);
 		
-		this.setStyle("-fx-border-width: 4px; -fx-border-color: white; -fx-background-color: slategrey; -fx-background-radius: 25; -fx-border-radius:25;");		
+		this.setStyle(PANE_STYLE);		
 		this.setPrefWidth(260);
 	}
 }
