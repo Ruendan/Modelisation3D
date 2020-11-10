@@ -88,11 +88,6 @@ public class Figure extends Subject{
 			f.preSort();
 		}
 		Collections.sort(faces);
-		int i=0;
-		for(Face f : faces) {
-			f.setId(i);
-			i++;
-		}
 	}
 
 	public Point center() {
