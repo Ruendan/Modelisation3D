@@ -14,7 +14,7 @@ public class ColorPane extends GridPane implements Buttons_control{
 	public ColorPane(Canva canva) {
 		
 		this.titleCP1 = new Label("  Couleur de fond  ");
-		this.titleCP2 = new Label("  Couleur de trait   ");
+		this.titleCP2 = new Label("  Couleur de face  ");
 		this.titleCP1.setStyle(LABEL_STYLE);
 		this.titleCP2.setStyle(LABEL_STYLE);
 		
