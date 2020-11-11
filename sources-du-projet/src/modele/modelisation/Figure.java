@@ -104,6 +104,14 @@ public class Figure extends Subject{
 		return this.name;
 	}
 	
+	/**
+	 * Return the figure's number of points.
+	 * @return double
+	 * 			The figure's number of points.
+	 */
+	public double getNbPoint() {
+		return 0;
+	}
 	
 	private void initialisation() {
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
@@ -306,4 +314,5 @@ public class Figure extends Subject{
 		center.deplacer(x, y, z);
 		notifyObservers();
 	}
+
 }
