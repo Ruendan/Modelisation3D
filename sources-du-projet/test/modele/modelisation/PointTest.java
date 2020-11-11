@@ -141,5 +141,21 @@ class PointTest {
 		assertEquals(0.0, vide.getY(), 0.01);
 		assertEquals(0.0, vide.getZ(), 0.01);
 	}
+	
+	@Test
+	public void test_aggrandir_vide() {
+		vide.agrandir(3);
+		assertEquals(0.0, vide.getX(), 0.01);
+		assertEquals(0.0, vide.getY(), 0.01);
+		assertEquals(0.0, vide.getZ(), 0.01);
+	}
+	
+	@Test
+	public void test_aggrandir_classique() {
+		classique.agrandir(3);
+		assertEquals(0.0, classique.getX(), 0.01);
+		assertEquals(3.0, classique.getY(), 0.01);
+		assertEquals(6.0, classique.getZ(), 0.01);
+	}
 
 }
