@@ -2,6 +2,7 @@ package modele.modelisation;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,12 +80,19 @@ public class PlyTest {
 	
 	@Test
 	public void test_list_points() {
-		//assertEquals(expectedPoints, tested.getPoints());
+		assertEquals(8, tested.getVertex());
+		for(Point p : tested.getPoints()) assertTrue(expectedPoints.contains(p));
 	}
 	
 	@Test
-	public void test_list_faces() {
+	public void test_get_faces() {
+		assertEquals(6, tested.getNbFace());
 		assertEquals(expectedFaces, tested.getFaces());
+	}
+	
+	@Test
+	public void test_getName() {
+		assertEquals("cube", tested.getName());
 	}
 
 }
