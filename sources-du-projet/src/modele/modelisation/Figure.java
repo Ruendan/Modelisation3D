@@ -7,6 +7,7 @@ import java.util.Set;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Subject;
+import view.Canva;
 
 /**
  *Modelisation du fichier PLY
@@ -31,10 +32,9 @@ public class Figure extends Subject{
 	private Set<Point> points;
 
 	/**
-	 * Create a figure with a Ply file
-	 * @see Ply
+	 * Create a figure with a {@link Ply}
 	 * @param ply
-	 * 			The using PLY
+	 * 			The using {@link Ply}
 	 */
 	public Figure(Ply ply) {
 		this.name = ply.getName();
@@ -48,6 +48,7 @@ public class Figure extends Subject{
 	/**
 	 * Create a figure with a name pf a ply File
 	 * @see Ply
+	 * @see PlyParser
 	 * @param nom
 	 * 			The name of the PLY File you want to use
 	 * @throws PlyParserException
@@ -61,7 +62,7 @@ public class Figure extends Subject{
 	
 	/**
 	 * Return figure's set of point
-	 * @return java.util.Set modele.modelisation.Point
+	 * @return {@link Set} of {@link Point}
 	 * 			The list of all points of the figure
 	 */
 	public Set<Point> getPoints(){
@@ -70,7 +71,7 @@ public class Figure extends Subject{
 	
 	/**
 	 * Return the point that matches with the figure's center
-	 * @return modele.modelisation.Point
+	 * @return {@link Point}
 	 * 			The center of the figure
 	 */
 	public Point getCenter() {
@@ -78,8 +79,8 @@ public class Figure extends Subject{
 	}
 	
 	/**
-	 * Return the figure's number of faces
-	 * @return int
+	 * Return the figure's number of {@link Face}
+	 * @return {@link Integer}
 	 * 			The number of Figures'faces
 	 */
 	public int getNbFaces() {
@@ -87,9 +88,9 @@ public class Figure extends Subject{
 	}
 	
 	/**
-	 * Return the figure's list of faces
-	 * @return java.util.List modele.modelisation.Face 
-	 * 			The List of Figure's faces
+	 * Return the figure's {@link List} of {@link Face} 
+	 * @return {@link List} of {@link Face} 
+	 * 			The List of Figure's {@link Face}
 	 */
 	public List<Face> getFaces(){
 		return faces;
@@ -97,7 +98,7 @@ public class Figure extends Subject{
 	
 	/**
 	 * Return the figure's name
-	 * @return java.lang.String
+	 * @return {@link String}
 	 * 			The figure's name
 	 */
 	public String getName() {
@@ -105,9 +106,9 @@ public class Figure extends Subject{
 	}
 	
 	/**
-	 * Return the figure's number of points.
-	 * @return double
-	 * 			The figure's number of points.
+	 * Return the figure's number of {@link Point}.
+	 * @return {@link Double}
+	 * 			The figure's number of {@link Point}.
 	 */
 	public double getNbPoint() {
 		return 0;
@@ -158,8 +159,8 @@ public class Figure extends Subject{
 	}
 
 	/**
-	 * Sort the list of faces
-	 * <p> Sort the list of faces in the good order for print. The farthest is in first place and the closest in last place</p>
+	 * Sort the {@link List} of {@link Face}
+	 * <p> Sort the {@link List} of {@link Face} in the good order for print. The farthest {@link Face} is in first place and the closest in last place</p>
 	 * @see Figure#getFaces()
 	 * @see Face
 	 */
@@ -171,10 +172,10 @@ public class Figure extends Subject{
 	}
 
 	/**
-	 * Initializes the center point
-	 * <p> create the point who is at the center of the figures by the average of extremes point</p>
-	 * @return Point
-	 * 			The center point
+	 * Initializes the center {@link Point}
+	 * <p> create the {@link Point} who is at the center of the figures by the average of extremes point</p>
+	 * @return {@link Point}
+	 * 			The center {@link Point}
 	 * 
 	 * @see Figure#getCenter()
 	 * @see Figure#getExtremePoint()
@@ -189,7 +190,7 @@ public class Figure extends Subject{
 	}
 
 	/**
-	 * String of the Figure
+	 * {@link String} of the Figure
 	 * <p> Exemple Figure [name=cube, faces=(List of Faces), nbFaces=6, center=(center point), points=(List of points)]</p>
 	 * 
 	 * @see Figure#getName()
@@ -268,7 +269,7 @@ public class Figure extends Subject{
 	}
 	
 	/**
-	 * Move the figure on the center of the Canva
+	 * Move the figure on the center of the {@link Canva}
 	 * 
 	 * @see Canva
 	 * @see Figure#getCenter()
@@ -279,9 +280,9 @@ public class Figure extends Subject{
 	}
 	/**
 	 * Get the extreme points of the figure
-	 * <p>Return an array of double the the first to are the closest X and the Farthest X, the 2 next are the same but for Y and same things for Z</p>
-	 * @return double[]
-	 * 			All the extreme point
+	 * <p>Return an array of {@link Double} the two first value are the closest X and the Farthest X, the 2 next are the same but for Y and same things for Z</p>
+	 * @return array of {@link Double}
+	 * 			All the extreme {@link Point}
 	 */
 	public double[] getExtremePoint() {
 		double[] extreme = new double[6];
@@ -308,6 +309,7 @@ public class Figure extends Subject{
 	 * 			The value of the number of time you want to move the figure in the Y axes.
 	 * @param z
 	 * 			The value of the number of time you want to move the figure in the Y axes.
+	 * @see Mouvement
 	 */
 	public void deplace(double x, double y, double z) {
 		Mouvement.deplacer(this, x, y, z);
