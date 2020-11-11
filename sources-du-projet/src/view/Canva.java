@@ -13,7 +13,13 @@ import modele.modelisation.Matrix;
 import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
-
+/**
+ * Figure Display
+ * <p>This class is used to manage the display of the {@link Figure}</p>
+ * @author Groupe G1
+ *	Implements {@link Observer}
+ *	exctends {@link Canvas}
+ */
 public class Canva extends Canvas implements Observer {
 
 	private Figure fig;
