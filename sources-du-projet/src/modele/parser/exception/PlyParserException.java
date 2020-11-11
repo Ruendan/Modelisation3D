@@ -7,7 +7,7 @@ public abstract class PlyParserException extends Exception{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final String classic = "Une Erreur de Parser à été provoquée";
+	private static final String classic = "Une Erreur de Parser Ã  Ã©tÃ© provoquÃ©e";
 
 	public PlyParserException() {
 		this(classic);
