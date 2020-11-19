@@ -7,7 +7,7 @@ public class PropertyPropertiesError extends PlyParserException{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final String classic = "Les propriétés 'propriété' ne sont pas conformes.";
+	private static final String classic = "Les propriÃ©tÃ©s 'propriÃ©tÃ©' ne sont pas conformes.";
 	
 	public PropertyPropertiesError() {
 		this(classic);
