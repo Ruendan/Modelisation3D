@@ -1,0 +1,17 @@
+Rules importantes V V
+
+CollapsibleIfStatements permet la réduction des if imbriqué, en les "mixant" si possible, va avec les autres règles permettant d'améliorer la visibilité et l'optimisation des conditions dans les "if"
+ExcessiveMethodLength ; juste indispensable pour le maintien et la lisibilité
+xxxxNamingConventions ; permet la vérification des nom, (on peut y inclure les rule qui regarde si ce sont des data class ou des Utility class)
+StringToString  ; permet de vérifier que l'on ne fait pas un String.toString, ce qui est inutile (peux important en sois, mais c'est toute la catégorie d'optimisation de ce genre, qu'il faut considérer)
+GodClass    ;   Ici aussi, nous avons aa faire avec un incontournable, permettant la lisibilité, le maintien sans trop de soucis, et le principe de réutilisation des objets
+
+
+
+rules non utilisée V V
+
+OnlyOneReturn     ;dans certains cas le return est vraiment utile
+CommentRequired   ; On a déjà défini que les commentaires abusifs sont un code smell
+PrematureDeclaration     ;   C'est vrai que dans ce cas les variables peuvent etre detruite avant leurs utilisation, mais ce sont des cas rare et il est préférable de les déclarer au début de la méthode
+LiteralsFirstInComparisons  ; on ne pouvait pas faire sans, pour detecter les "vertex" et autre (dans le parser du moins).
+UncommentedEmptyConstructor  ; le constructeur vide est utilisé dans le parseur pour fairte un .Ply dont les variable sont initialisés par défaut.
