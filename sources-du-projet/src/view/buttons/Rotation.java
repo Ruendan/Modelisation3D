@@ -13,9 +13,6 @@ public class Rotation extends GridPane implements Buttons_control{
 	
 	public Rotation(Figure fig){
 		
-		title = new Label("   Rotation   ");
-		title.setStyle(LABEL_STYLE);
-		
 		this.Xup = new Button("↑");
 		Xup.setOnAction(e ->{
 			fig.rotateX(VALEUR_DE_ROTATION);
@@ -53,14 +50,14 @@ public class Rotation extends GridPane implements Buttons_control{
 		this.setPadding(new Insets(22,0,0,15));
 		this.setHgap(10);
 		this.setVgap(20);
+		this.setGridLinesVisible(true);
 		
-		this.add(title, 1, 0);
-		this.add(Xup, 0, 1); this.add(Xdown, 2, 1);
-		this.add(Yup, 0, 2); this.add(Ydown, 2, 2);
-		this.add(Zup, 0, 3); this.add(Zdown, 2, 3);
+		this.add(Xup, 0, 0); this.add(Xdown, 2, 0);
+		this.add(Yup, 0, 1); this.add(Ydown, 2, 1);
+		this.add(Zup, 0, 2); this.add(Zdown, 2, 2);
 		
 		this.setStyle(PANE_STYLE);		
-		this.setPrefSize(250,220);
+		this.setPrefSize(160,150);
 	}
 }
 

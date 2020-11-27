@@ -13,9 +13,6 @@ public class Translation extends GridPane implements Buttons_control{
 	
 	public Translation(Figure fig){
 		
-		title = new Label("   Translation   ");
-		title.setStyle(LABEL_STYLE);
-		
 		this.up = new Button("↑");
 		up.setOnAction(e->{
 			fig.VDeplace(-VALEUR_DE_DEPLACEMENT);;
@@ -41,15 +38,15 @@ public class Translation extends GridPane implements Buttons_control{
 		this.setPadding(new Insets(10,0,10,10));
 		this.setHgap(10);
 		this.setVgap(10);
-		
-		this.add(title, 1, 0);
-		this.add(up, 0, 1);
-		this.add(down, 2, 1);
+		this.setGridLinesVisible(true);
+	
+		this.add(up, 1, 1);
 		this.add(left, 0, 2);
 		this.add(right, 2, 2);
+		this.add(down, 1, 3);
 		
 		this.setStyle(PANE_STYLE);		
-		this.setPrefWidth(260);
+		this.setPrefWidth(190);
 	}
 }
 

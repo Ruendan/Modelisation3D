@@ -34,13 +34,13 @@ public class Zoom extends GridPane implements Buttons_control{
 		this.setPadding(new Insets(10,0,10,30));
 		this.setHgap(10);
 		this.setVgap(10);
+		this.setGridLinesVisible(true);
 		
-		this.add(title, 1, 0);
 		this.add(In, 0, 1);
 		this.add(Out, 2, 1);
 		
 		this.setStyle(PANE_STYLE);		
-		this.setPrefWidth(200);
+		this.setPrefWidth(190);
 	}
 }
 
