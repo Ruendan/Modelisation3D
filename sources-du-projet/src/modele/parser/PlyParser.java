@@ -16,10 +16,6 @@ import modele.parser.exception.UnsupportedFileFormat;
 
 public class PlyParser {
 	
-	private static String url = "ressources/plys/";
-	boolean headCorrect;
-	
-	
 	private int xpos;
 	private int ypos;
 	private int zpos;
@@ -43,6 +39,7 @@ public class PlyParser {
 	}
 	
 	public void loadPly(Ply res,String filename) throws PlyParserException {
+		String url = "ressources/plys/";
 		loadPly(res,new File(url+filename+".ply"));
 	}
 	
@@ -68,14 +65,14 @@ public class PlyParser {
 		try(Scanner sc = new Scanner(fichier)) {
 			StringBuilder content = new StringBuilder();
 			while(sc.hasNextLine())content.append(sc.nextLine()+System.lineSeparator());
-			return content.toString().split(""+System.lineSeparator());
+			return content.toString().split(System.lineSeparator());
 		} catch (FileNotFoundException e) {e.printStackTrace();}
 		return null;
 	}
 	
 
 	private boolean handleHeader(String[] lines) throws PlyParserException {
-		comment = new ArrayList<String>();
+		comment = new ArrayList<>();
 		ParserHeader ph = new ParserHeader(vertex,face,comment,lines);
 		boolean res = ph.handleHeader();
 		
@@ -101,8 +98,8 @@ public class PlyParser {
 	}
 	
 	private boolean handlePoint(String[] lines) {
-		points = new HashSet<Point>();
-		pointsTotaux = new ArrayList<Point>();
+		points = new HashSet<>();
+		pointsTotaux = new ArrayList<>();
 		for (int i = 0; i < vertex; i++) {
 			if(!addPoint(lines[idx]))return false;
 			idx++;
@@ -115,7 +112,7 @@ public class PlyParser {
 		for (String string : tab) {
 			try {
 				Double.parseDouble(string);
-			} catch(Exception e) {
+			} catch(NumberFormatException e) {
 				return false;
 			}
 		}
@@ -130,7 +127,7 @@ public class PlyParser {
 	}
 	
 	private boolean handleFace(String[] lines) {
-		faces= new ArrayList<Face>();
+		faces= new ArrayList<>();
 		for (int i = 0; i < face; i++) {
 			if(!addFaces(lines[idx]))return false;
 			idx++;
@@ -145,11 +142,11 @@ public class PlyParser {
 		for (String string : tab) {
 			try {
 				Integer.parseInt(string);
-			} catch(Exception e) {
+			} catch(NumberFormatException e) {
 				return false;
 			}
 		}
-		ArrayList<Point> pointss = new ArrayList<Point>();
+		ArrayList<Point> pointss = new ArrayList<>();
 		nbPointInFace = Integer.parseInt(tab[0]);
 		if(nbPointInFace==2) {
 			face--;

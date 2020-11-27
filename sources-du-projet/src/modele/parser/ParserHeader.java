@@ -47,7 +47,7 @@ public class ParserHeader {
 	
 	boolean handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
-		comment = new ArrayList<String>();
+		comment = new ArrayList<>();
 		extraPropertys = 0;
 		extraElements = 0;
 		xpos = -1;
@@ -71,6 +71,8 @@ public class ParserHeader {
 				break;
 			case "property":
 				if(!handleProperty(line))return false;
+				break;
+			default:
 				break;
 			}
 			idx++;

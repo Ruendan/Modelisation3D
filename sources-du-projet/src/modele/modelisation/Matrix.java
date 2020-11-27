@@ -3,7 +3,7 @@ package modele.modelisation;
 public class Matrix {
 	
 	private Double[][] matrice;
-	public static final Matrix matriceTransformation = new Matrix( new Double[][]{
+	public static final Matrix MATRICETRANSFORMATION = new Matrix( new Double[][]{
 		{1.0,	0.0,	0.0},
 		{0.0,	1.0,	0.0}});
 	
@@ -73,7 +73,7 @@ public class Matrix {
 	}
 	
 	public static void transformation(Point point2) {
-		multiplyMatrice(matriceTransformation,point2);
+		multiplyMatrice(MATRICETRANSFORMATION,point2);
 	}
 	
 	

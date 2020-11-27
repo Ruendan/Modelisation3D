@@ -2,7 +2,11 @@
 <pmd>
     <workingSet>Aggregate:Java Main Sources:Java Test Sources:</workingSet>
     <useProjectRuleSet>true</useProjectRuleSet>
+<<<<<<< HEAD
     <ruleSetFile>C:\Users\natht\Work\ProdAppli\tp-qualité\pmd-rules-prod-appli.xml</ruleSetFile>
+=======
+    <ruleSetFile>D:\Documents\DUT\Modélisation\pmd-rules-prod-appli.xml</ruleSetFile>
+>>>>>>> cdb82f0f911b7c1085d93ce017f8d0ee166d0092
     <includeDerivedFiles>false</includeDerivedFiles>
     <violationsAsErrors>false</violationsAsErrors>
     <fullBuildEnabled>true</fullBuildEnabled>

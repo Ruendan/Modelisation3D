@@ -11,7 +11,7 @@ public class Face implements Comparable<Face> {
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
-		if(points==null) this.points = new ArrayList<Point>();
+		if(points==null) this.points = new ArrayList<>();
 		else this.points=points;
 		setClosest();
 		setNormal();
@@ -59,7 +59,7 @@ public class Face implements Comparable<Face> {
 	}
 	
 	public void setNormal() {
-		if(points!=null) if(!points.isEmpty())normal = Vecteur.getNormal(points);
+		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
 	}
 	
 	@Override
@@ -123,7 +123,6 @@ public class Face implements Comparable<Face> {
 		if (getClass() != obj.getClass())
 			return false;
 		Face other = (Face) obj;
-		
 		
 		if (points == null) {
 			if (other.points != null)
