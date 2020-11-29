@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 
-public class Zoom extends GridPane implements Buttons_control{
+public class Zoom extends GridPane{
 	
 	private Button In,Out;
 	private Label title;
@@ -14,21 +14,21 @@ public class Zoom extends GridPane implements Buttons_control{
 	public Zoom(Figure fig){
 		
 		title = new Label("   Zoom   ");
-		title.setStyle(LABEL_STYLE);
+		title.setStyle(Buttons_control.LABEL_STYLE);
 		
 		this.In = new Button("+");
 		In.setOnAction(e->{
-			fig.zoom(1+VALEUR_DE_ZOOM);
+			fig.zoom(1+Buttons_control.VALEUR_DE_ZOOM);
 		});
-		this.In.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
-		this.In.setStyle(BUTTON_STYLE);
+		this.In.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
+		this.In.setStyle(Buttons_control.BUTTON_STYLE);
 		
 		this.Out = new Button("-");
 		Out.setOnAction(e->{
-			fig.zoom(1-VALEUR_DE_ZOOM);
+			fig.zoom(1-Buttons_control.VALEUR_DE_ZOOM);
 		});
-		this.Out.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
-		this.Out.setStyle(BUTTON_STYLE);
+		this.Out.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
+		this.Out.setStyle(Buttons_control.BUTTON_STYLE);
 		
 		
 		this.setPadding(new Insets(10,0,10,30));
@@ -39,7 +39,7 @@ public class Zoom extends GridPane implements Buttons_control{
 		this.add(In, 0, 1);
 		this.add(Out, 2, 1);
 		
-		this.setStyle(PANE_STYLE);		
+		this.setStyle(Buttons_control.PANE_STYLE);		
 		this.setPrefWidth(190);
 	}
 }

@@ -6,7 +6,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import view.Canva;
 
-public class LineWidthPane extends GridPane implements Buttons_control{
+public class LineWidthPane extends GridPane{
 	
 	private Slider thicken;
 	private Label title;
@@ -17,7 +17,7 @@ public class LineWidthPane extends GridPane implements Buttons_control{
 	public LineWidthPane(Canva canva) {
 		
 		title = new Label("  Epaisseur du trait  ");
-		title.setStyle(LABEL_STYLE);
+		title.setStyle(Buttons_control.LABEL_STYLE);
 		
 		this.setPadding(new Insets(10,0,10,30));
 		this.setHgap(10);
@@ -30,7 +30,7 @@ public class LineWidthPane extends GridPane implements Buttons_control{
 		this.add(title, 1, 0);
 		this.add(thicken, 1, 1);
 		
-		this.setStyle(PANE_STYLE);
+		this.setStyle(Buttons_control.PANE_STYLE);
 		this.setPrefWidth(250);
 	}
 }

@@ -5,16 +5,18 @@ import modele.modelisation.Figure;
 import view.Canva;
 
 public class ButtonFactory {
+	
+	public static final String R="Rotation",T="Translation",Z="Zoom",C="Color",TH="Thickness";
 
 	public static GridPane makeButton(String type, Figure fig) {
 		
 		switch(type) {
 		
-		case "Rotation":
+		case R:
 			return new Rotation(fig);
-		case "Translation":
+		case T:
 			return new Translation(fig);			
-		case "Zoom":
+		case Z:
 			return new Zoom(fig);	
 		
 		default:
@@ -27,9 +29,9 @@ public class ButtonFactory {
 		
 		switch(type) {
 		
-		case "Color":
+		case C:
 			return new ColorPane(canv);
-		case "Thickness":
+		case TH:
 			return new LineWidthPane(canv);
 		
 		default:
