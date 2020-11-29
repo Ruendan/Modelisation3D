@@ -1,0 +1,8 @@
+Les régles les plus importante pour moi sont:
+ - GodClass
+ - LawOfDemeter
+ - NcssCount
+ - ClassNamingConventions
+ - AvoidDeeplyNestedIfStmts
+
+ Car c'est des règles qui corresponde à ce qui nous est demandé pour notre projet de modélisation.
