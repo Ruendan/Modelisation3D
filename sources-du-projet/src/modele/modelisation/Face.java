@@ -6,22 +6,17 @@ import java.util.List;
 public class Face implements Comparable<Face> {
 	private int nbPoints;
 	private List<Point> points;
-	private int id;
-	private static int ID=0;
 	private Vecteur normal;
 	private Double closest;
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
-		if(points==null) this.points = new ArrayList<Point>();
+		if(points==null) this.points = new ArrayList<>();
 		else this.points=points;
-		id=ID;
-		ID++;
+		setClosest();
 		setNormal();
 	}
 
-	
-	
 	public Point pointMoyen() {
 		double x = 0;
 		double y = 0;
@@ -63,8 +58,8 @@ public class Face implements Comparable<Face> {
 		setClosest();
 	}
 	
-	private void setNormal() {
-		if(points!=null) if(!points.isEmpty())normal = Vecteur.getNormal(points);
+	public void setNormal() {
+		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
 	}
 	
 	@Override
@@ -79,14 +74,20 @@ public class Face implements Comparable<Face> {
 	}
  
 	public void setClosest() {
-		double petit = points.get(0).getZ();
+		double petit;
+		if(this.getNbPoints()==0)
+			petit = Double.NaN;
+		else petit = points.get(0).getZ();
+		
 		for (Point point : points) {
 			if(point.getZ()<petit)petit=point.getZ();
 		}
 		this.closest = petit;
 	}
-
-
+	
+	public Double getClosest() {
+		return this.closest;
+	}
 
 	public Vecteur getNormal() {
 		return this.normal;
@@ -98,14 +99,6 @@ public class Face implements Comparable<Face> {
 	
 	public List<Point> getPoints() {
 		return points;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	@Override
@@ -130,7 +123,6 @@ public class Face implements Comparable<Face> {
 		if (getClass() != obj.getClass())
 			return false;
 		Face other = (Face) obj;
-		
 		
 		if (points == null) {
 			if (other.points != null)

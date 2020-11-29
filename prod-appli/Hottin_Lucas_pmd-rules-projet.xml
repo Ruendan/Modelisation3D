@@ -1,0 +1,34 @@
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Custom Rules" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+<rule ref="category/java/design.xml/FinalFieldCouldBeStatic"/>
+<rule ref="category/java/design.xml/GodClass"/>
+<rule ref="category/java/design.xml/ImmutableField"/>
+<rule ref="category/java/design.xml/LawOfDemeter"/>
+<rule ref="category/java/design.xml/LogicInversion"/>
+<rule ref="category/java/design.xml/NcssCount">
+<properties>
+<property name="methodReportLevel" value="40"/>
+<property name="classReportLevel" value="200"/>
+<property name="ncssOptions" value=""/>
+</properties>
+</rule>
+<rule ref="category/java/codestyle.xml/MethodNamingConventions"/>
+<rule ref="category/java/codestyle.xml/UseDiamondOperator"/>
+<rule ref="category/apex/codestyle.xml/ClassNamingConventions" />
+<rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts">
+<properties>
+<property name="problemDepth" value="2"/>
+</properties>
+</rule>
+<rule ref="category/java/errorprone.xml/AvoidLiteralsInIfCondition" />
+<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+<rule ref="category/java/bestpractices.xml/UnusedAssignment" />
+<rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
+<rule ref="category/java/bestpractices.xml/UnusedPrivateField" />
+<rule ref="category/java/performance.xml/AddEmptyString" />
+<rule ref="category/java/performance.xml/AvoidArrayLoops" />
+<rule ref="category/java/performance.xml/AvoidInstantiatingObjectsInLoops" />
+<rule ref="category/java/performance.xml/UseArraysAsList" />
+<rule ref="category/java/design.xml/ExcessiveParameterList" />
+
+
+</ruleset>

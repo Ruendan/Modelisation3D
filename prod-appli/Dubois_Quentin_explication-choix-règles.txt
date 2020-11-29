@@ -1,0 +1,12 @@
+GodClass : Eviter La god classe est SUPER important, car ca evite d'avoir un code qui fait des MILLIONS de lignes, ce qui rends les choses illisibles, et est complétement contre productif. Si on fait tout dans la meme classe, on ne fait pas de la programmation objet. Autant faire du C
+
+
+LawOfDemeter : La loi de demeter est une loi très importante à mon sens. Le fait d'éviter le niveau d'appel rends le code plus clair. On evite le this.getthat().getThis()... a l'infini pour se concentrer sur du code clair, concis, sans trop de compléxité à lire.
+
+
+SwitchStmtsShouldHaveDefault : Etant un utilisateur régulier de Switch, cette rule est utile pour moi. Et evite le cas où on gérerai un cas non prévu. (Sauf dans le cas d'une enum).
+
+
+AvoidLiteralsInIfCondition : Basiquement, eviter les Magic Numbers (literals). Ca permet d'avoir un code facilement polyvalent, et de pouvoir modifier les valeurs manuellement sans avoir a les chercher partout dans le code.
+
+AvoidDeeplyNestedIfStmts : En lien avec la loi de Demeter et le clean code en general, le fait d'avoir des dizaines de if imbriqués les uns dans les autres rends le code totalement illisible, ce pourquoi j'applique cette regle. j'autorise un niveau d'imbrication de 2.

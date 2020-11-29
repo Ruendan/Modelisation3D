@@ -39,7 +39,7 @@ class FaceTest {
 		assertEquals(videList, vide.getPoints());
 		
 		
-		//Il faut que tu gère le Null Exception dans le constructeur de Face
+		//Il faut que tu gï¿½re le Null Exception dans le constructeur de Face
 		assertEquals(nulle.getNbPoints(), 0);
 		assertEquals(new ArrayList<Integer>(), nulle.getPoints());
 	}
@@ -107,8 +107,42 @@ class FaceTest {
 	}
 	
 	@Test
-	public void test_compareTo_classique() {
-		System.out.println("Les tests de Face Passent, cependant la methode CompareTo est pas finie");
+	public void test_pointMoyen_nulle() {
+		Point tested = nulle.pointMoyen();
+		assertEquals(Double.NaN, tested.getX());
+		assertEquals(Double.NaN, tested.getY());
+		assertEquals(Double.NaN, tested.getZ());
+	}
+	
+	@Test
+	public void test_pointMoyen_vide() {
+		Point tested = vide.pointMoyen();
+		assertEquals(Double.NaN, tested.getX());
+		assertEquals(Double.NaN, tested.getY());
+		assertEquals(Double.NaN, tested.getZ());
+	}
+	
+	@Test
+	public void test_pointMoyen_classique() {
+		Point tested = classique.pointMoyen();
+		assertEquals(0.5, tested.getX());
+		assertEquals(0.5, tested.getY());
+		assertEquals(0, tested.getZ());
+	}
+	
+	@Test
+	public void test_setClosest_nulle() {
+		assertEquals(Double.NaN, nulle.getClosest());
+	}
+	
+	@Test
+	public void test_setClosest_vide() {
+		assertEquals(Double.NaN, vide.getClosest());
+	}
+	
+	@Test
+	public void test_setClosest_classique() {
+		assertEquals(0.0, classique.getClosest());
 	}
 
 }

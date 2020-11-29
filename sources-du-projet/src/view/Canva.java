@@ -1,94 +1,277 @@
 package view;
 
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
+import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
-
+/**
+ * Figure Display
+ * <p>This class is used to manage the display of the {@link Figure}</p>
+ * @author Groupe G1
+ *	Implements {@link Observer}
+ *	exctends {@link Canvas}
+ */
 public class Canva extends Canvas implements Observer {
 
 	private Figure fig;
-	// private Timeline timeline;
+	private Timeline timeline;
+
+	private Color canvaFillColor = Color.rgb(135, 206, 250, 1);
+
+	private Color figureFillColor = Color.rgb(135, 206, 250, 1);
+	private Color figureStrokeColor = Color.BLACK;
+	private double figureLineWidth = 0.2;
 
 	private GraphicsContext gc;
 
+	private static final double DEFAULT_WIDTH = 800;
+	private static final double DEFAULT_HEIGHT = 500;
+
 	private double[][] coord;
 
-	public Canva(Figure figure, double width, double height) {
+	/**
+	 * Create the {@link Canvas} of the {@link Figure} with the width and the height of the {@link Canvas}.
+	 * @param width
+	 * 			The width of your {@link Canvas}
+	 * @param height
+	 * 			The height of your {@link Canvas}
+	 */
+	public Canva(double width, double height) {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
-		figure.attach(this);
-		this.fig = figure;
 		coord = new double[2][1];
-		this.fig.centerFigure(width, height);
-
-		this.printFigure();
-
+	}
+	
+	/**
+	 * Create the {@link Canvas} of the {@link Figure} with the default width and height
+	 * <p> DEFAULT_WIDTH = 800 <br> DEFAULT_HEIGHT = 500 </p>
+	 */
+	public Canva() {
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	}
+	
+	/**
+	 * Set the background {@link Color} of your {@link Canvas}
+	 * @param rgba
+	 * 			The new {@link Color} of the background
+	 */
+	public void setCanvaFillColor(Color rgba) {
+		this.canvaFillColor = rgba;
+		visualUpdateLite();
+	}
+	
+	/**
+	 * Get the background {@link Color} of the {@link Canvas}
+	 * @return {@link Color}
+	 * 			 the {@link Color} of the background
+	 */
+	public Color getCanvaFillColor() {
+		return canvaFillColor;
 	}
 
-	private void printPolygon(double[][] coord, Face f) {
-		this.gc.setFill(Color.rgb(135, 206, 250, 1));
-		this.gc.setStroke(Color.BLACK);
-		this.gc.setLineWidth(0.2);
+	/**
+	 * Set the {@link Figure}'s {@link Color}
+	 * @param rgba
+	 * 			The new {@link Color} of the {@link Figure}
+	 */
+	public void setFigureFillColor(Color rgba) {
+		this.figureFillColor = rgba;
+		visualUpdateLite();
+	}
+
+	/**
+	 * Get the {@link Figure}'s {@link Color}
+	 * @return {@link Figure}
+	 * 			the {@link Color} of the {@link Figure}
+	 */
+	public Color getFigureFillColor() {
+		return figureFillColor;
+	}
+
+	/**
+	 * Get the {@link Figure} draw on the {@link Canvas}
+	 * @return {@link Figure}
+	 * 			the {@link Figure}
+	 */
+	public Figure getFigure() {
+		return this.fig;
+	}
+	/**
+	 * Set the {@link Canvas}'s {@link Figure}
+	 * @param fig
+	 * 			the {@link Figure} you want to draw
+	 */
+	public void setFigure(Figure fig) {
+		if (this.fig != null)
+			this.fig.detach(this);
+
+		this.fig = fig;
+		this.fig.attach(this);
+		this.centerFigure();
+		this.printFigure();
+		timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {
+			fig.rotate(5, 5 ,5);
+			visualUpdate();
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.setAutoReverse(true);
+	}
+
+	/**
+	 * Get the edge's width
+	 * @return {@link Double}
+	 * 			the edge's width of the {@link Figure}
+	 */
+	public double getFigureLineWidth() {
+		return this.figureLineWidth;
+	}
+	
+	/**
+	 * Set the edge's width
+	 * @param value
+	 * 			the value of the new edge's width of the {@link Figure}
+	 */
+	public void setFigureLineWidth(double value) {
+		this.figureLineWidth = value;
+		visualUpdateLite();
+	}
+
+	private void printFace(Face f) {
+		this.gc.setFill(figureFillColor);
+		this.gc.setStroke(figureStrokeColor);
+		this.gc.setLineWidth(figureLineWidth);
 		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
 
 	}
 
-	private void convert3d2d(Face face) {
-		/*
-		 * 
-		 */
+	private void convert3d2d() {
+		for (Point p : fig.getPoints())
+			Matrix.transformation(p);
+	}
+	
+
+	private void initialiseCoordsFromFace(Face face) {
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
+
 		for (int j = 0; j < face.getPoints().size(); j++) {
-			Matrix.transformation(face.getPoints().get(j));
 			coord[0][j] = face.getPoints().get(j).getX();
 			coord[1][j] = face.getPoints().get(j).getY();
 		}
 	}
-
+	
+	/**
+	 * Draw the {@link Figure}
+	 * <p> Convert the coordinate of the {@link Figure} before printing </p>
+	 * @see Canva#printFigureLite()
+	 */
 	public void printFigure() {
-		/*
-		 * CA DOIT MODIFIER ET NON CHANGER LE POLYGONE
-		 */
-
-		for (Face f : fig.getFaces()) {
-			convert3d2d((f));
-			printPolygon(coord, f);
-		}
+		convert3d2d();
+		printFigureLite();
 	}
 
+	/**
+	 * Draw the {@link Figure} without convert the coordinate
+	 * <p> This function is useful if you have only do minor change on the {@link Canva} and not on the {@link Figure}</p>
+	 * @see Canva#printFigure()
+	 */
+	public void printFigureLite() {
+		for (Face f : fig.getFaces()) {
+			initialiseCoordsFromFace(f);
+			printFace(f);
+		}
+	}
+	
+	/**
+	 * Update the {@link Figure} when it changes
+	 * @see Observer
+	 * @see Subject
+	 * @see Canva#update(Subject, Object)
+	 */
 	@Override
 	public void update(Subject subj) {
 		fig.tri();
-		this.clear();
-		this.printFigure();
+		visualUpdate();
 	}
 
+	/**
+	 * Update the {@link Figure} when it changes
+	 * @see Observer
+	 * @see Subject
+	 * @see Canva#update(Subject)
+	 */
 	@Override
 	public void update(Subject subj, Object data) {
 		update(subj);
 	}
 
+	/**
+	 * Clear the {@link Canvas}
+	 */
 	private void clear() {
-		this.gc.setFill(Color.BLACK);
+		this.gc.setFill(canvaFillColor);
 		this.gc.fillRect(0, 0, this.getWidth(), this.getHeight());
-
 	}
 
-	/*
-	 * CODE POUR LA TIMELINE timeline= new Timeline(new
-	 * KeyFrame(Duration.seconds(0.033333), e -> { fig.tri(); Mouvement.rotate(fig,
-	 * 1, 1, 1); this.getChildren().clear();
-	 * this.getChildren().addAll(this.getFigure()); }));
-	 * timeline.setCycleCount(Animation.INDEFINITE); timeline.setAutoReverse(true);
-	 * 
-	 * timeline.play();
+	/**
+	 * Update the figure on the {@link Canvas}
+	 * <p> use {@link Canva#printFigure()}</p>
+	 * @see Canva#visualUpdateLite()
 	 */
+	private void visualUpdate() {
+		clear();
+		printFigure();
+	}
+	
+	/**
+	 * Update the figure on the {@link Canvas}
+	 * <p> use {@link Canva#printFigureLite()}</p>
+	 * @see Canva#visualUpdate()
+	 */
+	private void visualUpdateLite() {
+		clear();
+		printFigureLite();
+	}
+
+	/**
+	 * Put the {@link Figure} on the center of the {@link Canvas}
+	 */
+	public void centerFigure() {
+		double[] extreme = fig.getExtremePoint();
+		double ext = 0;
+		for (int i = 0; i < extreme.length - 2; i++) {
+			if (ext < Math.abs(extreme[i]))
+				ext = Math.abs(extreme[i]);
+		}
+		fig.zoom((this.getHeight() / 3) / ext);
+
+		fig.deplace(this.getWidth() / 2, this.getHeight() / 2, 0);
+
+	}
+	
+	/**
+	 * Begin the rotation of the {@link Figure}
+	 */
+	public void startRotation() {
+		timeline.play();
+	}
+	/**
+	 * Stop the rotation of the {@link Figure}
+	 */
+	public void stopRotation() {
+		timeline.stop();
+	}
+
 }

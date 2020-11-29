@@ -1,0 +1,16 @@
+Règles les plus importantes :
+
+GodClass : Cette règle est essentielle car elle représente un des problèmes les plus graves
+ImmutableField : Permet de clarifier le code dès la lecture des attributs 
+NcssCount : Elle est essentielle car les consignes du projet définit des limites de tailes
+...NamingConventions : Les noms des méthodes permettent une plus grande clarté du fonctionnement général
+FinalFieldCouldBeStatic : Assure une sécurité des champs nécessaires
+
+
+Règles non choisies :
+
+OnlyOneReturn : L'utilisation de plusieurs return permet de réduire la taille du code et de le simplifier
+CommentRequired : Le cours de COA nous a appris qu'il faut limiter la quantité de commentaires
+LawOfDemeter : JavaFX ne respectant pas cette loi, l'ajouter reviendrait à bloqer l'utilisation d'une partie de JavaFX
+RedundantFieldInitializater : La JVM a tendance à renvoyer une erreur lorsque les champ ne sont pas initialisés manuellement
+ExcessiveImports : La construction de JavaFX implique l'utilisation de beaucop d'import
