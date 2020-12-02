@@ -228,7 +228,7 @@ public class Figure extends Subject{
 	 * 			The value of the angle you want to rotate
 	 * @see Mouvement
 	 */
-	public void rotateX(int i) {
+	public void rotateX(double i) {
 		toOrigin();
 		Mouvement.rotateX(this, i);
 		toCenter();
@@ -237,13 +237,13 @@ public class Figure extends Subject{
 
 	/**
 	 * Rotate the figure on the Y axes only
-	 * @param i
+	 * @param d
 	 * 			The value of the angle you want to rotate
 	 * @see Mouvement
 	 */
-	public void rotateY(int i) {
+	public void rotateY(double d) {
 		toOrigin();
-		Mouvement.rotateY(this, i);
+		Mouvement.rotateY(this, d);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -254,7 +254,7 @@ public class Figure extends Subject{
 	 * 			The value of the angle you want to rotate
 	 * @see Mouvement
 	 */
-	public void rotateZ(int i) {
+	public void rotateZ(double i) {
 		toOrigin();
 		Mouvement.rotateZ(this, i);
 		toCenter();

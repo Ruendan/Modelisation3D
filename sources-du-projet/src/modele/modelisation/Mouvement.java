@@ -13,15 +13,15 @@ public class Mouvement {
 
 	}
 
-	public static void rotateX(Figure figure, int i) {
+	public static void rotateX(Figure figure, double i) {
 		for(Point p : figure.getPoints()) p.rotateX(i);	
 	}
 	
-	public static void rotateY(Figure figure, int i) {
+	public static void rotateY(Figure figure, double i) {
 		for(Point p : figure.getPoints()) p.rotateY(i);	
 	}
 	
-	public static void rotateZ(Figure figure, int i) {
+	public static void rotateZ(Figure figure, double i) {
 		for(Point p : figure.getPoints()) p.rotateZ(i);	
 	}
 	

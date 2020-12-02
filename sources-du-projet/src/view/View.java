@@ -2,6 +2,7 @@ package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -42,6 +43,8 @@ public class View extends Stage implements Observer{
 	private static final CornerRadii BACKGROUND_CORNER_RADII = CornerRadii.EMPTY;
 	private static final Insets BACKGROUND_INSETS = Insets.EMPTY;
 	
+	private double x,y;
+	
 	public View(Figure fig) {
 		
 		ccl = new CustomChangeListener(fig);
@@ -77,6 +80,27 @@ public class View extends Stage implements Observer{
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		res.getChildren().addAll(display, buttons);
+		
+		display.setOnMousePressed(e -> {
+			x=e.getX();
+			y=e.getY();
+		  });
+		display.setOnMouseDragged(e -> {
+			
+			if (e.getButton() == MouseButton.PRIMARY) {
+				fig.rotateY(x-e.getX());
+				fig.rotateX(y-e.getY());
+			}
+			if (e.getButton() == MouseButton.SECONDARY) {
+				fig.HDeplace(e.getX()-x);
+				fig.VDeplace(e.getY()-y);
+			}
+			if (e.getButton() == MouseButton.MIDDLE) {
+				fig.rotateZ(e.getX()-x);
+			}
+			x=e.getX();
+			y=e.getY();
+		  });
 		
 		return res;
 	} 

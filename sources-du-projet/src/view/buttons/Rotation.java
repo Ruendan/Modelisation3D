@@ -2,14 +2,12 @@ package view.buttons;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 
 public class Rotation extends GridPane{
 	
 	private Button Xup,Xdown,Yup,Ydown,Zup,Zdown;
-	private Label title;
 	
 	public Rotation(Figure fig){
 		
