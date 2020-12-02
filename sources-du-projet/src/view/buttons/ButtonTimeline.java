@@ -5,15 +5,16 @@ import view.Canva;
 
 public class ButtonTimeline extends Button {
 	
-	Canva canva; 
+	private Canva canva; 
 
-	private static final String TEXTSTART = "START";
-	private static final String TEXTSTOP = "STOP";
+	private static final String TEXTSTART = ">";
+	private static final String TEXTSTOP = "||";
 	
 	public ButtonTimeline(Canva canva) {
 		this.canva = canva;
 		this.setText((canva.isRotating()?TEXTSTOP:TEXTSTART));
 		this.setOnAction(e -> onClick());
+		this.setStyle(ButtonsConst.BUTTON_STYLE);
 	}
 	
 	public void onClick() {
