@@ -15,8 +15,8 @@ public class ColorPane extends GridPane{
 		
 		this.titleCP1 = new Label("  Couleur de fond  ");
 		this.titleCP2 = new Label("  Couleur de face  ");
-		this.titleCP1.setStyle(Buttons_control.LABEL_STYLE);
-		this.titleCP2.setStyle(Buttons_control.LABEL_STYLE);
+		this.titleCP1.setStyle(ButtonsConst.LABEL_STYLE);
+		this.titleCP2.setStyle(ButtonsConst.LABEL_STYLE);
 		
 		this.canvaColorPicker = new ColorPicker(canva.getCanvaFillColor());
 		canvaColorPicker.setOnAction(e -> canva.setCanvaFillColor(canvaColorPicker.getValue()));
@@ -33,7 +33,7 @@ public class ColorPane extends GridPane{
 		this.add(titleCP2, 2, 2);
 		this.add(figureColorPicker, 2, 3);
 		
-		this.setStyle(Buttons_control.PANE_STYLE);
+		this.setStyle(ButtonsConst.PANE_STYLE);
 		this.setPrefWidth(250);
 	}
 }

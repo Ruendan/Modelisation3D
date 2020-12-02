@@ -18,7 +18,7 @@ public class Explorer extends ListView<String>{
 			file = file.substring(0, file.length()-4);
 			
 			try {
-				convertedInPly = PlyParser.loadPly(file);
+				convertedInPly = PlyParser.loadHeader(file);
 				this.getItems().add(convertedInPly.getName()+ " : " +convertedInPly.getNbFace() + " faces");
 			} catch (PlyParserException e) {
 				e.printStackTrace();

@@ -12,30 +12,30 @@ public class Translation extends GridPane{
 	public Translation(Figure fig){
 		
 		this.up = new Button("↑");
-		up.setOnAction(e->fig.VDeplace(-Buttons_control.VALEUR_DE_DEPLACEMENT));
+		up.setOnAction(e->fig.VDeplace(-ButtonsConst.VALEUR_DE_DEPLACEMENT));
 		this.down = new Button("↓");
 		
 		down.setOnAction(e->{
-			fig.VDeplace(Buttons_control.VALEUR_DE_DEPLACEMENT);
+			fig.VDeplace(ButtonsConst.VALEUR_DE_DEPLACEMENT);
 		});
 		
-		this.up.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.down.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.up.setStyle(Buttons_control.BUTTON_STYLE);
-		this.down.setStyle(Buttons_control.BUTTON_STYLE);
+		this.up.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.down.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.up.setStyle(ButtonsConst.BUTTON_STYLE);
+		this.down.setStyle(ButtonsConst.BUTTON_STYLE);
 		
 		this.left = new Button("←");
 		left.setOnAction(e->{
-			fig.HDeplace(-Buttons_control.VALEUR_DE_DEPLACEMENT);
+			fig.HDeplace(-ButtonsConst.VALEUR_DE_DEPLACEMENT);
 		});
 		this.right = new Button("→");	
 		right.setOnAction(e->{
-			fig.HDeplace(Buttons_control.VALEUR_DE_DEPLACEMENT);
+			fig.HDeplace(ButtonsConst.VALEUR_DE_DEPLACEMENT);
 		});
-		this.left.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.right.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.left.setStyle(Buttons_control.BUTTON_STYLE);
-		this.right.setStyle(Buttons_control.BUTTON_STYLE);
+		this.left.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.right.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.left.setStyle(ButtonsConst.BUTTON_STYLE);
+		this.right.setStyle(ButtonsConst.BUTTON_STYLE);
 		
 		this.setPadding(new Insets(10,0,10,10));
 		this.setHgap(10);
@@ -47,7 +47,7 @@ public class Translation extends GridPane{
 		this.add(right, 2, 2);
 		this.add(down, 1, 3);
 		
-		this.setStyle(Buttons_control.PANE_STYLE);		
+		this.setStyle(ButtonsConst.PANE_STYLE);		
 		this.setPrefWidth(190);
 	}
 }
