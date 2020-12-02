@@ -3,13 +3,13 @@ package view.buttons;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import view.Canva;
+import view.CanvasFigure;
 
 public class ButtonsPanel extends HBox {
 	
 	private GridPane buttons_rotation, buttons_translation, buttons_zoom, bouttons_couleur, bouttons_epaisseur;
 	
-	public ButtonsPanel(Canva canva) {
+	public ButtonsPanel(CanvasFigure canva) {
 	
 		this.buttons_rotation = ButtonsFactory.makeButton("Rotation", canva);
 		this.buttons_translation = ButtonsFactory.makeButton("Translation", canva);

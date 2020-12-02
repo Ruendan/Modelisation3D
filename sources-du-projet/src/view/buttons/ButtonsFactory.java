@@ -1,13 +1,13 @@
 package view.buttons;
 
 import javafx.scene.layout.GridPane;
-import view.Canva;
+import view.CanvasFigure;
 
 public class ButtonsFactory {
 	
 	public static final String R="Rotation",T="Translation",Z="Zoom",C="Color",TH="Thickness";
 
-	public static GridPane makeButton(String type, Canva canva) {
+	public static GridPane makeButton(String type, CanvasFigure canva) {
 		
 		switch(type) {
 		

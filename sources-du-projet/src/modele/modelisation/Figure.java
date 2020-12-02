@@ -7,7 +7,7 @@ import java.util.Set;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Subject;
-import view.Canva;
+import view.CanvasFigure;
 
 /**
  *Modelisation du fichier PLY
@@ -267,9 +267,9 @@ public class Figure extends Subject{
 	}
 	
 	/**
-	 * Move the figure on the center of the {@link Canva}
+	 * Move the figure on the center of the {@link CanvasFigure}
 	 * 
-	 * @see Canva
+	 * @see CanvasFigure
 	 * @see Figure#getCenter()
 	 * @see Mouvement
 	 */

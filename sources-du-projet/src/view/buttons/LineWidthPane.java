@@ -4,7 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import view.Canva;
+import view.CanvasFigure;
 
 public class LineWidthPane extends GridPane{
 	
@@ -14,7 +14,7 @@ public class LineWidthPane extends GridPane{
 	private static final double MIN_WIDTH = 0.1;
 	private static final double MAX_WIDTH = 1.0;
 
-	public LineWidthPane(Canva canva) {
+	public LineWidthPane(CanvasFigure canva) {
 		
 		title = new Label("  Epaisseur du trait  ");
 		title.setStyle(ButtonsConst.LABEL_STYLE);

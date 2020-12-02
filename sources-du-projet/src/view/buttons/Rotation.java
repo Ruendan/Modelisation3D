@@ -3,13 +3,13 @@ package view.buttons;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import view.Canva;
+import view.CanvasFigure;
 
 public class Rotation extends GridPane{
 	
 	private Button Xup,Xdown,Yup,Ydown,Zup,Zdown;
 	
-	public Rotation(Canva canva){
+	public Rotation(CanvasFigure canva){
 		
 		this.Xup = new Button("↑");
 		Xup.setOnAction(e ->{

@@ -1,13 +1,13 @@
 package view.buttons;
 
 import javafx.scene.control.Button;
-import view.Canva;
+import view.CanvasFigure;
 
-public class Options extends Canva{
+public class Options extends CanvasFigure{
 
 	private Button popup;
 	
-	public Options(Canva canv){
+	public Options(CanvasFigure canv){
 		System.out.println("cc");
 	}
 }

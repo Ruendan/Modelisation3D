@@ -25,9 +25,9 @@ public class ParserHeader {
 	private int vertex;
 	private int face;
 	
-	ArrayList<String> comment;
+	private ArrayList<String> comment;
 	
-	String[] lines;
+	private String[] lines;
 	
 	public ParserHeader(int vertex, int face, ArrayList<String> comment, String[] lines) {
 		pointPos = 0;
@@ -41,7 +41,7 @@ public class ParserHeader {
 		this.lines = lines;
 	}
 
-	boolean handleHeader() throws PlyParserException {
+	public boolean handleHeader() throws PlyParserException {
 		return handleHeader(lines);
 	}
 	
@@ -54,8 +54,8 @@ public class ParserHeader {
 		ypos = -1;
 		zpos = -1;
 		
-		if(!checkType(lines[0]))return false;
-		if(!checkFormat(lines[1]))return false;
+		if(!checkType(lines[0])) return false;
+		if(!checkFormat(lines[1])) return false;
 		idx=2;
 		while(!endHeader) {
 			String[] line = lines[idx].split(" ");
@@ -67,10 +67,10 @@ public class ParserHeader {
 				comment.add(lines[idx].substring(8));
 				break;
 			case "element":
-				if(!handleElement(line))return false;
+				if(!handleElement(line)) return false;
 				break;
 			case "property":
-				if(!handleProperty(line))return false;
+				if(!handleProperty(line)) return false;
 				break;
 			default:
 				break;
