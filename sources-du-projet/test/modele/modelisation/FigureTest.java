@@ -64,9 +64,10 @@ class FigureTest {
 		cube.HDeplace(10);
 		
 		double moyenneAfter = 0;
-		for(Point p : cube.getPoints())
+		for(Point p : cube.getPoints()) {
 			moyenneAfter+=p.getX();
-		
+		}
+		System.out.println(cube.getNbPoint());
 		assertEquals(10, moyenneAfter/cube.getNbPoint());
 	}
 	
@@ -83,11 +84,12 @@ class FigureTest {
 	
 	@Test
 	void test_rotateAll() {
+
+		
 	}
 	
 	@Test
 	void test_rotateX() {
-		
 	}
 	
 	@Test

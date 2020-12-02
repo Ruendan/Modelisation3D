@@ -60,6 +60,35 @@ public class PlyParser {
 			}
 		}
 	}
+	
+	public static Ply loadHeader(String nom) throws PlyParserException {
+		PlyParser pp = new PlyParser();
+		Ply ply = new Ply();
+		ply.setName(nom);
+		pp.loadHeader(ply, nom);
+		return ply;
+	}
+	
+	public void loadHeader(Ply res,String filename) throws PlyParserException {
+		String url = "ressources/plys/";
+		loadHeader(res,new File(url+filename+".ply"));
+	}
+	
+	public void loadHeader(Ply res,File fichier) throws PlyParserException {
+		idx = 0;
+		vertex = -1;
+		face = -1;
+		
+		String[] lines = getLines(fichier);
+		
+		if(!(lines.length<12)) {
+			if(handleHeader(lines)) {
+				res.setVertex(vertex);
+				res.setNbFace(face);
+				res.setComment(comment);
+			}
+		}
+	}
 
 	private String[] getLines(File fichier) {
 		try(Scanner sc = new Scanner(fichier)) {

@@ -1,6 +1,6 @@
 package view.buttons;
 
-public class Buttons_control {
+public class ButtonsConst {
 	
 	public static final double VALEUR_DE_ZOOM = 0.05;
 	public static final int VALEUR_DE_DEPLACEMENT = 10;

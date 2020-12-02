@@ -21,10 +21,12 @@ import utils.Subject;
  *	Implements {@link Observer}
  *	exctends {@link Canvas}
  */
-public class Canva extends Canvas implements Observer {
+public class CanvasFigure extends Canvas implements Observer {
 
 	private Figure fig;
 	private Timeline timeline;
+	
+	private boolean rotating;
 
 	private Color canvaFillColor = Color.rgb(135, 206, 250, 1);
 
@@ -46,18 +48,19 @@ public class Canva extends Canvas implements Observer {
 	 * @param height
 	 * 			The height of your {@link Canvas}
 	 */
-	public Canva(double width, double height) {
+	public CanvasFigure(double width, double height) {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
 		coord = new double[2][1];
+		rotating = false;
 	}
 	
 	/**
 	 * Create the {@link Canvas} of the {@link Figure} with the default width and height
 	 * <p> DEFAULT_WIDTH = 800 <br> DEFAULT_HEIGHT = 500 </p>
 	 */
-	public Canva() {
+	public CanvasFigure() {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 	
@@ -74,6 +77,7 @@ public class Canva extends Canvas implements Observer {
 	/**
 	 * Get the background {@link Color} of the {@link Canvas}
 	 * @return {@link Color}
+			visualUpdate();
 	 * 			 the {@link Color} of the background
 	 */
 	public Color getCanvaFillColor() {
@@ -175,7 +179,7 @@ public class Canva extends Canvas implements Observer {
 	/**
 	 * Draw the {@link Figure}
 	 * <p> Convert the coordinate of the {@link Figure} before printing </p>
-	 * @see Canva#printFigureLite()
+	 * @see CanvasFigure#printFigureLite()
 	 */
 	public void printFigure() {
 		convert3d2d();
@@ -184,8 +188,8 @@ public class Canva extends Canvas implements Observer {
 
 	/**
 	 * Draw the {@link Figure} without convert the coordinate
-	 * <p> This function is useful if you have only do minor change on the {@link Canva} and not on the {@link Figure}</p>
-	 * @see Canva#printFigure()
+	 * <p> This function is useful if you have only do minor change on the {@link CanvasFigure} and not on the {@link Figure}</p>
+	 * @see CanvasFigure#printFigure()
 	 */
 	public void printFigureLite() {
 		for (Face f : fig.getFaces()) {
@@ -198,7 +202,7 @@ public class Canva extends Canvas implements Observer {
 	 * Update the {@link Figure} when it changes
 	 * @see Observer
 	 * @see Subject
-	 * @see Canva#update(Subject, Object)
+	 * @see CanvasFigure#update(Subject, Object)
 	 */
 	@Override
 	public void update(Subject subj) {
@@ -210,7 +214,7 @@ public class Canva extends Canvas implements Observer {
 	 * Update the {@link Figure} when it changes
 	 * @see Observer
 	 * @see Subject
-	 * @see Canva#update(Subject)
+	 * @see CanvasFigure#update(Subject)
 	 */
 	@Override
 	public void update(Subject subj, Object data) {
@@ -227,8 +231,8 @@ public class Canva extends Canvas implements Observer {
 
 	/**
 	 * Update the figure on the {@link Canvas}
-	 * <p> use {@link Canva#printFigure()}</p>
-	 * @see Canva#visualUpdateLite()
+	 * <p> use {@link CanvasFigure#printFigure()}</p>
+	 * @see CanvasFigure#visualUpdateLite()
 	 */
 	private void visualUpdate() {
 		clear();
@@ -237,8 +241,8 @@ public class Canva extends Canvas implements Observer {
 	
 	/**
 	 * Update the figure on the {@link Canvas}
-	 * <p> use {@link Canva#printFigureLite()}</p>
-	 * @see Canva#visualUpdate()
+	 * <p> use {@link CanvasFigure#printFigureLite()}</p>
+	 * @see CanvasFigure#visualUpdate()
 	 */
 	private void visualUpdateLite() {
 		clear();
@@ -265,12 +269,26 @@ public class Canva extends Canvas implements Observer {
 	 * Begin the rotation of the {@link Figure}
 	 */
 	public void startRotation() {
+		rotating = true;
 		timeline.play();
 	}
+	
+	/**
+	 * 
+	 * @return {@link boolean}
+	 * 		true if the canva is rotating, false otherwise.
+	 * 		@see CanvasFigure#startRotation()
+	 * 		@see CanvasFigure#stopRotation()
+	 */
+	public boolean isRotating() {
+		return this.rotating;
+	}
+	
 	/**
 	 * Stop the rotation of the {@link Figure}
 	 */
 	public void stopRotation() {
+		rotating = false;
 		timeline.stop();
 	}
 
