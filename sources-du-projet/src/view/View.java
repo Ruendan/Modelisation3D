@@ -73,6 +73,10 @@ public class View extends Stage implements Observer{
 		VBox res = new VBox();
 		
 		display.setFigure(fig);
+		display.setOnScroll(e ->{
+			if(e.getDeltaY()>0) fig.zoom(1.2);
+			else fig.zoom(0.9);
+		});
 		HBox buttons = new Buttons(display);
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
