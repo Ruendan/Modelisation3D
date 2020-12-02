@@ -14,21 +14,21 @@ public class Zoom extends GridPane{
 	public Zoom(Figure fig){
 		
 		title = new Label("   Zoom   ");
-		title.setStyle(Buttons_control.LABEL_STYLE);
+		title.setStyle(ButtonsConst.LABEL_STYLE);
 		
 		this.In = new Button("+");
 		In.setOnAction(e->{
-			fig.zoom(1+Buttons_control.VALEUR_DE_ZOOM);
+			fig.zoom(1+ButtonsConst.VALEUR_DE_ZOOM);
 		});
-		this.In.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.In.setStyle(Buttons_control.BUTTON_STYLE);
+		this.In.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.In.setStyle(ButtonsConst.BUTTON_STYLE);
 		
 		this.Out = new Button("-");
 		Out.setOnAction(e->{
-			fig.zoom(1-Buttons_control.VALEUR_DE_ZOOM);
+			fig.zoom(1-ButtonsConst.VALEUR_DE_ZOOM);
 		});
-		this.Out.setPrefSize(Buttons_control.BUTTON_SIZE,Buttons_control.BUTTON_SIZE);
-		this.Out.setStyle(Buttons_control.BUTTON_STYLE);
+		this.Out.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
+		this.Out.setStyle(ButtonsConst.BUTTON_STYLE);
 		
 		
 		this.setPadding(new Insets(10,0,10,30));
@@ -39,7 +39,7 @@ public class Zoom extends GridPane{
 		this.add(In, 0, 1);
 		this.add(Out, 2, 1);
 		
-		this.setStyle(Buttons_control.PANE_STYLE);		
+		this.setStyle(ButtonsConst.PANE_STYLE);		
 		this.setPrefWidth(190);
 	}
 }
