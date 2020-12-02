@@ -43,6 +43,22 @@ public class PlyParser {
 		loadPly(res,new File(url+filename+".ply"));
 	}
 	
+	public void loadHeader(Ply res,File fichier) throws PlyParserException {
+		idx = 0;
+		vertex = -1;
+		face = -1;
+		
+		String[] lines = getLines(fichier);
+		
+		if(!(lines.length<12)) {
+			if(handleHeader(lines)) {
+				res.setVertex(vertex);
+				res.setNbFace(face);
+				res.setComment(comment);
+			}
+		}
+	}
+	
 	public void loadPly(Ply res,File fichier) throws PlyParserException {
 		idx = 0;
 		vertex = -1;
