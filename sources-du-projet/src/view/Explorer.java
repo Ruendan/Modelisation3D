@@ -9,8 +9,8 @@ import modele.parser.exception.PlyParserException;
 
 public class Explorer extends ListView<String>{
 	
-	File lib = new File("ressources/plys");
-	String[] files = lib.list();
+	private File lib = new File("ressources/plys");
+	private String[] files = lib.list();
 	
 	public Explorer(CustomChangeListener gg){
 		Ply convertedInPly;
@@ -27,7 +27,6 @@ public class Explorer extends ListView<String>{
 
 		this.getSelectionModel().selectedItemProperty().addListener(gg);
 	}
-	
 }
 
 

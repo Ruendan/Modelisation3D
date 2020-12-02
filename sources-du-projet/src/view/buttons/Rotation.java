@@ -54,10 +54,13 @@ public class Rotation extends GridPane{
 		this.add(Yup, 0, 1); this.add(Ydown, 2, 1);
 		this.add(Zup, 0, 2); this.add(Zdown, 2, 2);
 
-		this.add(new ButtonTimeline(canva), 0, 3);
+		ButtonTimeline autoRotate = new ButtonTimeline(canva);
+		//GridPane.setColumnSpan(autoRotate,2);
+		this.add(autoRotate, 1, 3);
+		
 		
 		this.setStyle(ButtonsConst.PANE_STYLE);	
-		this.setPrefSize(160,150);
+		this.setPrefSize(185,150);
 	}
 }
 
