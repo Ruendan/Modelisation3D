@@ -4,7 +4,7 @@ import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import view.Canva;
 
-public class ButtonFactory {
+public class ButtonsFactory {
 	
 	public static final String R="Rotation",T="Translation",Z="Zoom",C="Color",TH="Thickness";
 

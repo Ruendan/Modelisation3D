@@ -17,7 +17,7 @@ public class LineWidthPane extends GridPane{
 	public LineWidthPane(Canva canva) {
 		
 		title = new Label("  Epaisseur du trait  ");
-		title.setStyle(Buttons_control.LABEL_STYLE);
+		title.setStyle(ButtonsConst.LABEL_STYLE);
 		
 		this.setPadding(new Insets(10,0,10,30));
 		this.setHgap(10);
@@ -30,7 +30,7 @@ public class LineWidthPane extends GridPane{
 		this.add(title, 1, 0);
 		this.add(thicken, 1, 1);
 		
-		this.setStyle(Buttons_control.PANE_STYLE);
+		this.setStyle(ButtonsConst.PANE_STYLE);
 		this.setPrefWidth(250);
 	}
 }

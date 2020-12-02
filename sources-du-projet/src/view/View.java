@@ -15,7 +15,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Observer;
 import utils.Subject;
-import view.buttons.Buttons;
+import view.buttons.ButtonsPanel;
 
 public class View extends Stage implements Observer{
 	
@@ -73,7 +73,7 @@ public class View extends Stage implements Observer{
 		VBox res = new VBox();
 		
 		display.setFigure(fig);
-		HBox buttons = new Buttons(display);
+		HBox buttons = new ButtonsPanel(display);
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		res.getChildren().addAll(display, buttons);
