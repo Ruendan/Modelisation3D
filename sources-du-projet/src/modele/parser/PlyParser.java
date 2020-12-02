@@ -38,6 +38,22 @@ public class PlyParser {
 		return ply;
 	}
 	
+	public static Ply loadPly(File file) throws PlyParserException {
+		PlyParser pp = new PlyParser();
+		Ply res = new Ply();
+		res.setName(file.getName());
+		pp.loadPly(res,file);
+		return res;
+	}
+	
+	public static Ply loadHeader(File file) throws PlyParserException {
+		PlyParser pp = new PlyParser();
+		Ply res = new Ply();
+		res.setName(file.getName());
+		pp.loadHeader(res,file);
+		return res;
+	}
+	
 	public void loadPly(Ply res,String filename) throws PlyParserException {
 		String url = "ressources/plys/";
 		loadPly(res,new File(url+filename+".ply"));

@@ -1,4 +1,4 @@
-package view;
+package view.explorer;
 
 import java.io.File;
 

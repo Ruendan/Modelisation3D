@@ -16,6 +16,8 @@ import modele.parser.exception.PlyParserException;
 import utils.Observer;
 import utils.Subject;
 import view.buttons.ButtonsPanel;
+import view.explorer.CustomChangeListener;
+import view.explorer.Explorer;
 
 public class View extends Stage implements Observer{
 	

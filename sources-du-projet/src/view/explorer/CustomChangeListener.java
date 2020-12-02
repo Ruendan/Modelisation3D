@@ -1,4 +1,4 @@
-package view;
+package view.explorer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -7,7 +7,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Subject;
 
-public class CustomChangeListener extends Subject implements ChangeListener<String> {
+public class CustomChangeListener extends Subject implements ChangeListener<PlyFile> {
 
 	Figure fig;
 	
@@ -16,9 +16,9 @@ public class CustomChangeListener extends Subject implements ChangeListener<Stri
 	}
 
 	@Override
-	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	public void changed(ObservableValue<? extends PlyFile> observable, PlyFile oldValue, PlyFile newValue) {
 		try {
-			this.fig = new Figure(PlyParser.loadPly(newValue.split(" ")[0]));
+			this.fig = new Figure(PlyParser.loadPly(newValue.getPly().getName()));
 		} catch (PlyParserException e) {
 			e.printStackTrace();
 		}
