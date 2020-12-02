@@ -1,16 +1,16 @@
 package view.buttons;
 
 import javafx.scene.control.Button;
-import view.Canva;
+import view.CanvasFigure;
 
 public class ButtonTimeline extends Button {
-	
-	private Canva canva; 
+
+	CanvasFigure canva;
 
 	private static final String TEXTSTART = ">";
 	private static final String TEXTSTOP = "||";
 	
-	public ButtonTimeline(Canva canva) {
+	public ButtonTimeline(CanvasFigure canva) {
 		this.canva = canva;
 		this.setText((canva.isRotating()?TEXTSTOP:TEXTSTART));
 		this.setOnAction(e -> onClick());

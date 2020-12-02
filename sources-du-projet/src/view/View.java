@@ -24,7 +24,7 @@ public class View extends Stage implements Observer{
 	
 	private CustomChangeListener ccl;
 	
-	private Canva display;
+	private CanvasFigure display;
 
 	private static final double SCENE_WIDTH = 1100;
 	private static final double SCENE_HEIGHT = 800;
@@ -49,7 +49,7 @@ public class View extends Stage implements Observer{
 
 		Explorer modelsList = new Explorer(ccl);
 		
-		display = new Canva();
+		display = new CanvasFigure();
 		
 		right = createRight(fig);
 		right.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
@@ -73,6 +73,11 @@ public class View extends Stage implements Observer{
 		VBox res = new VBox();
 		
 		display.setFigure(fig);
+		display.setOnScroll(e ->{
+			if(e.getDeltaY()>0) fig.zoom(1.2);
+			else fig.zoom(0.9);
+		});
+
 		HBox buttons = new ButtonsPanel(display);
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
