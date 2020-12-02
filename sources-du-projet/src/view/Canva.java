@@ -25,6 +25,8 @@ public class Canva extends Canvas implements Observer {
 
 	private Figure fig;
 	private Timeline timeline;
+	
+	private boolean rotating;
 
 	private Color canvaFillColor = Color.rgb(135, 206, 250, 1);
 
@@ -51,6 +53,7 @@ public class Canva extends Canvas implements Observer {
 		this.setWidth(width);
 		this.setHeight(height);
 		coord = new double[2][1];
+		rotating = false;
 	}
 	
 	/**
@@ -74,6 +77,7 @@ public class Canva extends Canvas implements Observer {
 	/**
 	 * Get the background {@link Color} of the {@link Canvas}
 	 * @return {@link Color}
+			visualUpdate();
 	 * 			 the {@link Color} of the background
 	 */
 	public Color getCanvaFillColor() {
@@ -265,12 +269,26 @@ public class Canva extends Canvas implements Observer {
 	 * Begin the rotation of the {@link Figure}
 	 */
 	public void startRotation() {
+		rotating = true;
 		timeline.play();
 	}
+	
+	/**
+	 * 
+	 * @return {@link boolean}
+	 * 		true if the canva is rotating, false otherwise.
+	 * 		@see Canva#startRotation()
+	 * 		@see Canva#stopRotation()
+	 */
+	public boolean isRotating() {
+		return this.rotating;
+	}
+	
 	/**
 	 * Stop the rotation of the {@link Figure}
 	 */
 	public void stopRotation() {
+		rotating = false;
 		timeline.stop();
 	}
 

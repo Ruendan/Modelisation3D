@@ -11,9 +11,9 @@ public class Buttons extends HBox {
 	
 	public Buttons(Canva canva) {
 		
-		this.buttons_rotation = ButtonFactory.makeButton("Rotation", canva.getFigure());
-		this.buttons_translation = ButtonFactory.makeButton("Translation", canva.getFigure());
-		this.buttons_zoom = ButtonFactory.makeButton("Zoom", canva.getFigure());
+		this.buttons_rotation = ButtonFactory.makeButton("Rotation", canva);
+		this.buttons_translation = ButtonFactory.makeButton("Translation", canva);
+		this.buttons_zoom = ButtonFactory.makeButton("Zoom", canva);
 		this.bouttons_couleur = ButtonFactory.makeButton("Color", canva);
 		this.bouttons_epaisseur = ButtonFactory.makeButton("Thickness", canva);		
 

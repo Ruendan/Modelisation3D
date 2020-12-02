@@ -1,39 +1,26 @@
 package view.buttons;
 
 import javafx.scene.layout.GridPane;
-import modele.modelisation.Figure;
 import view.Canva;
 
 public class ButtonFactory {
 	
 	public static final String R="Rotation",T="Translation",Z="Zoom",C="Color",TH="Thickness";
 
-	public static GridPane makeButton(String type, Figure fig) {
+	public static GridPane makeButton(String type, Canva canva) {
 		
 		switch(type) {
 		
 		case R:
-			return new Rotation(fig);
+			return new Rotation(canva);
 		case T:
-			return new Translation(fig);			
+			return new Translation(canva.getFigure());			
 		case Z:
-			return new Zoom(fig);	
-		
-		default:
-			System.out.println("Veuillez insérer un type de bouton correct");
-			return null;
-		}
-	}
-	
-	public static GridPane makeButton(String type, Canva canv) {
-		
-		switch(type) {
-		
+			return new Zoom(canva.getFigure());	
 		case C:
-			return new ColorPane(canv);
+			return new ColorPane(canva);
 		case TH:
-			return new LineWidthPane(canv);
-		
+			return new LineWidthPane(canva);
 		default:
 			System.out.println("Veuillez insérer un type de bouton correct");
 			return null;

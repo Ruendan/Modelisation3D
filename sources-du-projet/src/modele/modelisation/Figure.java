@@ -27,7 +27,6 @@ public class Figure extends Subject{
 
 	private String name;
 	private List<Face> faces;
-	private int nbFaces;
 	private Point center;
 	private Set<Point> points;
 
@@ -41,7 +40,6 @@ public class Figure extends Subject{
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
 		this.center = center();
-		this.nbFaces=faces.size();
 		this.initialisation();
 	}
 	
@@ -84,7 +82,7 @@ public class Figure extends Subject{
 	 * 			The number of Figures'faces
 	 */
 	public int getNbFaces() {
-		return nbFaces;
+		return faces.size();
 	}
 	
 	/**
@@ -111,7 +109,7 @@ public class Figure extends Subject{
 	 * 			The figure's number of {@link Point}.
 	 */
 	public double getNbPoint() {
-		return 0;
+		return points.size();
 	}
 	
 	private void initialisation() {
@@ -201,7 +199,7 @@ public class Figure extends Subject{
 	 */
 	@Override
 	public String toString() {
-		return "Figure [name=" + name + ", faces=" + faces + ", nbFaces=" + nbFaces + ", center=" + center + ", points=" + points + "]";
+		return "Figure [name=" + name + ", faces=" + faces + ", center=" + center + ", points=" + points + "]";
 	}
 
 	/**
