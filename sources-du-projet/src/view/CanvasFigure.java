@@ -28,7 +28,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private Color canvaFillColor = Color.rgb(135, 206, 250, 1);
+	private Color canvaFillColor = Color.rgb(145, 196, 240, 1);
 
 	private Color figureFillColor = Color.rgb(135, 206, 250, 1);
 	private Color figureStrokeColor = Color.BLACK;

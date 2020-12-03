@@ -43,7 +43,6 @@ public class View extends Stage implements Observer{
 	private static final CornerRadii BACKGROUND_CORNER_RADII = CornerRadii.EMPTY;
 	private static final Insets BACKGROUND_INSETS = Insets.EMPTY;
 	
-	private double x,y;
 	
 	public View(Figure fig) {
 		
