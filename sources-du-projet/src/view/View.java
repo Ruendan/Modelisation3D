@@ -17,7 +17,7 @@ import utils.Observer;
 import utils.Subject;
 import view.buttons.ButtonsPanel;
 import view.explorer.CustomChangeListener;
-import view.explorer.Explorer;
+import view.explorer.ExplorerLayout;
 
 public class View extends Stage implements Observer{
 	
@@ -49,7 +49,8 @@ public class View extends Stage implements Observer{
 		ccl = new CustomChangeListener(fig);
 		ccl.attach(this);
 
-		Explorer modelsList = new Explorer(ccl);
+		//Explorer modelsList = new Explorer(ccl); Fonctionnel mais Obsolete 
+		ExplorerLayout modelsList = new ExplorerLayout(ccl);
 		
 		display = new CanvasFigure();
 		

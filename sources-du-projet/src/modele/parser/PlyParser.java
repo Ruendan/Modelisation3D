@@ -25,10 +25,10 @@ public class PlyParser {
 	private int vertex;
 	private int face;
 	
-	ArrayList<String> comment;
-	Set<Point> points;
-	List<Point> pointsTotaux;
-	List<Face> faces;
+	private ArrayList<String> comment;
+	private Set<Point> points;
+	private List<Point> pointsTotaux;
+	private List<Face> faces;
 	
 	public static Ply loadPly(String nom) throws PlyParserException {
 		PlyParser pp = new PlyParser();
