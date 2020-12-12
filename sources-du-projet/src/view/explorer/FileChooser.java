@@ -5,11 +5,28 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
+/**
+ * 
+ * @author Dubois Quentin, Camus Sylvain
+ * 
+ * @apiNote Thank to Sylvain, who already had this kind 
+ * of problem to solve. It's mainly its work that i 
+ * applied to our case. (But luckily, he's working
+ * on this project too)
+ *
+ */
 public class FileChooser {
 	
+	/**
+	 * A private constructor, making the Class uninstanciable.
+	 */
 	private FileChooser() {};
 	
-	public static File pathSelector() { //sert a choisir des données externe
+	/**
+	 * 
+	 * @return the File that will be chosen by the user.
+	 */
+	public static File pathSelector() { //sert a choisir des données externe.
 		
 		File res = null;
 		
@@ -28,11 +45,15 @@ public class FileChooser {
 		}
 		return res;
 	}
-
+	
+	
+	/**
+	 * Enjoy the test !
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		File f = pathSelector();
 		System.out.println(f);
-		
 	}
 }
 

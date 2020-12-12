@@ -9,6 +9,10 @@ public class Explorer extends ListView<PlyFile>{
 	File lib = new File("ressources/plys");
 	File[] files = lib.listFiles();
 	
+	/**
+	 * The Explorer.
+	 * @param gg
+	 */
 	public Explorer(CustomChangeListener gg){
 		for (File file : this.files) {
 			this.getItems().add(new PlyFile(file));
@@ -18,13 +22,8 @@ public class Explorer extends ListView<PlyFile>{
 	}
 
 	public boolean addFile(File file) {
-		if(file == null) return false;
-		else {
-			this.getItems().add(new PlyFile(file));
-			return true;
-		}
+		return this.getItems().add(new PlyFile(file));
 	}
-	
 }
 
 
