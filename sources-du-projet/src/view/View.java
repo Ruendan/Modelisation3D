@@ -45,6 +45,9 @@ public class View extends Stage implements Observer{
 	private static final CornerRadii BACKGROUND_CORNER_RADII = CornerRadii.EMPTY;
 	private static final Insets BACKGROUND_INSETS = Insets.EMPTY;
 	
+	public View() throws PlyParserException {
+		this(new Figure(PlyParser.loadPly(DEFAULT_MODEL)));
+	}
 	
 	public View(Figure fig) {
 		
