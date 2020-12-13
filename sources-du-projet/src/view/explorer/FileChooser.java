@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * 
@@ -37,7 +38,9 @@ public class FileChooser {
 		}
 		
 		JFileChooser chooser = new JFileChooser();
-		chooser.setDialogTitle("Selectionnez le dossier Content");
+		chooser.setDialogTitle("Selectionnez le Fichier PLY à ajouter");
+		chooser.setAcceptAllFileFilterUsed(false);
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("PLY Files", "ply"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		int returnVal = chooser.showOpenDialog(chooser);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {

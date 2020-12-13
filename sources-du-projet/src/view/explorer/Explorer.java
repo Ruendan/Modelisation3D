@@ -22,7 +22,9 @@ public class Explorer extends ListView<PlyFile>{
 	}
 
 	public boolean addFile(File file) {
-		return this.getItems().add(new PlyFile(file));
+		if(file == null) return false;
+		if(file.getName().contains(".ply")) return this.getItems().add(new PlyFile(file));
+		else return false;
 	}
 }
 

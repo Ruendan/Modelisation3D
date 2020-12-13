@@ -1,5 +1,8 @@
 package view.explorer;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class ExplorerLayout extends VBox{
@@ -10,9 +13,11 @@ public class ExplorerLayout extends VBox{
 	 * @param cgl
 	 */
 	public ExplorerLayout(CustomChangeListener cgl) {
+		this.setPadding(new Insets(20));
+		this.setSpacing(20);
 		Explorer listFiles = new Explorer(cgl);
-		FileExplorerButton feb = new FileExplorerButton();
-		feb.setOnAction(e -> listFiles.addFile(feb.getFile()));
-		this.getChildren().addAll(feb, listFiles);
+		ExplorerToolBar bar = new ExplorerToolBar(listFiles);
+		VBox.setVgrow(listFiles, Priority.ALWAYS);
+		this.getChildren().addAll(bar, listFiles);
 	}
 }
