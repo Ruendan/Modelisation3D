@@ -17,15 +17,12 @@ import modele.parser.exception.PlyParserException;
 import utils.Observer;
 import utils.Subject;
 import view.buttons.ButtonsPanel;
-import view.explorer.CustomChangeListener;
 import view.explorer.ExplorerLayout;
 
 public class View extends Stage implements Observer{
 	
 	private VBox right;
 	private BorderPane layout;
-	
-	private CustomChangeListener ccl;
 	
 	private CanvasFigure display;
 
@@ -50,12 +47,9 @@ public class View extends Stage implements Observer{
 	}
 	
 	public View(Figure fig) {
-		
-		ccl = new CustomChangeListener(fig);
-		ccl.attach(this);
 
-		//Explorer modelsList = new Explorer(ccl); Fonctionnel mais Obsolete 
-		ExplorerLayout modelsList = new ExplorerLayout(ccl);
+		//Explorer modelsList = new Explorer(ccl); //Fonctionnel mais Obsolete 
+		ExplorerLayout modelsList = new ExplorerLayout(this);
 		
 		display = new CanvasFigure();
 		
@@ -77,7 +71,7 @@ public class View extends Stage implements Observer{
 		this.show();
 	}
 	
-	private VBox createRight(Figure fig) {
+	public VBox createRight(Figure fig) {
 		VBox res = new VBox();
 		
 		display.setFigure(fig);

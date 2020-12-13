@@ -3,6 +3,7 @@ package view.explorer;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import view.View;
 
 public class ExplorerLayout extends VBox{
 	
@@ -11,10 +12,10 @@ public class ExplorerLayout extends VBox{
 	 * It's a VBox regrouping the Explorer and the FileChoser.
 	 * @param cgl
 	 */
-	public ExplorerLayout(CustomChangeListener cgl) {
+	public ExplorerLayout(View parent) {
 		this.setPadding(new Insets(20));
 		this.setSpacing(20);
-		Explorer listFiles = new Explorer(cgl);
+		Explorer listFiles = new Explorer(parent);
 		ExplorerToolBar bar = new ExplorerToolBar(listFiles);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);
 		this.getChildren().addAll(bar, listFiles);

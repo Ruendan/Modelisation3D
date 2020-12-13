@@ -3,6 +3,8 @@ package view.explorer;
 import java.io.File;
 
 import javafx.scene.control.ListView;
+import modele.modelisation.Figure;
+import view.View;
 
 public class Explorer extends ListView<PlyFile>{
 	
@@ -13,12 +15,12 @@ public class Explorer extends ListView<PlyFile>{
 	 * The Explorer.
 	 * @param gg
 	 */
-	public Explorer(CustomChangeListener gg){
+	public Explorer(View parent){
 		for (File file : this.files) {
 			this.getItems().add(new PlyFile(file));
 		}
 
-		this.getSelectionModel().selectedItemProperty().addListener(gg);
+		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> parent.createRight(new Figure(newvalue.getPly())));
 	}
 
 	public boolean addFile(File file) {
