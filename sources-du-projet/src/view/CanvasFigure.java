@@ -28,9 +28,11 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private Color canvaFillColor = Color.rgb(145, 196, 240, 1);
-
-	private Color figureFillColor = Color.rgb(135, 206, 250, 1);
+	private double opacity = 1;
+	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
+	private Color figureFillColor = Color.rgb(135, 206, 250, opacity);
+	
+	
 	private Color figureStrokeColor = Color.BLACK;
 	private double figureLineWidth = 0.2;
 
@@ -96,7 +98,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * 			The new {@link Color} of the {@link Figure}
 	 */
 	public void setFigureFillColor(Color rgba) {
-		this.figureFillColor = rgba;
+		this.figureFillColor = Color.color(rgba.getRed(), rgba.getGreen(), rgba.getBlue(), this.opacity);
 		visualUpdateLite();
 	}
 
@@ -291,6 +293,15 @@ public class CanvasFigure extends Canvas implements Observer {
 	public void stopRotation() {
 		rotating = false;
 		timeline.stop();
+	}
+
+	public double getFigureOpacity() {
+		return opacity;
+	}
+
+	public void setFigureOpacity(double newValue) {
+		this.opacity = newValue;
+		this.setFigureFillColor(this.figureFillColor);
 	}
 
 }
