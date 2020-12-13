@@ -14,12 +14,10 @@ import javafx.stage.Stage;
 import modele.modelisation.Figure;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
-import utils.Observer;
-import utils.Subject;
 import view.buttons.ButtonsPanel;
 import view.explorer.ExplorerLayout;
 
-public class View extends Stage implements Observer{
+public class View extends Stage{
 	
 	private VBox right;
 	private BorderPane layout;
@@ -71,7 +69,7 @@ public class View extends Stage implements Observer{
 		this.show();
 	}
 	
-	public VBox createRight(Figure fig) {
+	private VBox createRight(Figure fig) {
 		VBox res = new VBox();
 		
 		display.setFigure(fig);
@@ -109,22 +107,8 @@ public class View extends Stage implements Observer{
 	double x = 0;
 	double y = 0;
 	
-	
-
-	@Override
-	public void update(Subject subj){
-		try {
-			right = createRight(new Figure(PlyParser.loadPly(DEFAULT_MODEL)));
-			layout.setRight(right);
-		} catch (PlyParserException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void update(Subject subj, Object data) {
-		right = createRight((Figure) data);
+	public void updateRight(Figure f){
+		right = createRight(f);
 		layout.setRight(right);
 		
 	}
