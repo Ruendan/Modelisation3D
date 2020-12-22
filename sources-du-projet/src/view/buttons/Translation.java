@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
+import view.ButtonsConst;
 
 public class Translation extends GridPane{
 	
@@ -12,30 +13,30 @@ public class Translation extends GridPane{
 	public Translation(Figure fig){
 		
 		this.up = new Button("↑");
-		up.setOnAction(e->fig.VDeplace(-ButtonsConst.VALEUR_DE_DEPLACEMENT));
+		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
 		this.down = new Button("↓");
 		
 		down.setOnAction(e->{
-			fig.VDeplace(ButtonsConst.VALEUR_DE_DEPLACEMENT);
+			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
 		});
 		
-		this.up.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
-		this.down.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
-		this.up.setStyle(ButtonsConst.BUTTON_STYLE);
-		this.down.setStyle(ButtonsConst.BUTTON_STYLE);
+		this.up.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.down.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.up.setStyle(ButtonsConst.getButtonStyle());
+		this.down.setStyle(ButtonsConst.getButtonStyle());
 		
 		this.left = new Button("←");
 		left.setOnAction(e->{
-			fig.HDeplace(-ButtonsConst.VALEUR_DE_DEPLACEMENT);
+			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});
 		this.right = new Button("→");	
 		right.setOnAction(e->{
-			fig.HDeplace(ButtonsConst.VALEUR_DE_DEPLACEMENT);
+			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});
-		this.left.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
-		this.right.setPrefSize(ButtonsConst.BUTTON_SIZE,ButtonsConst.BUTTON_SIZE);
-		this.left.setStyle(ButtonsConst.BUTTON_STYLE);
-		this.right.setStyle(ButtonsConst.BUTTON_STYLE);
+		this.left.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.right.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.left.setStyle(ButtonsConst.getButtonStyle());
+		this.right.setStyle(ButtonsConst.getButtonStyle());
 		
 		this.setPadding(new Insets(10,0,10,10));
 		this.setHgap(10);
@@ -47,7 +48,7 @@ public class Translation extends GridPane{
 		this.add(right, 2, 2);
 		this.add(down, 1, 3);
 		
-		this.setStyle(ButtonsConst.PANE_STYLE);		
+		this.setStyle(ButtonsConst.getPaneStyle());		
 		this.setPrefWidth(190);
 	}
 }

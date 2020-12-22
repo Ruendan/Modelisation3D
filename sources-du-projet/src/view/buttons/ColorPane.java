@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import view.ButtonsConst;
 import view.CanvasFigure;
 
 public class ColorPane extends GridPane{
@@ -15,8 +16,8 @@ public class ColorPane extends GridPane{
 		
 		this.titleCP1 = new Label("  Couleur de fond  ");
 		this.titleCP2 = new Label("  Couleur de face  ");
-		this.titleCP1.setStyle(ButtonsConst.LABEL_STYLE);
-		this.titleCP2.setStyle(ButtonsConst.LABEL_STYLE);
+		this.titleCP1.setStyle(ButtonsConst.getLabelStyle());
+		this.titleCP2.setStyle(ButtonsConst.getLabelStyle());
 		
 		this.canvaColorPicker = new ColorPicker(canva.getCanvaFillColor());
 		canvaColorPicker.setOnAction(e -> canva.setCanvaFillColor(canvaColorPicker.getValue()));
@@ -33,7 +34,7 @@ public class ColorPane extends GridPane{
 		this.add(titleCP2, 2, 2);
 		this.add(figureColorPicker, 2, 3);
 		
-		this.setStyle(ButtonsConst.PANE_STYLE);
+		this.setStyle(ButtonsConst.getPaneStyle());
 		this.setPrefWidth(250);
 	}
 }

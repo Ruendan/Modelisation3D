@@ -1,6 +1,7 @@
 package view.buttons;
 
 import javafx.scene.control.Button;
+import view.ButtonsConst;
 import view.CanvasFigure;
 
 public class ButtonTimeline extends Button {
@@ -14,7 +15,7 @@ public class ButtonTimeline extends Button {
 		this.canva = canva;
 		this.setText((canva.isRotating()?TEXTSTOP:TEXTSTART));
 		this.setOnAction(e -> onClick());
-		this.setStyle(ButtonsConst.BUTTON_STYLE);
+		this.setStyle(ButtonsConst.getButtonStyle());
 	}
 	
 	public void onClick() {

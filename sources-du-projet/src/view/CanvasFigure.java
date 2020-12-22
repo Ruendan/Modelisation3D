@@ -56,8 +56,8 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.setHeight(height);
 		coord = new double[2][1];
 		rotating = false;
-		timeline = new Timeline(new KeyFrame(Duration.seconds(0.05), e -> {
-			fig.rotate(5, 5 ,5);
+		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
+			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
 			visualUpdate();
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);

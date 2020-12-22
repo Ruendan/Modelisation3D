@@ -213,7 +213,7 @@ public class Figure extends Subject{
 	 * 			The value of the angle you want to rotate in Z axes
 	 * @see Mouvement
 	 */
-	public void rotate(int i, int j, int k) {
+	public void rotate(double i, double j, double k) {
 		toOrigin();
 		Mouvement.rotate(this, i, j, k);
 		toCenter();

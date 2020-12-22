@@ -8,7 +8,8 @@ public class ExplorerToolBar extends ToolBar{
 	public ExplorerToolBar(Explorer items) {
 		FileExplorerButton feb = new FileExplorerButton(items);
 		NewTabButton ntb = new NewTabButton();
-		this.getItems().addAll(feb, new Separator(), ntb);
+		OptionButton option = new OptionButton();
+		this.getItems().addAll(feb, new Separator(), ntb, new Separator(), option);
 	}
 	
 }
