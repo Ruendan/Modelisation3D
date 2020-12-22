@@ -2,7 +2,7 @@ package view.optionConfiguration;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
-import view.optionConfiguration.optionConfigurationBoxes.HBoxConfigurationFactory;
+import view.optionConfiguration.boxes.HBoxConfigurationFactory;
 
 public class OptionConfigurationLayout extends VBox {
 	

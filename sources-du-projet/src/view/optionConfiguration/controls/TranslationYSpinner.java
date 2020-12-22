@@ -1,4 +1,4 @@
-package view.optionConfiguration.optionConfigurationControls;
+package view.optionConfiguration.controls;
 
 import view.ButtonsConst;
 

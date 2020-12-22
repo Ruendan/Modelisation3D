@@ -1,4 +1,4 @@
-package view.optionConfiguration.optionConfigurationBoxes;
+package view.optionConfiguration.boxes;
 
 import view.optionConfiguration.Element;
 

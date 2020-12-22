@@ -1,9 +1,9 @@
-package view.optionConfiguration.optionConfigurationBoxes;
+package view.optionConfiguration.boxes;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import view.optionConfiguration.optionConfigurationControls.TranslationYSpinner;
+import view.optionConfiguration.controls.TranslationYSpinner;
 
 public class HBoxTranslationY extends ConfigurationHBox {
 	public HBoxTranslationY() {

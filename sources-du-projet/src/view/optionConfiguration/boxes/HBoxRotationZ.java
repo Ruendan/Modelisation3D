@@ -1,9 +1,9 @@
-package view.optionConfiguration.optionConfigurationBoxes;
+package view.optionConfiguration.boxes;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import view.optionConfiguration.optionConfigurationControls.RotationZSpinner;
+import view.optionConfiguration.controls.RotationZSpinner;
 
 public class HBoxRotationZ extends ConfigurationHBox {
 	
