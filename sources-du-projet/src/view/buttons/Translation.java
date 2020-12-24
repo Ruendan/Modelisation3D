@@ -12,9 +12,11 @@ public class Translation extends GridPane{
 	
 	public Translation(Figure fig){
 		
-		this.up = new Button("↑");
+		// Hello bg TEST
+		
+		this.up = new Button("â†‘");
 		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
-		this.down = new Button("↓");
+		this.down = new Button("â†“");
 		
 		down.setOnAction(e->{
 			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
@@ -25,11 +27,11 @@ public class Translation extends GridPane{
 		this.up.setStyle(ButtonsConst.getButtonStyle());
 		this.down.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.left = new Button("←");
+		this.left = new Button("â†�");
 		left.setOnAction(e->{
 			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});
-		this.right = new Button("→");	
+		this.right = new Button("â†’");	
 		right.setOnAction(e->{
 			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});

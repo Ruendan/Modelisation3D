@@ -12,11 +12,11 @@ public class Rotation extends GridPane{
 	
 	public Rotation(CanvasFigure canva){
 		
-		this.Xup = new Button("↑");
+		this.Xup = new Button("â†‘");
 		Xup.setOnAction(e ->{
 			canva.getFigure().rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
-		this.Xdown = new Button("↓");
+		this.Xdown = new Button("â†“");
 		Xdown.setOnAction(e ->{
 			canva.getFigure().rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
@@ -24,22 +24,22 @@ public class Rotation extends GridPane{
 		this.Xup.setStyle(ButtonsConst.getButtonStyle()); this.Xdown.setStyle(ButtonsConst.getButtonStyle());
 		
 		
-		this.Yup = new Button("←");
+		this.Yup = new Button("â†�");
 		Yup.setOnAction(e ->{
 			canva.getFigure().rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
-		this.Ydown = new Button("→");
+		this.Ydown = new Button("â†’");
 		Ydown.setOnAction(e ->{
 			canva.getFigure().rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
 		this.Yup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.Ydown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
 		this.Yup.setStyle(ButtonsConst.getButtonStyle()); this.Ydown.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.Zup = new Button("↷");
+		this.Zup = new Button("â†·");
 		Zup.setOnAction(e ->{
 			canva.getFigure().rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
-		this.Zdown = new Button("↶");
+		this.Zdown = new Button("â†¶");
 		Zdown.setOnAction(e ->{
 			canva.getFigure().rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
