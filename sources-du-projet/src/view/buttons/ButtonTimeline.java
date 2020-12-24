@@ -1,19 +1,23 @@
 package view.buttons;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import view.ButtonsConst;
 import view.CanvasFigure;
 
 public class ButtonTimeline extends Button {
 
 	CanvasFigure canva;
-
-	private static final String TEXTSTART = ">";
-	private static final String TEXTSTOP = "||";
+	
+	private static ImageView play,pause;
 	
 	public ButtonTimeline(CanvasFigure canva) {
+		play = new ImageView(new Image(getClass().getResourceAsStream("imgs/play.png")));
+		pause = new ImageView(new Image(getClass().getResourceAsStream("imgs/pause.png")));
+		
 		this.canva = canva;
-		this.setText((canva.isRotating()?TEXTSTOP:TEXTSTART));
+		this.setGraphic((canva.isRotating()?pause:play));
 		this.setOnAction(e -> onClick());
 		this.setStyle(ButtonsConst.getButtonStyle());
 	}
@@ -21,10 +25,10 @@ public class ButtonTimeline extends Button {
 	public void onClick() {
 		if(canva.isRotating()) {
 			canva.stopRotation();
-			this.setText(TEXTSTART);
+			this.setGraphic(play);
 		}else {
 			canva.startRotation();
-			this.setText(TEXTSTOP);
+			this.setGraphic(pause);
 		}
 	}
 }

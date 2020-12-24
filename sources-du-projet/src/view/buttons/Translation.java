@@ -2,6 +2,8 @@ package view.buttons;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import view.ButtonsConst;
@@ -9,15 +11,17 @@ import view.ButtonsConst;
 public class Translation extends GridPane{
 	
 	private Button up,down,left,right;
+	private static ImageView Up,Down,Left,Right;
 	
 	public Translation(Figure fig){
+		Up = new ImageView(new Image(getClass().getResourceAsStream("imgs/up.png")));
+		Down = new ImageView(new Image(getClass().getResourceAsStream("imgs/down.png")));
+		Left = new ImageView(new Image(getClass().getResourceAsStream("imgs/left.png")));
+		Right = new ImageView(new Image(getClass().getResourceAsStream("imgs/right.png")));
 		
-		// Hello bg TEST voila
-		
-		this.up = new Button("â†‘");
+		this.up = new Button("",Up);
 		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
-		this.down = new Button("â†“");
-		
+		this.down = new Button("", Down);
 		down.setOnAction(e->{
 			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
 		});
@@ -27,11 +31,11 @@ public class Translation extends GridPane{
 		this.up.setStyle(ButtonsConst.getButtonStyle());
 		this.down.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.left = new Button("â†�");
+		this.left = new Button("",Left);
 		left.setOnAction(e->{
 			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});
-		this.right = new Button("â†’");	
+		this.right = new Button("",Right);	
 		right.setOnAction(e->{
 			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});

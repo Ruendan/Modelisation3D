@@ -2,6 +2,8 @@ package view.buttons;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import view.ButtonsConst;
 import view.CanvasFigure;
@@ -9,14 +11,22 @@ import view.CanvasFigure;
 public class Rotation extends GridPane{
 	
 	private Button Xup,Xdown,Yup,Ydown,Zup,Zdown;
+	private static ImageView xUp,xDown,yUp,yDown,zUp,zDown;
 	
 	public Rotation(CanvasFigure canva){
 		
-		this.Xup = new Button("â†‘");
+		xUp = new ImageView(new Image(getClass().getResourceAsStream("imgs/xUp.png")));
+		xDown = new ImageView(new Image(getClass().getResourceAsStream("imgs/xDown.png")));		
+		yUp = new ImageView(new Image(getClass().getResourceAsStream("imgs/yUp.png")));
+		yDown = new ImageView(new Image(getClass().getResourceAsStream("imgs/yDown.png")));
+		zUp = new ImageView(new Image(getClass().getResourceAsStream("imgs/zUp.png")));
+		zDown = new ImageView(new Image(getClass().getResourceAsStream("imgs/zDown.png")));
+		
+		this.Xup = new Button("",xUp);
 		Xup.setOnAction(e ->{
 			canva.getFigure().rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
-		this.Xdown = new Button("â†“");
+		this.Xdown = new Button("",xDown);
 		Xdown.setOnAction(e ->{
 			canva.getFigure().rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
@@ -24,22 +34,22 @@ public class Rotation extends GridPane{
 		this.Xup.setStyle(ButtonsConst.getButtonStyle()); this.Xdown.setStyle(ButtonsConst.getButtonStyle());
 		
 		
-		this.Yup = new Button("â†�");
+		this.Yup = new Button("",yUp);
 		Yup.setOnAction(e ->{
 			canva.getFigure().rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
-		this.Ydown = new Button("â†’");
+		this.Ydown = new Button("",yDown);
 		Ydown.setOnAction(e ->{
 			canva.getFigure().rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
 		this.Yup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.Ydown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
 		this.Yup.setStyle(ButtonsConst.getButtonStyle()); this.Ydown.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.Zup = new Button("â†·");
+		this.Zup = new Button("",zUp);
 		Zup.setOnAction(e ->{
 			canva.getFigure().rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
-		this.Zdown = new Button("â†¶");
+		this.Zdown = new Button("",zDown);
 		Zdown.setOnAction(e ->{
 			canva.getFigure().rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
