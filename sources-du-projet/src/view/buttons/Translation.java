@@ -12,7 +12,7 @@ public class Translation extends GridPane{
 	
 	public Translation(Figure fig){
 		
-		// Hello bg TEST
+		// Hello bg TEST voila
 		
 		this.up = new Button("â†‘");
 		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
