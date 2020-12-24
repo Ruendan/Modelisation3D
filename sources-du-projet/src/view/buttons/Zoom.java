@@ -2,34 +2,34 @@ package view.buttons;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
+import utils.Icon;
 import view.ButtonsConst;
 
 public class Zoom extends GridPane{
 	
-	private Button In,Out;
-	private static ImageView Plus,Less;
+	private Button in,out;
+	private static ImageView inImg,lessImg;
 	
 	public Zoom(Figure fig){
-		Plus = new ImageView(new Image(getClass().getResourceAsStream("imgs/plus.png")));
-		Less = new ImageView(new Image(getClass().getResourceAsStream("imgs/less.png")));
+		inImg = Icon.createButtonIcon("plus");
+		lessImg = Icon.createButtonIcon("less");
 		
-		this.In = new Button("", Plus);
-		In.setOnAction(e->{
+		this.in = new Button("", inImg);
+		in.setOnAction(e->{
 			fig.zoom(1+ButtonsConst.getVALEUR_DE_ZOOM());
 		});
-		this.In.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.In.setStyle(ButtonsConst.getButtonStyle());
+		this.in.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.in.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.Out = new Button("", Less);
-		Out.setOnAction(e->{
+		this.out = new Button("", lessImg);
+		out.setOnAction(e->{
 			fig.zoom(1-ButtonsConst.getVALEUR_DE_ZOOM());
 		});
-		this.Out.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.Out.setStyle(ButtonsConst.getButtonStyle());
+		this.out.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		this.out.setStyle(ButtonsConst.getButtonStyle());
 		
 		
 		this.setPadding(new Insets(10,0,10,30));
@@ -37,8 +37,8 @@ public class Zoom extends GridPane{
 		this.setVgap(10);
 		this.setGridLinesVisible(true);
 		
-		this.add(In, 0, 0);
-		this.add(Out, 2, 0);
+		this.add(in, 0, 0);
+		this.add(out, 2, 0);
 		
 		this.setStyle(ButtonsConst.getPaneStyle());		
 		this.setPrefWidth(190);

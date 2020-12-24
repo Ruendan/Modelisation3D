@@ -2,26 +2,26 @@ package view.buttons;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
+import utils.Icon;
 import view.ButtonsConst;
 
 public class Translation extends GridPane{
 	
 	private Button up,down,left,right;
-	private static ImageView Up,Down,Left,Right;
+	private static ImageView upImg,downImg,leftImg,rightImg;
 	
 	public Translation(Figure fig){
-		Up = new ImageView(new Image(getClass().getResourceAsStream("imgs/up.png")));
-		Down = new ImageView(new Image(getClass().getResourceAsStream("imgs/down.png")));
-		Left = new ImageView(new Image(getClass().getResourceAsStream("imgs/left.png")));
-		Right = new ImageView(new Image(getClass().getResourceAsStream("imgs/right.png")));
+		upImg = Icon.createButtonIcon("up");
+		downImg = Icon.createButtonIcon("down");
+		leftImg = Icon.createButtonIcon("left");
+		rightImg = Icon.createButtonIcon("right");
 		
-		this.up = new Button("",Up);
+		this.up = new Button("",upImg);
 		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
-		this.down = new Button("", Down);
+		this.down = new Button("", downImg);
 		down.setOnAction(e->{
 			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
 		});
@@ -31,11 +31,11 @@ public class Translation extends GridPane{
 		this.up.setStyle(ButtonsConst.getButtonStyle());
 		this.down.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.left = new Button("",Left);
+		this.left = new Button("",leftImg);
 		left.setOnAction(e->{
 			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});
-		this.right = new Button("",Right);	
+		this.right = new Button("",rightImg);	
 		right.setOnAction(e->{
 			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
 		});

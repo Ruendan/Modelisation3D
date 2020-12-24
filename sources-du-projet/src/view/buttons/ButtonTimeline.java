@@ -1,8 +1,8 @@
 package view.buttons;
 
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import utils.Icon;
 import view.ButtonsConst;
 import view.CanvasFigure;
 
@@ -13,8 +13,8 @@ public class ButtonTimeline extends Button {
 	private static ImageView play,pause;
 	
 	public ButtonTimeline(CanvasFigure canva) {
-		play = new ImageView(new Image(getClass().getResourceAsStream("imgs/play.png")));
-		pause = new ImageView(new Image(getClass().getResourceAsStream("imgs/pause.png")));
+		play = Icon.createButtonIcon("play");
+		pause = Icon.createButtonIcon("pause");
 		
 		this.canva = canva;
 		this.setGraphic((canva.isRotating()?pause:play));
