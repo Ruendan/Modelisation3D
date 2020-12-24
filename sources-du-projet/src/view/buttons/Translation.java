@@ -44,18 +44,18 @@ public class Translation extends GridPane{
 		this.left.setStyle(ButtonsConst.getButtonStyle());
 		this.right.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.setPadding(new Insets(10,0,10,10));
+		this.setPadding(new Insets(0,35,0,35));
 		this.setHgap(10);
 		this.setVgap(10);
-		this.setGridLinesVisible(true);
+		//this.setGridLinesVisible(true);
 	
 		this.add(up, 1, 0);
 		this.add(left, 0, 1);
 		this.add(right, 2,1);
 		this.add(down, 1, 2);
 		
-		this.setStyle(ButtonsConst.getPaneStyle());		
-		this.setPrefWidth(200);
+		//this.setStyle(ButtonsConst.getPaneStyle());
+		this.setMaxHeight(180);
 	}
 }
 

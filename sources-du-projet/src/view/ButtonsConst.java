@@ -60,7 +60,7 @@ public class ButtonsConst {
 		VALEUR_DE_ROTATION_Z = value;
 	}
 	
-	protected static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 15 arial;";
+	protected static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 15 arial; -fx-border-width: 2px; -fx-border-color: white; -fx-border-radius:50;";
 	protected static final String PANE_STYLE = "-fx-border-width: 4px; -fx-border-color: white; -fx-background-color: slategrey; -fx-background-radius: 25; -fx-border-radius:25;";
 	protected static final String LABEL_STYLE = "-fx-text-fill: white; -fx-font: 13 arial; -fx-font-weight:bold; -fx-border-width:3px; -fx-border-color:white; -fx-border-radius:5";
 

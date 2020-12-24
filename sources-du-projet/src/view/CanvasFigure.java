@@ -39,7 +39,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	private GraphicsContext gc;
 
 	private static final double DEFAULT_WIDTH = 800;
-	private static final double DEFAULT_HEIGHT = 500;
+	private static final double DEFAULT_HEIGHT = 800;
 
 	private double[][] coord;
 

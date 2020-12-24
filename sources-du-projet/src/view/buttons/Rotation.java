@@ -56,10 +56,9 @@ public class Rotation extends GridPane{
 		this.zup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.zdown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
 		this.zup.setStyle(ButtonsConst.getButtonStyle()); this.zdown.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.setPadding(new Insets(22,0,0,15));
 		this.setHgap(10);
 		this.setVgap(20);
-		this.setGridLinesVisible(true);
+		//this.setGridLinesVisible(true);
 		
 		this.add(xup, 0, 0); this.add(xdown, 2, 0);
 		this.add(yup, 0, 1); this.add(ydown, 2, 1);
@@ -69,8 +68,8 @@ public class Rotation extends GridPane{
 		this.add(autoRotate, 1, 3);
 		
 		
-		this.setStyle(ButtonsConst.getPaneStyle());	
-		this.setPrefSize(200,280);
+		//this.setStyle(ButtonsConst.getPaneStyle());	
+		this.setMaxHeight(250);
 	}
 }
 

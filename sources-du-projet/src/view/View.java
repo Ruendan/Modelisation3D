@@ -10,8 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import modele.modelisation.Figure;
 import modele.parser.PlyParser;
@@ -84,9 +84,9 @@ public class View extends Stage{
 		
 		HBox buttons = new ButtonsControls(display);
 		
-		//res.setStyle("-fx-border-width: 2px; -fx-border-color: red; -fx-background-color: slategrey;");
-		res.getChildren().addAll(display, buttons);
-		//buttons.setAlignment(Pos.CENTER_LEFT);
+		//res.setStyle("-fx-border-width: 10px; -fx-border-color: white; -fx-background-color: slategrey;");
+		res.getChildren().addAll(display,buttons);
+		StackPane.setAlignment(buttons, Pos.TOP_LEFT);
 		
 		display.setOnMousePressed(e -> {
 			x=e.getX();

@@ -1,8 +1,9 @@
 package view.buttons;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import view.CanvasFigure;
 
 public class ButtonsControls extends HBox {
@@ -15,7 +16,10 @@ public class ButtonsControls extends HBox {
 		this.buttons_translation = ButtonsFactory.makeButton("Translation", canva);
 		this.buttons_zoom = ButtonsFactory.makeButton("Zoom", canva);
 
-		this.getChildren().addAll(new VBox(buttons_rotation), new VBox(buttons_translation,buttons_zoom));
-		this.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
+		this.getChildren().addAll(buttons_rotation, buttons_translation,buttons_zoom);		
+		
+		this.setPadding(new Insets(5,0,0,10));
+		this.setMaxSize(400, 250);
+		this.buttons_zoom.setAlignment(Pos.BOTTOM_RIGHT);
 	}
 }

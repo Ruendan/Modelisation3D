@@ -31,17 +31,15 @@ public class Zoom extends GridPane{
 		this.out.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
 		this.out.setStyle(ButtonsConst.getButtonStyle());
 		
-		
-		this.setPadding(new Insets(10,0,10,30));
 		this.setHgap(10);
 		this.setVgap(10);
-		this.setGridLinesVisible(true);
+		//this.setGridLinesVisible(true);
 		
 		this.add(in, 0, 0);
-		this.add(out, 4, 0);
+		this.add(out, 2, 0);
 		
-		this.setStyle(ButtonsConst.getPaneStyle());		
-		this.setPrefWidth(200);
+		//this.setStyle(ButtonsConst.getPaneStyle());
+		this.setMaxHeight(50);
 	}
 }
 
