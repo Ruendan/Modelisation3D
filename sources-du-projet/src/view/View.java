@@ -14,17 +14,18 @@ import javafx.stage.Stage;
 import modele.modelisation.Figure;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
-import view.buttons.ButtonsPanel;
+import view.buttons.ButtonsControls;
+import view.buttons.ButtonsOthers;
 import view.explorer.ExplorerLayout;
 
 public class View extends Stage{
 	
-	private VBox right;
+	private VBox middle;
 	private BorderPane layout;
 	
 	private CanvasFigure display;
 
-	private static final double SCENE_WIDTH = 1100;
+	private static final double SCENE_WIDTH = 1420;
 	private static final double SCENE_HEIGHT = 800;
 	
 	private static final double SCENE_MIN_WIDTH = 700;
@@ -51,12 +52,15 @@ public class View extends Stage{
 		
 		display = new CanvasFigure();
 		
-		right = createRight(fig);
-		right.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
+		middle = createMiddle(fig);
+		middle.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
+		
+		ButtonsOthers right = new ButtonsOthers(display);
 		
 		
 		layout = new BorderPane();		
 		layout.setLeft(modelsList);
+		layout.setCenter(middle);
 		layout.setRight(right);
 		layout.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR,BACKGROUND_CORNER_RADII, BACKGROUND_INSETS)));
 		
@@ -69,14 +73,14 @@ public class View extends Stage{
 		this.show();
 	}
 	
-	private VBox createRight(Figure fig) {
+	private VBox createMiddle(Figure fig) {
 		VBox res = new VBox();
 		
 		display.setFigure(fig);
 		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));
 		
 		
-		HBox buttons = new ButtonsPanel(display);
+		HBox buttons = new ButtonsControls(display);
 		
 		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 		res.getChildren().addAll(display, buttons);
@@ -107,9 +111,9 @@ public class View extends Stage{
 	double x = 0;
 	double y = 0;
 	
-	public void updateRight(Figure f){
-		right = createRight(f);
-		layout.setRight(right);
+	public void updateMiddle(Figure f){
+		middle = createMiddle(f);
+		layout.setCenter(middle);
 		
 	}
 }

@@ -20,7 +20,7 @@ public class Explorer extends ListView<PlyFile>{
 			this.getItems().add(new PlyFile(file));
 		}
 
-		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> parent.updateRight(new Figure(newvalue.getPly())));
+		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> parent.updateMiddle(new Figure(newvalue.getPly())));
 	}
 
 	public boolean addFile(File file) {
