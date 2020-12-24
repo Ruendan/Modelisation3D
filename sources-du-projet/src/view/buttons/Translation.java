@@ -49,13 +49,13 @@ public class Translation extends GridPane{
 		this.setVgap(10);
 		this.setGridLinesVisible(true);
 	
-		this.add(up, 1, 1);
-		this.add(left, 0, 2);
-		this.add(right, 2, 2);
-		this.add(down, 1, 3);
+		this.add(up, 1, 0);
+		this.add(left, 0, 1);
+		this.add(right, 2,1);
+		this.add(down, 1, 2);
 		
 		this.setStyle(ButtonsConst.getPaneStyle());		
-		this.setPrefWidth(190);
+		this.setPrefWidth(200);
 	}
 }
 

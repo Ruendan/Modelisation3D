@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
@@ -8,6 +9,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -20,7 +22,7 @@ import view.explorer.ExplorerLayout;
 
 public class View extends Stage{
 	
-	private VBox middle;
+	private StackPane middle;
 	private BorderPane layout;
 	
 	private CanvasFigure display;
@@ -73,8 +75,8 @@ public class View extends Stage{
 		this.show();
 	}
 	
-	private VBox createMiddle(Figure fig) {
-		VBox res = new VBox();
+	private StackPane createMiddle(Figure fig) {
+		StackPane res = new StackPane();
 		
 		display.setFigure(fig);
 		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));
@@ -82,8 +84,9 @@ public class View extends Stage{
 		
 		HBox buttons = new ButtonsControls(display);
 		
-		//res.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
+		//res.setStyle("-fx-border-width: 2px; -fx-border-color: red; -fx-background-color: slategrey;");
 		res.getChildren().addAll(display, buttons);
+		//buttons.setAlignment(Pos.CENTER_LEFT);
 		
 		display.setOnMousePressed(e -> {
 			x=e.getX();

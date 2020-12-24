@@ -15,8 +15,7 @@ public class ButtonsControls extends HBox {
 		this.buttons_translation = ButtonsFactory.makeButton("Translation", canva);
 		this.buttons_zoom = ButtonsFactory.makeButton("Zoom", canva);
 
-		this.getChildren().addAll(buttons_rotation, new VBox(buttons_translation,buttons_zoom));
-		//this.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
-
+		this.getChildren().addAll(new VBox(buttons_rotation), new VBox(buttons_translation,buttons_zoom));
+		this.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
 	}
 }
