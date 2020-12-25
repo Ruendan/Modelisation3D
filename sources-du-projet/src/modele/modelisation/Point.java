@@ -63,25 +63,6 @@ public class Point {
 		this.z = point.getZ();
 	}
 	
-	
-	public void rotate(double thetaX, double thetaY, double thetaZ) {
-		Matrix.rotateX(this, thetaX);
-		Matrix.rotateY(this, thetaY);
-		Matrix.rotateZ(this, thetaZ);		
-	}
-	
-	public void rotateX(double theta) {
-		Matrix.rotateX(this, theta);
-	}
-	
-	public void rotateY(double theta) {
-		Matrix.rotateY(this, theta);
-	}
-	
-	public void rotateZ(double theta) {
-		Matrix.rotateZ(this, theta);
-	}
-	
 	public void deplacerX(double x) {
 		this.x+=x;
 	}

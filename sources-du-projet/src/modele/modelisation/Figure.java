@@ -28,7 +28,7 @@ public class Figure extends Subject{
 	private String name;
 	private List<Face> faces;
 	private Point center;
-	private Set<Point> points;
+	private Matrix points;
 
 	/**
 	 * Create a figure with a {@link Ply}
@@ -38,7 +38,7 @@ public class Figure extends Subject{
 	public Figure(Ply ply) {
 		this.name = ply.getName();
 		this.faces = ply.getFaces();
-		this.points = ply.getPoints();
+		this.points = new Matrix(ply.getPoints());
 		this.center = center();
 		this.initialisation();
 	}
@@ -63,7 +63,7 @@ public class Figure extends Subject{
 	 * @return {@link Set} of {@link Point}
 	 * 			The list of all points of the figure
 	 */
-	public Set<Point> getPoints(){
+	public Matrix getPoints(){
 		return points;
 	}
 	
@@ -108,14 +108,14 @@ public class Figure extends Subject{
 	 * @return {@link Double}
 	 * 			The figure's number of {@link Point}.
 	 */
-	public double getNbPoint() {
-		return points.size();
+	public int getNbPoint() {
+		return points.length();
 	}
 	
 	private void initialisation() {
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		Matrix.deplacer(points, -center.getX(), -center.getY(), -center.getZ());
 		center.deplacer(-center.getX(), -center.getY(), -center.getZ());
-		Mouvement.rotate(this, 180, 180, 0);
+		Matrix.rotate(points, 180, 180, 0);
 		tri();
 	}
 
@@ -127,7 +127,8 @@ public class Figure extends Subject{
 	 */
 	public void zoom(double zoom) {
 		toOrigin();
-		for(Point p : this.getPoints()) p.agrandir(zoom);
+		//for(Point p : this.getPoints()) p.agrandir(zoom);
+		this.getPoints().aggrandir(zoom);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -140,7 +141,7 @@ public class Figure extends Subject{
 	 */
 	public void HDeplace(double value) {
 		center.deplacerX(value);
-		Mouvement.deplacer(this, value, 0, 0);
+		Matrix.deplacerX(points, value);
 		notifyObservers();
 	}
 	
@@ -152,7 +153,7 @@ public class Figure extends Subject{
 	 */
 	public void VDeplace(double value){
 		center.deplacerY(value);
-		Mouvement.deplacer(this, 0, value, 0);
+		Matrix.deplacerY(points, value);
 		notifyObservers();
 	}
 
@@ -215,7 +216,7 @@ public class Figure extends Subject{
 	 */
 	public void rotate(double i, double j, double k) {
 		toOrigin();
-		Mouvement.rotate(this, i, j, k);
+		Matrix.rotate(points, i, j, k);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -228,7 +229,7 @@ public class Figure extends Subject{
 	 */
 	public void rotateX(double i) {
 		toOrigin();
-		Mouvement.rotateX(this, i);
+		Matrix.rotateX(this.getPoints(), i);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -241,7 +242,7 @@ public class Figure extends Subject{
 	 */
 	public void rotateY(double d) {
 		toOrigin();
-		Mouvement.rotateY(this, d);
+		Matrix.rotateY(points, d);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -254,7 +255,7 @@ public class Figure extends Subject{
 	 */
 	public void rotateZ(double i) {
 		toOrigin();
-		Mouvement.rotateZ(this, i);
+		Matrix.rotateZ(points, i);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -263,7 +264,7 @@ public class Figure extends Subject{
 	 * Move the figure on (0,0,0)
 	 */
 	private void toOrigin() {
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		Matrix.deplacer(points, -center.getX(), -center.getY(), -center.getZ());
 	}
 	
 	/**
@@ -274,7 +275,7 @@ public class Figure extends Subject{
 	 * @see Mouvement
 	 */
 	private void toCenter() {
-		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
+		Matrix.deplacer(points, center.getX(), center.getY(), center.getZ());
 	}
 	/**
 	 * Get the extreme points of the figure
@@ -287,13 +288,13 @@ public class Figure extends Subject{
 		for(int i = 0 ; i < extreme.length ; i++) {
 			extreme[i] = 0;
 		}
-		for(Point p : points) {
-			if(extreme[0]>p.getX()) extreme[0] = p.getX(); 
-			if(extreme[1]<p.getX()) extreme[1] = p.getX();
-			if(extreme[2]>p.getY()) extreme[2] = p.getY(); 
-			if(extreme[3]<p.getY()) extreme[3] = p.getY();
-			if(extreme[4]>p.getZ()) extreme[4] = p.getZ(); 
-			if(extreme[5]<p.getZ()) extreme[5] = p.getZ();
+		for(/*Point p : points*/ int i = 0; i < points.getMatrix().length; i++) {
+			if(extreme[0]>points.getMatrix()[i][0]) extreme[0] = points.getMatrix()[i][0]; 
+			if(extreme[1]<points.getMatrix()[i][0]) extreme[1] = points.getMatrix()[i][0];
+			if(extreme[2]>points.getMatrix()[i][1]) extreme[2] = points.getMatrix()[i][1]; 
+			if(extreme[3]<points.getMatrix()[i][1]) extreme[3] = points.getMatrix()[i][1];
+			if(extreme[4]>points.getMatrix()[i][2]) extreme[4] = points.getMatrix()[i][2]; 
+			if(extreme[5]<points.getMatrix()[i][2]) extreme[5] = points.getMatrix()[i][2];
 		}
 		return extreme;
 	}
@@ -310,7 +311,7 @@ public class Figure extends Subject{
 	 * @see Mouvement
 	 */
 	public void deplace(double x, double y, double z) {
-		Mouvement.deplacer(this, x, y, z);
+		Matrix.deplacer(points, x, y, z);
 		center.deplacer(x, y, z);
 		notifyObservers();
 	}

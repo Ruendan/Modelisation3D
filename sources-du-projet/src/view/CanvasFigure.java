@@ -11,7 +11,6 @@ import javafx.util.Duration;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
-import modele.modelisation.Point;
 import utils.Observer;
 import utils.Subject;
 /**
@@ -164,8 +163,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void convert3d2d() {
-		for (Point p : fig.getPoints())
-			Matrix.transformation(p);
+		Matrix.transformation(fig.getPoints());
 	}
 	
 
