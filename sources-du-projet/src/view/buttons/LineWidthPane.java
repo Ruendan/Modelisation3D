@@ -12,7 +12,7 @@ public class LineWidthPane extends GridPane{
 	private Slider thicken;
 	private Label title;
 
-	private static final double MIN_WIDTH = 0.1;
+	private static final double MIN_WIDTH = 0.001;
 	private static final double MAX_WIDTH = 1.0;
 
 	public LineWidthPane(CanvasFigure canva) {
