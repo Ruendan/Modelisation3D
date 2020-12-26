@@ -1,10 +1,10 @@
 package view.buttons;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
-import view.ButtonsConst;
 import view.CanvasFigure;
 
 public class LineWidthPane extends GridPane{
@@ -17,8 +17,7 @@ public class LineWidthPane extends GridPane{
 
 	public LineWidthPane(CanvasFigure canva) {
 		
-		title = new Label("  Epaisseur du trait  ");
-		title.setStyle(ButtonsConst.getLabelStyle());
+		title = new Label("Epaisseur du trait");
 		
 		this.setPadding(new Insets(10,0,10,30));
 		this.setHgap(10);
@@ -28,10 +27,9 @@ public class LineWidthPane extends GridPane{
 		thicken.setShowTickMarks(true);
 		thicken.valueProperty().addListener((observable, oldValue, newValue) -> canva.setFigureLineWidth((double)newValue));
 		
-		this.add(title, 1, 0);
-		this.add(thicken, 1, 1);
+		this.add(title, 0, 0);
+		this.add(thicken, 0, 1);
 		
-		this.setStyle(ButtonsConst.getPaneStyle());
-		this.setPrefWidth(250);
+		GridPane.setHalignment(title, HPos.CENTER);
 	}
 }

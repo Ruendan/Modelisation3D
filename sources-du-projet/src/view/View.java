@@ -9,6 +9,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -79,11 +80,11 @@ public class View extends Stage{
 		
 		display.setFigure(fig);
 		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));
+		//display.widthProperty().bind(res.widthProperty());
 		
 		
 		HBox buttons = new ButtonsControls(display);
-		
-		//res.setStyle("-fx-border-width: 10px; -fx-border-color: white; -fx-background-color: slategrey;");
+
 		res.getChildren().addAll(display,buttons);
 		StackPane.setAlignment(buttons, Pos.TOP_LEFT);
 		

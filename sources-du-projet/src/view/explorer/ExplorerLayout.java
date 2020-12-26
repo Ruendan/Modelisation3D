@@ -1,6 +1,5 @@
 package view.explorer;
 
-import javafx.geometry.Insets;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import view.View;
@@ -13,7 +12,6 @@ public class ExplorerLayout extends VBox{
 	 * @param cgl
 	 */
 	public ExplorerLayout(View parent) {
-		this.setPadding(new Insets(10));
 		Explorer listFiles = new Explorer(parent);
 		ExplorerToolBar bar = new ExplorerToolBar(listFiles);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);

@@ -16,7 +16,7 @@ public class ButtonsOthers extends HBox {
 		this.bouttons_transparency = ButtonsFactory.makeButton("Transparency", canva);		
 
 		this.getChildren().addAll(new VBox(bouttons_couleur, bouttons_epaisseur,bouttons_transparency));
-		//this.setStyle("-fx-border-width: 2px; -fx-border-color: blue;");
-
+		this.setStyle("-fx-background-color: #f1f1f1;");
+		this.setPrefWidth(200);
 	}
 }
