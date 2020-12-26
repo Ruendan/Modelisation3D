@@ -54,6 +54,7 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
+
 		coord = new double[2][1];
 		rotating = false;
 		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {

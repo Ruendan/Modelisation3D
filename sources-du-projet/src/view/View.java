@@ -79,9 +79,7 @@ public class View extends Stage{
 		StackPane res = new StackPane();
 		
 		display.setFigure(fig);
-		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));
-		//display.widthProperty().bind(res.widthProperty());
-		
+		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));		
 		
 		HBox buttons = new ButtonsControls(display);
 
