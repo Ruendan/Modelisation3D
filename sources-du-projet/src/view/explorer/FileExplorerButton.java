@@ -3,13 +3,12 @@ package view.explorer;
 import java.io.File;
 
 import javafx.scene.control.Button;
+import utils.Icon;
 
 public class FileExplorerButton extends Button{
-
-	private static final String BUTTONTEXT = "Load new File";
 	
 	public FileExplorerButton(Explorer items) {
-		super(BUTTONTEXT);
+		super("",Icon.createButtonIcon("newFile"));
 
 		this.setOnAction(e -> items.addFile(this.getFile()));
 	}

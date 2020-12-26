@@ -13,8 +13,7 @@ public class ExplorerLayout extends VBox{
 	 * @param cgl
 	 */
 	public ExplorerLayout(View parent) {
-		this.setPadding(new Insets(20));
-		this.setSpacing(20);
+		this.setPadding(new Insets(10));
 		Explorer listFiles = new Explorer(parent);
 		ExplorerToolBar bar = new ExplorerToolBar(listFiles);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);
