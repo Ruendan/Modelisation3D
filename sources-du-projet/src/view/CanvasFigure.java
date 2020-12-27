@@ -28,16 +28,18 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private Color canvaFillColor = Color.rgb(145, 196, 240, 1);
-
-	private Color figureFillColor = Color.rgb(135, 206, 250, 1);
+	private double opacity = 1;
+	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
+	private Color figureFillColor = Color.rgb(135, 206, 250, opacity);
+	
+	
 	private Color figureStrokeColor = Color.BLACK;
 	private double figureLineWidth = 0.2;
 
 	private GraphicsContext gc;
 
 	private static final double DEFAULT_WIDTH = 800;
-	private static final double DEFAULT_HEIGHT = 500;
+	private static final double DEFAULT_HEIGHT = 800;
 
 	private double[][] coord;
 
@@ -52,8 +54,15 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
+
 		coord = new double[2][1];
 		rotating = false;
+		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
+			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
+			visualUpdate();
+		}));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.setAutoReverse(true);
 	}
 	
 	/**
@@ -90,7 +99,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * 			The new {@link Color} of the {@link Figure}
 	 */
 	public void setFigureFillColor(Color rgba) {
-		this.figureFillColor = rgba;
+		this.figureFillColor = Color.color(rgba.getRed(), rgba.getGreen(), rgba.getBlue(), this.opacity);
 		visualUpdateLite();
 	}
 
@@ -124,12 +133,7 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.fig.attach(this);
 		this.centerFigure();
 		this.printFigure();
-		timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> {
-			fig.rotate(5, 5 ,5);
-			visualUpdate();
-		}));
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(true);
+		this.stopRotation();
 	}
 
 	/**
@@ -290,6 +294,15 @@ public class CanvasFigure extends Canvas implements Observer {
 	public void stopRotation() {
 		rotating = false;
 		timeline.stop();
+	}
+
+	public double getFigureOpacity() {
+		return opacity;
+	}
+
+	public void setFigureOpacity(double newValue) {
+		this.opacity = newValue;
+		this.setFigureFillColor(this.figureFillColor);
 	}
 
 }
