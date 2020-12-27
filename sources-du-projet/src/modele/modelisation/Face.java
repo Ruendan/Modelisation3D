@@ -8,6 +8,8 @@ public class Face implements Comparable<Face> {
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
+	private double exposition;
+	private static final Vecteur vVue = new Vecteur(0,0,-1);
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -56,10 +58,15 @@ public class Face implements Comparable<Face> {
 	public void preSort() {
 		setNormal();
 		setClosest();
+		
 	}
 	
 	public void setNormal() {
 		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
+		if(normal!=null) {
+			exposition = -vVue.produitScalaire(normal);
+			
+		}
 	}
 	
 	@Override
@@ -133,6 +140,10 @@ public class Face implements Comparable<Face> {
 			}
 		}
 		return true;
+	}
+
+	public double getExposition() {
+		return exposition;
 	}
 	
 }

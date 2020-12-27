@@ -29,14 +29,19 @@ public class Vecteur {
 	}
 	
 	public static Vecteur getNormal(Point a,Point b, Point c) {
-		double x,y,z;
+		double nx,ny,nz,nn;
 		Vecteur ab = new Vecteur(a,b);
 		Vecteur ac = new Vecteur(a,c);
-		x = ab.dirY*ac.dirZ-ab.dirZ*ac.dirY;
-		y = ab.dirZ*ac.dirX-ab.dirX*ac.dirZ;
-		z = ab.dirX*ac.dirY-ab.dirY*ac.dirX;
-		Vecteur vn = new Vecteur(x, y, z);
-		return new Vecteur(vn.dirX/vn.norm, vn.dirY/vn.norm, vn.dirZ/vn.norm);
+		nx = ab.dirY*ac.dirZ-ab.dirZ*ac.dirY;
+		ny = ab.dirZ*ac.dirX-ab.dirX*ac.dirZ;
+		nz = ab.dirX*ac.dirY-ab.dirY*ac.dirX;
+		nn = Math.sqrt(nx*nx+ny*ny+nz*nz);
+		Vecteur normal = new Vecteur(nx/nn, ny/nn, nz/nn);
+		return normal;
+	}
+	
+	public double produitScalaire(Vecteur vb) {
+		return this.getDirX()*vb.getDirX()+this.getDirY()*vb.getDirY()+this.getDirZ()*vb.getDirZ();
 	}
 	
 	public double getDirX() {

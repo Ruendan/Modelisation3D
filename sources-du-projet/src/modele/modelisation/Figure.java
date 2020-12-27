@@ -1,5 +1,6 @@
 package modele.modelisation;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class Figure extends Subject{
 
 	private String name;
 	private List<Face> faces;
+	private List<Face> toDraw;
 	private Point center;
 	private Set<Point> points;
 
@@ -38,6 +40,7 @@ public class Figure extends Subject{
 	public Figure(Ply ply) {
 		this.name = ply.getName();
 		this.faces = ply.getFaces();
+		this.toDraw = new ArrayList<>();
 		this.points = ply.getPoints();
 		this.center = center();
 		this.initialisation();
@@ -94,6 +97,10 @@ public class Figure extends Subject{
 		return faces;
 	}
 	
+	public List<Face> getToDraw() {
+		return toDraw;
+	}
+
 	/**
 	 * Return the figure's name
 	 * @return {@link String}
@@ -163,10 +170,16 @@ public class Figure extends Subject{
 	 * @see Face
 	 */
 	public void tri() {
+		toDraw.clear();
 		for(Face f : faces) {
 			f.preSort();
+			
+			if(f.getExposition()>0) {
+				toDraw.add(f);
+			}
+			
 		}
-		Collections.sort(faces);
+		Collections.sort(toDraw);
 	}
 
 	/**
