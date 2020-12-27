@@ -196,9 +196,11 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#printFigure()
 	 */
 	public void printFigureLite() {
-		for (Face f : fig.getToDraw()) {
-			initialiseCoordsFromFace(f);
-			printFace(f);
+		for (Face f : fig.getFaces()) {
+			if(f.isUpper()) {
+				initialiseCoordsFromFace(f);
+				printFace(f);
+			}
 		}
 	}
 	

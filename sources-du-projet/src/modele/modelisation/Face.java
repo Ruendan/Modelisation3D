@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Face implements Comparable<Face> {
+	
 	private int nbPoints;
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
 	private double exposition;
+	private boolean isUpper;
 	private static final Vecteur vVue = new Vecteur(0,0,-1);
 	
 	public Face(int nbPoints,List<Point> points) {
@@ -58,14 +60,14 @@ public class Face implements Comparable<Face> {
 	public void preSort() {
 		setNormal();
 		setClosest();
-		
 	}
 	
 	public void setNormal() {
 		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
 		if(normal!=null) {
 			exposition = -vVue.produitScalaire(normal);
-			
+			if(exposition>0)isUpper = true;
+			else isUpper = false;
 		}
 	}
 	
@@ -99,7 +101,9 @@ public class Face implements Comparable<Face> {
 	public Vecteur getNormal() {
 		return this.normal;
 	}
-	
+	public boolean isUpper() {
+		return isUpper;
+	}
 	public int getNbPoints() {
 		return nbPoints;
 	}

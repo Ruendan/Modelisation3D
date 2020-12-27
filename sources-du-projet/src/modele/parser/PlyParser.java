@@ -146,7 +146,10 @@ public class PlyParser {
 		points = new HashSet<>();
 		pointsTotaux = new ArrayList<>();
 		for (int i = 0; i < vertex; i++) {
-			if(!addPoint(lines[idx]))return false;
+			if(!addPoint(lines[idx])) {
+				System.out.println(idx);
+				return false;
+			}
 			idx++;
 		}
 		return true;
