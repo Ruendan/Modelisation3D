@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -8,7 +9,8 @@ import javafx.scene.image.ImageView;
 
 public class Icon {
 
-	public static final String BUTTONICONSFOLDER = "sources-du-projet\\ressources\\imgs\\buttons_icons\\";
+	private static String fs = File.separator;
+	public static final String BUTTONICONSFOLDER = "ressources"+fs+"imgs"+fs+"buttons_icons"+fs;
 	public static final String EXTENSION = ".png";
 	
 	public static ImageView createButtonIcon(String imgName) {
