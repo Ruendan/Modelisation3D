@@ -13,7 +13,7 @@ public class Ply {
 	
 	private List<String> comment;
 	private Set<Point> points;
-	private List<Face> faces;
+	private List<Faces> faces;
 	
 	public String getName() {
 		return this.name;
@@ -47,11 +47,11 @@ public class Ply {
 		this.points = points;
 	}
 	
-	public List<Face> getFaces() {
+	public List<Faces> getFaces() {
 		return faces;
 	}
 	
-	public void setFaces(List<Face> faces) {
+	public void setFaces(List<Faces> faces) {
 		this.faces = faces;
 	}
 
@@ -63,7 +63,7 @@ public class Ply {
 		this.comment = comment;
 	}
 
-	public Ply(int vertex, int nbFace, Set<Point> points, List<Face> faces) {
+	public Ply(int vertex, int nbFace, Set<Point> points, List<Faces> faces) {
 		this.vertex = vertex;
 		this.nbFace = nbFace;
 		this.points = points;

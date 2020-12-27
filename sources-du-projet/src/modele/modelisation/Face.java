@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Face implements Comparable<Face> {
-	private int nbPoints;
+	
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
 	
 	public Face(int nbPoints,List<Point> points) {
-		this.nbPoints=nbPoints;
 		if(points==null) this.points = new ArrayList<>();
 		else this.points=points;
 		setClosest();
@@ -18,6 +17,7 @@ public class Face implements Comparable<Face> {
 	}
 
 	public Point pointMoyen() {
+		int nbPoints = this.getNbPoints();
 		double x = 0;
 		double y = 0;
 		double z = 0;
@@ -34,7 +34,7 @@ public class Face implements Comparable<Face> {
 		for(Point p : points) {
 			res+=p.getZ();
 		}
-		return res/nbPoints;
+		return res/this.getNbPoints();
 	}
 	
 	public double moyenneY() {
@@ -42,7 +42,7 @@ public class Face implements Comparable<Face> {
 		for(Point p : points) {
 			res+=p.getY();
 		}
-		return res/nbPoints;
+		return res/this.getNbPoints();
 	}
 
 	public double moyenneX() {
@@ -50,7 +50,7 @@ public class Face implements Comparable<Face> {
 		for(Point p : points) {
 			res+=p.getX();
 		}
-		return res/nbPoints;
+		return res/this.getNbPoints();
 	}
 	
 	public void preSort() {
@@ -94,7 +94,7 @@ public class Face implements Comparable<Face> {
 	}
 	
 	public int getNbPoints() {
-		return nbPoints;
+		return points.size();
 	}
 	
 	public List<Point> getPoints() {
@@ -103,7 +103,7 @@ public class Face implements Comparable<Face> {
 	
 	@Override
 	public String toString() {
-		return "Face [nbPoints=" + nbPoints + ", points:(" + points + ")";
+		return "Face [nbPoints=" + getNbPoints() + ", points:(" + points + ")";
 	}
 	
 	@Override

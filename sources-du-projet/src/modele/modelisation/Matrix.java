@@ -40,7 +40,7 @@ public class Matrix {
 	public Matrix(Double[][] matrice){
 		this.matrice = matrice;
 	}
-	
+
 	public int length() {
 		return matrice.length;
 	}
@@ -161,11 +161,11 @@ public class Matrix {
 				for(int k=0; k<points.matrice[j].length; k++) { //Itère sur chaque colonne des 2 matrices
 					res2 += (matrice.matrice[i][k] * points.matrice[j][k]);
 				}
-				System.out.println("i="+ i + " et j=" + j);
+				//System.out.println("i="+ i + " et j=" + j);
 				res.matrice[i][j] = res2;
 			}
 		}
-		System.out.println(res);
+		//System.out.println(res);
 	}
 	
 	public static void transformation(Matrix points) {
@@ -219,5 +219,9 @@ public class Matrix {
 		for(Double[] points : m.matrice) {
 			points[2]+=z;
 		}
+	}
+
+	public boolean isEmpty() {
+		return matrice.length==0;
 	}
 }

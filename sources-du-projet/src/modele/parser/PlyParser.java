@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import modele.modelisation.Face;
+import modele.modelisation.Faces;
 import modele.modelisation.Ply;
 import modele.modelisation.Point;
 import modele.parser.exception.PlyParserException;
@@ -28,7 +28,7 @@ public class PlyParser {
 	private ArrayList<String> comment;
 	private Set<Point> points;
 	private List<Point> pointsTotaux;
-	private List<Face> faces;
+	private List<Faces> faces;
 	
 	public static Ply loadPly(String nom) throws PlyParserException {
 		PlyParser pp = new PlyParser();
@@ -200,10 +200,10 @@ public class PlyParser {
 		for (int i = 1; i < nbPointInFace+1; i++) {
 			pointss.add(pointsTotaux.get(Integer.parseInt(tab[i])));
 		}
-		return addFace(new Face(nbPointInFace, pointss));	 
+		return addFace(new Faces(nbPointInFace, pointss));	 
 	}
 
-	private boolean addFace(Face face) {
+	private boolean addFace(Faces face) {
 		return faces.add(face);
 	}
 

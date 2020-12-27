@@ -8,7 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import modele.modelisation.Face;
+import modele.modelisation.Faces;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
 import utils.Observer;
@@ -153,13 +153,12 @@ public class CanvasFigure extends Canvas implements Observer {
 		visualUpdateLite();
 	}
 
-	private void printFace(Face f) {
+	private void printFace(Faces f) {
 		this.gc.setFill(figureFillColor);
 		this.gc.setStroke(figureStrokeColor);
 		this.gc.setLineWidth(figureLineWidth);
 		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
-
 	}
 
 	private void convert3d2d() {
@@ -167,13 +166,13 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 	
 
-	private void initialiseCoordsFromFace(Face face) {
+	private void initialiseCoordsFromFace(Faces face) {
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
 
-		for (int j = 0; j < face.getPoints().size(); j++) {
-			coord[0][j] = face.getPoints().get(j).getX();
-			coord[1][j] = face.getPoints().get(j).getY();
+		for (int j = 0; j < face.getNbPoints(); j++) {
+			coord[0][j] = face.getPoints().getMatrix()[j][0];
+			coord[1][j] = face.getPoints().getMatrix()[j][1];
 		}
 	}
 	
@@ -193,7 +192,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#printFigure()
 	 */
 	public void printFigureLite() {
-		for (Face f : fig.getFaces()) {
+		for (Faces f : fig.getFaces()) {
 			initialiseCoordsFromFace(f);
 			printFace(f);
 		}

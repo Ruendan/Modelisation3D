@@ -74,5 +74,9 @@ public class Vecteur {
 	public String toString() {
 		return ""+dirX+","+dirY+","+dirZ;
 	}
+
+	public static Vecteur getNormal(Matrix points) {
+		return null;
+	}
 	
 }

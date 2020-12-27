@@ -26,7 +26,8 @@ public class Figure extends Subject{
 	
 
 	private String name;
-	private List<Face> faces;
+	//private List<Face> faces;
+	private List<Faces> faces;
 	private Point center;
 	private Matrix points;
 
@@ -36,11 +37,16 @@ public class Figure extends Subject{
 	 * 			The using {@link Ply}
 	 */
 	public Figure(Ply ply) {
+		System.out.println("FACES : ");
 		this.name = ply.getName();
 		this.faces = ply.getFaces();
 		this.points = new Matrix(ply.getPoints());
 		this.center = center();
-		this.initialisation();
+		System.out.println("FACES : " + faces);
+		try{
+			Thread.sleep(2000);
+		}catch(Exception e) {};
+		//this.initialisation();
 	}
 	
 	/**
@@ -90,7 +96,7 @@ public class Figure extends Subject{
 	 * @return {@link List} of {@link Face} 
 	 * 			The List of Figure's {@link Face}
 	 */
-	public List<Face> getFaces(){
+	public List<Faces> getFaces(){
 		return faces;
 	}
 	
@@ -164,9 +170,10 @@ public class Figure extends Subject{
 	 * @see Face
 	 */
 	public void tri() {
-		for(Face f : faces) {
+		for(Faces f : faces) {
 			f.preSort();
 		}
+		
 		Collections.sort(faces);
 	}
 
