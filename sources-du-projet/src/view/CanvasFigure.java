@@ -176,7 +176,9 @@ public class CanvasFigure extends Canvas implements Observer {
 		for (int j = 0; j < face.getPoints().size(); j++) {
 			coord[0][j] = face.getPoints().get(j).getX();
 			coord[1][j] = face.getPoints().get(j).getY();
+			System.out.println(j+": "+coord[0][j]+";"+coord[1][j]+"\n");
 		}
+		System.out.println("---------------------------------------");
 	}
 	
 	/**

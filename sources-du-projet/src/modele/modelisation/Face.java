@@ -1,18 +1,24 @@
 package modele.modelisation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Face implements Comparable<Face> {
 	
 	private int nbPoints;
-	private AllPoint points;
+	private AllPoint allPoints;
+	private List<Integer> points;
 	private Vecteur normal;
 	private Double closest;
 	private double exposition;
 	private boolean isUpper;
 	private static final Vecteur vVue = new Vecteur(0,0,-1);
 	
-	public Face(int nbPoints,AllPoint points) {
+	public Face(int nbPoints,List<Integer> points, AllPoint allPoint) {
+		System.out.println(points.get(0)+" "+points.get(1)+" "+points.get(2));
 		this.nbPoints=nbPoints;
-		if(points==null) this.points = new AllPoint(nbPoints);
+		this.allPoints = allPoint;
+		if(points==null) this.points = new ArrayList<Integer>();
 		else this.points=points;
 		setClosest();
 		setNormal();
@@ -23,9 +29,9 @@ public class Face implements Comparable<Face> {
 		double y = 0;
 		double z = 0;
 		for(int i = 0 ; i<points.size() ; i++) {
-			x+=points.getMatrix()[i][0];
-			y+=points.getMatrix()[i][1];
-			z+=points.getMatrix()[i][2];
+			x+=allPoints.getMatrix()[points.get(i)][0];
+			y+=allPoints.getMatrix()[points.get(i)][1];
+			z+=allPoints.getMatrix()[points.get(i)][2];
 		}
 		return new Point(x/nbPoints,y/nbPoints,z/nbPoints);
 	}
@@ -33,7 +39,7 @@ public class Face implements Comparable<Face> {
 	public double moyenneZ() {
 		double res = 0;
 		for(int i = 0 ; i<points.size() ; i++) {
-			res+=points.getMatrix()[i][2];
+			res+=allPoints.getMatrix()[points.get(i)][2];
 		}
 		return res/nbPoints;
 	}
@@ -41,7 +47,7 @@ public class Face implements Comparable<Face> {
 	public double moyenneY() {
 		double res = 0;
 		for(int i = 0 ; i<points.size() ; i++) {
-			res+=points.getMatrix()[i][1];
+			res+=allPoints.getMatrix()[points.get(i)][1];
 		}
 		return res/nbPoints;
 	}
@@ -49,7 +55,7 @@ public class Face implements Comparable<Face> {
 	public double moyenneX() {
 		double res = 0;
 		for(int i = 0 ; i<points.size() ; i++) {
-			res+=points.getMatrix()[i][0];
+			res+=allPoints.getMatrix()[points.get(i)][0];
 		}
 		return res/nbPoints;
 	}
@@ -60,7 +66,8 @@ public class Face implements Comparable<Face> {
 	}
 	
 	public void setNormal() {
-		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
+
+		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(getPoints());
 		if(normal!=null) {
 			exposition = -vVue.produitScalaire(normal);
 			if(exposition>0)isUpper = true;
@@ -83,10 +90,10 @@ public class Face implements Comparable<Face> {
 		double petit;
 		if(this.getNbPoints()==0)
 			petit = Double.NaN;
-		else petit = points.get(0).getZ();
+		else petit = allPoints.get(points.get(0)).getZ();
 		
 		for(int i = 0 ; i<points.size() ; i++) {
-			if(points.getMatrix()[i][2]<petit)petit=points.getMatrix()[i][2];
+			if(allPoints.getMatrix()[points.get(i)][2]<petit)petit=allPoints.getMatrix()[points.get(i)][2];
 		}
 		this.closest = petit;
 	}
@@ -106,7 +113,13 @@ public class Face implements Comparable<Face> {
 	}
 	
 	public AllPoint getPoints() {
-		return points;
+		AllPoint p = new AllPoint(points.size());
+		for (Integer integer : points) {
+			p.add(allPoints.get(integer));
+			//System.out.print(allPoints.get(integer)+"   ");
+		}
+		//System.out.println();
+		return p;
 	}
 	
 	@Override
@@ -137,7 +150,7 @@ public class Face implements Comparable<Face> {
 				return false;
 		} else {
 			for(int i=0; i<points.size(); i++) {
-				if(!this.points.get(i).equals(other.getPoints().get(i))) return false;
+				if(!this.allPoints.get(points.get(i)).equals(other.getPoints().get(i))) return false;
 			}
 		}
 		return true;

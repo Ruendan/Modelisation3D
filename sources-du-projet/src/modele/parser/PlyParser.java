@@ -194,15 +194,15 @@ public class PlyParser {
 			}
 		}
 		nbPointInFace = Integer.parseInt(tab[0]);
-		AllPoint pointss = new AllPoint(nbPointInFace);
+		List<Integer> pointss = new ArrayList<Integer>();
 		if(nbPointInFace==2) {
 			face--;
 			return true;
 		}
 		for (int i = 1; i < nbPointInFace+1; i++) {
-			pointss.add(pointsTotaux.get(Integer.parseInt(tab[i])));
+			pointss.add(Integer.parseInt(tab[i]));
 		}
-		return addFace(new Face(nbPointInFace, pointss));	 
+		return addFace(new Face(nbPointInFace, pointss, points));	 
 	}
 
 	private boolean addFace(Face face) {
