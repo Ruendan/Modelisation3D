@@ -1,109 +1,73 @@
 package modele.modelisation;
 
-public class Point {
-	private double x;
-	private double y;
-	private double z;
+public class Point{
+	private static final int X = 0;
+	private static final int Y = 1;
+	private static final int Z = 2;
+	
+	private Double[] coord;
+	
+	public Double[] getCoord() {
+		return coord;
+	}
 	
 	public Double getX() {
-		return x;
+		return this.coord[X];
 	}
-
+	
 	public Double getY() {
-		return y;
+		return this.coord[Y];
 	}
-
+	
 	public Double getZ() {
-		return z;
+		return this.coord[Z];
 	}
 	
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public void setZ(double z) {
-		this.z = z;
+	public void setX(Double x) {
+		this.coord[X] = x;
 	}
 	
-	public void deplacer(double x,double y,double z) {
-		this.x+=x;
-		this.y+=y;
-		this.z+=z;
+	public void setY(Double y) {
+		this.coord[Y] = y;
 	}
 	
-	public void agrandir(double multi) {
-		this.x*=multi;
-		this.y*=multi;
-		this.z*=multi;
+	public void setZ(Double z) {
+		this.coord[Z] = z;
 	}
-
+	
 	public Point(double x, double y, double z) {
-		this.x=x;
-		this.y=y;
-		this.z=z;
+		this.coord = new Double[] {x,y,z};
 	}
 	public Point(double x, double y) {
-		this.x=x;
-		this.y=y;
-		this.z=0;
+		this.coord = new Double[] {x,y};
+	}
+	
+	public Point(int size) {
+		this.coord = new Double[size];
 	}
 
 	@Override
 	public String toString() {
-		return "x:" + x + "y:" + y + "z:" + z + ";";
+		return "x:" + coord[X] + "y:" + coord[Y] + "z:" + coord[Z] + ";";
 	}
 
-	public void setPoint(Point point) {
-		this.x = point.getX();
-		this.y = point.getY();
-		this.z = point.getZ();
+	public void setPoint(Double x, Double y, Double z) {
+		this.setX(x);
+		this.setY(y);
+		this.setZ(z);
 	}
 	
-	
-	public void rotate(double thetaX, double thetaY, double thetaZ) {
-		Matrix.rotateX(this, thetaX);
-		Matrix.rotateY(this, thetaY);
-		Matrix.rotateZ(this, thetaZ);		
-	}
-	
-	public void rotateX(double theta) {
-		Matrix.rotateX(this, theta);
-	}
-	
-	public void rotateY(double theta) {
-		Matrix.rotateY(this, theta);
-	}
-	
-	public void rotateZ(double theta) {
-		Matrix.rotateZ(this, theta);
-	}
-	
-	public void deplacerX(double x) {
-		this.x+=x;
-	}
-	
-	public void deplacerY(double y) {
-		this.y+=y;
-	}
-	
-	public void deplacerZ(double z) {
-		this.z+=z;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(x);
+		temp = Double.doubleToLongBits(coord[X]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y);
+		temp = Double.doubleToLongBits(coord[Y]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(z);
+		temp = Double.doubleToLongBits(coord[Z]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -117,21 +81,27 @@ public class Point {
 		if (getClass() != obj.getClass())
 			return false;
 		Point other = (Point) obj;
-		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
+		if (Double.doubleToLongBits(coord[X]) != Double.doubleToLongBits(other.coord[X]))
 			return false;
-		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
+		if (Double.doubleToLongBits(coord[Y]) != Double.doubleToLongBits(other.coord[Y]))
 			return false;
-		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
+		if (Double.doubleToLongBits(coord[Z]) != Double.doubleToLongBits(other.coord[Z]))
 			return false;
 		return true;
 	}
-	
-	public void setPoint(Double x, Double y, Double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+
+	public void deplacer(double x, double y, double z) {
+		this.coord[X]+=x;
+		this.coord[Y]+=y;
+		this.coord[Z]+=z;
+	}
+
+	public void deplacerX(double x) {
+		this.coord[X]+=x;
 	}
 	
-
+	public void deplacerY(double y) {
+		this.coord[Y]+=y;
+	}
 
 }

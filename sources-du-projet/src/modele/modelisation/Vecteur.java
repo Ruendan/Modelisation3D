@@ -24,7 +24,7 @@ public class Vecteur {
 		this(b.getX()-a.getX(),b.getY()-a.getY(),b.getZ()-a.getZ());
 	}
 	
-	public static Vecteur getNormal(List<Point> liste) {
+	public static Vecteur getNormal(AllPoint liste) {
 		return getNormal(liste.get(0), liste.get(1), liste.get(2));
 	}
 	

@@ -3,11 +3,10 @@ package modele.parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
+import modele.modelisation.AllPoint;
 import modele.modelisation.Face;
 import modele.modelisation.Ply;
 import modele.modelisation.Point;
@@ -26,8 +25,8 @@ public class PlyParser {
 	private int face;
 	
 	private ArrayList<String> comment;
-	private Set<Point> points;
-	private List<Point> pointsTotaux;
+	private AllPoint points;
+	private AllPoint pointsTotaux;
 	private List<Face> faces;
 	
 	public static Ply loadPly(String nom) throws PlyParserException {
@@ -143,8 +142,8 @@ public class PlyParser {
 	}
 	
 	private boolean handlePoint(String[] lines) {
-		points = new HashSet<>();
-		pointsTotaux = new ArrayList<>();
+		points = new AllPoint(vertex);
+		pointsTotaux = new AllPoint(vertex);
 		for (int i = 0; i < vertex; i++) {
 			if(!addPoint(lines[idx])) {
 				System.out.println(idx);
@@ -194,8 +193,8 @@ public class PlyParser {
 				return false;
 			}
 		}
-		ArrayList<Point> pointss = new ArrayList<>();
 		nbPointInFace = Integer.parseInt(tab[0]);
+		AllPoint pointss = new AllPoint(nbPointInFace);
 		if(nbPointInFace==2) {
 			face--;
 			return true;

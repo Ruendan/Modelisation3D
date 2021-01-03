@@ -1,21 +1,18 @@
 package modele.modelisation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Face implements Comparable<Face> {
 	
 	private int nbPoints;
-	private List<Point> points;
+	private AllPoint points;
 	private Vecteur normal;
 	private Double closest;
 	private double exposition;
 	private boolean isUpper;
 	private static final Vecteur vVue = new Vecteur(0,0,-1);
 	
-	public Face(int nbPoints,List<Point> points) {
+	public Face(int nbPoints,AllPoint points) {
 		this.nbPoints=nbPoints;
-		if(points==null) this.points = new ArrayList<>();
+		if(points==null) this.points = new AllPoint(nbPoints);
 		else this.points=points;
 		setClosest();
 		setNormal();
@@ -25,34 +22,34 @@ public class Face implements Comparable<Face> {
 		double x = 0;
 		double y = 0;
 		double z = 0;
-		for (Point p : points) {
-			x+=p.getX();
-			y+=p.getY();
-			z+=p.getZ();
+		for(int i = 0 ; i<points.size() ; i++) {
+			x+=points.getMatrix()[i][0];
+			y+=points.getMatrix()[i][1];
+			z+=points.getMatrix()[i][2];
 		}
 		return new Point(x/nbPoints,y/nbPoints,z/nbPoints);
 	}
 	
 	public double moyenneZ() {
 		double res = 0;
-		for(Point p : points) {
-			res+=p.getZ();
+		for(int i = 0 ; i<points.size() ; i++) {
+			res+=points.getMatrix()[i][2];
 		}
 		return res/nbPoints;
 	}
 	
 	public double moyenneY() {
 		double res = 0;
-		for(Point p : points) {
-			res+=p.getY();
+		for(int i = 0 ; i<points.size() ; i++) {
+			res+=points.getMatrix()[i][1];
 		}
 		return res/nbPoints;
 	}
 
 	public double moyenneX() {
 		double res = 0;
-		for(Point p : points) {
-			res+=p.getX();
+		for(int i = 0 ; i<points.size() ; i++) {
+			res+=points.getMatrix()[i][0];
 		}
 		return res/nbPoints;
 	}
@@ -88,8 +85,8 @@ public class Face implements Comparable<Face> {
 			petit = Double.NaN;
 		else petit = points.get(0).getZ();
 		
-		for (Point point : points) {
-			if(point.getZ()<petit)petit=point.getZ();
+		for(int i = 0 ; i<points.size() ; i++) {
+			if(points.getMatrix()[i][2]<petit)petit=points.getMatrix()[i][2];
 		}
 		this.closest = petit;
 	}
@@ -108,7 +105,7 @@ public class Face implements Comparable<Face> {
 		return nbPoints;
 	}
 	
-	public List<Point> getPoints() {
+	public AllPoint getPoints() {
 		return points;
 	}
 	

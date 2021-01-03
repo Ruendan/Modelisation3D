@@ -2,13 +2,13 @@ package modele.modelisation;
 
 public class Matrix {
 	
-	private Double[][] matrice;
+	protected Double[][] matrice;
 	public static final Matrix MATRICETRANSFORMATION = new Matrix( new Double[][]{
 		{1.0,	0.0,	0.0},
 		{0.0,	1.0,	0.0}});
 	
-	public Matrix(Point p){
-		this.matrice = new Double[][]{{p.getX(), p.getY(), p.getZ()}};
+	public Matrix(int size){
+		this.matrice = new Double[size][];
 	}
 	
 	public Matrix(Double[][] matrice){
@@ -24,28 +24,18 @@ public class Matrix {
 	}
 	
 	
-	public static void rotateZ(Point point2,double theta) {
-		theta = Math.toRadians(theta);
-		Matrix matrice = new Matrix(new Double[][]{
-			{Math.cos(theta),	-Math.sin(theta),	0.0},
-			{Math.sin(theta),	Math.cos(theta),	0.0},
-			{0.0,				0.0,				1.0}});	
-			
-		multiplyMatrice(matrice,point2);
-	}
-	
-	public static void rotateX(Point point2,double theta) {
+	public static void rotateX(AllPoint points,double theta) {
 		theta = Math.toRadians(theta);
 		Matrix matrice = new Matrix(new Double[][]{
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}});
 		
-		multiplyMatrice(matrice,point2);
+		multiplyMatrice(matrice,points);
 	}
 	
 	
-	public static void rotateY(Point point2,double theta) {
+	public static void rotateY(AllPoint point2,double theta) {
 		theta = Math.toRadians(theta);
 		Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),		0.0,		-Math.sin(theta)},
@@ -55,25 +45,36 @@ public class Matrix {
 		multiplyMatrice(matrice,point2);
 	}
 	
-	private static void multiplyMatrice(Matrix matrice, Point point2) {
-		Double[] res = new Double[matrice.length()];
-		Double[] p = new Double[] {point2.getX(),point2.getY(),point2.getZ()};
-		
-		
-		for(int i=0; i<matrice.length();i++) {
-			res[i]=0.0;
-			for(int j = 0 ; j<p.length;j++) {
-				res[i]+=(p[j])*matrice.getMatrix()[i][j];
-			}
+	public static void rotateZ(AllPoint points,double theta) {
+		theta = Math.toRadians(theta);
+		Matrix matrice = new Matrix(new Double[][]{
+			{Math.cos(theta),	-Math.sin(theta),	0.0},
+			{Math.sin(theta),	Math.cos(theta),	0.0},
+			{0.0,				0.0,				1.0}});	
 			
-		}
-		point2.setX(res[0]);
-		point2.setY(res[1]);
-		if(res.length==3) point2.setZ(res[2]); 
+		multiplyMatrice(matrice,points);
 	}
 	
-	public static void transformation(Point point2) {
-		multiplyMatrice(MATRICETRANSFORMATION,point2);
+	private static void multiplyMatrice(Matrix matrice, AllPoint points) {
+		Point res = new Point(matrice.length());
+		Point p = new Point(3);
+		for(int k = 0 ; k<points.size() ; k++) {
+			p.setPoint(points.matrice[k][0], points.matrice[k][1], points.matrice[k][2]);
+			for(int i=0; i<matrice.length();i++) {
+				res.getCoord()[i]=0.0;
+				for(int j = 0 ; j<p.getCoord().length;j++) {
+					res.getCoord()[i]+=(p.getCoord()[j])*matrice.getMatrix()[i][j];
+				}
+				
+			}
+			points.matrice[k][0] = res.getCoord()[0];
+			points.matrice[k][0] = res.getCoord()[1];
+			if(res.getCoord().length==3) points.matrice[k][2] = res.getCoord()[2]; 
+		}
+	}
+	
+	public static void transformation(AllPoint points) {
+		multiplyMatrice(MATRICETRANSFORMATION,points);
 	}
 	
 	

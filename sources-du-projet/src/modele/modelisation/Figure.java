@@ -28,7 +28,7 @@ public class Figure extends Subject{
 	private String name;
 	private List<Face> faces;
 	private Point center;
-	private Set<Point> points;
+	private AllPoint points;
 
 	/**
 	 * Create a figure with a {@link Ply}
@@ -63,7 +63,7 @@ public class Figure extends Subject{
 	 * @return {@link Set} of {@link Point}
 	 * 			The list of all points of the figure
 	 */
-	public Set<Point> getPoints(){
+	public AllPoint getPoints(){
 		return points;
 	}
 	
@@ -127,7 +127,7 @@ public class Figure extends Subject{
 	 */
 	public void zoom(double zoom) {
 		toOrigin();
-		for(Point p : this.getPoints()) p.agrandir(zoom);
+		points.agrandir(zoom);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -283,19 +283,7 @@ public class Figure extends Subject{
 	 * 			All the extreme {@link Point}
 	 */
 	public double[] getExtremePoint() {
-		double[] extreme = new double[6];
-		for(int i = 0 ; i < extreme.length ; i++) {
-			extreme[i] = 0;
-		}
-		for(Point p : points) {
-			if(extreme[0]>p.getX()) extreme[0] = p.getX(); 
-			if(extreme[1]<p.getX()) extreme[1] = p.getX();
-			if(extreme[2]>p.getY()) extreme[2] = p.getY(); 
-			if(extreme[3]<p.getY()) extreme[3] = p.getY();
-			if(extreme[4]>p.getZ()) extreme[4] = p.getZ(); 
-			if(extreme[5]<p.getZ()) extreme[5] = p.getZ();
-		}
-		return extreme;
+		return points.getExtremePoint();
 	}
 
 	/**

@@ -165,8 +165,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void convert3d2d() {
-		for (Point p : fig.getPoints())
-			Matrix.transformation(p);
+		Matrix.transformation(fig.getPoints());
 	}
 	
 
