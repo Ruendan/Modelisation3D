@@ -164,13 +164,13 @@ public class CanvasFigure extends Canvas implements Observer {
 		if(colorCustom) {
 			//System.out.println(figureFillColor.getRed()+"  "+f.getExposition()+" = "+((double)figureFillColor.getRed()*f.getExposition())*256);
 			
-			int red = (int)((double)figureFillColor.getRed()*f.getExposition()*256);
-			int green = (int)((double)figureFillColor.getGreen()*f.getExposition()*256);
-			int blue = (int)((double)figureFillColor.getBlue()*f.getExposition()*256);
-			if(red<0)red = 0;
-			if(blue<0)blue = 0;
-			if(green<0)green = 0;
-			Color faceFillColor = Color.rgb(red, green, blue, opacity);
+			double red = figureFillColor.getRed()*f.getExposition();
+			double green = figureFillColor.getGreen()*f.getExposition();
+			double blue = figureFillColor.getBlue()*f.getExposition();
+			if(red<0)red = 0.0;
+			if(blue<0)blue = 0.0;
+			if(green<0)green = 0.0;
+			Color faceFillColor = Color.color(red, green, blue, opacity);
 			
 			this.gc.setFill(faceFillColor);
 		} else this.gc.setFill(figureFillColor);

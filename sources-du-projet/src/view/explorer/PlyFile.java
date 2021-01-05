@@ -46,26 +46,32 @@ public class PlyFile extends File{
 	 * If it's still a Header, it turns the PlyFile into a 
 	 * Complete PlyFile
 	 */
-	private void update() {
+	private void update() throws PlyParserException {
 		if(header) {
-			try {
-				ply = PlyParser.loadPly(file);
-				header = false;
-			} catch (PlyParserException e) {
-				e.printStackTrace();
-			}
+			ply = PlyParser.loadPly(file);
+			header = false;
 		}
 	}
 	
 	/**
 	 * 
 	 * @return The Ply which targets the file.
+	 * @throws PlyParserException 
 	 */
-	public Ply getPly() {
+	public Ply getPly() throws PlyParserException {
 		update();
 		return ply;
 	}
 	
+	public void unload() {
+		try {
+			this.ply = PlyParser.loadHeader(file);
+			header = true;
+		} catch (PlyParserException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public String toString() {
 		return ply.getName() + " : " + ply.getNbFace() + " Faces";

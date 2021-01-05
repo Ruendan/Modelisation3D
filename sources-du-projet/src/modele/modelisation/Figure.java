@@ -165,6 +165,7 @@ public class Figure extends Subject{
 		for(Face f : faces) {
 			f.preSort(vVue,vLumière);
 		}
+		System.out.println("cc");
 		Collections.sort(faces);
 	}
 
