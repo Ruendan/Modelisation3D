@@ -59,12 +59,17 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
-
 		coord = new double[2][1];
+		resetTimeline();
+		
+	}
+	
+	private void resetTimeline() {
+		if(timeline!=null) timeline.stop();
 		rotating = false;
 		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
 			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
-			visualUpdate();
+			//visualUpdate();
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(true);
@@ -292,6 +297,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * Begin the rotation of the {@link Figure}
 	 */
 	public void startRotation() {
+		resetTimeline();
 		rotating = true;
 		timeline.play();
 	}

@@ -34,6 +34,11 @@ public class TimelineConst {
 	public static double getDefaultz() {
 		return ZROTATIONVALUE;
 	}
+
+	public static void setTempsdactualisation(double seconds) {
+		TEMPSDACTUALISATION = seconds;
+		
+	}
 	
 	
 }

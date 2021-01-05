@@ -38,18 +38,6 @@ class MatrixTest {
 	}
 	
 	
-	
-	/*
-	 * BATTERIE DE TESTS DE TRANSFORMATION
-	 */
-	
-	@Test
-	public void test_multiplyMatrix() {
-		//fail("Pas encore implement� FAUT VRAIMENT QU'ON EN PARLE LUCAS");
-	}
-	
-	
-	
 	/*
 	 * BATTERIE DE TESTS DE ROTATEX/Y/Z
 	 */

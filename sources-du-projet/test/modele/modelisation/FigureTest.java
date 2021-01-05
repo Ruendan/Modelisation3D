@@ -83,26 +83,6 @@ class FigureTest {
 	}
 	
 	@Test
-	void test_rotateAll() {
-
-		
-	}
-	
-	@Test
-	void test_rotateX() {
-	}
-	
-	@Test
-	void test_rotateY() {
-		
-	}
-	
-	@Test
-	void test_rotateZ() {
-		
-	}
-	
-	@Test
 	void test_deplaceAll() {
 		cube.deplace(10, 10, 10);
 
