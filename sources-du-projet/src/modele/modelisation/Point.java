@@ -1,9 +1,13 @@
 package modele.modelisation;
 
+import java.awt.Color;
+
 public class Point {
 	private double x;
 	private double y;
 	private double z;
+	
+	private Color couleur;
 	
 	public Double getX() {
 		return x;
@@ -40,7 +44,12 @@ public class Point {
 		this.y*=multi;
 		this.z*=multi;
 	}
-
+	
+	public Point(double x, double y, double z,Color couleur) {
+		this(x,y,z);
+		this.couleur = couleur;
+	}
+	
 	public Point(double x, double y, double z) {
 		this.x=x;
 		this.y=y;
@@ -132,6 +141,8 @@ public class Point {
 		this.z = z;
 	}
 	
-
+	public Color getColor() {
+		return couleur;
+	}
 
 }

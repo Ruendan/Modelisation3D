@@ -1,5 +1,6 @@
 package modele.parser;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ public class PlyParser {
 	private int xpos;
 	private int ypos;
 	private int zpos;
+	
+	private int redPos;
+	private int greenPos;
+	private int bluePos;
+	private boolean isColored;
 	
 	private int idx;
 	
@@ -115,7 +121,6 @@ public class PlyParser {
 		return null;
 	}
 	
-
 	private boolean handleHeader(String[] lines) throws PlyParserException {
 		comment = new ArrayList<>();
 		ParserHeader ph = new ParserHeader(vertex,face,comment,lines);
@@ -128,8 +133,17 @@ public class PlyParser {
 		vertex = ph.getVertex();
 		face = ph.getFace();
 		comment = ph.getComment();
-		
+		setColor(ph);
 		return res;
+	}
+
+	private void setColor(ParserHeader ph) {
+		isColored = ph.isColored();
+		if(isColored) {
+			redPos = ph.getRpos();
+			greenPos = ph.getGpos();
+			bluePos = ph.getBpos();
+		}
 	}
 
 	private boolean handleBody(String[] lines) throws UnsupportedFileFormat {
@@ -167,6 +181,10 @@ public class PlyParser {
 		double x = Double.parseDouble(tab[xpos]);
 		double y = Double.parseDouble(tab[ypos]);
 		double z = Double.parseDouble(tab[zpos]);
+		if(isColored) {
+			Color couleur = new Color(Integer.parseInt(tab[redPos]),Integer.parseInt(tab[greenPos]),Integer.parseInt(tab[bluePos]));
+			return addPoint(new Point(x,y,z,couleur));
+		}
 		return addPoint(new Point(x,y,z));
 	}
 

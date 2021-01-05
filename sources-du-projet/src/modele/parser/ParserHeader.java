@@ -15,12 +15,16 @@ public class ParserHeader {
 	private int ypos;
 	private int zpos;
 	
-	private boolean midHeader;
+	private int pred;
+	private int pgreen;
+	private int pblue;
+	private boolean isColored;
 	
 	private int extraElements;
 	private int extraPropertys;
 	
 	private int idx;
+	
 	
 	private int vertex;
 	private int face;
@@ -47,6 +51,38 @@ public class ParserHeader {
 	
 	boolean handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
+		initGlobal();
+		
+		if(!checkType(lines[0])) return false;
+		if(!checkFormat(lines[1])) return false;
+		idx=1;
+		while(!endHeader) {
+			idx++;
+			String[] line = lines[idx].split(" ");
+			switch (line[0]) {
+			case "end_header":
+				endHeader = true;
+				idx++;
+				break;
+			case "comment":
+				comment.add(lines[idx].substring(8));
+				break;
+			case "element":
+				if(!handleElement(line)) {
+					return false;
+				}
+				break;
+			case "property":
+				return false;
+			default:
+				break;
+			}
+			
+		}
+		return checkHeader(lines);
+	}
+
+	private void initGlobal() {
 		comment = new ArrayList<>();
 		extraPropertys = 0;
 		extraElements = 0;
@@ -54,30 +90,10 @@ public class ParserHeader {
 		ypos = -1;
 		zpos = -1;
 		
-		if(!checkType(lines[0])) return false;
-		if(!checkFormat(lines[1])) return false;
-		idx=2;
-		while(!endHeader) {
-			String[] line = lines[idx].split(" ");
-			switch (line[0]) {
-			case "end_header":
-				endHeader = true;
-				break;
-			case "comment":
-				comment.add(lines[idx].substring(8));
-				break;
-			case "element":
-				if(!handleElement(line)) return false;
-				break;
-			case "property":
-				if(!handleProperty(line)) return false;
-				break;
-			default:
-				break;
-			}
-			idx++;
-		}
-		return checkHeader(lines);
+		isColored = false;
+		pred = -1;
+		pgreen = -1;
+		pblue = -1;
 	}
 
 	private boolean checkType(String line) throws NotPlyFileException{
@@ -92,21 +108,44 @@ public class ParserHeader {
 		throw new UnsupportedFileFormat();
 	}
 	
-	private boolean handleElement(String[] line) throws ElementPropertiesError {
+	private boolean handleElement(String[] line) throws ElementPropertiesError, PropertyPropertiesError {
 		if(line.length==3 && line[1].equals("vertex") && Integer.parseInt(line[2])>2) {
-			vertex = handleVertex(line[2]);
+			return handleVertex(line[2]);
 		} else if(line.length==3 && line[1].equals("face") && Integer.parseInt(line[2])>0) {
-			face = handleFace(line[2]);
-		} else if(midHeader && line.length==3) {
+			return handleFace(line[2]);
+		} else if(line.length==3) {
 			extraElements += Integer.parseInt(line[2]);
 			extraPropertys++;
+			return handleExtraElement();
 		} else {
 			throw new ElementPropertiesError();
 		}
-		return true;
 	}
 
-	private int handleVertex(String vert) {
+	private boolean handleVertex(String fline) throws PropertyPropertiesError {
+		vertex = getNbVertex(fline);
+		boolean endVertex = false;
+		while(!endVertex) {
+			idx++;
+			String[] line = lines[idx].split(" ");
+			switch (line[0]) {
+				case "end_header":
+					return false;
+				case "element":
+					endVertex = true;
+					idx--;
+					break;
+				case "property":
+					handleVertexProperty(line);
+					break;
+				default:
+					break;
+			}
+		}
+		return true;
+	}
+	
+	private int getNbVertex(String vert) {
 		if(vert.matches("[0-9]+")) {
 			pointPos = idx;
 			return Integer.parseInt(vert);
@@ -114,33 +153,100 @@ public class ParserHeader {
 		return -1;
 	}
 	
-	private int handleFace(String face) {
+	private boolean handleVertexProperty(String[] line) throws PropertyPropertiesError {
+		if(line.length==3&&(line[1].equals("float")||line[1].equals("float32"))) {
+			return handleFloat(line);
+		} else if(line.length==3&&(line[1].equals("uchar"))) {	
+			return handleColor(line);
+		} else {
+			throw new PropertyPropertiesError("header:vertex");
+		}
+	}
+	
+	private boolean handleFloat(String[] line) throws PropertyPropertiesError {
+		if(line[2].equals("x")&&xpos==-1) {
+			xpos=idx-pointPos-1;
+		}
+		else if(line[2].equals("y")&&ypos==-1) {
+			ypos=idx-pointPos-1;
+		}
+		else if(line[2].equals("z")&&zpos==-1) {
+			zpos=idx-pointPos-1;
+		}
+		else {
+			throw new PropertyPropertiesError("xyz");
+		}
+		return true;
+	}
+
+	private boolean handleColor(String[] line) throws PropertyPropertiesError {
+		if(line[2].equals("red")&&pred==-1) {
+			pred=idx-pointPos-1;
+		} else if(line[2].equals("green")&&pgreen==-1) {
+			pgreen=idx-pointPos-1;
+		} else if(line[2].equals("blue")&&pblue==-1) {
+			pblue=idx-pointPos-1;
+		} else {
+			throw new PropertyPropertiesError("couleur:"+line[2]);
+		}
+		extraPropertys++;
+		return true;
+	}
+
+	private boolean handleFace(String fline) throws PropertyPropertiesError {
+		face = getNbFace(fline);
+		boolean endFace = false;
+		while(!endFace) {
+			idx++;
+			String[] line = lines[idx].split(" ");
+			switch (line[0]) {
+				case "end_header":
+					endFace = true;
+				case "element":
+					endFace = true;
+					idx--;
+					break;
+				case "property":
+					handleFaceProperty(line);
+					break;
+				default:
+					break;
+			}
+		}
+		return true;
+	}
+
+	private int getNbFace(String face) {
 		if(face.matches("[0-9]+"))return Integer.parseInt(face);
 		else return -1;
 	}
 
-	private boolean handleProperty(String[] line) throws PropertyPropertiesError {
-		if(line.length==3&&(line[1].equals("float")||line[1].equals("float32"))) {
-			if(line[2].equals("x")&&xpos==-1) {
-				xpos=idx-pointPos-1;
+	private boolean handleFaceProperty(String[] line) throws PropertyPropertiesError {
+		if(!(line.length>3&&line[1].equals("list"))) {
+			throw new PropertyPropertiesError("header:face");
+		}
+		return true;
+	}
+
+	private boolean handleExtraElement() {
+		boolean endExtra = false;
+		while(!endExtra) {
+			idx++;
+			String[] line = lines[idx].split(" ");
+			switch (line[0]) {
+				case "end_header":
+					endExtra = true;;
+				case "element":
+					endExtra = true;
+					idx--;
+					break;
+				case "property":
+					extraPropertys++;
+					break;
+				default:
+					break;
 			}
-			else if(line[2].equals("y")&&ypos==-1) {
-				ypos=idx-pointPos-1;
-			}
-			else if(line[2].equals("z")&&zpos==-1) {
-				zpos=idx-pointPos-1;
-			}
-			else {
-				throw new PropertyPropertiesError("xyz");
-			}
-		} else if(line.length==3&&!midHeader) {
-			extraPropertys++;
-		} else if(line.length>3&&line[1].equals("list")&&!midHeader) {
-			midHeader = true;
-		} else if(midHeader)extraPropertys++; 
-		else {
-			throw new PropertyPropertiesError("header");
-		} 
+		}
 		return true;
 	}
 
@@ -154,9 +260,15 @@ public class ParserHeader {
 		if(vertex==-1||face==-1) {
 			throw new ElementPropertiesError();
 		}
+		if(pred+pgreen+pblue!=-3)isColored = true;
+		if((pred==-1||pgreen==-1||pblue==-1)&&isColored) {
+			throw new ElementPropertiesError();
+		}
 		return true;
 	}
 
+	
+	
 	public int getVertex() {
 		return vertex;
 	}
@@ -173,6 +285,18 @@ public class ParserHeader {
 		return idx;
 	}
 
+	public int getRpos() {
+		return pred;
+	}
+	
+	public int getGpos() {
+		return pgreen;
+	}
+	
+	public int getBpos() {
+		return pblue;
+	}
+	
 	public int getXpos() {
 		return xpos;
 	}
@@ -183,6 +307,10 @@ public class ParserHeader {
 	
 	public int getZpos() {
 		return zpos;
+	}
+	
+	public boolean isColored() {
+		return isColored;
 	}
 	
 }
