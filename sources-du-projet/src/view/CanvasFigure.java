@@ -31,7 +31,7 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	private boolean colorCustom = true;
 	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
-	private Vecteur vLumière = Vecteur.getDirecteur(1,-1,1);
+	private Vecteur vLumière = Vecteur.getDirecteur(1,1,1);
 	
 	private double opacity = 1;
 	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
