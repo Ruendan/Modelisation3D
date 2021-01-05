@@ -13,7 +13,7 @@ public class ExplorerLayout extends VBox{
 	 */
 	public ExplorerLayout(View parent) {
 		Explorer listFiles = new Explorer(parent);
-		ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent.getActualFigure().getName());
+		ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);
 		this.getChildren().addAll(bar, listFiles);
 	}
