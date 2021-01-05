@@ -187,7 +187,9 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#printFigureLite()
 	 */
 	public void printFigure() {
+		System.out.println(fig.getFaces().get(0).getPoints().get(0));
 		convert3d2d();
+		System.out.println(fig.getFaces().get(0).getPoints().get(0)	);
 		printFigureLite();
 	}
 

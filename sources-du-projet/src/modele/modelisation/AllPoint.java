@@ -8,7 +8,7 @@ public class AllPoint extends Matrix {
 	private static final int Z = 2;
 	private int nbPoint;
 	private int size;
-	private Point point = new Point(0,0,0);
+	//private Point point = new Point(0,0,0);
 	
 	public AllPoint(int size) {
 		super(size);
@@ -27,10 +27,9 @@ public class AllPoint extends Matrix {
 		return this.nbPoint == this.size;
 	}
 
-	public Point get(int i) {
-		point.setPoint(matrice[i][X], matrice[i][Y], matrice[i][Z]);
-		return point;
-	}
+//	public Point get(int i) {
+//		return matrice[i];
+//	}
 
 	public double size() {
 		return size;

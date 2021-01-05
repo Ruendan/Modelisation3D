@@ -15,7 +15,7 @@ public class Face implements Comparable<Face> {
 	private static final Vecteur vVue = new Vecteur(0,0,-1);
 	
 	public Face(int nbPoints,List<Integer> points, AllPoint allPoint) {
-		System.out.println(points.get(0)+" "+points.get(1)+" "+points.get(2));
+		//System.out.println(points.get(0)+" "+points.get(1)+" "+points.get(2));
 		this.nbPoints=nbPoints;
 		this.allPoints = allPoint;
 		if(points==null) this.points = new ArrayList<Integer>();
@@ -90,7 +90,7 @@ public class Face implements Comparable<Face> {
 		double petit;
 		if(this.getNbPoints()==0)
 			petit = Double.NaN;
-		else petit = allPoints.get(points.get(0)).getZ();
+		else petit = allPoints.get(points.get(0))[2);
 		
 		for(int i = 0 ; i<points.size() ; i++) {
 			if(allPoints.getMatrix()[points.get(i)][2]<petit)petit=allPoints.getMatrix()[points.get(i)][2];
@@ -116,9 +116,7 @@ public class Face implements Comparable<Face> {
 		AllPoint p = new AllPoint(points.size());
 		for (Integer integer : points) {
 			p.add(allPoints.get(integer));
-			//System.out.print(allPoints.get(integer)+"   ");
 		}
-		//System.out.println();
 		return p;
 	}
 	

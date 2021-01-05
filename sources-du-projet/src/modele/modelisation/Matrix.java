@@ -3,6 +3,7 @@ package modele.modelisation;
 public class Matrix {
 	
 	protected Double[][] matrice;
+	
 	public static final Matrix MATRICETRANSFORMATION = new Matrix( new Double[][]{
 		{1.0,	0.0,	0.0},
 		{0.0,	1.0,	0.0}});
@@ -13,6 +14,10 @@ public class Matrix {
 	
 	public Matrix(Double[][] matrice){
 		this.matrice = matrice;
+	}
+	
+	public Matrix(int size1, int size2) {
+		matrice = new Double[size1][size2];
 	}
 	
 	public int length() {

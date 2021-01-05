@@ -1,54 +1,58 @@
 package modele.modelisation;
 
-public class Point{
+public class Point extends Matrix{
 	private static final int X = 0;
 	private static final int Y = 1;
 	private static final int Z = 2;
 	
-	private Double[] coord;
 	
 	public Double[] getCoord() {
-		return coord;
+		return matrice[0];
 	}
 	
 	public Double getX() {
-		return this.coord[X];
+		return matrice[0][X];
 	}
 	
 	public Double getY() {
-		return this.coord[Y];
+		return matrice[0][Y];
 	}
 	
 	public Double getZ() {
-		return this.coord[Z];
+		return matrice[0][Z];
 	}
 	
 	public void setX(Double x) {
-		this.coord[X] = x;
+		matrice[0][X] = x;
 	}
 	
 	public void setY(Double y) {
-		this.coord[Y] = y;
+		matrice[0][Y] = y;
 	}
 	
 	public void setZ(Double z) {
-		this.coord[Z] = z;
+		matrice[0][Z] = z;
 	}
 	
 	public Point(double x, double y, double z) {
-		this.coord = new Double[] {x,y,z};
+		this(3);
+		matrice[0][X] = x;
+		matrice[0][Y] = y;
+		matrice[0][Z] = z;
 	}
 	public Point(double x, double y) {
-		this.coord = new Double[] {x,y};
+		this(2);
+		matrice[0][X] = x;
+		matrice[0][Y] = y;
 	}
 	
 	public Point(int size) {
-		this.coord = new Double[size];
+		super(1,size);
 	}
 
 	@Override
 	public String toString() {
-		return "x:" + coord[X] + "y:" + coord[Y] + "z:" + coord[Z] + ";";
+		return "x:" + matrice[0][X] + "y:" + matrice[0][Y] + "z:" + matrice[0][Z] + ";";
 	}
 
 	public void setPoint(Double x, Double y, Double z) {
@@ -63,11 +67,11 @@ public class Point{
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(coord[X]);
+		temp = Double.doubleToLongBits(matrice[0][X]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(coord[Y]);
+		temp = Double.doubleToLongBits(matrice[0][Y]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(coord[Z]);
+		temp = Double.doubleToLongBits(matrice[0][Z]);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -81,27 +85,27 @@ public class Point{
 		if (getClass() != obj.getClass())
 			return false;
 		Point other = (Point) obj;
-		if (Double.doubleToLongBits(coord[X]) != Double.doubleToLongBits(other.coord[X]))
+		if (Double.doubleToLongBits(matrice[0][X]) != Double.doubleToLongBits(other.matrice[0][X]))
 			return false;
-		if (Double.doubleToLongBits(coord[Y]) != Double.doubleToLongBits(other.coord[Y]))
+		if (Double.doubleToLongBits(matrice[0][Y]) != Double.doubleToLongBits(other.matrice[0][Y]))
 			return false;
-		if (Double.doubleToLongBits(coord[Z]) != Double.doubleToLongBits(other.coord[Z]))
+		if (Double.doubleToLongBits(matrice[0][Z]) != Double.doubleToLongBits(other.matrice[0][Z]))
 			return false;
 		return true;
 	}
 
 	public void deplacer(double x, double y, double z) {
-		this.coord[X]+=x;
-		this.coord[Y]+=y;
-		this.coord[Z]+=z;
+		matrice[0][X]+=x;
+		matrice[0][Y]+=y;
+		matrice[0][Z]+=z;
 	}
 
 	public void deplacerX(double x) {
-		this.coord[X]+=x;
+		matrice[0][X]+=x;
 	}
 	
 	public void deplacerY(double y) {
-		this.coord[Y]+=y;
+		matrice[0][Y]+=y;
 	}
 
 }
