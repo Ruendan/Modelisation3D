@@ -20,8 +20,9 @@ public class ConfigurationSpinnerFactory {
 			return new TranslationXSpinner();
 		case TranslationY:
 			return new TranslationYSpinner();
-		default:
-			return null;
+		case TimelineSpeed:
+			return new ActualisationTimeSpinner();
+		default: return null;
 		}
 	}
 }

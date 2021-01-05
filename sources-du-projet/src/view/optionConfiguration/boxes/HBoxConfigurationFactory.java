@@ -19,6 +19,8 @@ public class HBoxConfigurationFactory {
 			return new HBoxTranslationX();
 		case TranslationY:
 			return new HBoxTranslationY();
+		case TimelineSpeed:
+			return new HBoxActualisationTime();
 		default:
 			return null;
 		}

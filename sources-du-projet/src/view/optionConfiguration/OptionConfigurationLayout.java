@@ -13,6 +13,7 @@ public class OptionConfigurationLayout extends VBox {
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.RotateX));
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.RotateY));
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.RotateZ));
+		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.TimelineSpeed));
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.TranslationX));
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.TranslationY));
 		this.getChildren().add(HBoxConfigurationFactory.getConfigurationBox(Element.Zoom));
