@@ -6,6 +6,8 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import view.errors.ErrorScene;
+
 /**
  * 
  * @author Dubois Quentin, Camus Sylvain
@@ -34,7 +36,7 @@ public class FileChooser {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch(Exception ex) {
-			ex.printStackTrace();
+			ErrorScene.display(ex);
 		}
 		
 		JFileChooser chooser = new JFileChooser();

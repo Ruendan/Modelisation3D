@@ -7,6 +7,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import utils.Icon;
 import view.View;
+import view.errors.ErrorScene;
 
 public class NewTabButton extends Button{
 	
@@ -18,8 +19,7 @@ public class NewTabButton extends Button{
 				System.out.println(parent.getActualFigure());
 				openNewWindow(parent.getActualFigure());
 			} catch (PlyParserException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ErrorScene.display(e1);
 			}
 		});
 	}
