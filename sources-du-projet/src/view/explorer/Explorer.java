@@ -20,13 +20,17 @@ public class Explorer extends ListView<PlyFile>{
 	 */
 	public Explorer(View parent){
 		for (File file : this.files) {
-			this.getItems().add(new PlyFile(file));
+			try {
+				this.getItems().add(new PlyFile(file));
+			} catch (PlyParserException e) {
+				ErrorScene.display(e);
+			}
 		}
 		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
 			try {
+				//System.out.println("Bon, Alors");
 				Ply newPly = newvalue.getPly();
 				if(oldvalue!=null) oldvalue.unload();
-				System.out.println(newPly);
 				if(newPly != null) parent.updateMiddle(new Figure(newPly));
 			} catch (PlyParserException e) {
 				ErrorScene.display(e);
@@ -36,8 +40,13 @@ public class Explorer extends ListView<PlyFile>{
 
 	public boolean addFile(File file) {
 		if(file == null) return false;
-		if(file.getName().contains(".ply")) return this.getItems().add(new PlyFile(file));
-		else return false;
+		if(file.getName().contains(".ply"))
+			try {
+				return this.getItems().add(new PlyFile(file));
+			} catch (PlyParserException e) {
+				ErrorScene.display(e);
+			}
+		return false;
 	}
 }
 

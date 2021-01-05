@@ -30,15 +30,11 @@ public class PlyFile extends File{
 	 * Put the "HeaderPly" in the ply.
 	 * 
 	 */
-	public PlyFile(File file) {
+	public PlyFile(File file) throws PlyParserException {
 		super(file.getAbsolutePath());
-		try {
-			header = true;
-			this.file=file;
-			ply = PlyParser.loadHeader(file);
-		} catch (PlyParserException e) {
-			e.printStackTrace();
-		}
+		header = true;
+		this.file=file;
+		ply = PlyParser.loadHeader(file);
 	}
 	
 	/**
@@ -63,13 +59,9 @@ public class PlyFile extends File{
 		return ply;
 	}
 	
-	public void unload() {
-		try {
-			this.ply = PlyParser.loadHeader(file);
-			header = true;
-		} catch (PlyParserException e) {
-			e.printStackTrace();
-		}
+	public void unload() throws PlyParserException{
+		this.ply = PlyParser.loadHeader(file);
+		header = true;
 	}
 
 	@Override
