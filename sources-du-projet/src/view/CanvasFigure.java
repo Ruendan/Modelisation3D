@@ -12,6 +12,7 @@ import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
 import modele.modelisation.Point;
+import modele.modelisation.Vecteur;
 import utils.Observer;
 import utils.Subject;
 /**
@@ -28,6 +29,10 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
+	private boolean colorCustom = true;
+	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
+	private Vecteur vLumière = Vecteur.getDirecteur(1,-1,1);
+	
 	private double opacity = 1;
 	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
 	private Color figureFillColor = Color.rgb(135, 206, 250, opacity);
@@ -156,7 +161,19 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void printFace(Face f) {
-		this.gc.setFill(figureFillColor);
+		if(colorCustom) {
+			//System.out.println(figureFillColor.getRed()+"  "+f.getExposition()+" = "+((double)figureFillColor.getRed()*f.getExposition())*256);
+			
+			int red = (int)((double)figureFillColor.getRed()*f.getExposition()*256);
+			int green = (int)((double)figureFillColor.getGreen()*f.getExposition()*256);
+			int blue = (int)((double)figureFillColor.getBlue()*f.getExposition()*256);
+			if(red<0)red = 0;
+			if(blue<0)blue = 0;
+			if(green<0)green = 0;
+			Color faceFillColor = Color.rgb(red, green, blue, opacity);
+			
+			this.gc.setFill(faceFillColor);
+		} else this.gc.setFill(figureFillColor);
 		this.gc.setStroke(figureStrokeColor);
 		this.gc.setLineWidth(figureLineWidth);
 		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
@@ -212,7 +229,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	@Override
 	public void update(Subject subj) {
-		fig.tri();
+		fig.tri(vVue,vLumière);
 		visualUpdate();
 	}
 

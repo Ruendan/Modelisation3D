@@ -116,7 +116,6 @@ public class Figure extends Subject{
 		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 		center.deplacer(-center.getX(), -center.getY(), -center.getZ());
 		Mouvement.rotate(this, 180, 180, 0);
-		tri();
 	}
 
 	/**
@@ -162,9 +161,9 @@ public class Figure extends Subject{
 	 * @see Figure#getFaces()
 	 * @see Face
 	 */
-	public void tri() {
+	public void tri(Vecteur vVue,Vecteur vLumière) {
 		for(Face f : faces) {
-			f.preSort();
+			f.preSort(vVue,vLumière);
 		}
 		Collections.sort(faces);
 	}

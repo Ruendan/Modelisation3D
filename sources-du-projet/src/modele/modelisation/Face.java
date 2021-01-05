@@ -9,9 +9,10 @@ public class Face implements Comparable<Face> {
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
+	private double visibility;
 	private double exposition;
 	private boolean isUpper;
-	private static final Vecteur vVue = new Vecteur(0,0,-1);
+	
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -57,18 +58,34 @@ public class Face implements Comparable<Face> {
 		return res/nbPoints;
 	}
 	
-	public void preSort() {
+	public void preSort(Vecteur vVue,Vecteur vLumière) {
 		setNormal();
+		setVisibility(vVue);
+		setExposition(vLumière);
 		setClosest();
 	}
 	
 	public void setNormal() {
 		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
+		
+	}
+	
+	public void setVisibility(Vecteur observateur) {
 		if(normal!=null) {
-			exposition = -vVue.produitScalaire(normal);
-			if(exposition>0)isUpper = true;
+			visibility = -observateur.produitScalaire(normal);
+			if(visibility>0)isUpper = true;
 			else isUpper = false;
 		}
+	}
+	
+	public void setExposition(Vecteur lumière) {
+		if(normal!=null) {
+			exposition = -lumière.produitScalaire(normal);
+		}
+	}
+	
+	public double getExposition() {
+		return exposition;
 	}
 	
 	@Override
@@ -146,8 +163,8 @@ public class Face implements Comparable<Face> {
 		return true;
 	}
 
-	public double getExposition() {
-		return exposition;
+	public double getVisibility() {
+		return visibility;
 	}
 	
 }

@@ -44,6 +44,12 @@ public class Vecteur {
 		return this.getDirX()*vb.getDirX()+this.getDirY()*vb.getDirY()+this.getDirZ()*vb.getDirZ();
 	}
 	
+	public static Vecteur getDirecteur(double x,double y,double z) {
+		double norm = Math.sqrt(x*x+y*y+z*z);
+		Vecteur directeur = new Vecteur(-x/norm, -y/norm, -z/norm);
+		return directeur;
+	}
+	
 	public double getDirX() {
 		return dirX;
 	}
