@@ -48,7 +48,7 @@ public class View extends Stage{
 	
 	public View(Figure fig) {
 		
-		display = new CanvasFigure();
+		display = new CanvasFigure(this);
 		
 		middle = createMiddle(fig);
 		middle.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
@@ -69,7 +69,6 @@ public class View extends Stage{
 		
 		this.setMinWidth(SCENE_MIN_WIDTH);
 		this.setMinHeight(SCENE_MIN_HEIGHT);
-		this.setTitle(TITRE);
 		this.show();
 	}
 	
@@ -114,6 +113,11 @@ public class View extends Stage{
 		middle = createMiddle(f);
 		layout.setCenter(middle);
 		
+	}
+	
+	public void updateTitle(String name) {
+		if(name==null||name.equals(""))this.setTitle(TITRE);
+		this.setTitle(TITRE+" - "+name);
 	}
 	
 	public Figure getActualFigure() {

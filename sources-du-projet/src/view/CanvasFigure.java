@@ -29,7 +29,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private boolean drawAllEdges = false;
+	private boolean drawAllEdges = true;
 	private boolean useShadow = true;
 	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
 	private Vecteur vLumière = Vecteur.getDirecteur(1,1,1);
@@ -43,7 +43,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	private double figureLineWidth = 0.2;
 
 	private GraphicsContext gc;
-
+	private View MainWindow;
 	private static final double DEFAULT_WIDTH = 800;
 	private static final double DEFAULT_HEIGHT = 800;
 
@@ -79,9 +79,11 @@ public class CanvasFigure extends Canvas implements Observer {
 	/**
 	 * Create the {@link Canvas} of the {@link Figure} with the default width and height
 	 * <p> DEFAULT_WIDTH = 800 <br> DEFAULT_HEIGHT = 500 </p>
+	 * @param view 
 	 */
-	public CanvasFigure() {
+	public CanvasFigure(View view) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.MainWindow = view;
 	}
 	
 	/**
@@ -139,7 +141,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	public void setFigure(Figure fig) {
 		if (this.fig != null)
 			this.fig.detach(this);
-
+		this.MainWindow.updateTitle(fig.getName());
 		this.fig = fig;
 		this.fig.attach(this);
 		this.centerFigure();
