@@ -29,6 +29,8 @@ public class Figure extends Subject{
 	private List<Face> faces;
 	private Point center;
 	private Set<Point> points;
+	
+	private boolean isColored;
 
 	/**
 	 * Create a figure with a {@link Ply}
@@ -40,6 +42,7 @@ public class Figure extends Subject{
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
 		this.center = center();
+		this.isColored = ply.isColored();
 		this.initialisation();
 	}
 	
@@ -101,6 +104,10 @@ public class Figure extends Subject{
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	public boolean isColored() {
+		return this.isColored;
 	}
 	
 	/**

@@ -29,7 +29,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private boolean colorCustom = true;
+	private boolean drawAllEdges = false;
+	private boolean useShadow = true;
 	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
 	private Vecteur vLumière = Vecteur.getDirecteur(1,1,1);
 	
@@ -166,22 +167,23 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void printFace(Face f) {
-		if(colorCustom) {
-			//System.out.println(figureFillColor.getRed()+"  "+f.getExposition()+" = "+((double)figureFillColor.getRed()*f.getExposition())*256);
-			
-			double red = figureFillColor.getRed()*f.getExposition();
-			double green = figureFillColor.getGreen()*f.getExposition();
-			double blue = figureFillColor.getBlue()*f.getExposition();
+		Color faceFillColor = figureFillColor;
+		if(fig.isColored()) {
+			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue());
+		}
+		if(useShadow) {
+			double red = faceFillColor.getRed()*f.getExposition();
+			double green = faceFillColor.getGreen()*f.getExposition();
+			double blue = faceFillColor.getBlue()*f.getExposition();
 			if(red<0)red = 0.0;
 			if(blue<0)blue = 0.0;
 			if(green<0)green = 0.0;
-			Color faceFillColor = Color.color(red, green, blue, opacity);
-			
-			this.gc.setFill(faceFillColor);
-		} else this.gc.setFill(figureFillColor);
+			faceFillColor = Color.color(red, green, blue, opacity);
+		}
+		this.gc.setFill(faceFillColor);
 		this.gc.setStroke(figureStrokeColor);
 		this.gc.setLineWidth(figureLineWidth);
-		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
+		if(f.isUpper()&&opacity>0)this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
 
 	}
@@ -219,7 +221,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	public void printFigureLite() {
 		for (Face f : fig.getFaces()) {
-			if(f.isUpper()) {
+			if(drawAllEdges||f.isUpper()) {
 				initialiseCoordsFromFace(f);
 				printFace(f);
 			}

@@ -7,8 +7,6 @@ public class Point {
 	private double y;
 	private double z;
 	
-	private Color couleur;
-	
 	public Double getX() {
 		return x;
 	}
@@ -43,11 +41,6 @@ public class Point {
 		this.x*=multi;
 		this.y*=multi;
 		this.z*=multi;
-	}
-	
-	public Point(double x, double y, double z,Color couleur) {
-		this(x,y,z);
-		this.couleur = couleur;
 	}
 	
 	public Point(double x, double y, double z) {
@@ -141,8 +134,4 @@ public class Point {
 		this.z = z;
 	}
 	
-	public Color getColor() {
-		return couleur;
-	}
-
 }

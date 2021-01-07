@@ -1,5 +1,6 @@
 package modele.modelisation;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Face implements Comparable<Face> {
 	private double exposition;
 	private boolean isUpper;
 	
+	private Color couleur;
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -129,6 +131,14 @@ public class Face implements Comparable<Face> {
 		return points;
 	}
 	
+	public Color getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
+
 	@Override
 	public String toString() {
 		return "Face [nbPoints=" + nbPoints + ", points:(" + points + ")";
