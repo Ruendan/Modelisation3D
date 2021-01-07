@@ -10,7 +10,8 @@ public class ExplorerToolBar extends ToolBar{
 		FileExplorerButton feb = new FileExplorerButton(items);
 		NewTabButton ntb = new NewTabButton(parent);
 		OptionButton option = new OptionButton();
-		this.getItems().addAll(feb, new Separator(), ntb, new Separator(), option);
+		ScriptButton sb = new ScriptButton();
+		this.getItems().addAll(feb, new Separator(), ntb, new Separator(), option, new Separator(), sb);
 	}
 	
 }
