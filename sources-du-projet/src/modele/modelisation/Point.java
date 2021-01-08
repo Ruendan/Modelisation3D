@@ -1,7 +1,5 @@
 package modele.modelisation;
 
-import java.awt.Color;
-
 public class Point {
 	private double x;
 	private double y;

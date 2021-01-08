@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -28,8 +27,6 @@ public class PlyParser {
 	private boolean isColored;
 	
 	private int idx;
-	private int pointIdx;
-	
 	private int vertex;
 	private int face;
 	
@@ -153,7 +150,6 @@ public class PlyParser {
 	}
 
 	private boolean handleBody() throws UnsupportedFileFormat {
-		pointIdx = idx;
 		if(!handlePoint()) {
 			throw new UnsupportedFileFormat("points");
 		}
