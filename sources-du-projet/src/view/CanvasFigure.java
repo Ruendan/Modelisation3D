@@ -29,7 +29,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	
 	private boolean rotating;
 
-	private boolean drawAllEdges = true;
+	private boolean drawEdges;
 	private boolean useShadow = true;
 	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
 	private Vecteur vLumière = Vecteur.getDirecteur(1,1,1);
@@ -169,6 +169,24 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void printFace(Face f) {
+		if(f.isUpper()) {
+			if(opacity>0) {
+				printFill(f);
+			}
+			if(drawEdges&&figureLineWidth>0) {
+				printEdge(f);
+			}
+		} else {
+			if(drawEdges&&opacity<1&&figureLineWidth>0) {
+				printEdge(f);
+			}
+		}
+		
+		
+
+	}
+
+	private void printFill(Face f) {
 		Color faceFillColor = figureFillColor;
 		if(fig.isColored()) {
 			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue());
@@ -183,11 +201,13 @@ public class CanvasFigure extends Canvas implements Observer {
 			faceFillColor = Color.color(red, green, blue, opacity);
 		}
 		this.gc.setFill(faceFillColor);
+		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
+	}
+
+	private void printEdge(Face f) {
 		this.gc.setStroke(figureStrokeColor);
 		this.gc.setLineWidth(figureLineWidth);
-		if(f.isUpper()&&opacity>0)this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
 		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
-
 	}
 
 	private void convert3d2d() {
@@ -223,10 +243,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	public void printFigureLite() {
 		for (Face f : fig.getFaces()) {
-			if(drawAllEdges||f.isUpper()) {
-				initialiseCoordsFromFace(f);
-				printFace(f);
-			}
+			initialiseCoordsFromFace(f);
+			printFace(f);
 		}
 	}
 	
@@ -334,4 +352,9 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.setFigureFillColor(this.figureFillColor);
 	}
 
+	public void setAllEdgeVisible(boolean newValue) {
+		this.drawEdges = newValue;
+		visualUpdateLite();
+	}
+	
 }
