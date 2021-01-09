@@ -17,7 +17,7 @@ import view.CanvasFigure;
  *<p>
  *
  *<br>
- * @author Groupe G1 
+ * @author Groupe G1
  * <br>
  * {@link} nathan-developpeur.com
  * 
