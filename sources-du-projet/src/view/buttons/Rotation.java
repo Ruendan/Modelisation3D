@@ -19,36 +19,38 @@ public class Rotation extends GridPane{
 	
 	/**
 	 * Create the rotation buttons panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that need to auto-rotate
 	 * @param fig
 	 * 			The {@link Figure} the buttons are linked to
 	 */
-	public Rotation(CanvasFigure canva){
+	public Rotation(CanvasFigure canva,Figure fig){
 		
 		this.xup = this.createButton("xUp");
 		xup.setOnAction(e ->{
-			canva.getFigure().rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
+			fig.rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
 		this.xdown = this.createButton("xDown");
 		xdown.setOnAction(e ->{
-			canva.getFigure().rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
+			fig.rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
 		
 		this.yup = this.createButton("yUp");
 		yup.setOnAction(e ->{
-			canva.getFigure().rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
+			fig.rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
 		this.ydown = this.createButton("yDown");
 		ydown.setOnAction(e ->{
-			canva.getFigure().rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
+			fig.rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
 		
 		this.zup = this.createButton("zUp");
 		zup.setOnAction(e ->{
-			canva.getFigure().rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
+			fig.rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
 		this.zdown = this.createButton("zDown");
 		zdown.setOnAction(e ->{
-			canva.getFigure().rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
+			fig.rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
 
 		this.setHgap(10);
@@ -58,7 +60,7 @@ public class Rotation extends GridPane{
 		this.add(yup, 0, 1); this.add(ydown, 2, 1);
 		this.add(zup, 0, 2); this.add(zdown, 2, 2);
 
-		ButtonTimeline autoRotate = new ButtonTimeline(canva);
+		Timeline autoRotate = new Timeline(canva);
 		this.add(autoRotate, 1, 3);
 	
 		this.setMaxHeight(250);

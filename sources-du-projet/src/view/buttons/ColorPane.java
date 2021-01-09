@@ -5,13 +5,24 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import modele.modelisation.Figure;
 import view.CanvasFigure;
 
+/**
+ * Creation of colors buttons
+ * <p>This class is used to create the buttons that modify the colors in the {@link CanvasFigure}</p>
+ * @author Groupe G1
+ */
 public class ColorPane extends GridPane{
 	
 	private ColorPicker figureColorPicker, canvaColorPicker;
 	private Label titleCP1, titleCP2;
 
+	/**
+	 * Create the colors buttons panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that need to be colored
+	 */
 	public ColorPane(CanvasFigure canva) {
 		
 		this.titleCP1 = new Label("Couleur de fond");

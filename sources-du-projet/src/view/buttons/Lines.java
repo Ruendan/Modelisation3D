@@ -5,9 +5,15 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import modele.modelisation.Figure;
 import view.CanvasFigure;
 
-public class LineWidthPane extends GridPane{
+/**
+ * Creation of buttons that handle lines
+ * <p>This class is used to create the buttons that modify the width of the lines and permit to show them or not</p>
+ * @author Groupe G1
+ */
+public class Lines extends GridPane{
 	
 	private Slider thicken;
 	private Label title;
@@ -16,7 +22,12 @@ public class LineWidthPane extends GridPane{
 	private static final double MIN_WIDTH = 0.001;
 	private static final double MAX_WIDTH = 1.0;
 
-	public LineWidthPane(CanvasFigure canva) {
+	/**
+	 * Create the lines buttons panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that has the lines
+	 */
+	public Lines(CanvasFigure canva) {
 		
 		title = new Label("Epaisseur des arêtes");
 		

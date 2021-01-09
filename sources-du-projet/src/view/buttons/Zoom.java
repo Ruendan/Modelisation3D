@@ -4,7 +4,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
-import modele.modelisation.Ply;
 import utils.Icon;
 import view.ButtonsConst;
 
