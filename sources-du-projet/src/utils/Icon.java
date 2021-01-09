@@ -7,6 +7,11 @@ import java.io.FileNotFoundException;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Create an {@link Icon} from image's name
+ * <p>This class is used to create a usable Icon for buttons just by giving its name (images need to be in the buttons_icones folder)</p>
+ * @author Groupe G1
+ */
 public class Icon {
 
 	private static String fs = File.separator;

@@ -3,6 +3,11 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Extendable class to convert a class into a Subject
+ * <p>This class is used to convert any other class into a Subject from the Observer Pattern</p>
+ * @author Groupe G1
+ */
 public abstract class Subject {
     protected List<Observer> attached;
 
