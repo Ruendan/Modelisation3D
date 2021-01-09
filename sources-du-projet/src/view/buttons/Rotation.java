@@ -3,61 +3,56 @@ package view.buttons;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import modele.modelisation.Figure;
 import utils.Icon;
 import view.ButtonsConst;
 import view.CanvasFigure;
 
+/**
+ * Creation of rotation buttons
+ * <p>This class is used to create the rotation buttons linked to the {@link Figure}</p>
+ * @author Groupe G1
+ */
 public class Rotation extends GridPane{
 	
 	private Button xup,xdown,yup,ydown,zup,zdown;
-	private static ImageView xupImg,xdownImg,yupImg,ydownImg,zupImg,zdownImg;
 	
+	/**
+	 * Create the rotation buttons panel linked to {@link Figure}
+	 * @param fig
+	 * 			The {@link Figure} the buttons are linked to
+	 */
 	public Rotation(CanvasFigure canva){
 		
-		xupImg = Icon.createButtonIcon("xUp");
-		xdownImg = Icon.createButtonIcon("xDown");	
-		yupImg = Icon.createButtonIcon("yUp");
-		ydownImg = Icon.createButtonIcon("yDown");
-		zupImg = Icon.createButtonIcon("zUp");
-		zdownImg = Icon.createButtonIcon("zDown");
-		
-		this.xup = new Button("",xupImg);
+		this.xup = this.createButton("xUp");
 		xup.setOnAction(e ->{
 			canva.getFigure().rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
-		this.xdown = new Button("",xdownImg);
+		this.xdown = this.createButton("xDown");
 		xdown.setOnAction(e ->{
 			canva.getFigure().rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
 		});
-		this.xup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.xdown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.xup.setStyle(ButtonsConst.getButtonStyle()); this.xdown.setStyle(ButtonsConst.getButtonStyle());
 		
-		
-		this.yup = new Button("",yupImg);
+		this.yup = this.createButton("yUp");
 		yup.setOnAction(e ->{
 			canva.getFigure().rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
-		this.ydown = new Button("",ydownImg);
+		this.ydown = this.createButton("yDown");
 		ydown.setOnAction(e ->{
 			canva.getFigure().rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
 		});
-		this.yup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.ydown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.yup.setStyle(ButtonsConst.getButtonStyle()); this.ydown.setStyle(ButtonsConst.getButtonStyle());
 		
-		this.zup = new Button("",zupImg);
+		this.zup = this.createButton("zUp");
 		zup.setOnAction(e ->{
 			canva.getFigure().rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
-		this.zdown = new Button("",zdownImg);
+		this.zdown = this.createButton("zDown");
 		zdown.setOnAction(e ->{
 			canva.getFigure().rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
 		});
-		this.zup.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize()); this.zdown.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.zup.setStyle(ButtonsConst.getButtonStyle()); this.zdown.setStyle(ButtonsConst.getButtonStyle());
-		
+
 		this.setHgap(10);
 		this.setVgap(20);
-		//this.setGridLinesVisible(true);
 		
 		this.add(xup, 0, 0); this.add(xdown, 2, 0);
 		this.add(yup, 0, 1); this.add(ydown, 2, 1);
@@ -65,10 +60,25 @@ public class Rotation extends GridPane{
 
 		ButtonTimeline autoRotate = new ButtonTimeline(canva);
 		this.add(autoRotate, 1, 3);
-		
-		
-		//this.setStyle(ButtonsConst.getPaneStyle());	
+	
 		this.setMaxHeight(250);
+	}
+	/**
+	 * Create a rotation button with an image
+	 * @param imgName
+	 * 			The image's name
+	 * @return {@link Button}
+	 * 			The button with its image
+	 */
+	private Button createButton(String imgName) {
+		Button res;
+		ImageView img = Icon.createButtonIcon(imgName);
+		
+		res = new Button("",img);
+		res.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
+		res.setStyle(ButtonsConst.getButtonStyle());
+		
+		return res;
 	}
 }
 
