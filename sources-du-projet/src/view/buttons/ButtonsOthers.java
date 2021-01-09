@@ -12,11 +12,12 @@ public class ButtonsOthers extends HBox {
 		final GridPane bouttonsCouleur, bouttonsEpaisseur,bouttonsTransparency;
 		
 		bouttonsCouleur = ButtonsFactory.makeButton("Color", canva);
+		bouttonsTransparency = ButtonsFactory.makeButton("Transparency", canva);
 		bouttonsEpaisseur = ButtonsFactory.makeButton("Thickness", canva);
-		bouttonsTransparency = ButtonsFactory.makeButton("Transparency", canva);		
+			
 
-		this.getChildren().addAll(new VBox(bouttonsCouleur, bouttonsEpaisseur,bouttonsTransparency));
+		this.getChildren().addAll(new VBox(bouttonsCouleur, bouttonsTransparency, bouttonsEpaisseur));
 		this.setStyle("-fx-background-color: #f1f1f1;");
-		this.setPrefWidth(200);
+		this.setPrefWidth(250);
 	}
 }

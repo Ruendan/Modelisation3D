@@ -20,7 +20,7 @@ public class ButtonsFactory {
 		case C:
 			return new ColorPane(canva);
 		case TH:
-			return new LineWidthPane(canva);
+			return new LineControlPane(canva);
 		case TR:
 			return new TransparencyPane(canva);
 		default:

@@ -29,7 +29,10 @@ public class CanvasFigure extends Canvas implements Observer {
 	private boolean rotating;
 
 	private boolean drawEdges;
-	private boolean useShadow = true; //faut que je le fasse (Sylvain)
+	private boolean useShadow;
+	private boolean faceVisible;
+	private boolean colorCustom;
+	
 	private final Vecteur vVue = Vecteur.getDirecteur(0,0,1);
 	private Vecteur vLumiere = Vecteur.getDirecteur(1,1,1); //faut que je le fasse (Sylvain)
 	
@@ -170,14 +173,14 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	private void printFace(Face f) {
 		if(f.isUpper()) {
-			if(opacity>0) {
+			if(opacity>0&&faceVisible) {
 				printFill(f);
 			}
 			if(drawEdges&&figureLineWidth>0) {
 				printEdge(f);
 			}
 		} else {
-			if(drawEdges&&opacity<1&&figureLineWidth>0) {
+			if(drawEdges&&(opacity<1||!faceVisible)&&figureLineWidth>0) {
 				printEdge(f);
 			}
 		}
@@ -188,13 +191,13 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	private void printFill(Face f) {
 		Color faceFillColor = figureFillColor;
-		if(fig.isColored()) {
+		if(fig.isColored()&&colorCustom) {
 			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue()); //DE ME TEEEER
 		}
 		if(useShadow) {
-			double red = faceFillColor.getRed()*f.getExposition();
-			double green = faceFillColor.getGreen()*f.getExposition();
-			double blue = faceFillColor.getBlue()*f.getExposition();
+			double red = faceFillColor.getRed()*(f.getExposition()+((1-f.getExposition())/3));
+			double green = faceFillColor.getGreen()*(f.getExposition()+((1-f.getExposition())/3));
+			double blue = faceFillColor.getBlue()*(f.getExposition()+((1-f.getExposition())/3));
 			if(red<0)red = 0.0;
 			if(blue<0)blue = 0.0;
 			if(green<0)green = 0.0;
@@ -354,6 +357,21 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	public void setAllEdgeVisible(boolean newValue) {
 		this.drawEdges = newValue;
+		visualUpdateLite();
+	}
+	
+	public void setShadowView(boolean newValue) {
+		this.useShadow = newValue;
+		visualUpdateLite();
+	}
+
+	public void setFaceVisible(boolean newValue) {
+		this.faceVisible = newValue;
+		visualUpdateLite();
+	}
+
+	public void setCouleurCustom(boolean newValue) {
+		this.colorCustom = newValue;
 		visualUpdateLite();
 	}
 	

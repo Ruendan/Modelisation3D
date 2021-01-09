@@ -168,8 +168,7 @@ public class Face implements Comparable<Face> {
 		} else {
 			for(int i=0; i<points.size(); i++) {
 				final Point thisPoint = this.points.get(i);
-				List<Point> otherPoints = other.getPoints(); // je ne comprend pas la loi de demeter ici
-				if(!thisPoint.equals(otherPoints.get(i))) return false;
+				if(!thisPoint.equals(other.getPoints().get(i))) return false;  // je ne comprend pas la loi de demeter ici
 			}
 		}
 		return true;
