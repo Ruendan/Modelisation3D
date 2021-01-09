@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import utils.Icon;
-import view.ButtonsConst;
+import view.ButtonsAttributes;
 
 /**
  * Creation of zooming buttons
@@ -25,12 +25,12 @@ public class Zoom extends GridPane{
 
 		this.in = this.createButton("plus");		
 		in.setOnAction(e->{
-			fig.zoom(1+ButtonsConst.getVALEUR_DE_ZOOM());
+			fig.zoom(1+ButtonsAttributes.getVALEUR_DE_ZOOM());
 		});
 		
 		this.out = this.createButton("less");	
 		out.setOnAction(e->{
-			fig.zoom(1-ButtonsConst.getVALEUR_DE_ZOOM());
+			fig.zoom(1-ButtonsAttributes.getVALEUR_DE_ZOOM());
 		});
 		
 		this.setHgap(10);
@@ -53,8 +53,8 @@ public class Zoom extends GridPane{
 		ImageView img = Icon.createButtonIcon(imgName);
 		
 		res = new Button("",img);		
-		res.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		res.setStyle(ButtonsConst.getButtonStyle());
+		res.setPrefSize(ButtonsAttributes.getButtonSize(),ButtonsAttributes.getButtonSize());
+		res.setStyle(ButtonsAttributes.getButtonStyle());
 		
 		return res;
 	}	

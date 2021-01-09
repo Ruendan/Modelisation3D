@@ -1,53 +1,27 @@
 package view.explorer;
 
-import java.io.File;
-
-import javafx.scene.control.ListView;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import modele.modelisation.Figure;
-import modele.modelisation.Ply;
-import modele.parser.exception.PlyParserException;
 import view.View;
-import view.errors.ErrorScene;
 
-public class Explorer extends ListView<PlyFile>{
-	
-	File lib = new File("ressources/plys");
-	File[] files = lib.listFiles();
+/**
+ * Creation the layout of the explorer
+ * <p>This class is used to create the zoom-in and zoom-out buttons linked to the {@link Figure}</p>
+ * @author Groupe G1
+ */
+public class Explorer extends VBox{
 	
 	/**
-	 * The Explorer.
-	 * @param gg
+	 * The Layout made to display the FileExplorer.
+	 * It's a VBox regrouping the Explorer and the FileChoser.
+	 * @param parent
+	 * 			The {@link View} to add the explorer and toolbar to
 	 */
-	public Explorer(View parent){
-		for (File file : this.files) {
-			try {
-				this.getItems().add(new PlyFile(file));
-			} catch (PlyParserException e) {
-				ErrorScene.display(e);
-			}
-		}
-		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
-			try {
-				//System.out.println("Bon, Alors");
-				Ply newPly = newvalue.getPly();
-				if(oldvalue!=null) oldvalue.unload();
-				if(newPly != null) parent.updateMiddle(new Figure(newPly));
-			} catch (PlyParserException e) {
-				ErrorScene.display(e);
-			}
-		});
-	}
-
-	public boolean addFile(File file) {
-		if(file == null) return false;
-		if(file.getName().contains(".ply"))
-			try {
-				return this.getItems().add(new PlyFile(file));
-			} catch (PlyParserException e) {
-				ErrorScene.display(e);
-			}
-		return false;
+	public Explorer(View parent) {
+		ExplorerFilesList listFiles = new ExplorerFilesList(parent);
+		ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent);
+		VBox.setVgrow(listFiles, Priority.ALWAYS);
+		this.getChildren().addAll(bar, listFiles);
 	}
 }
-
-

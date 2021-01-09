@@ -2,6 +2,10 @@ package view.optionConfiguration.controls;
 
 import view.optionConfiguration.Element;
 
+/**
+ * Factory for all the configurations's spinners
+ * @author Groupe G1
+ */
 public class ConfigurationSpinnerFactory {
 	
 	private ConfigurationSpinnerFactory() {}

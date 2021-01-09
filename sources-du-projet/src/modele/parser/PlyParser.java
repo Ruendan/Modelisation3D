@@ -41,7 +41,7 @@ public class PlyParser {
 	public static Ply loadPly(String nom) throws PlyParserException {
 		PlyParser pp = new PlyParser();
 		Ply ply = new Ply();
-		ply.setName(nom);
+		ply.setName(nom+".ply");
 		pp.loadPly(ply, nom);
 		return ply;
 	}

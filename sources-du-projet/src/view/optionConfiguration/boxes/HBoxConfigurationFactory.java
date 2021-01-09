@@ -2,6 +2,10 @@ package view.optionConfiguration.boxes;
 
 import view.optionConfiguration.Element;
 
+/**
+ * Factory for all the configurations's label and fields
+ * @author Groupe G1
+ */
 public class HBoxConfigurationFactory {
 	private HBoxConfigurationFactory() {}
 	

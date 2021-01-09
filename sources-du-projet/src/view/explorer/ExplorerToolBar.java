@@ -6,9 +6,9 @@ import view.View;
 
 public class ExplorerToolBar extends ToolBar{
 	
-	public ExplorerToolBar(Explorer items, View parent) {
+	public ExplorerToolBar(ExplorerFilesList items, View parent) {
 		FileExplorerButton feb = new FileExplorerButton(items);
-		NewTabButton ntb = new NewTabButton(parent);
+		NewWindow ntb = new NewWindow(parent);
 		OptionButton option = new OptionButton();
 		this.getItems().addAll(feb, new Separator(), ntb, new Separator(), option);
 	}

@@ -1,6 +1,11 @@
 package view;
 
-public class ButtonsConst {
+/**
+ * Creation of buttons constants
+ * <p>This class is used to be able to refer to the same style/size/... for each buttons we create</p>
+ * @author Groupe G1
+ */
+public class ButtonsAttributes {
 	
 	protected static double VALEUR_DE_ZOOM = 0.05;
 	protected static double VALEUR_DE_DEPLACEMENT_X = 10;
@@ -11,6 +16,8 @@ public class ButtonsConst {
 	protected static int VALEUR_DE_ROTATION_Z = 10;
 	
 	protected static final int BUTTON_SIZE = 48;
+	
+	protected static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 15 arial; -fx-border-width: 2px; -fx-border-color: white; -fx-border-radius:50;";
 	
 	public static double getVALEUR_DE_ZOOM() {
 		return VALEUR_DE_ZOOM;
@@ -59,8 +66,6 @@ public class ButtonsConst {
 	public static void setVALEUR_DE_ROTATION_Z(int value) {
 		VALEUR_DE_ROTATION_Z = value;
 	}
-	
-	protected static final String BUTTON_STYLE = "-fx-background-color: black; -fx-background-radius: 50; -fx-text-fill: white; -fx-font: 15 arial; -fx-border-width: 2px; -fx-border-color: white; -fx-border-radius:50;";
 	
 	public static int getButtonSize() {
 		return BUTTON_SIZE;

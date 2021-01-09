@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import utils.Icon;
-import view.ButtonsConst;
+import view.ButtonsAttributes;
 import view.CanvasFigure;
 
 /**
@@ -28,29 +28,29 @@ public class Rotation extends GridPane{
 		
 		this.xup = this.createButton("xUp");
 		xup.setOnAction(e ->{
-			fig.rotateX(ButtonsConst.getVALEUR_DE_ROTATION_Y());
+			fig.rotateX(ButtonsAttributes.getVALEUR_DE_ROTATION_Y());
 		});
 		this.xdown = this.createButton("xDown");
 		xdown.setOnAction(e ->{
-			fig.rotateX(-ButtonsConst.getVALEUR_DE_ROTATION_Y());
+			fig.rotateX(-ButtonsAttributes.getVALEUR_DE_ROTATION_Y());
 		});
 		
 		this.yup = this.createButton("yUp");
 		yup.setOnAction(e ->{
-			fig.rotateY(ButtonsConst.getVALEUR_DE_ROTATION_X());
+			fig.rotateY(ButtonsAttributes.getVALEUR_DE_ROTATION_X());
 		});
 		this.ydown = this.createButton("yDown");
 		ydown.setOnAction(e ->{
-			fig.rotateY(-ButtonsConst.getVALEUR_DE_ROTATION_X());
+			fig.rotateY(-ButtonsAttributes.getVALEUR_DE_ROTATION_X());
 		});
 		
 		this.zup = this.createButton("zUp");
 		zup.setOnAction(e ->{
-			fig.rotateZ(ButtonsConst.getVALEUR_DE_ROTATION_Z());
+			fig.rotateZ(ButtonsAttributes.getVALEUR_DE_ROTATION_Z());
 		});
 		this.zdown = this.createButton("zDown");
 		zdown.setOnAction(e ->{
-			fig.rotateZ(-ButtonsConst.getVALEUR_DE_ROTATION_Z());
+			fig.rotateZ(-ButtonsAttributes.getVALEUR_DE_ROTATION_Z());
 		});
 
 		this.setHgap(10);
@@ -77,8 +77,8 @@ public class Rotation extends GridPane{
 		ImageView img = Icon.createButtonIcon(imgName);
 		
 		res = new Button("",img);
-		res.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		res.setStyle(ButtonsConst.getButtonStyle());
+		res.setPrefSize(ButtonsAttributes.getButtonSize(),ButtonsAttributes.getButtonSize());
+		res.setStyle(ButtonsAttributes.getButtonStyle());
 		
 		return res;
 	}

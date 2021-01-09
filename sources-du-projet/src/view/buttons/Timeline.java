@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import modele.modelisation.Figure;
 import utils.Icon;
-import view.ButtonsConst;
+import view.ButtonsAttributes;
 import view.CanvasFigure;
 
 /**
@@ -30,7 +30,7 @@ public class Timeline extends Button {
 		this.canva = canva;
 		this.setGraphic((canva.isRotating()?pause:play));
 		this.setOnAction(e -> onClick());
-		this.setStyle(ButtonsConst.getButtonStyle());
+		this.setStyle(ButtonsAttributes.getButtonStyle());
 	}
 	
 	/**

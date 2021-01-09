@@ -6,11 +6,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import utils.Icon;
-import view.ButtonsConst;
+import view.ButtonsAttributes;
 
 /**
  * Creation of moving buttons
- * <p>This class is used to create the moving buttons linked to the {@link Figure}</p>
+ * <p>This class is used to create the translation buttons linked to the {@link Figure}</p>
  * @author Groupe G1
  */
 public class Translation extends GridPane{
@@ -18,26 +18,26 @@ public class Translation extends GridPane{
 	private Button up,down,left,right;
 	
 	/**
-	 * Create the moving buttons panel linked to {@link Figure}
+	 * Create the translation buttons panel linked to {@link Figure}
 	 * @param fig
 	 * 			The {@link Figure} the buttons are linked to
 	 */
 	public Translation(Figure fig){
 		
 		this.up = this.createButton("up");
-		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
+		up.setOnAction(e->fig.VDeplace(-ButtonsAttributes.getVALEUR_DE_DEPLACEMENT_Y()));
 		this.down = this.createButton("down");
 		down.setOnAction(e->{
-			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
+			fig.VDeplace(ButtonsAttributes.getVALEUR_DE_DEPLACEMENT_Y());
 		});
 		
 		this.left = this.createButton("left");
 		left.setOnAction(e->{
-			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
+			fig.HDeplace(-ButtonsAttributes.getVALEUR_DE_DEPLACEMENT_X());
 		});
 		this.right = this.createButton("right");	
 		right.setOnAction(e->{
-			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
+			fig.HDeplace(ButtonsAttributes.getVALEUR_DE_DEPLACEMENT_X());
 		});
 		
 		this.setPadding(new Insets(0,35,0,35));
@@ -52,7 +52,7 @@ public class Translation extends GridPane{
 		this.setMaxHeight(180);
 	}
 	/**
-	 * Create a moving button with an image
+	 * Create a translation button with an image
 	 * @param imgName
 	 * 			The image's name
 	 * @return {@link Button}
@@ -63,8 +63,8 @@ public class Translation extends GridPane{
 		ImageView img = Icon.createButtonIcon(imgName);
 		
 		res = new Button("",img);
-		res.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		res.setStyle(ButtonsConst.getButtonStyle());
+		res.setPrefSize(ButtonsAttributes.getButtonSize(),ButtonsAttributes.getButtonSize());
+		res.setStyle(ButtonsAttributes.getButtonStyle());
 		
 		return res;
 	}

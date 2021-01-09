@@ -20,7 +20,7 @@ import utils.Subject;
  * <p>This class is used to manage the display of the {@link Figure}</p>
  * @author Groupe G1
  *	Implements {@link Observer}
- *	exctends {@link Canvas}
+ *	extends {@link Canvas}
  */
 public class CanvasFigure extends Canvas implements Observer {
 
@@ -68,8 +68,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	private void resetTimeline() {
 		if(timeline!=null) timeline.stop();
 		rotating = false;
-		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
-			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
+		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineAttributes.TEMPSDACTUALISATION), e -> {
+			fig.rotate(TimelineAttributes.XROTATIONVALUE, TimelineAttributes.YROTATIONVALUE ,TimelineAttributes.ZROTATIONVALUE);
 			//visualUpdate();
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);

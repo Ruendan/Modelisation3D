@@ -9,8 +9,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import view.errors.ErrorScene;
 
 /**
+ * Open the file chooser
+ * <p>Open a configured system file explorer that allows the user to choose its own ply files</p>
  * 
- * @author Dubois Quentin, Camus Sylvain
+ * @author Groupe G1
  * 
  * @apiNote Thank to Sylvain, who already had this kind 
  * of problem to solve. It's mainly its work that i 
@@ -26,7 +28,7 @@ public class FileChooser {
 	private FileChooser() {};
 	
 	/**
-	 * 
+	 * Open the system's file explorer
 	 * @return the File that will be chosen by the user.
 	 */
 	public static File pathSelector() { //sert a choisir des données externe.
@@ -49,16 +51,6 @@ public class FileChooser {
 			res = chooser.getSelectedFile();
 		}
 		return res;
-	}
-	
-	
-	/**
-	 * Enjoy the test !
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		File f = pathSelector();
-		System.out.println(f);
 	}
 }
 

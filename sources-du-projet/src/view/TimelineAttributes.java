@@ -1,6 +1,11 @@
 package view;
 
-public class TimelineConst {
+/**
+ * Creation of timeline constants
+ * <p>This class is used to store all the timeline's constants</p>
+ * @author Groupe G1
+ */
+public class TimelineAttributes {
 	
 	protected static double TEMPSDACTUALISATION = 0.05;
 	protected static double XROTATIONVALUE = 5;
