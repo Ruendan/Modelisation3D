@@ -21,6 +21,7 @@ public class Rotation extends GridPane{
 			YDOWNIMG = IconConstants.createButtonIcon("yDown"),
 			ZUPIMG = IconConstants.createButtonIcon("zUp"),
 			ZDOWNIMG = IconConstants.createButtonIcon("zDown");
+	
 	/**
 	 * Create the rotation buttons panel linked to {@link Figure}
 	 * @param fig
@@ -29,12 +30,10 @@ public class Rotation extends GridPane{
 	public Rotation(CanvasFigure canva){
 		super();
 		final Button xup,xdown,yup,ydown,zup,zdown;
-		
 		xup = new Button("",XUPIMG);
 		xup.setOnAction(e ->{
 			canva.getFigure().rotateX(ButtonsConstants.getValeurRotation());
 		});
-		
 		xdown = new Button("",XDOWNIMG);
 		
 		xdown.setOnAction(e ->{
@@ -59,15 +58,12 @@ public class Rotation extends GridPane{
 		zup.setOnAction(e ->{
 			canva.getFigure().rotateZ(ButtonsConstants.getValeurRotation());
 		});
-		
 		zdown = new Button("",ZDOWNIMG);
 		zdown.setOnAction(e ->{
 			canva.getFigure().rotateZ(-ButtonsConstants.getValeurRotation());
 		});
-		
 		zup.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize()); zdown.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
 		zup.setStyle(ButtonsConstants.getButtonStyle()); zdown.setStyle(ButtonsConstants.getButtonStyle());
-		
 		
 		this.setHgap(10);
 		this.setVgap(20);
