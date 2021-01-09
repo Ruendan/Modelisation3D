@@ -2,33 +2,32 @@ package view.buttons;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import utils.Icon;
-import view.ButtonsConst;
+import utils.IconConstants;
+import view.ButtonsConstants;
 import view.CanvasFigure;
 
 public class ButtonTimeline extends Button {
 
-	CanvasFigure canva;
+	private final CanvasFigure canva;
 	
-	private static ImageView play,pause;
+	private static final ImageView PLAY = IconConstants.createButtonIcon("play"), PAUSE = IconConstants.createButtonIcon("pause");
 	
 	public ButtonTimeline(CanvasFigure canva) {
-		play = Icon.createButtonIcon("play");
-		pause = Icon.createButtonIcon("pause");
+		super();
 		
 		this.canva = canva;
-		this.setGraphic((canva.isRotating()?pause:play));
+		this.setGraphic((canva.isRotating()?PAUSE:PLAY));
 		this.setOnAction(e -> onClick());
-		this.setStyle(ButtonsConst.getButtonStyle());
+		this.setStyle(ButtonsConstants.getButtonStyle());
 	}
 	
 	public void onClick() {
 		if(canva.isRotating()) {
 			canva.stopRotation();
-			this.setGraphic(play);
+			this.setGraphic(PLAY);
 		}else {
 			canva.startRotation();
-			this.setGraphic(pause);
+			this.setGraphic(PAUSE);
 		}
 	}
 }

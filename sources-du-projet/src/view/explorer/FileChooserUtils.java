@@ -6,7 +6,7 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import view.errors.ErrorScene;
+import view.errors.ErrorSceneConstants;
 
 /**
  * 
@@ -18,12 +18,12 @@ import view.errors.ErrorScene;
  * on this project too)
  *
  */
-public class FileChooser {
+public final class FileChooserUtils {
 	
 	/**
 	 * A private constructor, making the Class uninstanciable.
 	 */
-	private FileChooser() {};
+	private FileChooserUtils() {};
 	
 	/**
 	 * 
@@ -36,15 +36,15 @@ public class FileChooser {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch(Exception ex) {
-			ErrorScene.display(ex);
+			ErrorSceneConstants.display(ex);
 		}
 		
-		JFileChooser chooser = new JFileChooser();
+		final JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Selectionnez le Fichier PLY à ajouter");
 		chooser.setAcceptAllFileFilterUsed(false);
 		chooser.addChoosableFileFilter(new FileNameExtensionFilter("PLY Files", "ply"));
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		int returnVal = chooser.showOpenDialog(chooser);
+		final int returnVal = chooser.showOpenDialog(chooser);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			res = chooser.getSelectedFile();
 		}
@@ -56,8 +56,8 @@ public class FileChooser {
 	 * Enjoy the test !
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		File f = pathSelector();
+	public static void main() {
+		final File f = pathSelector();
 		System.out.println(f);
 	}
 }

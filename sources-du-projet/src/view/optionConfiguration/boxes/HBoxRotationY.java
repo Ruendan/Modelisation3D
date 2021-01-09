@@ -8,6 +8,7 @@ import view.optionConfiguration.controls.RotationYSpinner;
 public class HBoxRotationY extends ConfigurationHBox{
 	
 	public HBoxRotationY() {
+		super();
 		this.spinner = new RotationYSpinner();
 		this.label = new Label("Rotation sur Y (Mode Auto): ");
 		this.getChildren().addAll(label, spinner);

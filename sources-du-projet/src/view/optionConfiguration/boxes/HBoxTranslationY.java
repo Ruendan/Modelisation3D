@@ -6,7 +6,9 @@ import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.TranslationYSpinner;
 
 public class HBoxTranslationY extends ConfigurationHBox {
+	
 	public HBoxTranslationY() {
+		super();
 		this.spinner = new TranslationYSpinner();
 		this.label = new Label("Translation sur Y : ");
 		this.getChildren().addAll(label, spinner);

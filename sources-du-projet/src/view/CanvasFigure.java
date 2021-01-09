@@ -1,6 +1,5 @@
 package view;
 
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,20 +29,20 @@ public class CanvasFigure extends Canvas implements Observer {
 	private boolean rotating;
 
 	private boolean drawEdges;
-	private boolean useShadow = true;
-	private Vecteur vVue = Vecteur.getDirecteur(0,0,1);
-	private Vecteur vLumière = Vecteur.getDirecteur(1,1,1);
+	private boolean useShadow = true; //faut que je le fasse (Sylvain)
+	private final Vecteur vVue = Vecteur.getDirecteur(0,0,1);
+	private Vecteur vLumiere = Vecteur.getDirecteur(1,1,1); //faut que je le fasse (Sylvain)
 	
 	private double opacity = 1;
 	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
 	private Color figureFillColor = Color.rgb(135, 206, 250, opacity);
 	
 	
-	private Color figureStrokeColor = Color.BLACK;
+	private final Color figureStrokeColor = Color.BLACK;
 	private double figureLineWidth = 0.2;
 
 	private GraphicsContext gc;
-	private View MainWindow;
+	private View mainWindow;
 	private static final double DEFAULT_WIDTH = 800;
 	private static final double DEFAULT_HEIGHT = 800;
 
@@ -57,6 +56,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * 			The height of your {@link Canvas}
 	 */
 	public CanvasFigure(double width, double height) {
+		super();
 		this.gc = this.getGraphicsContext2D();
 		this.setWidth(width);
 		this.setHeight(height);
@@ -68,8 +68,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	private void resetTimeline() {
 		if(timeline!=null) timeline.stop();
 		rotating = false;
-		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
-			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
+		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConstants.tempsActualisation), e -> {
+			fig.rotate(TimelineConstants.xRotationValue, TimelineConstants.yRotationValue ,TimelineConstants.zRotationValue);
 			//visualUpdate();
 		}));
 		timeline.setCycleCount(Animation.INDEFINITE);
@@ -83,7 +83,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	public CanvasFigure(View view) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.MainWindow = view;
+		this.mainWindow = view;
 	}
 	
 	/**
@@ -141,7 +141,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	public void setFigure(Figure fig) {
 		if (this.fig != null)
 			this.fig.detach(this);
-		this.MainWindow.updateTitle(fig.getName());
+		this.mainWindow.updateTitle(fig.getName());
 		this.fig = fig;
 		this.fig.attach(this);
 		this.centerFigure();
@@ -189,7 +189,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	private void printFill(Face f) {
 		Color faceFillColor = figureFillColor;
 		if(fig.isColored()) {
-			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue());
+			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue()); //DE ME TEEEER
 		}
 		if(useShadow) {
 			double red = faceFillColor.getRed()*f.getExposition();
@@ -211,7 +211,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	}
 
 	private void convert3d2d() {
-		for (Point p : fig.getPoints())
+		for (final Point p : fig.getPoints())
 			Matrix.transformation(p);
 	}
 	
@@ -220,7 +220,7 @@ public class CanvasFigure extends Canvas implements Observer {
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
 
-		for (int j = 0; j < face.getPoints().size(); j++) {
+		for (int j = 0; j < face.getPoints().size(); j++) { //demeter
 			coord[0][j] = face.getPoints().get(j).getX();
 			coord[1][j] = face.getPoints().get(j).getY();
 		}
@@ -242,7 +242,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#printFigure()
 	 */
 	public void printFigureLite() {
-		for (Face f : fig.getFaces()) {
+		for (final Face f : fig.getFaces()) {
 			initialiseCoordsFromFace(f);
 			printFace(f);
 		}
@@ -256,7 +256,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	@Override
 	public void update(Subject subj) {
-		fig.tri(vVue,vLumière);
+		fig.tri(vVue,vLumiere);
 		visualUpdate();
 	}
 
@@ -303,7 +303,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * Put the {@link Figure} on the center of the {@link Canvas}
 	 */
 	public void centerFigure() {
-		double[] extreme = fig.getExtremePoint();
+		final double[] extreme = fig.getExtremePoint();
 		double ext = 0;
 		for (int i = 0; i < extreme.length - 2; i++) {
 			if (ext < Math.abs(extreme[i]))

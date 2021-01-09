@@ -4,31 +4,33 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
-import utils.Icon;
-import view.ButtonsConst;
+import utils.IconConstants;
+import view.ButtonsConstants;
 
 public class Zoom extends GridPane{
 	
-	private Button in,out;
-	private static ImageView inImg,lessImg;
+	
+	private static final ImageView INIMG = IconConstants.createButtonIcon("plus"),
+			LESSIMG = IconConstants.createButtonIcon("less");
 	
 	public Zoom(Figure fig){
-		inImg = Icon.createButtonIcon("plus");
-		lessImg = Icon.createButtonIcon("less");
+		super();
 		
-		this.in = new Button("", inImg);
+		final Button in,out;
+		
+		in = new Button("", INIMG);
 		in.setOnAction(e->{
-			fig.zoom(1+ButtonsConst.getVALEUR_DE_ZOOM());
+			fig.zoom(1+ButtonsConstants.getValeurZoom());
 		});
-		this.in.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.in.setStyle(ButtonsConst.getButtonStyle());
+		in.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		in.setStyle(ButtonsConstants.getButtonStyle());
 		
-		this.out = new Button("", lessImg);
+		out = new Button("", LESSIMG);
 		out.setOnAction(e->{
-			fig.zoom(1-ButtonsConst.getVALEUR_DE_ZOOM());
+			fig.zoom(1-ButtonsConstants.getValeurZoom());
 		});
-		this.out.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.out.setStyle(ButtonsConst.getButtonStyle());
+		out.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		out.setStyle(ButtonsConstants.getButtonStyle());
 		
 		this.setHgap(10);
 		this.setVgap(10);

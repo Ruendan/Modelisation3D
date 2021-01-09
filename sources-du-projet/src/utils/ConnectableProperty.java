@@ -5,6 +5,7 @@ public class ConnectableProperty extends ObservableProperty implements Observer 
 	protected boolean propagating;
 
 	public ConnectableProperty() {
+		super();
 		propagating = false;
 	}
 

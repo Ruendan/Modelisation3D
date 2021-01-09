@@ -5,6 +5,11 @@ public class ObservableProperty extends Subject {
 
 	protected Object value;
 
+	public ObservableProperty() {
+		super();
+		value = new Object();
+	}
+	
 	public Object getValue() {
 		return value;
 	}

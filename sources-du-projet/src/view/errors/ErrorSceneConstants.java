@@ -6,14 +6,14 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ErrorScene {
+public class ErrorSceneConstants {
 	
 	public static void display(Exception e) {
-		Stage s = new Stage();
+		final Stage s = new Stage();
 		s.setTitle("Erreur : " + e.getMessage());
 		s.initModality(Modality.APPLICATION_MODAL);
 		
-		HBox layout = new HBox();
+		final HBox layout = new HBox();
 		layout.getChildren().add(new Label(e.toString()));
 		
 		

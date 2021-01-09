@@ -7,6 +7,7 @@ public class ObservableString extends Subject {
 	
 	public ObservableString() {
 		super();
+		text = "";
 	}
 	
 	public void setText(String text) {

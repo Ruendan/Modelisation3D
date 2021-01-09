@@ -2,6 +2,7 @@ package view.buttons;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
+import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Labeled;
@@ -14,7 +15,10 @@ public class ToggleSwitch extends Labeled {
 	private static final PseudoClass PSEUDO_CLASS_SELECTED =
 			PseudoClass.getPseudoClass("selected");
 	
+	private BooleanProperty value;
+	
 	public ToggleSwitch() {
+		super();
 		init();
 	}
 	
@@ -26,8 +30,6 @@ public class ToggleSwitch extends Labeled {
 	private void init() {
 		getStyleClass().setAll(DEFAULT_STYLE_CLASS);
 	}
-	
-	private BooleanProperty value;
 	
 	public final void setValue(boolean value) {
 		selectedProperty().set(value);

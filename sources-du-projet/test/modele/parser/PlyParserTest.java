@@ -3,6 +3,7 @@ package modele.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import modele.parser.exception.PlyParserException;
 class PlyParserTest {
 
 	private Ply tested;
+	private PlyParser parser;
 	private List<Point> expectedListPoints;
 	private Set<Point> expectedSetPoints;
 	
@@ -27,9 +29,10 @@ class PlyParserTest {
 	
 	@BeforeEach
 	public void initialise() {
+		parser = PlyParser.getInstance();
 		try {
-			tested = PlyParser.loadPly("cube");
-		} catch (PlyParserException e) {
+			tested = parser.loadPly("cube");
+		} catch (PlyParserException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		

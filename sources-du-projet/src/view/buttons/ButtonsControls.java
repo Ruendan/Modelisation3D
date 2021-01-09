@@ -8,18 +8,19 @@ import view.CanvasFigure;
 
 public class ButtonsControls extends HBox {
 	
-	private GridPane buttons_rotation, buttons_translation, buttons_zoom;
-	
 	public ButtonsControls(CanvasFigure canva) {
-	
-		this.buttons_rotation = ButtonsFactory.makeButton("Rotation", canva);
-		this.buttons_translation = ButtonsFactory.makeButton("Translation", canva);
-		this.buttons_zoom = ButtonsFactory.makeButton("Zoom", canva);
-
-		this.getChildren().addAll(buttons_rotation, buttons_translation,buttons_zoom);		
+		super();
+		final GridPane buttonsRotation, buttonsTranslation, buttonsZoom;
+		
+		buttonsRotation = ButtonsFactory.makeButton("Rotation", canva);
+		buttonsTranslation = ButtonsFactory.makeButton("Translation", canva);
+		buttonsZoom = ButtonsFactory.makeButton("Zoom", canva);
+		buttonsZoom.setAlignment(Pos.BOTTOM_RIGHT);
+		
+		this.getChildren().addAll(buttonsRotation, buttonsTranslation,buttonsZoom);		
 		
 		this.setPadding(new Insets(5,0,0,10));
 		this.setMaxSize(400, 250);
-		this.buttons_zoom.setAlignment(Pos.BOTTOM_RIGHT);
+		
 	}
 }

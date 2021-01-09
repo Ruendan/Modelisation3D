@@ -2,25 +2,25 @@ package view.optionConfiguration.controls;
 
 import view.optionConfiguration.Element;
 
-public class ConfigurationSpinnerFactory {
+public final class ConfigurationSpinnerFactory { // On aurait du rajout Factory a la liste en temps que mot de fin
 	
 	private ConfigurationSpinnerFactory() {}
 	
 	public static ConfigurationSpinner getSpinner(Element element) {
 		switch(element) {
-		case RotateX:
+		case ROTATEX:
 			return new RotationXSpinner();
-		case RotateY:
+		case ROTATEY:
 			return new RotationYSpinner();
-		case RotateZ:
+		case ROTATEZ:
 			return new RotationZSpinner();
-		case Zoom:
+		case ZOOM:
 			return new ZoomSpinner();
-		case TranslationX:
+		case TRANSLATIONX:
 			return new TranslationXSpinner();
-		case TranslationY:
+		case TRANSLATIONY:
 			return new TranslationYSpinner();
-		case TimelineSpeed:
+		case TIMELINESPEED:
 			return new ActualisationTimeSpinner();
 		default: return null;
 		}

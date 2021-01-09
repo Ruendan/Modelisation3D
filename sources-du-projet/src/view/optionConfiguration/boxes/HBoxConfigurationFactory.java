@@ -2,24 +2,24 @@ package view.optionConfiguration.boxes;
 
 import view.optionConfiguration.Element;
 
-public class HBoxConfigurationFactory {
+public final class HBoxConfigurationFactory {  // On aurait du rajouter Factory au PMD
 	private HBoxConfigurationFactory() {}
 	
 	public static ConfigurationHBox getConfigurationBox(Element element) {
 		switch(element) {
-		case RotateX:
+		case ROTATEX:
 			return new HBoxRotationX();
-		case RotateY:
+		case ROTATEY:
 			return new HBoxRotationY();
-		case RotateZ:
+		case ROTATEZ:
 			return new HBoxRotationZ();
-		case Zoom:
+		case ZOOM:
 			return new ZoomBox();
-		case TranslationX:
+		case TRANSLATIONX:
 			return new HBoxTranslationX();
-		case TranslationY:
+		case TRANSLATIONY:
 			return new HBoxTranslationY();
-		case TimelineSpeed:
+		case TIMELINESPEED:
 			return new HBoxActualisationTime();
 		default:
 			return null;

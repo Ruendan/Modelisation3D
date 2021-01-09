@@ -37,11 +37,11 @@ import javafx.scene.layout.StackPane;
  */
 public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
 	private final StackPane thumb;	
-	double thumbTarget;
+	private double thumbTarget;
 	private final StackPane thumbArea;
 	private final Label label;
 	private final StackPane labelContainer;
-
+	private final ToggleSwitch toggleSwitch;
 	/**
 	 * Constructor for all ToggleSwitchSkin instances.
 	 *
@@ -49,7 +49,8 @@ public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
 	 */
 	public ToggleSwitchSkin(ToggleSwitch control) {
 		super(control);
-
+		
+		this.toggleSwitch = control;
 		thumb = new StackPane();
 		thumbArea = new StackPane();
 		label = new Label();
@@ -72,15 +73,11 @@ public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
 	}
 
 	private void selectedStateChanged() {
-		// Stop the transition if it was already running, has no effect otherwise.
-		 if (getSkinnable().isToggle()) {
-        	setToggle();
-            //transition.setRate(1.0);
-        	//transition.jumpTo(Duration.ZERO);
-        } else {
-        	// If we are not selected, we need to go from right to left.
-        	setUnToggle();
-        }
+		if (toggleSwitch.isToggle()) {
+			setToggle();
+		} else {
+			setUnToggle();
+		}
 	}
 
 	private void setUnToggle() {
@@ -104,14 +101,13 @@ public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
-		ToggleSwitch toggleSwitch = getSkinnable();
-		double thumbWidth = snapSize(thumb.prefWidth(-1));
-		double thumbHeight = snapSize(thumb.prefHeight(-1));
+		final double thumbWidth = snapSize(thumb.prefWidth(-1));
+		final double thumbHeight = snapSize(thumb.prefHeight(-1));
 		thumb.resize(thumbWidth, thumbHeight);
 		
-		double thumbAreaY = snapPosition(contentY);
-		double thumbAreaWidth = snapSize(thumbArea.prefWidth(-1));
-		double thumbAreaHeight = snapSize(thumbArea.prefHeight(-1));
+		final double thumbAreaY = snapPosition(contentY);
+		final double thumbAreaWidth = snapSize(thumbArea.prefWidth(-1));
+		final double thumbAreaHeight = snapSize(thumbArea.prefHeight(-1));
 
 		thumbArea.resize(thumbAreaWidth, thumbAreaHeight);
 		thumbArea.setLayoutX(contentWidth - thumbAreaWidth);
@@ -147,12 +143,12 @@ public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
 
 	@Override
 	protected double computeMaxWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
-		return getSkinnable().prefWidth(height);
+		return toggleSwitch.prefWidth(height);
 	}
 
 	@Override
 	protected double computeMaxHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
-		return getSkinnable().prefHeight(width);
+		return toggleSwitch.prefHeight(width);
 	}
 
 }

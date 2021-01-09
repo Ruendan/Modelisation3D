@@ -3,7 +3,7 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Subject {
+public class Subject {
     protected List<Observer> attached;
 
     public Subject() {
@@ -23,14 +23,14 @@ public abstract class Subject {
     }
 
     public void notifyObservers() {
-        for (Observer o : attached) {
+        for (final Observer o : attached) {
             o.update(this);
         }
     }
 
 
     public void notifyObservers(Object data) {
-        for (Observer o : attached) {
+        for (final Observer o : attached) {
             o.update(this, data);
         }
     }

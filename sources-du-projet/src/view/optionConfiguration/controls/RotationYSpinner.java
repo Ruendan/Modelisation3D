@@ -1,11 +1,11 @@
 package view.optionConfiguration.controls;
 
-import view.TimelineConst;
+import view.TimelineConstants;
 
 public class RotationYSpinner extends ConfigurationSpinner {
 	public RotationYSpinner() {
-		super(TimelineConst.getDefaulty());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineConst.setYRotationValue((double)newValue));
+		super(TimelineConstants.getDefaulty());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineConstants.setYRotationValue((double)newValue));
 		this.setEditable(true);
 	}
 }

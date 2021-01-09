@@ -9,6 +9,7 @@ public class OptionConfigurationStage extends Stage{
 	private static final String TITRE = "Configuration de la rotation";
 	
 	public OptionConfigurationStage() {
+		super();
 		this.setTitle(TITRE);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setScene(new Scene(new OptionConfigurationLayout()));

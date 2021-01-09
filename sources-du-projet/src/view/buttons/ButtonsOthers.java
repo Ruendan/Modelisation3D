@@ -7,15 +7,15 @@ import view.CanvasFigure;
 
 public class ButtonsOthers extends HBox {
 	
-	private GridPane bouttons_couleur, bouttons_epaisseur,bouttons_transparency;
-	
 	public ButtonsOthers(CanvasFigure canva) {
+		super();
+		final GridPane bouttonsCouleur, bouttonsEpaisseur,bouttonsTransparency;
+		
+		bouttonsCouleur = ButtonsFactory.makeButton("Color", canva);
+		bouttonsEpaisseur = ButtonsFactory.makeButton("Thickness", canva);
+		bouttonsTransparency = ButtonsFactory.makeButton("Transparency", canva);		
 
-		this.bouttons_couleur = ButtonsFactory.makeButton("Color", canva);
-		this.bouttons_epaisseur = ButtonsFactory.makeButton("Thickness", canva);
-		this.bouttons_transparency = ButtonsFactory.makeButton("Transparency", canva);		
-
-		this.getChildren().addAll(new VBox(bouttons_couleur, bouttons_epaisseur,bouttons_transparency));
+		this.getChildren().addAll(new VBox(bouttonsCouleur, bouttonsEpaisseur,bouttonsTransparency));
 		this.setStyle("-fx-background-color: #f1f1f1;");
 		this.setPrefWidth(200);
 	}

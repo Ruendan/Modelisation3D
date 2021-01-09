@@ -6,7 +6,9 @@ import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.ActualisationTimeSpinner;
 
 public class HBoxActualisationTime extends ConfigurationHBox {
+	
 	public HBoxActualisationTime() {
+		super();
 		this.spinner = new ActualisationTimeSpinner();
 		this.label = new Label("Vitesse de rotation (mode auto) : ");
 		this.getChildren().addAll(label, spinner);

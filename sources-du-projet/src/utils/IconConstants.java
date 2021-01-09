@@ -1,13 +1,15 @@
 package utils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Icon {
+public class IconConstants {
 
 	private static String fs = File.separator;
 	public static final String BUTTONICONSFOLDER = "ressources"+fs+"imgs"+fs+"buttons_icons"+fs;
@@ -16,9 +18,11 @@ public class Icon {
 	public static ImageView createButtonIcon(String imgName) {
 		ImageView res = null;
 		
+		final Path path = Paths.get(BUTTONICONSFOLDER+imgName+EXTENSION);
+		
 		try {
-			res = new ImageView(new Image(new FileInputStream(BUTTONICONSFOLDER+imgName+EXTENSION)));
-		} catch (FileNotFoundException e) {
+			res = new ImageView(new Image(Files.newInputStream(path)));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return res;

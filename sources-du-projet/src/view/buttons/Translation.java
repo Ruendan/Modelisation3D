@@ -5,44 +5,45 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
-import utils.Icon;
-import view.ButtonsConst;
+import utils.IconConstants;
+import view.ButtonsConstants;
 
 public class Translation extends GridPane{
 	
-	private Button up,down,left,right;
-	private static ImageView upImg,downImg,leftImg,rightImg;
+	
+	private static final ImageView UPIMG = IconConstants.createButtonIcon("up"),
+									DOWNIMG = IconConstants.createButtonIcon("down"),
+									LEFTIMG = IconConstants.createButtonIcon("left"),
+									RIGHTIMG = IconConstants.createButtonIcon("right");
 	
 	public Translation(Figure fig){
-		upImg = Icon.createButtonIcon("up");
-		downImg = Icon.createButtonIcon("down");
-		leftImg = Icon.createButtonIcon("left");
-		rightImg = Icon.createButtonIcon("right");
+		super();
+		final Button up,down,left,right;
 		
-		this.up = new Button("",upImg);
-		up.setOnAction(e->fig.VDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y()));
-		this.down = new Button("", downImg);
+		up = new Button("",UPIMG);
+		up.setOnAction(e->fig.vDeplace(-ButtonsConstants.getValeurTranslation()));
+		down = new Button("", DOWNIMG);
 		down.setOnAction(e->{
-			fig.VDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_Y());
+			fig.vDeplace(ButtonsConstants.getValeurTranslation());
 		});
 		
-		this.up.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.down.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.up.setStyle(ButtonsConst.getButtonStyle());
-		this.down.setStyle(ButtonsConst.getButtonStyle());
+		up.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		down.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		up.setStyle(ButtonsConstants.getButtonStyle());
+		down.setStyle(ButtonsConstants.getButtonStyle());
 		
-		this.left = new Button("",leftImg);
+		left = new Button("",LEFTIMG);
 		left.setOnAction(e->{
-			fig.HDeplace(-ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
+			fig.hDeplace(-ButtonsConstants.getValeurTranslation());
 		});
-		this.right = new Button("",rightImg);	
+		right = new Button("",RIGHTIMG);	
 		right.setOnAction(e->{
-			fig.HDeplace(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
+			fig.hDeplace(ButtonsConstants.getValeurTranslation());
 		});
-		this.left.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.right.setPrefSize(ButtonsConst.getButtonSize(),ButtonsConst.getButtonSize());
-		this.left.setStyle(ButtonsConst.getButtonStyle());
-		this.right.setStyle(ButtonsConst.getButtonStyle());
+		left.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		right.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
+		left.setStyle(ButtonsConstants.getButtonStyle());
+		right.setStyle(ButtonsConstants.getButtonStyle());
 		
 		this.setPadding(new Insets(0,35,0,35));
 		this.setHgap(10);

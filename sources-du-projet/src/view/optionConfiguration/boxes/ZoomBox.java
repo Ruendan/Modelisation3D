@@ -8,6 +8,7 @@ import view.optionConfiguration.controls.ZoomSpinner;
 public class ZoomBox extends ConfigurationHBox {
 	
 	public ZoomBox() {
+		super();
 		this.spinner = new ZoomSpinner();
 		this.label = new Label("Valeur de Zoom : ");
 		this.getChildren().addAll(label, spinner);

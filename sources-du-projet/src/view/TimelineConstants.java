@@ -1,42 +1,42 @@
 package view;
 
-public class TimelineConst {
+public class TimelineConstants {
 	
-	protected static double TEMPSDACTUALISATION = 0.05;
-	protected static double XROTATIONVALUE = 5;
-	protected static double YROTATIONVALUE = 5;
-	protected static double ZROTATIONVALUE = 5;
+	protected static double tempsActualisation = 0.05;
+	protected static double xRotationValue = 5;
+	protected static double yRotationValue = 5;
+	protected static double zRotationValue = 5;
 	
 	public static void setXRotationValue(double value) {
-		XROTATIONVALUE = value;
+		xRotationValue = value;
 	}
 	
 	public static void setYRotationValue(double value) {
-		YROTATIONVALUE = value;
+		yRotationValue = value;
 	}
 	
 	public static void setZRotationValue(double newValue) {
-		ZROTATIONVALUE = newValue;
+		zRotationValue = newValue;
 	}
 	
 	public static double getTempsdactualisation() {
-		return TEMPSDACTUALISATION;
+		return tempsActualisation;
 	}
 	
 	public static double getDefaultx() {
-		return XROTATIONVALUE;
+		return xRotationValue;
 	}
 	
 	public static double getDefaulty() {
-		return YROTATIONVALUE;
+		return yRotationValue;
 	}
 	
 	public static double getDefaultz() {
-		return ZROTATIONVALUE;
+		return zRotationValue;
 	}
 
 	public static void setTempsdactualisation(double seconds) {
-		TEMPSDACTUALISATION = seconds;
+		tempsActualisation = seconds;
 		
 	}
 	

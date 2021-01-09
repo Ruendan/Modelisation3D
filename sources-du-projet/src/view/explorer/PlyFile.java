@@ -1,6 +1,7 @@
 package view.explorer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import modele.modelisation.Ply;
 import modele.parser.PlyParser;
@@ -21,30 +22,34 @@ public class PlyFile extends File{
 	private static final long serialVersionUID = 1L;
 	
 	private Ply ply;
-	private File file;
-	boolean header;
+	private final File file;
+	private boolean header;
+	private final PlyParser parser;
 
 	/**
 	 * 
 	 * @param file - The File toward the PlyFile
 	 * Put the "HeaderPly" in the ply.
+	 * @throws FileNotFoundException 
 	 * 
 	 */
-	public PlyFile(File file) throws PlyParserException {
+	public PlyFile(File file) throws PlyParserException, FileNotFoundException {
 		super(file.getAbsolutePath());
 		header = true;
 		this.file=file;
-		ply = PlyParser.loadHeader(file);
+		parser = PlyParser.getInstance();
+		ply = parser.loadHeader(file);
 	}
 	
 	/**
 	 * Verify if the Ply file is the header of a complete Ply File.
 	 * If it's still a Header, it turns the PlyFile into a 
 	 * Complete PlyFile
+	 * @throws FileNotFoundException 
 	 */
-	private void update() throws PlyParserException {
+	private void update() throws PlyParserException, FileNotFoundException {
 		if(header) {
-			ply = PlyParser.loadPly(file);
+			ply = parser.loadPly(file);
 			header = false;
 		}
 	}
@@ -53,14 +58,15 @@ public class PlyFile extends File{
 	 * 
 	 * @return The Ply which targets the file.
 	 * @throws PlyParserException 
+	 * @throws FileNotFoundException 
 	 */
-	public Ply getPly() throws PlyParserException {
+	public Ply getPly() throws PlyParserException, FileNotFoundException {
 		update();
 		return ply;
 	}
 	
-	public void unload() throws PlyParserException{
-		this.ply = PlyParser.loadHeader(file);
+	public void unload() throws PlyParserException, FileNotFoundException{
+		this.ply = parser.loadHeader(file);
 		header = true;
 	}
 

@@ -1,12 +1,12 @@
 package view.optionConfiguration.controls;
 
-import view.ButtonsConst;
+import view.ButtonsConstants;
 
 public class TranslationXSpinner extends ConfigurationSpinner {
 
 	public TranslationXSpinner() {
-		super(ButtonsConst.getVALEUR_DE_DEPLACEMENT_X());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsConst.setVALEUR_DE_DEPLACEMENT_X((double)newValue));
+		super(ButtonsConstants.getValeurTranslation());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsConstants.setValeurTranslation((double)newValue));
 		this.setEditable(true);
 	}
 

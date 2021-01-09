@@ -15,7 +15,7 @@ import modele.modelisation.Point;
 import modele.parser.exception.PlyParserException;
 import modele.parser.exception.UnsupportedFileFormat;
 
-public class PlyParser {
+public final class PlyParser {
 	
 	private int xpos;
 	private int ypos;
@@ -32,111 +32,109 @@ public class PlyParser {
 	
 	private String[] lines;
 	
-	private ArrayList<String> comment;
+	private List<String> comment;
 	private List<Color> couleurs;
 	private Set<Point> points;
 	private List<Point> pointsTotaux;
 	private List<Face> faces;
 	
-	public static Ply loadPly(String nom) throws PlyParserException {
-		PlyParser pp = new PlyParser();
-		Ply ply = new Ply();
+	private static PlyParser instance;
+	private PlyParser() {}
+	
+	public static PlyParser getInstance() {
+		if(instance==null)instance = new PlyParser();
+		return instance;
+	}
+	
+	public Ply loadPly(String nom) throws PlyParserException, FileNotFoundException {
+		final Ply ply = new Ply();
 		ply.setName(nom);
-		pp.loadPly(ply, nom);
+		this.loadPly(ply, nom);
 		return ply;
 	}
 	
-	public static Ply loadPly(File file) throws PlyParserException {
-		PlyParser pp = new PlyParser();
-		Ply res = new Ply();
+	public Ply loadPly(File file) throws PlyParserException, FileNotFoundException {
+		final Ply res = new Ply();
 		res.setName(file.getName());
-		pp.loadPly(res,file);
+		this.loadPly(res,file);
 		return res;
 	}
 	
-	public static Ply loadHeader(File file) throws PlyParserException {
-		PlyParser pp = new PlyParser();
-		Ply res = new Ply();
+	public Ply loadHeader(File file) throws PlyParserException, FileNotFoundException {
+		final Ply res = new Ply();
 		res.setName(file.getName());
-		pp.loadHeader(res,file);
+		this.loadHeader(res,file);
 		return res;
 	}
 	
-	public void loadPly(Ply res,String filename) throws PlyParserException {
-		String url = "ressources/plys/";
+	public void loadPly(Ply res,String filename) throws PlyParserException, FileNotFoundException {
+		final String url = "ressources/plys/";
 		loadPly(res,new File(url+filename+".ply"));
 	}
 	
-	public void loadPly(Ply res,File fichier) throws PlyParserException {
+	public void loadPly(Ply res,File fichier) throws PlyParserException, FileNotFoundException {
 		idx = 0;
 		vertex = -1;
 		face = -1;
 		
 		lines = getLines(fichier);
 		
-		if(!(lines.length<12)) {
-			if(handleHeader()&&handleBody()) {
-				res.setVertex(vertex);
-				res.setNbFace(face);
-				res.setPoints(points);
-				res.setFaces(faces);
-				res.setComment(comment);
-				if(isColored)res.setColored();
-			}
+		if(lines.length>12 && handleHeader() && handleBody()) {
+			res.setVertex(vertex);
+			res.setNbFace(face);
+			res.setPoints(points);
+			res.setFaces(faces);
+			res.setComment(comment);
+			if(isColored)res.setColored();
 		}
 	}
 	
-	public static Ply loadHeader(String nom) throws PlyParserException {
-		PlyParser pp = new PlyParser();
-		Ply ply = new Ply();
+	public Ply loadHeader(String nom) throws PlyParserException, FileNotFoundException {
+		final Ply ply = new Ply();
 		ply.setName(nom);
-		pp.loadHeader(ply, nom);
+		this.loadHeader(ply, nom);
 		return ply;
 	}
 	
-	public void loadHeader(Ply res,String filename) throws PlyParserException {
-		String url = "ressources/plys/";
+	public void loadHeader(Ply res,String filename) throws PlyParserException, FileNotFoundException {
+		final String url = "ressources/plys/";
 		loadHeader(res,new File(url+filename+".ply"));
 	}
 	
-	public void loadHeader(Ply res,File fichier) throws PlyParserException {
+	public void loadHeader(Ply res,File fichier) throws PlyParserException, FileNotFoundException {
 		idx = 0;
 		vertex = -1;
 		face = -1;
-		
 		lines = getLines(fichier);
 		
-		if(!(lines.length<12)) {
-			if(handleHeader()) {
-				res.setVertex(vertex);
-				res.setNbFace(face);
-				res.setComment(comment);
-			}
+		if(lines.length>12 && handleHeader()) {
+			res.setVertex(vertex);
+			res.setNbFace(face);
+			res.setComment(comment);
 		}
 	}
 
-	private String[] getLines(File fichier) {
-		try(Scanner sc = new Scanner(fichier)) {
-			StringBuilder content = new StringBuilder();
-			while(sc.hasNextLine())content.append(sc.nextLine()+System.lineSeparator());
-			return content.toString().split(System.lineSeparator());
-		} catch (FileNotFoundException e) {e.printStackTrace();}
-		return null;
+	private String[] getLines(File fichier) throws FileNotFoundException {
+		final StringBuilder content = new StringBuilder();
+		final Scanner sc = new Scanner(fichier);
+		while(sc.hasNextLine())content.append(sc.nextLine()+System.lineSeparator());
+		sc.close();
+		return content.toString().split(System.lineSeparator());
 	}
 	
 	private boolean handleHeader() throws PlyParserException {
 		comment = new ArrayList<>();
-		ParserHeader ph = new ParserHeader(vertex,face,comment,lines);
-		boolean res = ph.handleHeader();
+		final ParserHeader parserHeader = new ParserHeader(comment,lines);
+		final boolean res = parserHeader.handleHeader();
 		
-		xpos = ph.getXpos();
-		ypos = ph.getYpos();
-		zpos = ph.getZpos();
-		idx = ph.getIdx();
-		vertex = ph.getVertex();
-		face = ph.getFace();
-		comment = ph.getComment();
-		setColorPos(ph);
+		xpos = parserHeader.getXpos();
+		ypos = parserHeader.getYpos();
+		zpos = parserHeader.getZpos();
+		idx = parserHeader.getIdx();
+		vertex = parserHeader.getVertex();
+		face = parserHeader.getFace();
+		comment = parserHeader.getComment();
+		setColorPos(parserHeader);
 		return res;
 	}
 
@@ -174,17 +172,17 @@ public class PlyParser {
 	}
 
 	private boolean addPoint(String line) {
-		String tab[] = line.split(" ");
-		for (String string : tab) {
+		final String tab[] = line.split(" ");
+		for (final String string : tab) {
 			try {
 				Double.parseDouble(string);
 			} catch(NumberFormatException e) {
 				return false;
 			}
 		}
-		double x = Double.parseDouble(tab[xpos]);
-		double y = Double.parseDouble(tab[ypos]);
-		double z = Double.parseDouble(tab[zpos]);
+		final double x = Double.parseDouble(tab[xpos]);
+		final double y = Double.parseDouble(tab[ypos]);
+		final double z = Double.parseDouble(tab[zpos]);
 		if(isColored&&!addColor(tab))isColored = false;
 		return addPoint(new Point(x,y,z));
 	}
@@ -209,11 +207,12 @@ public class PlyParser {
 	private boolean addFaces(String line) {
 		int nbPointInFace;
 		
-		String tab[] = line.split(" ");
+		final String tab[] = line.split(" ");
 		if(!testPoint(tab))return false;
-		ArrayList<Point> pointss = new ArrayList<>();
+		final ArrayList<Point> pointss = new ArrayList<>();
 		nbPointInFace = Integer.parseInt(tab[0]);
-		if(nbPointInFace==2) {
+		final int minNbPoint = 2;
+		if(nbPointInFace==minNbPoint) {
 			face--;
 			return true;
 		}
@@ -225,28 +224,30 @@ public class PlyParser {
 		return addFace(new Face(nbPointInFace, pointss));	 
 	}
 
-	private boolean addFaceWithColor(String[] tab, int nbPointInFace, ArrayList<Point> pointss) {
+	private boolean addFaceWithColor(String[] tab, int nbPointInFace, List<Point> pointss) {
 		int red=0,green=0,blue=0;
 		int idx;
+		Color temp;
 		for (int i = 1; i < nbPointInFace+1; i++) {
 			idx = Integer.parseInt(tab[i]);
 			pointss.add(pointsTotaux.get(idx));
-			red+=couleurs.get(idx).getRed();
+			temp = couleurs.get(idx);
+			red+=temp.getRed();
 			
-			green+=couleurs.get(idx).getGreen();
-			blue+=couleurs.get(idx).getBlue();
+			green+=temp.getGreen();
+			blue+=temp.getBlue();
 		}
 		red/=nbPointInFace;
 		green/=nbPointInFace;
 		blue/=nbPointInFace;
-		Face face = new Face(nbPointInFace, pointss);
+		final Face face = new Face(nbPointInFace, pointss);
 		face.setCouleur(new Color(red,green,blue));
 		
 		return addFace(face);	
 	}
 
 	private boolean testPoint(String[] tab) {
-		for (String string : tab) {
+		for (final String string : tab) {
 			try {
 				Integer.parseInt(string);
 			} catch(NumberFormatException e) {

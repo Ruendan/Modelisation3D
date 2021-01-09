@@ -9,13 +9,15 @@ import view.CanvasFigure;
 
 public class ColorPane extends GridPane{
 	
-	private ColorPicker figureColorPicker, canvaColorPicker;
-	private Label titleCP1, titleCP2;
+	private final ColorPicker figureColorPicker, canvaColorPicker;
+	
 
 	public ColorPane(CanvasFigure canva) {
+		super();
+		final Label titleCP1, titleCP2;
 		
-		this.titleCP1 = new Label("Couleur de fond");
-		this.titleCP2 = new Label("Couleur de face");
+		titleCP1 = new Label("Couleur de fond");
+		titleCP2 = new Label("Couleur de face");
 		
 		this.canvaColorPicker = new ColorPicker(canva.getCanvaFillColor());
 		canvaColorPicker.setOnAction(e -> canva.setCanvaFillColor(canvaColorPicker.getValue()));

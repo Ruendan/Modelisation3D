@@ -2,6 +2,8 @@ package modele.modelisation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ class FigureTest {
 	void initialise() {
 		try {
 			cube = new Figure("cube");
-		} catch (PlyParserException e) {
+		} catch (PlyParserException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -61,7 +63,7 @@ class FigureTest {
 	
 	@Test
 	void test_HDeplacer() {
-		cube.HDeplace(10);
+		cube.hDeplace(10);
 		
 		double moyenneAfter = 0;
 		for(Point p : cube.getPoints()) {
@@ -73,7 +75,7 @@ class FigureTest {
 	
 	@Test
 	void test_VDeplacer() {
-		cube.VDeplace(10);
+		cube.vDeplace(10);
 		
 		double moyenneAfter = 0;
 		for(Point p : cube.getPoints())

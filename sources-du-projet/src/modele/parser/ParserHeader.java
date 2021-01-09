@@ -1,6 +1,7 @@
 package modele.parser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import modele.parser.exception.ElementPropertiesError;
 import modele.parser.exception.NotPlyFileException;
@@ -29,18 +30,20 @@ public class ParserHeader {
 	private int vertex;
 	private int face;
 	
-	private ArrayList<String> comment;
+	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",
+			VERTEX = "vertex", FACE = "face", RED = "red", GREEN = "green", BLUE = "blue";
+	private static final int PROPERTY_POS = 1, VALUE_POS = 2, BASICS_LEN = 3;
 	
-	private String[] lines;
+	private List<String> comment;
 	
-	public ParserHeader(int vertex, int face, ArrayList<String> comment, String[] lines) {
+	private final String[] lines;
+	
+	public ParserHeader(List<String> comment, String[] lines) {
 		pointPos = 0;
 		idx = 0;
-		vertex = -1;
-		face = -1;
 		
-		this.vertex = vertex;
-		this.face = face;
+		this.vertex = -1;
+		this.face = -1;
 		this.comment = comment;
 		this.lines = lines;
 	}
@@ -49,18 +52,19 @@ public class ParserHeader {
 		return handleHeader(lines);
 	}
 	
-	boolean handleHeader(String[] lines) throws PlyParserException {
+	private boolean handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
 		initGlobal();
 		
 		if(!checkType(lines[0])) return false;
 		if(!checkFormat(lines[1])) return false;
 		idx=1;
+		String[] line;
 		while(!endHeader) {
 			idx++;
-			String[] line = lines[idx].split(" ");
+			line = lines[idx].split(" ");
 			switch (line[0]) {
-			case "end_header":
+			case END_HEADER:
 				endHeader = true;
 				idx++;
 				break;
@@ -97,23 +101,23 @@ public class ParserHeader {
 	}
 
 	private boolean checkType(String line) throws NotPlyFileException{
-		if(line.equals("ply"))return true;
+		if("ply".equals(line))return true;
 		else {
 			throw new NotPlyFileException();
 		}
 	}
 	
 	private boolean checkFormat(String line) throws UnsupportedFileFormat {
-		if(line.equals("format ascii 1.0"))return true;
+		if("format ascii 1.0".equals(line))return true;
 		throw new UnsupportedFileFormat();
 	}
 	
 	private boolean handleElement(String[] line) throws ElementPropertiesError, PropertyPropertiesError {
-		if(line.length==3 && line[1].equals("vertex") && Integer.parseInt(line[2])>2) {
-			return handleVertex(line[2]);
-		} else if(line.length==3 && line[1].equals("face") && Integer.parseInt(line[2])>0) {
-			return handleFace(line[2]);
-		} else if(line.length==3) {
+		if(line.length==BASICS_LEN && VERTEX.equals(line[PROPERTY_POS]) && Integer.parseInt(line[VALUE_POS])>VALUE_POS) {
+			return handleVertex(line[VALUE_POS]);
+		} else if(line.length==BASICS_LEN && FACE.equals(line[PROPERTY_POS]) && Integer.parseInt(line[VALUE_POS])>0) {
+			return handleFace(line[VALUE_POS]);
+		} else if(line.length==BASICS_LEN) {
 			extraElements += Integer.parseInt(line[2]);
 			extraPropertys++;
 			return handleExtraElement();
@@ -125,17 +129,18 @@ public class ParserHeader {
 	private boolean handleVertex(String fline) throws PropertyPropertiesError {
 		vertex = getNbVertex(fline);
 		boolean endVertex = false;
+		String[] line;
 		while(!endVertex) {
 			idx++;
-			String[] line = lines[idx].split(" ");
+			line = lines[idx].split(" ");
 			switch (line[0]) {
-				case "end_header":
+				case END_HEADER:
 					return false;
-				case "element":
+				case ELEMENT:
 					endVertex = true;
 					idx--;
 					break;
-				case "property":
+				case PROPERTY:
 					handleVertexProperty(line);
 					break;
 				default:
@@ -154,9 +159,9 @@ public class ParserHeader {
 	}
 	
 	private boolean handleVertexProperty(String[] line) throws PropertyPropertiesError {
-		if(line.length==3&&(line[1].equals("float")||line[1].equals("float32"))) {
+		if(line.length==3&&("float".equals(line[1])||"float32".equals(line[1]))) {
 			return handleFloat(line);
-		} else if(line.length==3&&(line[1].equals("uchar"))) {	
+		} else if(line.length==3&&("uchar".equals(line[1]))) {	
 			return handleColor(line);
 		} else {
 			throw new PropertyPropertiesError("header:vertex");
@@ -164,13 +169,13 @@ public class ParserHeader {
 	}
 	
 	private boolean handleFloat(String[] line) throws PropertyPropertiesError {
-		if(line[2].equals("x")&&xpos==-1) {
+		if(line[2].charAt(0)=='x'&&xpos==-1) {
 			xpos=idx-pointPos-1;
 		}
-		else if(line[2].equals("y")&&ypos==-1) {
+		else if(line[2].charAt(0)=='y'&&ypos==-1) {
 			ypos=idx-pointPos-1;
 		}
-		else if(line[2].equals("z")&&zpos==-1) {
+		else if(line[2].charAt(0)=='z'&&zpos==-1) {
 			zpos=idx-pointPos-1;
 		}
 		else {
@@ -180,11 +185,11 @@ public class ParserHeader {
 	}
 
 	private boolean handleColor(String[] line) throws PropertyPropertiesError {
-		if(line[2].equals("red")&&pred==-1) {
+		if(RED.equals(line[VALUE_POS])&&pred==-1) {
 			pred=idx-pointPos-1;
-		} else if(line[2].equals("green")&&pgreen==-1) {
+		} else if(GREEN.equals(line[VALUE_POS])&&pgreen==-1) {
 			pgreen=idx-pointPos-1;
-		} else if(line[2].equals("blue")&&pblue==-1) {
+		} else if(BLUE.equals(line[VALUE_POS])&&pblue==-1) {
 			pblue=idx-pointPos-1;
 		} else {
 			throw new PropertyPropertiesError("couleur:"+line[2]);
@@ -196,17 +201,20 @@ public class ParserHeader {
 	private boolean handleFace(String fline) throws PropertyPropertiesError {
 		face = getNbFace(fline);
 		boolean endFace = false;
+		String[] line;
 		while(!endFace) {
 			idx++;
-			String[] line = lines[idx].split(" ");
+			line = lines[idx].split(" ");
 			switch (line[0]) {
-				case "end_header":
-					endFace = true;
-				case "element":
+				case END_HEADER:
 					endFace = true;
 					idx--;
 					break;
-				case "property":
+				case ELEMENT:
+					endFace = true;
+					idx--;
+					break;
+				case PROPERTY:
 					handleFaceProperty(line);
 					break;
 				default:
@@ -222,7 +230,7 @@ public class ParserHeader {
 	}
 
 	private boolean handleFaceProperty(String[] line) throws PropertyPropertiesError {
-		if(!(line.length>3&&line[1].equals("list"))) {
+		if(!(line.length>3&&"list".equals(line[1]))) {
 			throw new PropertyPropertiesError("header:face");
 		}
 		return true;
@@ -230,17 +238,20 @@ public class ParserHeader {
 
 	private boolean handleExtraElement() {
 		boolean endExtra = false;
+		String[] line;
 		while(!endExtra) {
 			idx++;
-			String[] line = lines[idx].split(" ");
+			line = lines[idx].split(" ");
 			switch (line[0]) {
-				case "end_header":
-					endExtra = true;;
-				case "element":
+				case END_HEADER:
 					endExtra = true;
 					idx--;
 					break;
-				case "property":
+				case ELEMENT:
+					endExtra = true;
+					idx--;
+					break;
+				case PROPERTY:
 					extraPropertys++;
 					break;
 				default:
@@ -273,7 +284,7 @@ public class ParserHeader {
 		return vertex;
 	}
 
-	public ArrayList<String> getComment() {
+	public List<String> getComment() {
 		return comment;
 	}
 

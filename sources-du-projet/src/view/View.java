@@ -1,5 +1,7 @@
 package view;
 
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,21 +43,24 @@ public class View extends Stage{
 	private static final Color BACKGROUND_COLOR = Color.BLACK;
 	private static final CornerRadii BACKGROUND_CORNER_RADII = CornerRadii.EMPTY;
 	private static final Insets BACKGROUND_INSETS = Insets.EMPTY;
+
+	private double x = 0;
+	private double y = 0;
 	
-	public View() throws PlyParserException {
-		this(new Figure(PlyParser.loadPly(DEFAULT_MODEL)));
+	public View() throws PlyParserException, FileNotFoundException {
+		this(new Figure(PlyParser.getInstance().loadPly(DEFAULT_MODEL)));
 	}
 	
 	public View(Figure fig) {
-		
+		super();
 		display = new CanvasFigure(this);
 		
 		middle = createMiddle(fig);
 		middle.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
 		
-		ExplorerLayout modelsList = new ExplorerLayout(this);
+		final ExplorerLayout modelsList = new ExplorerLayout(this);
 		
-		ButtonsOthers right = new ButtonsOthers(display);
+		final ButtonsOthers right = new ButtonsOthers(display);
 		
 		
 		layout = new BorderPane();		
@@ -64,7 +69,7 @@ public class View extends Stage{
 		layout.setRight(right);
 		layout.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR,BACKGROUND_CORNER_RADII, BACKGROUND_INSETS)));
 		
-		Scene mainScene = new Scene(layout, SCENE_WIDTH, SCENE_HEIGHT);
+		final Scene mainScene = new Scene(layout, SCENE_WIDTH, SCENE_HEIGHT);
 		this.setScene(mainScene);
 		
 		this.setMinWidth(SCENE_MIN_WIDTH);
@@ -73,14 +78,14 @@ public class View extends Stage{
 	}
 	
 	private StackPane createMiddle(Figure fig) {
-		StackPane res = new StackPane();
+		final StackPane res = new StackPane();
 		
 		display.setFigure(fig);
 		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));		
 		
-		HBox buttons = new ButtonsControls(display);
-
-		res.getChildren().addAll(display,buttons);
+		final HBox buttons = new ButtonsControls(display);
+		
+		res.getChildren().addAll(display,buttons); //DEMETER
 		StackPane.setAlignment(buttons, Pos.TOP_LEFT);
 		
 		display.setOnMousePressed(e -> {
@@ -94,8 +99,8 @@ public class View extends Stage{
 				fig.rotateX(y-e.getY());
 			}
 			if (e.getButton() == MouseButton.SECONDARY) {
-				fig.HDeplace(e.getX()-x);
-				fig.VDeplace(e.getY()-y);
+				fig.hDeplace(e.getX()-x);
+				fig.vDeplace(e.getY()-y);
 			}
 			if (e.getButton() == MouseButton.MIDDLE) {
 				fig.rotateZ(e.getX()-x);
@@ -105,9 +110,7 @@ public class View extends Stage{
 		  });
 		
 		return res;
-	} 
-	double x = 0;
-	double y = 0;
+	}
 	
 	public void updateMiddle(Figure f){
 		middle = createMiddle(f);

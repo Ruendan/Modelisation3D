@@ -14,9 +14,9 @@ public class Vecteur {
 		this.dirX = dirX;
 		this.dirY = dirY;
 		this.dirZ = dirZ;
-		double x = Math.pow(dirX, 2);
-		double y = Math.pow(dirY, 2);
-		double z = Math.pow(dirZ, 2);
+		final double x = Math.pow(dirX, 2);
+		final double y = Math.pow(dirY, 2);
+		final double z = Math.pow(dirZ, 2);
 		this.norm = Math.sqrt(x+y+z);
 	}
 	
@@ -30,13 +30,13 @@ public class Vecteur {
 	
 	public static Vecteur getNormal(Point a,Point b, Point c) {
 		double nx,ny,nz,nn;
-		Vecteur ab = new Vecteur(a,b);
-		Vecteur ac = new Vecteur(a,c);
+		final Vecteur ab = new Vecteur(a,b);
+		final Vecteur ac = new Vecteur(a,c);
 		nx = ab.dirY*ac.dirZ-ab.dirZ*ac.dirY;
 		ny = ab.dirZ*ac.dirX-ab.dirX*ac.dirZ;
 		nz = ab.dirX*ac.dirY-ab.dirY*ac.dirX;
 		nn = Math.sqrt(nx*nx+ny*ny+nz*nz);
-		Vecteur normal = new Vecteur(nx/nn, ny/nn, nz/nn);
+		final Vecteur normal = new Vecteur(nx/nn, ny/nn, nz/nn);
 		return normal;
 	}
 	
@@ -45,9 +45,8 @@ public class Vecteur {
 	}
 	
 	public static Vecteur getDirecteur(double x,double y,double z) {
-		double norm = Math.sqrt(x*x+y*y+z*z);
-		Vecteur directeur = new Vecteur(-x/norm, -y/norm, -z/norm);
-		return directeur;
+		final double norm = Math.sqrt(x*x+y*y+z*z);
+		return new Vecteur(-x/norm, -y/norm, -z/norm);
 	}
 	
 	public double getDirX() {
@@ -83,7 +82,7 @@ public class Vecteur {
 	}
 
 	public String toString() {
-		return ""+dirX+","+dirY+","+dirZ;
+		return dirX+","+dirY+","+dirZ;
 	}
 	
 }

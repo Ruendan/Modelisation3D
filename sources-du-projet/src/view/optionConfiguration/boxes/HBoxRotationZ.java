@@ -8,6 +8,7 @@ import view.optionConfiguration.controls.RotationZSpinner;
 public class HBoxRotationZ extends ConfigurationHBox {
 	
 	public HBoxRotationZ() {
+		super();
 		this.spinner = new RotationZSpinner();
 		this.label = new Label("Rotation sur Z (Mode Auto): ");
 		this.getChildren().addAll(label, spinner);

@@ -12,8 +12,10 @@ public class ExplorerLayout extends VBox{
 	 * @param cgl
 	 */
 	public ExplorerLayout(View parent) {
-		Explorer listFiles = new Explorer(parent);
-		ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent);
+		super();
+		
+		final Explorer listFiles = new Explorer(parent);
+		final ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);
 		this.getChildren().addAll(bar, listFiles);
 	}

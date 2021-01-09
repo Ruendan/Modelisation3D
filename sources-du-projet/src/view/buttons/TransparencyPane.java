@@ -9,13 +9,14 @@ import view.CanvasFigure;
 
 public class TransparencyPane extends GridPane{
 	
-	private Slider opacify;
-	private Label title;
-
 	private static final double MIN_WIDTH = 0.0;
 	private static final double MAX_WIDTH = 1.0;
 
 	public TransparencyPane(CanvasFigure canva) {
+		super();
+		
+		final Slider opacify;
+		final Label title;
 		
 		title = new Label("Transparence des Faces");
 		
@@ -23,7 +24,7 @@ public class TransparencyPane extends GridPane{
 		this.setHgap(10);
 		this.setVgap(10);
 		
-		this.opacify = new Slider(MIN_WIDTH,MAX_WIDTH, canva.getFigureOpacity());
+		opacify = new Slider(MIN_WIDTH,MAX_WIDTH, canva.getFigureOpacity());
 		opacify.setShowTickMarks(true);
 		opacify.valueProperty().addListener((observable, oldValue, newValue) -> canva.setFigureOpacity((double)newValue));
 		

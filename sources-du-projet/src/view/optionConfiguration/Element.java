@@ -1,5 +1,5 @@
 package view.optionConfiguration;
 
 public enum Element {
-	RotateX, RotateY, RotateZ, Zoom, TranslationX, TranslationY, TimelineSpeed;
+	ROTATEX, ROTATEY, ROTATEZ, ZOOM, TRANSLATIONX, TRANSLATIONY, TIMELINESPEED;
 }

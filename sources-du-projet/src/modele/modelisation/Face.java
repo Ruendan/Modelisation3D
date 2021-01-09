@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Face implements Comparable<Face> {
 	
-	private int nbPoints;
+	private final int nbPoints;
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
@@ -28,7 +28,7 @@ public class Face implements Comparable<Face> {
 		double x = 0;
 		double y = 0;
 		double z = 0;
-		for (Point p : points) {
+		for (final Point p : points) {
 			x+=p.getX();
 			y+=p.getY();
 			z+=p.getZ();
@@ -38,7 +38,7 @@ public class Face implements Comparable<Face> {
 	
 	public double moyenneZ() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getZ();
 		}
 		return res/nbPoints;
@@ -46,7 +46,7 @@ public class Face implements Comparable<Face> {
 	
 	public double moyenneY() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getY();
 		}
 		return res/nbPoints;
@@ -54,16 +54,16 @@ public class Face implements Comparable<Face> {
 
 	public double moyenneX() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getX();
 		}
 		return res/nbPoints;
 	}
 	
-	public void preSort(Vecteur vVue,Vecteur vLumière) {
+	public void preSort(Vecteur vVue,Vecteur vLumiere) {
 		setNormal();
 		setVisibility(vVue);
-		setExposition(vLumière);
+		setExposition(vLumiere);
 		setClosest();
 	}
 	
@@ -80,9 +80,9 @@ public class Face implements Comparable<Face> {
 		}
 	}
 	
-	public void setExposition(Vecteur lumière) {
+	public void setExposition(Vecteur lumiere) {
 		if(normal!=null) {
-			exposition = -lumière.produitScalaire(normal);
+			exposition = -lumiere.produitScalaire(normal);
 		}
 	}
 	
@@ -93,10 +93,10 @@ public class Face implements Comparable<Face> {
 	@Override
 	public int compareTo(Face o) {
 		
-		int point = this.closest.compareTo(o.closest);
+		final int point = this.closest.compareTo(o.closest);
 		if(point!=0)return point;
-		Double moyZ1 = normal.getDirZ();
-		Double moyZ2= o.getNormal().getDirZ();
+		final Double moyZ1 = normal.getDirZ();
+		final Double moyZ2= o.getNormal().getDirZ();
 		
 		return moyZ1.compareTo(moyZ2);
 	}
@@ -107,7 +107,7 @@ public class Face implements Comparable<Face> {
 			petit = Double.NaN;
 		else petit = points.get(0).getZ();
 		
-		for (Point point : points) {
+		for (final Point point : points) {
 			if(point.getZ()<petit)petit=point.getZ();
 		}
 		this.closest = petit;
@@ -160,14 +160,16 @@ public class Face implements Comparable<Face> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Face other = (Face) obj;
+		final Face other = (Face) obj;
 		
 		if (points == null) {
 			if (other.points != null)
 				return false;
 		} else {
 			for(int i=0; i<points.size(); i++) {
-				if(!this.points.get(i).equals(other.getPoints().get(i))) return false;
+				final Point thisPoint = this.points.get(i);
+				List<Point> otherPoints = other.getPoints(); // je ne comprend pas la loi de demeter ici
+				if(!thisPoint.equals(otherPoints.get(i))) return false;
 			}
 		}
 		return true;
