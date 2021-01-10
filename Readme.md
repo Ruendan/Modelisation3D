@@ -29,7 +29,9 @@
         J'ai aussi aidé dans le changement de modèle de l'explorateur.
 
     Camus Sylvain : 
-        J'ai réalisé du Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs, (même si le système d'ombre n'est pas encore implémenté) j'ai aussi fait enormément de refactoring. 
+        J'ai réalisé le Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs,
+	j'ai aussi fait enormément de refactoring. Incluant notamment la mise en place du pmd. Ainsi que de nombreux fix (redimensionnement du canva, j'en passe)
+	Mise en Place des Ombre, évolution de l'interface graphique, Implémentation du Toggle Switch, Mise en place des Couleur( couleurs sur Point et sur face)
 
 - Toutes précisions qui vous semblent importantes pour la bonne évaluation de votre projet (problème spécifique par exemple une absence prolongée de l'un des membres, réalisation dont vous êtes particulièrement fiers, ...)
     #TODO
