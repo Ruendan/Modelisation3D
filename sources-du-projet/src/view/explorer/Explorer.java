@@ -10,14 +10,21 @@ import modele.parser.exception.PlyParserException;
 import view.View;
 import view.errors.ErrorSceneConstants;
 
+/**
+ * Creation the layout of the explorer
+ * <p>This class is used to create the zoom-in and zoom-out buttons linked to the {@link Figure}</p>
+ * @author Groupe G1
+ */
 public class Explorer extends ListView<PlyFile>{
 	
 	private final File lib = new File("ressources/plys");
 	private final File[] files = lib.listFiles();
 	
 	/**
-	 * The Explorer.
-	 * @param gg
+	 * The Layout made to display the FileExplorer.
+	 * It's a VBox regrouping the Explorer and the FileChoser.
+	 * @param parent
+	 * 			The {@link View} to add the explorer and toolbar to
 	 */
 	public Explorer(View parent){
 		super();

@@ -8,11 +8,9 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 
 /**
- * 
- * @author Quentin Dubois
- * That's a File used to store a PlyFile and its File.
- * It's a specific kind of file which is assigned to PlyFile.
- *
+ * Stores ply file data
+ * <p>This class is used to store a .ply File with its original {@link File} and its loaded informations in a {@link Ply}</p>
+ * @author Groupe G1
  */
 public class PlyFile extends File{
 

@@ -11,8 +11,18 @@ import utils.IconConstants;
 import view.View;
 import view.errors.ErrorSceneConstants;
 
+/**
+ * Creation of the new window button
+ * <p>This class is used to create a new window with the actual {@link Figure} in it</p>
+ * @author Groupe G1
+ */
 public class NewTabButton extends Button{
 	
+	/**
+	 * Create the new window button with its tooltip
+	 * @param parent
+	 * 			The {@link View} containing the figure
+	 */
 	public NewTabButton(View parent) {
 		super("",IconConstants.createButtonIcon("newWindow"));
 		Tooltip.install(this, new Tooltip("Creer une nouvelle fenetre"));
@@ -26,6 +36,11 @@ public class NewTabButton extends Button{
 		});
 	}
 	
+	/**
+	 * Show the new window button and load a copy of the previous model
+	 * @param parent
+	 * 			The previous {@link Figure}
+	 */
 	private void openNewWindow(Figure parent) throws PlyParserException, FileNotFoundException {
 		final String figName = parent.getName();
 		
