@@ -1,8 +1,10 @@
 package view.optionConfiguration;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.View;
 
 /**
  * Creation of the option button
@@ -21,6 +23,7 @@ public class OptionConfigurationStage extends Stage{
 		this.setTitle(TITRE);
 		this.initModality(Modality.APPLICATION_MODAL);
 		this.setScene(new Scene(new OptionConfigurationLayout()));
+		this.getIcons().add(new Image("file:"+View.ICONPATH));
 		this.showAndWait();
 	}
 }

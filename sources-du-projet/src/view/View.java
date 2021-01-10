@@ -1,10 +1,12 @@
 package view;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,6 +21,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import view.buttons.ButtonsControls;
 import view.buttons.ButtonsOthers;
+import view.explorer.ExplorerFilesList;
 import view.explorer.ExplorerLayout;
 
 /**
@@ -42,6 +45,8 @@ public class View extends Stage{
 	private static final double WIDTH_MULTIPLY = 0.3;
 	
 	private static final String TITRE = "Visionneuse PLY 3D";
+	private static String fs = File.separator;
+	public static final String ICONPATH = "ressources"+fs+"imgs"+fs+"appli_icon"+fs+"icon.png";
 	
 	private static final String DEFAULT_MODEL = "cube";
 
@@ -86,6 +91,7 @@ public class View extends Stage{
 		
 		this.setMinWidth(SCENE_MIN_WIDTH);
 		this.setMinHeight(SCENE_MIN_HEIGHT);
+		this.getIcons().add(new Image("file:"+View.ICONPATH));
 		this.show();
 	}
 	/**
