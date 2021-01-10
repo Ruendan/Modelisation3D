@@ -1,11 +1,11 @@
 package view.optionConfiguration.controls;
 
-import view.TimelineConstants;
+import view.OurTimeline;
 
 public class RotationZSpinner extends ConfigurationSpinner {
 	public RotationZSpinner() {
-		super(TimelineConstants.getDefaultz());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineConstants.setZRotationValue((double)newValue));
+		super(OurTimeline.getDefaultz());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> OurTimeline.setZRotationValue((double)newValue));
 		this.setEditable(true);
 	}
 }

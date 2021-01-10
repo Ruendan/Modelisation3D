@@ -18,11 +18,11 @@ public class ButtonsFactory {
 		case Z:
 			return new Zoom(canva.getFigure());	
 		case C:
-			return new ColorPane(canva);
+			return new ColorPane(canva.getPainter());
 		case TH:
-			return new LineControlPane(canva);
+			return new LineControlPane(canva.getPainter());
 		case TR:
-			return new TransparencyPane(canva);
+			return new TransparencyPane(canva.getPainter());
 		default:
 			System.out.println("Veuillez inserer un type de bouton correct");
 			return null;

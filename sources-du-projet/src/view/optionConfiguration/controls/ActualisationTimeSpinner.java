@@ -1,12 +1,12 @@
 package view.optionConfiguration.controls;
 
-import view.TimelineConstants;
+import view.OurTimeline;
 
 public class ActualisationTimeSpinner extends ConfigurationSpinner {
 
 	public ActualisationTimeSpinner() {
-		super(TimelineConstants.getTempsdactualisation());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineConstants.setTempsdactualisation(newValue));
+		super(OurTimeline.getTempsdactualisation());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> OurTimeline.setTempsdactualisation(newValue));
 		this.setEditable(true);
 	}
 

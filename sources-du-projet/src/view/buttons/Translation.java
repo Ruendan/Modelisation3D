@@ -15,11 +15,6 @@ import view.ButtonsConstants;
  */
 public class Translation extends GridPane{
 	
-	private static final ImageView UPIMG = IconConstants.createButtonIcon("up"),
-									DOWNIMG = IconConstants.createButtonIcon("down"),
-									LEFTIMG = IconConstants.createButtonIcon("left"),
-									RIGHTIMG = IconConstants.createButtonIcon("right");
-	
 	/**
 	 * Create the moving buttons panel linked to {@link Figure}
 	 * @param fig
@@ -29,32 +24,18 @@ public class Translation extends GridPane{
 		super();
 		final Button up,down,left,right;
 		
-		up = new Button("",UPIMG);
+		up = createButton("up");
 		up.setOnAction(e->fig.vDeplace(-ButtonsConstants.getValeurTranslation()));
-		down = new Button("", DOWNIMG);
-		down.setOnAction(e->{
-			fig.vDeplace(ButtonsConstants.getValeurTranslation());
-		});
 		
-		up.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		down.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		up.setStyle(ButtonsConstants.getButtonStyle());
-		down.setStyle(ButtonsConstants.getButtonStyle());
+		down = createButton("down");
+		down.setOnAction(e->fig.vDeplace(ButtonsConstants.getValeurTranslation()));
 		
-		left = new Button("",LEFTIMG);
-		left.setOnAction(e->{
-			fig.hDeplace(-ButtonsConstants.getValeurTranslation());
-		});
 		
-		right = new Button("",RIGHTIMG);	
-		right.setOnAction(e->{
-			fig.hDeplace(ButtonsConstants.getValeurTranslation());
-		});
+		left = createButton("left");
+		left.setOnAction(e->fig.hDeplace(-ButtonsConstants.getValeurTranslation()));
 		
-		left.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		right.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		left.setStyle(ButtonsConstants.getButtonStyle());
-		right.setStyle(ButtonsConstants.getButtonStyle());
+		right = createButton("right");	
+		right.setOnAction(e->fig.hDeplace(ButtonsConstants.getValeurTranslation()));
 		
 		this.setPadding(new Insets(0,35,0,35));
 		this.setHgap(10);
@@ -76,7 +57,7 @@ public class Translation extends GridPane{
 	 */
 	private Button createButton(String imgName) {
 		Button res;
-		ImageView img = IconConstants.createButtonIcon(imgName);
+		final ImageView img = IconConstants.createButtonIcon(imgName);
 		
 		res = new Button("",img);
 		res.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());

@@ -14,31 +14,25 @@ import view.ButtonsConstants;
  */
 public class Zoom extends GridPane{
 	
-	private static final ImageView INIMG = IconConstants.createButtonIcon("plus"),
-			LESSIMG = IconConstants.createButtonIcon("less");
-	
 	/**
 	 * Create the zooming buttons panel linked to {@link Figure}
 	 * @param fig
 	 * 			The {@link Figure} the buttons are linked to
 	 */
-	public Zoom(Figure fig){super();
+	public Zoom(Figure fig){
+		super();
 		
 		final Button in,out;
 		
-		in = new Button("", INIMG);
+		in = createButton("plus");
 		in.setOnAction(e->{
 			fig.zoom(1+ButtonsConstants.getValeurZoom());
 		});
-		in.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		in.setStyle(ButtonsConstants.getButtonStyle());
 		
-		out = new Button("", LESSIMG);
+		out = createButton("less");
 		out.setOnAction(e->{
 			fig.zoom(1-ButtonsConstants.getValeurZoom());
 		});
-		out.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		out.setStyle(ButtonsConstants.getButtonStyle());
 		
 		this.setHgap(10);
 		this.setVgap(10);
@@ -57,7 +51,7 @@ public class Zoom extends GridPane{
 	 */
 	private Button createButton(String imgName) {
 		Button res;
-		ImageView img = IconConstants.createButtonIcon(imgName);
+		final ImageView img = IconConstants.createButtonIcon(imgName);
 		
 		res = new Button("",img);		
 		res.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
