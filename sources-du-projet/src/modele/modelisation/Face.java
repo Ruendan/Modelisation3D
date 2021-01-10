@@ -3,6 +3,11 @@ package modele.modelisation;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PrimitiveIterator.OfDouble;
+
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import javafx.collections.SetChangeListener;
 
 public class Face implements Comparable<Face> {
 	
@@ -15,7 +20,13 @@ public class Face implements Comparable<Face> {
 	private boolean isUpper;
 	
 	private Color couleur;
-	
+	/**
+	 * Create a Face with a {@link List} of {@link Point} and the number of point in this list 
+	 * @param nbPoints
+	 * 		Number of point of the Face
+	 * @param points
+	 * 		The point which constitutes the face
+	 */
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
 		if(points==null) this.points = new ArrayList<>();
@@ -24,6 +35,11 @@ public class Face implements Comparable<Face> {
 		setNormal();
 	}
 
+	/**
+	 * Return the point which is the center of the face
+	 * @return 
+	 * 		return a {@link Point} which is the center of the face
+	 */
 	public Point pointMoyen() {
 		double x = 0;
 		double y = 0;
@@ -36,6 +52,11 @@ public class Face implements Comparable<Face> {
 		return new Point(x/nbPoints,y/nbPoints,z/nbPoints);
 	}
 	
+	/**
+	 * Return the average of all the Z coordinate of the face
+	 * @return 
+	 * 		return a {@link Double} which is the average of the Z coordinate of the face
+	 */
 	public double moyenneZ() {
 		double res = 0;
 		for(Point p : points) {
@@ -44,6 +65,11 @@ public class Face implements Comparable<Face> {
 		return res/nbPoints;
 	}
 	
+	/**
+	 * Return the average of all the Y coordinate of the face
+	 * @return 
+	 * 		return a {@link Double} which is the average of the Y coordinate of the face
+	 */
 	public double moyenneY() {
 		double res = 0;
 		for(Point p : points) {
@@ -51,7 +77,12 @@ public class Face implements Comparable<Face> {
 		}
 		return res/nbPoints;
 	}
-
+	
+	/**
+	 * Return the average of all the X coordinate of the face
+	 * @return 
+	 * 		return a {@link Double} which is the average of the X coordinate of the face
+	 */
 	public double moyenneX() {
 		double res = 0;
 		for(Point p : points) {
@@ -60,6 +91,14 @@ public class Face implements Comparable<Face> {
 		return res/nbPoints;
 	}
 	
+	/**
+	 * Update the parameter of the face which is used for the sort
+	 * @param vVue
+	 * 		director vector of the view 
+	 * @param vLumière
+	 * 		director vector of the light
+	 * @see Vecteur
+	 */
 	public void preSort(Vecteur vVue,Vecteur vLumière) {
 		setNormal();
 		setVisibility(vVue);
@@ -67,11 +106,19 @@ public class Face implements Comparable<Face> {
 		setClosest();
 	}
 	
+	/**
+	 * Set the normal vector
+	 * @see Vecteur
+	 */
 	public void setNormal() {
 		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
 		
 	}
 	
+	/**
+	 * 
+	 * @param observateur
+	 */
 	public void setVisibility(Vecteur observateur) {
 		if(normal!=null) {
 			visibility = -observateur.produitScalaire(normal);
@@ -86,6 +133,11 @@ public class Face implements Comparable<Face> {
 		}
 	}
 	
+	/**
+	 * get the variable exposition of the face
+	 * @return 
+	 * 		{@link Double}
+	 */
 	public double getExposition() {
 		return exposition;
 	}
@@ -101,6 +153,9 @@ public class Face implements Comparable<Face> {
 		return moyZ1.compareTo(moyZ2);
 	}
  
+	/**
+	 * Set closest which is the Z coordinate the closest Z coordinate to the user's view
+	 */
 	public void setClosest() {
 		double petit;
 		if(this.getNbPoints()==0)
@@ -113,28 +168,65 @@ public class Face implements Comparable<Face> {
 		this.closest = petit;
 	}
 	
+	/**
+	 * Get the value of the variable closest
+	 * @return
+	 * 		{@link Double}
+	 */
 	public Double getClosest() {
 		return this.closest;
 	}
 
+	/**
+	 * Get the normal vector of the face
+	 * @return
+	 * 		{@link Vecteur}
+	 */
 	public Vecteur getNormal() {
 		return this.normal;
 	}
+	
+	/**
+	 * Get if the face is visible or not
+	 * @return
+	 * 	 {@link Boolean}
+	 */
 	public boolean isUpper() {
 		return isUpper;
 	}
+	
+	/**
+	 * Get the number of point of the face
+	 * @return
+	 * 		{@link Integer}
+	 */
 	public int getNbPoints() {
 		return nbPoints;
 	}
 	
+	/**
+	 * Get the {@link List} of {@link Point} of the face
+	 * @return
+	 * 		{@link List} of {@link Point}
+	 */
 	public List<Point> getPoints() {
 		return points;
 	}
 	
+	/**
+	 * Get the {@link javafx.scene.paint.Color} of the face
+	 * @return
+	 * 		{@link javafx.scene.paint.Color}
+	 */
 	public Color getCouleur() {
 		return couleur;
 	}
 
+	/**
+	 * Set the {@link javafx.scene.paint.Color} of the face
+	 * @param couleur
+	 * 		The future {@link javafx.scene.paint.Color} of the face
+	 */
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
 	}
@@ -173,6 +265,11 @@ public class Face implements Comparable<Face> {
 		return true;
 	}
 
+	/**
+	 * Get the result of the scalar product of the director vector of the observer and the normal vector of the face
+	 * @return
+	 * 		{@link Double}
+	 */
 	public double getVisibility() {
 		return visibility;
 	}
