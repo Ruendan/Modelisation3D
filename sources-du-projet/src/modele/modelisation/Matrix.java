@@ -1,9 +1,5 @@
 package modele.modelisation;
 
-import com.sun.org.apache.bcel.internal.generic.POP;
-
-import sun.security.util.Length;
-
 public class Matrix {
 	
 	private Double[][] matrice;
