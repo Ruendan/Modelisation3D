@@ -115,7 +115,7 @@ public class Matrix {
 	}
 	
 	/**
-	 * transfers the point of a 3d space to a 2d plane
+	 * transfers the point of a 3d space to a 2d plane	
 	 * @param point2
 	 */
 	public static void transformation(Point point2) {
