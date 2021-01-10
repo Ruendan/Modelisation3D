@@ -1,11 +1,15 @@
 package utils;
 
+/**
+ * Extendable class to convert a property into a Connectable Property
+ * <p>This class is used to convert any property into a Connectable Property from the Observer Pattern</p>
+ * @author Groupe G1
+ */
 public class ConnectableProperty extends ObservableProperty implements Observer {
 
 	protected boolean propagating;
 
 	public ConnectableProperty() {
-		super();
 		propagating = false;
 	}
 
