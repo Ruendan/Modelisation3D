@@ -3,7 +3,7 @@ package view.buttons;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import utils.IconConstants;
-import view.ButtonsConstants;
+import view.ButtonsUtils;
 import view.CanvasFigure;
 
 /**
@@ -11,7 +11,7 @@ import view.CanvasFigure;
  * <p>This class is used to create the automatic rotation button linked to the {@link Figure}</p>
  * @author Groupe G1
  */
-public class ButtonTimeline extends Button {
+public class Timeline extends Button {
 
 	private final CanvasFigure canva;
 	
@@ -22,13 +22,13 @@ public class ButtonTimeline extends Button {
 	 * @param canva
 	 * 			The {@link CanvasFigure} that need to auto-rotate
 	 */
-	public ButtonTimeline(CanvasFigure canva) {
+	public Timeline(CanvasFigure canva) {
 		super();
 		
 		this.canva = canva;
 		this.setGraphic((canva.isRotating()?PAUSE:PLAY));
 		this.setOnAction(e -> onClick());
-		this.setStyle(ButtonsConstants.getButtonStyle());
+		this.setStyle(ButtonsUtils.getButtonStyle());
 	}
 	
 	public void onClick() {

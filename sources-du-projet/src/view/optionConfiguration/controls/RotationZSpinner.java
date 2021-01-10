@@ -1,6 +1,6 @@
 package view.optionConfiguration.controls;
 
-import view.OurTimeline;
+import view.TimelineUtils;
 
 /**
  * Spinner for the configuration of Z's axis rotation
@@ -8,8 +8,8 @@ import view.OurTimeline;
  */
 public class RotationZSpinner extends ConfigurationSpinner {
 	public RotationZSpinner() {
-		super(OurTimeline.getDefaultz());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> OurTimeline.setZRotationValue((double)newValue));
+		super(TimelineUtils.getDefaultz());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineUtils.setZRotationValue((double)newValue));
 		this.setEditable(true);
 	}
 }

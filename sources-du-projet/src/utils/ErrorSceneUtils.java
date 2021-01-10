@@ -1,4 +1,4 @@
-package view.errors;
+package utils;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * <p>This class is used to show a new stage with any error that can occur</p>
  * @author Groupe G1
  */
-public class ErrorSceneConstants {
+public class ErrorSceneUtils {
 	
 	/**
 	 * Create the stage showing the error

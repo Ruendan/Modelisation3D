@@ -10,7 +10,7 @@ import javafx.util.Duration;
  * <p>This class is used to store all the timeline's attributes</p>
  * @author Groupe G1
  */
-public class OurTimeline {
+public class TimelineUtils {
 	
 	protected static double tempsActualisation = 0.05;
 	protected static double xRotationValue = 5;
@@ -25,7 +25,7 @@ public class OurTimeline {
 		return running;
 	}
 	
-	public OurTimeline(CanvasFigure canva) {
+	public TimelineUtils(CanvasFigure canva) {
 		super();
 		this.canva = canva;
 		running = false;

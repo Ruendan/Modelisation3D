@@ -41,8 +41,8 @@ public final class PlyParser {
 		final Ply ply = new Ply();
 		final String url = "ressources/plys/";
 		
-		ply.setName(nom);
-		loadPly(ply,new File(url+nom+".ply"));
+		ply.setName(nom+".ply");
+		loadPly(ply,new File(url+ply.getName()));
 		return ply;
 	}
 	

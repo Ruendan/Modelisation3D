@@ -1,6 +1,6 @@
 package view.optionConfiguration.controls;
 
-import view.OurTimeline;
+import view.TimelineUtils;
 
 /**
  * Spinner for the configuration of auto-rotate speed
@@ -9,8 +9,8 @@ import view.OurTimeline;
 public class ActualisationTimeSpinner extends ConfigurationSpinner {
 
 	public ActualisationTimeSpinner() {
-		super(OurTimeline.getTempsdactualisation());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> OurTimeline.setTempsdactualisation(newValue));
+		super(TimelineUtils.getTempsdactualisation());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineUtils.setTempsdactualisation(newValue));
 		this.setEditable(true);
 	}
 

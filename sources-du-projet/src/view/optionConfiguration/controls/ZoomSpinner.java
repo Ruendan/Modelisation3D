@@ -1,6 +1,6 @@
 package view.optionConfiguration.controls;
 
-import view.ButtonsConstants;
+import view.ButtonsUtils;
 
 /**
  * Spinner for the configuration of zoom
@@ -9,8 +9,8 @@ import view.ButtonsConstants;
 public class ZoomSpinner extends ConfigurationSpinner {
 
 	public ZoomSpinner() {
-		super(ButtonsConstants.getValeurZoom());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsConstants.setValeurZoom((double)newValue));
+		super(ButtonsUtils.getValeurZoom());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsUtils.setValeurZoom((double)newValue));
 		this.setEditable(true);
 	}
 

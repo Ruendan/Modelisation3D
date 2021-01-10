@@ -7,15 +7,15 @@ import javafx.scene.control.ListView;
 import modele.modelisation.Figure;
 import modele.modelisation.Ply;
 import modele.parser.exception.PlyParserException;
+import utils.ErrorSceneUtils;
 import view.View;
-import view.errors.ErrorSceneConstants;
 
 /**
  * Creation the layout of the explorer
  * <p>This class is used to create the zoom-in and zoom-out buttons linked to the {@link Figure}</p>
  * @author Groupe G1
  */
-public class Explorer extends ListView<PlyFile>{
+public class ExplorerFilesList extends ListView<PlyFile>{
 	
 	private final File lib = new File("ressources/plys");
 	private final File[] files = lib.listFiles();
@@ -26,13 +26,13 @@ public class Explorer extends ListView<PlyFile>{
 	 * @param parent
 	 * 			The {@link View} to add the explorer and toolbar to
 	 */
-	public Explorer(View parent){
+	public ExplorerFilesList(View parent){
 		super();
 		for (final File file : this.files) {
 			try {
 				this.getItems().add(new PlyFile(file));
 			} catch (PlyParserException | FileNotFoundException e) {
-				ErrorSceneConstants.display(e);
+				ErrorSceneUtils.display(e);
 			}
 		}
 		this.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
@@ -42,7 +42,7 @@ public class Explorer extends ListView<PlyFile>{
 				if(oldvalue!=null) oldvalue.unload();
 				if(newPly != null) parent.updateMiddle(new Figure(newPly));
 			} catch (PlyParserException | FileNotFoundException e) {
-				ErrorSceneConstants.display(e);
+				ErrorSceneUtils.display(e);
 			}
 		});
 	}
@@ -53,7 +53,7 @@ public class Explorer extends ListView<PlyFile>{
 			try {
 				return this.getItems().add(new PlyFile(file));
 			} catch (PlyParserException | FileNotFoundException e) {
-				ErrorSceneConstants.display(e);
+				ErrorSceneUtils.display(e);
 			}
 		return false;
 	}

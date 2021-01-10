@@ -11,7 +11,7 @@ import view.Painter;
  * <p>This class is used to create the buttons that modify the colors in the {@link CanvasFigure}</p>
  * @author Groupe G1
  */
-public class ColorPane extends GridPane{
+public class Colors extends GridPane{
 	
 	private final ColorPicker figureColorPicker, canvaColorPicker;
 	
@@ -21,7 +21,7 @@ public class ColorPane extends GridPane{
 	 * @param canva
 	 * 			The {@link CanvasFigure} that need to be colored
 	 */
-	public ColorPane(Painter painter) {
+	public Colors(Painter painter) {
 		super();
 		final Label titleCP1, titleCP2;
 		

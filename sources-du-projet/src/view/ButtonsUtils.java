@@ -5,7 +5,7 @@ package view;
  * <p>This class is used to be able to refer to the same style/size/... for each buttons we create</p>
  * @author Groupe G1
  */
-public class ButtonsConstants {
+public class ButtonsUtils {
 	
 	protected static double valeurZoom = 0.05;
 	protected static double valeurTranslation = 10;

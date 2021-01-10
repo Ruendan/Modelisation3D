@@ -11,7 +11,7 @@ import view.Painter;
  * <p>This class is used to create the buttons that modify the width of the lines and permit to show them or not</p>
  * @author Groupe G1
  */
-public class LineControlPane extends GridPane{
+public class Lines extends GridPane{
 
 	private static final double MIN_WIDTH = 0.001;
 	private static final double MAX_WIDTH = 1.0;
@@ -21,7 +21,7 @@ public class LineControlPane extends GridPane{
 	 * @param canva
 	 * 			The {@link CanvasFigure} that has the lines
 	 */
-	public LineControlPane(Painter painter) {
+	public Lines(Painter painter) {
 		super();
 		
 		final Slider thicken;

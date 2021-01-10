@@ -11,7 +11,7 @@ import view.Painter;
  * <p>This class is used to create the slider that modify the opacity of the {@link Figure}'s faces</p>
  * @author Groupe G1
  */
-public class TransparencyPane extends GridPane{
+public class Transparency extends GridPane{
 	
 	private static final double MIN_WIDTH = 0.0;
 	private static final double MAX_WIDTH = 1.0;
@@ -21,7 +21,7 @@ public class TransparencyPane extends GridPane{
 	 * @param canva
 	 * 			The {@link CanvasFigure} that has the faces
 	 */
-	public TransparencyPane(Painter painter) {
+	public Transparency(Painter painter) {
 		super();
 		
 		final Slider opacify;

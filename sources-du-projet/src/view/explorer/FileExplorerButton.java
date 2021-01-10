@@ -18,7 +18,7 @@ public class FileExplorerButton extends Button{
 	 * @param fig
 	 * 			The {@link ExplorerFilesList} to add the new file to
 	 */
-	public FileExplorerButton(Explorer items) {
+	public FileExplorerButton(ExplorerFilesList items) {
 		super("",IconConstants.createButtonIcon("newFile"));
 		Tooltip.install(this, new Tooltip("Ouvrir un nouveau fichier"));
 		this.setOnAction(e -> items.addFile(this.getFile()));

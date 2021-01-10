@@ -20,7 +20,7 @@ public class ExplorerLayout extends VBox{
 	public ExplorerLayout(View parent) {
 		super();
 		
-		final Explorer listFiles = new Explorer(parent);
+		final ExplorerFilesList listFiles = new ExplorerFilesList(parent);
 		final ExplorerToolBar bar = new ExplorerToolBar(listFiles,parent);
 		VBox.setVgrow(listFiles, Priority.ALWAYS);
 		this.getChildren().addAll(bar, listFiles);

@@ -7,23 +7,23 @@ import javafx.scene.control.Tooltip;
 import modele.modelisation.Figure;
 import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
+import utils.ErrorSceneUtils;
 import utils.IconConstants;
 import view.View;
-import view.errors.ErrorSceneConstants;
 
 /**
  * Creation of the new window button
  * <p>This class is used to create a new window with the actual {@link Figure} in it</p>
  * @author Groupe G1
  */
-public class NewTabButton extends Button{
+public class NewWindow extends Button{
 	
 	/**
 	 * Create the new window button with its tooltip
 	 * @param parent
 	 * 			The {@link View} containing the figure
 	 */
-	public NewTabButton(View parent) {
+	public NewWindow(View parent) {
 		super("",IconConstants.createButtonIcon("newWindow"));
 		Tooltip.install(this, new Tooltip("Creer une nouvelle fenetre"));
 		this.setOnAction(e -> {
@@ -31,7 +31,7 @@ public class NewTabButton extends Button{
 				System.out.println(parent.getActualFigure());
 				openNewWindow(parent.getActualFigure());
 			} catch (PlyParserException | FileNotFoundException e1) {
-				ErrorSceneConstants.display(e1);
+				ErrorSceneUtils.display(e1);
 			}
 		});
 	}

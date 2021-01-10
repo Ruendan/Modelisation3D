@@ -6,7 +6,7 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import view.errors.ErrorSceneConstants;
+import utils.ErrorSceneUtils;
 
 /**
  * Open the file chooser
@@ -38,7 +38,7 @@ public final class FileChooserUtils {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch(Exception ex) {
-			ErrorSceneConstants.display(ex);
+			ErrorSceneUtils.display(ex);
 		}
 		
 		final JFileChooser chooser = new JFileChooser();
