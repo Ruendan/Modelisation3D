@@ -1,6 +1,6 @@
 package view.optionConfiguration.controls;
 
-import view.OurTimeline;
+import view.TimelineUtils;
 
 /**
  * Spinner for the configuration of Y's axis rotation
@@ -8,8 +8,8 @@ import view.OurTimeline;
  */
 public class RotationYSpinner extends ConfigurationSpinner {
 	public RotationYSpinner() {
-		super(OurTimeline.getDefaulty());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> OurTimeline.setYRotationValue((double)newValue));
+		super(TimelineUtils.getDefaulty());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> TimelineUtils.setYRotationValue((double)newValue));
 		this.setEditable(true);
 	}
 }

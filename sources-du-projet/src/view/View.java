@@ -23,7 +23,7 @@ import view.explorer.ExplorerLayout;
 
 /**
  * Creation of the window of the application
- * <p>This class is used to create the {@link Stage} that will be shown to the user composed with the {@link Explorer}, the {@link ButtonsControls}, the {@link CansFigure} and the {@link ButtinsOthers}</p>
+ * <p>This class is used to create the {@link Stage} that will be shown to the user composed with the {@link ExplorerFilesList}, the {@link ButtonsControls}, the {@link CansFigure} and the {@link ButtinsOthers}</p>
  * @author Groupe G1
  */
 public class View extends Stage{

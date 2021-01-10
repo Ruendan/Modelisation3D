@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import utils.IconConstants;
-import view.ButtonsConstants;
+import view.ButtonsUtils;
 
 /**
  * Creation of moving buttons
@@ -25,17 +25,17 @@ public class Translation extends GridPane{
 		final Button up,down,left,right;
 		
 		up = createButton("up");
-		up.setOnAction(e->fig.vDeplace(-ButtonsConstants.getValeurTranslation()));
+		up.setOnAction(e->fig.vDeplace(-ButtonsUtils.getValeurTranslation()));
 		
 		down = createButton("down");
-		down.setOnAction(e->fig.vDeplace(ButtonsConstants.getValeurTranslation()));
+		down.setOnAction(e->fig.vDeplace(ButtonsUtils.getValeurTranslation()));
 		
 		
 		left = createButton("left");
-		left.setOnAction(e->fig.hDeplace(-ButtonsConstants.getValeurTranslation()));
+		left.setOnAction(e->fig.hDeplace(-ButtonsUtils.getValeurTranslation()));
 		
 		right = createButton("right");	
-		right.setOnAction(e->fig.hDeplace(ButtonsConstants.getValeurTranslation()));
+		right.setOnAction(e->fig.hDeplace(ButtonsUtils.getValeurTranslation()));
 		
 		this.setPadding(new Insets(0,35,0,35));
 		this.setHgap(10);
@@ -60,8 +60,8 @@ public class Translation extends GridPane{
 		final ImageView img = IconConstants.createButtonIcon(imgName);
 		
 		res = new Button("",img);
-		res.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		res.setStyle(ButtonsConstants.getButtonStyle());
+		res.setPrefSize(ButtonsUtils.getButtonSize(),ButtonsUtils.getButtonSize());
+		res.setStyle(ButtonsUtils.getButtonStyle());
 		
 		return res;
 	}

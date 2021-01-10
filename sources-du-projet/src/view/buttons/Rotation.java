@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import modele.modelisation.Figure;
 import utils.IconConstants;
-import view.ButtonsConstants;
+import view.ButtonsUtils;
 import view.CanvasFigure;
 
 /**
@@ -28,23 +28,23 @@ public class Rotation extends GridPane{
 		final Button xup,xdown,yup,ydown,zup,zdown;
 		
 		xup = createButton("xUp");
-		xup.setOnAction(e ->fig.rotateX(ButtonsConstants.getValeurRotation()));
+		xup.setOnAction(e ->fig.rotateX(ButtonsUtils.getValeurRotation()));
 		
 		
 		xdown = createButton("xDown");
-		xdown.setOnAction(e ->fig.rotateX(-ButtonsConstants.getValeurRotation()));
+		xdown.setOnAction(e ->fig.rotateX(-ButtonsUtils.getValeurRotation()));
 		
 		yup = createButton("yUp");
-		yup.setOnAction(e ->fig.rotateY(ButtonsConstants.getValeurRotation()));
+		yup.setOnAction(e ->fig.rotateY(ButtonsUtils.getValeurRotation()));
 		
 		ydown = createButton("yDown");
-		ydown.setOnAction(e ->fig.rotateY(-ButtonsConstants.getValeurRotation()));
+		ydown.setOnAction(e ->fig.rotateY(-ButtonsUtils.getValeurRotation()));
 		
 		zup = createButton("zUp");
-		zup.setOnAction(e ->fig.rotateZ(ButtonsConstants.getValeurRotation()));
+		zup.setOnAction(e ->fig.rotateZ(ButtonsUtils.getValeurRotation()));
 		
-		zdown = createButton("zUp");
-		zdown.setOnAction(e ->canva.getFigure().rotateZ(-ButtonsConstants.getValeurRotation()));
+		zdown = createButton("zDown");
+		zdown.setOnAction(e ->canva.getFigure().rotateZ(-ButtonsUtils.getValeurRotation()));
 		
 		this.setHgap(10);
 		this.setVgap(20);
@@ -53,7 +53,7 @@ public class Rotation extends GridPane{
 		this.add(yup, 0, 1); this.add(ydown, 2, 1);
 		this.add(zup, 0, 2); this.add(zdown, 2, 2);
 
-		final ButtonTimeline autoRotate = new ButtonTimeline(canva);
+		final Timeline autoRotate = new Timeline(canva);
 		this.add(autoRotate, 1, 3);
 	
 		this.setMaxHeight(250);
@@ -70,8 +70,8 @@ public class Rotation extends GridPane{
 		final ImageView img = IconConstants.createButtonIcon(imgName);
 		
 		res = new Button("",img);
-		res.setPrefSize(ButtonsConstants.getButtonSize(),ButtonsConstants.getButtonSize());
-		res.setStyle(ButtonsConstants.getButtonStyle());
+		res.setPrefSize(ButtonsUtils.getButtonSize(),ButtonsUtils.getButtonSize());
+		res.setStyle(ButtonsUtils.getButtonStyle());
 		
 		return res;
 	}

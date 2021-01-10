@@ -20,7 +20,7 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	private Figure fig;
 	
-	private OurTimeline timeline;
+	private TimelineUtils timeline;
 	
 	private final Vecteur vVue = Vecteur.getDirecteur(0,0,1);
 	private final Vecteur vLumiere = Vecteur.getDirecteur(1,1,1); //faut que je le fasse (Sylvain)
@@ -45,7 +45,7 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.setWidth(width);
 		this.setHeight(height);
 		coord = new double[2][1];
-		timeline = new OurTimeline(this);
+		timeline = new TimelineUtils(this);
 		
 	}
 	

@@ -112,7 +112,6 @@ public final class PlyParser {
 		points = new HashSet<>();
 		pointsTotaux = new ArrayList<>();
 		couleursPoints = new ArrayList<>();
-		System.out.println(lines[idx]);
 		for (int i = 0; i < header.getVertex(); i++) {
 			if(!addPoint(lines[idx])) {
 				return false;

@@ -1,6 +1,6 @@
 package view.optionConfiguration.controls;
 
-import view.ButtonsConstants;
+import view.ButtonsUtils;
 
 /**
  * Spinner for the configuration of Y's axis translation
@@ -9,8 +9,8 @@ import view.ButtonsConstants;
 public class TranslationYSpinner extends ConfigurationSpinner {
 
 	public TranslationYSpinner() {
-		super(ButtonsConstants.getValeurTranslation());
-		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsConstants.setValeurTranslation((double)newValue));
+		super(ButtonsUtils.getValeurTranslation());
+		this.valueProperty().addListener((observable, oldValue, newValue) -> ButtonsUtils.setValeurTranslation((double)newValue));
 		this.setEditable(true);
 	}
 

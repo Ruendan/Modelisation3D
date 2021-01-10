@@ -32,8 +32,7 @@ public class ParserHeader {
 	private int nbVertex;
 	private int face;
 	
-	
-	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",
+	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",LIST = "list",
 			VERTEX = "vertex", FACE = "face", RED = "red", GREEN = "green", BLUE = "blue";
 	private static final int PROPERTY_POS = 1, VALUE_POS = 2, BASICS_LEN = 3;
 	
@@ -238,7 +237,7 @@ public class ParserHeader {
 	}
 
 	private boolean handleFaceProperty(String[] line) throws PropertyPropertiesError {
-		if(line.length>3&&"list".equals(line[1])) {
+		if(line.length>BASICS_LEN&&LIST.equals(line[PROPERTY_POS])) {
 			return true;
 		} else if(line.length==3&&("uchar".equals(line[1]))){
 			return handleFaceColor(line);
@@ -331,7 +330,6 @@ public class ParserHeader {
 	}
 	
 	public int getXpos() {
-		System.out.println(xpos);
 		return xpos;
 	}
 	
