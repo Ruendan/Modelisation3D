@@ -4,9 +4,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import view.View;
 
 /**
  * Display errors that occur
@@ -35,6 +37,7 @@ public class ErrorSceneUtils {
 		layout.setAlignment(Pos.CENTER);
 
 		s.setScene(new Scene(layout));
+		s.getIcons().add(new Image("file:"+View.ICONPATH));
 		s.showAndWait();
 	}
 

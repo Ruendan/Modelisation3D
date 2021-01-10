@@ -21,9 +21,9 @@ public final class PlyParser {
 	private ParserHeader header;
 	private Ply ply;
 	private String[] lines;
+	private int ligneentrop;
 	
-	
-	private List<Color> couleurs;
+	private List<Color> couleursPoints;
 	private Set<Point> points;
 	private List<Point> pointsTotaux;
 	private List<Face> faces;
@@ -38,23 +38,15 @@ public final class PlyParser {
 	}
 	
 	public Ply loadPly(String nom) throws PlyParserException, FileNotFoundException {
-		final Ply ply = new Ply();
 		final String url = "ressources/plys/";
+		return loadPly(new File(url+nom+".ply"));
+	}
+	
+	public Ply loadPly(File fichier) throws PlyParserException, FileNotFoundException {
+		ply = new Ply();
 		
-		ply.setName(nom+".ply");
-		loadPly(ply,new File(url+ply.getName()));
-		return ply;
-	}
-	
-	public Ply loadPly(File file) throws PlyParserException, FileNotFoundException {
-		final Ply res = new Ply();
-		res.setName(file.getName());
-		this.loadPly(res,file);
-		return res;
-	}
-	
-	public void loadPly(Ply res,File fichier) throws PlyParserException, FileNotFoundException {
-		ply = res;
+		ligneentrop = 0;
+		ply.setName(fichier.getName());
 		idx = 0;
 		
 		lines = getLines(fichier);
@@ -65,8 +57,9 @@ public final class PlyParser {
 			ply.setPoints(points);
 			ply.setFaces(faces);
 			ply.setComment(header.getComment());
-			if(header.isColored())ply.setColored(true);
+			if(header.isColoredByPoint()||header.isColoredByFace())ply.setColored(true);
 		}
+		return ply;
 	}
 	
 	public Ply loadHeader(File file) throws PlyParserException, FileNotFoundException {
@@ -83,7 +76,7 @@ public final class PlyParser {
 		
 		if(lines.length>12 && handleHeader()) {
 			ply.setVertex(header.getVertex());
-			ply.setNbFace(header.getFace());
+			ply.setNbFace(header.getFace()-ligneentrop);
 			ply.setComment(header.getComment());
 		}
 	}
@@ -118,11 +111,9 @@ public final class PlyParser {
 	private boolean handlePoint() {
 		points = new HashSet<>();
 		pointsTotaux = new ArrayList<>();
-		couleurs = new ArrayList<>();
-		
+		couleursPoints = new ArrayList<>();
 		for (int i = 0; i < header.getVertex(); i++) {
 			if(!addPoint(lines[idx])) {
-				System.out.println(idx);
 				return false;
 			}
 			idx++;
@@ -139,15 +130,16 @@ public final class PlyParser {
 				return false;
 			}
 		}
+		
 		final double x = Double.parseDouble(tab[header.getXpos()]);
 		final double y = Double.parseDouble(tab[header.getYpos()]);
 		final double z = Double.parseDouble(tab[header.getZpos()]);
-		if(header.isColored()&&!addColor(tab))ply.setColored(false);
+		if(header.isColoredByPoint()&&!addPointColor(tab))ply.setColored(false);
 		return addPoint(new Point(x,y,z));
 	}
 
-	private boolean addColor(String[] tab) {
-		return couleurs.add(new Color(Integer.parseInt(tab[header.getRpos()]),
+	private boolean addPointColor(String[] tab) {
+		return couleursPoints.add(new Color(Integer.parseInt(tab[header.getRpos()]),
 									Integer.parseInt(tab[header.getGpos()]),
 									Integer.parseInt(tab[header.getBpos()])));
 	}
@@ -171,22 +163,33 @@ public final class PlyParser {
 		if(!testPoint(tab))return false;
 		final ArrayList<Point> pointss = new ArrayList<>();
 		final int nbPointInFace = Integer.parseInt(tab[0]);
-		
-		if(header.isColored())return addFaceWithColor(tab,nbPointInFace,pointss);
+		final int nbMinPoint = 3;
+		if(nbPointInFace<nbMinPoint) {
+			ligneentrop++;
+			return true;
+		}
+		if(header.isColoredByPoint())return addFaceWithPointColor(tab,nbPointInFace,pointss);
 		for (int i = 1; i < nbPointInFace+1; i++) {
 			pointss.add(pointsTotaux.get(Integer.parseInt(tab[i])));
 		}
-		return addFace(new Face(nbPointInFace, pointss));	 
+		if(header.isColoredByFace())return addFaceWithColor(tab,new Face(nbPointInFace, pointss));
+		return faces.add(new Face(nbPointInFace, pointss));	 
 	}
 
-	private boolean addFaceWithColor(String[] tab, int nbPointInFace, List<Point> pointss) {
+	private boolean addFaceWithColor(String[] tab,Face face) {
+		final int x = tab.length-(4-header.getRpos()), y = tab.length-(4-header.getGpos()), z = tab.length-(4-header.getBpos());
+		face.setCouleur(new Color(Integer.parseInt(tab[x]),Integer.parseInt(tab[y]),Integer.parseInt(tab[z])));
+		return faces.add(face);
+	}
+
+	private boolean addFaceWithPointColor(String[] tab, int nbPointInFace, List<Point> pointss) {
 		int red=0,green=0,blue=0;
 		int idx;
 		Color temp;
 		for (int i = 1; i < nbPointInFace+1; i++) {
 			idx = Integer.parseInt(tab[i]);
 			pointss.add(pointsTotaux.get(idx));
-			temp = couleurs.get(idx);
+			temp = couleursPoints.get(idx);
 			red+=temp.getRed();
 			
 			green+=temp.getGreen();
@@ -198,7 +201,7 @@ public final class PlyParser {
 		final Face face = new Face(nbPointInFace, pointss);
 		face.setCouleur(new Color(red,green,blue));
 		
-		return addFace(face);	
+		return faces.add(face);
 	}
 
 	private boolean testPoint(String[] tab) {
@@ -210,10 +213,6 @@ public final class PlyParser {
 			}
 		}
 		return true;
-	}
-
-	private boolean addFace(Face face) {
-		return faces.add(face);
 	}
 
 }

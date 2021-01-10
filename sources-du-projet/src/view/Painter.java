@@ -52,7 +52,7 @@ public class Painter {
 
 	private Color setFigureColor(Face f) {
 		Color faceFillColor = figureFillColor;
-		if(canva.isFigureColored()&&colorCustom) {
+		if(canva.isFigureColored()&&!colorCustom) {
 			faceFillColor = Color.rgb(f.getCouleur().getRed(),f.getCouleur().getGreen(),f.getCouleur().getBlue()); //DE ME TEEEER
 		}
 		if(useShadow) {

@@ -98,7 +98,6 @@ public class ToggleSwitchSkin extends SkinBase<ToggleSwitch> {
      * one edge to the other
      */
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
 		final double thumbWidth = snapSize(thumb.prefWidth(-1));

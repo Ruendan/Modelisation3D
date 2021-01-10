@@ -17,9 +17,10 @@
 
     Devigne Nathan : 
         Je me suis premièrement occupé de la conceptualisation de l'interface de notre projet afin que l'on ait un modèle en accord avec tout les membres du projet
-        J'ai ensuite réalisé cette interface, avec JavaFX, composée d'un explorateur de fichiers listant nos modèles ainsi que de la fenêtre d'affichage du modèle sélectionné et des boutons de rotation, translation et zoom
-        Une fois tout les éléments créés j'ai organisé les réactions de ceux-ci via les évenements de click et de sélection afin de modifier le modèle affiché, le déplacer, le faire tourner, l'agrandir ou le rétrécir.
-        J'ai également passé un peu de temps sur le style des différents éléments afin de commencer à rendre l'interface ergonomique.
+        Je me suis ensuite occupé de la création d'éléments contenus dans l'interface; la liste des fichiers, les différents boutons et leur placement,
+        la création d'une classe pour simplifier leur création et permettre d'y placer une image, l'ajout de tooltip. J'ai également produit les images présentes dans les boutons de l'application.
+        Après le premier modèle du livrable 1 j'ai redesigné l'interface afin de nous permettre d'ajouter des boutons supplémentaires pour les différentes fonctions à appliquer au modèle.
+        J'ai terminé par ajouter l'icône de l'application avant de rédiger la javadoc ainsi que de produire le diagramme UML.
         
     Hottin Lucas : 
         Je me suis initialement occupé de la conceptualisation de la figure dans la classe Figure et de l'affichage du modèle 3D, j'ai donc fais les fonctions de Translation, de Rotation et de Zoom.

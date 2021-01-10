@@ -1,10 +1,12 @@
 package view;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,6 +21,7 @@ import modele.parser.PlyParser;
 import modele.parser.exception.PlyParserException;
 import view.buttons.ButtonsControls;
 import view.buttons.ButtonsOthers;
+import view.explorer.ExplorerFilesList;
 import view.explorer.ExplorerLayout;
 
 /**
@@ -42,6 +45,8 @@ public class View extends Stage{
 	private static final double WIDTH_MULTIPLY = 0.3;
 	
 	private static final String TITRE = "Visionneuse PLY 3D";
+	private static String fs = File.separator;
+	public static final String ICONPATH = "ressources"+fs+"imgs"+fs+"appli_icon"+fs+"icon.png";
 	
 	private static final String DEFAULT_MODEL = "cube";
 
@@ -69,7 +74,7 @@ public class View extends Stage{
 		
 		middle = createMiddle(fig);
 		middle.prefWidthProperty().bind((this.widthProperty().multiply(WIDTH_MULTIPLY)));
-		
+		middle.setMinWidth(0);
 		final ExplorerLayout modelsList = new ExplorerLayout(this);
 		
 		final ButtonsOthers right = new ButtonsOthers(display);
@@ -83,10 +88,24 @@ public class View extends Stage{
 		
 		final Scene mainScene = new Scene(layout, SCENE_WIDTH, SCENE_HEIGHT);
 		this.setScene(mainScene);
-		
+		this.widthProperty().addListener((obs, oldVal, newVal) -> {
+			setDisplayWidth(newVal.doubleValue());
+		});
+		this.heightProperty().addListener((obs, oldVal, newVal) -> {
+			setDisplayHeight(newVal.doubleValue());
+		});
 		this.setMinWidth(SCENE_MIN_WIDTH);
 		this.setMinHeight(SCENE_MIN_HEIGHT);
+		this.getIcons().add(new Image("file:"+View.ICONPATH));
 		this.show();
+	}
+	
+	private void setDisplayWidth(double doubleValue) {
+		display.modifyWidth(doubleValue-248-234);
+	}
+	
+	private void setDisplayHeight(double doubleValue) {
+		display.modifyHeight(doubleValue);
 	}
 	/**
 	 * Create the middle part of the stage with the {@link Figure} and the {@link ButtonsControls}
@@ -100,8 +119,7 @@ public class View extends Stage{
 		display.setOnScroll(e -> fig.zoom(e.getDeltaY()>0?1.25:0.8));		
 		
 		final HBox buttons = new ButtonsControls(display);
-		
-		res.getChildren().addAll(display,buttons); //DEMETER
+		res.getChildren().addAll(display,buttons);
 		StackPane.setAlignment(buttons, Pos.TOP_LEFT);
 		
 		display.setOnMousePressed(e -> {
