@@ -1,5 +1,6 @@
 package modele.modelisation;
 
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ import view.CanvasFigure;
  *<p>
  *
  *<br>
- * @author Groupe G1 
+ * @author Groupe G1
  * <br>
  * {@link} nathan-developpeur.com
  * 
@@ -29,6 +30,8 @@ public class Figure extends Subject{
 	private List<Face> faces;
 	private Point center;
 	private Set<Point> points;
+	
+	private boolean isColored;
 
 	/**
 	 * Create a figure with a {@link Ply}
@@ -36,10 +39,12 @@ public class Figure extends Subject{
 	 * 			The using {@link Ply}
 	 */
 	public Figure(Ply ply) {
+		super();
 		this.name = ply.getName();
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
-		this.center = center();
+		this.setCenter();
+		this.isColored = ply.isColored();
 		this.initialisation();
 	}
 	
@@ -51,10 +56,11 @@ public class Figure extends Subject{
 	 * 			The name of the PLY File you want to use
 	 * @throws PlyParserException
 	 * 			if the PLY isn't exist or have an error
+	 * @throws FileNotFoundException 
 	 * 		
 	 */
-	public Figure(String nom) throws PlyParserException {
-		this(PlyParser.loadPly(nom));
+	public Figure(String nom) throws PlyParserException, FileNotFoundException {
+		this(PlyParser.getInstance().loadPly(nom));
 	}
 	
 	
@@ -103,6 +109,10 @@ public class Figure extends Subject{
 		return this.name;
 	}
 	
+	public boolean isColored() {
+		return this.isColored;
+	}
+	
 	/**
 	 * Return the figure's number of {@link Point}.
 	 * @return {@link Double}
@@ -113,10 +123,9 @@ public class Figure extends Subject{
 	}
 	
 	private void initialisation() {
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+		MouvementUtils.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 		center.deplacer(-center.getX(), -center.getY(), -center.getZ());
-		Mouvement.rotate(this, 180, 180, 0);
-		tri();
+		MouvementUtils.rotate(this, 180, 180, 0);
 	}
 
 	/**
@@ -127,7 +136,7 @@ public class Figure extends Subject{
 	 */
 	public void zoom(double zoom) {
 		toOrigin();
-		for(Point p : this.getPoints()) p.agrandir(zoom);
+		for(final Point p : this.getPoints()) p.agrandir(zoom);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -136,11 +145,11 @@ public class Figure extends Subject{
 	 * Move the figure horizontaly
 	 * @param value
 	 * 			The value of the number of time you want to move the figure in the X axes.
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
-	public void HDeplace(double value) {
+	public void hDeplace(double value) {
 		center.deplacerX(value);
-		Mouvement.deplacer(this, value, 0, 0);
+		MouvementUtils.deplacer(this, value, 0, 0);
 		notifyObservers();
 	}
 	
@@ -148,11 +157,11 @@ public class Figure extends Subject{
 	 * Move the figure verticaly
 	 * @param value
 	 * 			The value of the number of time you want to move the figure in the Y axes.
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
-	public void VDeplace(double value){
+	public void vDeplace(double value){
 		center.deplacerY(value);
-		Mouvement.deplacer(this, 0, value, 0);
+		MouvementUtils.deplacer(this, 0, value, 0);
 		notifyObservers();
 	}
 
@@ -162,9 +171,9 @@ public class Figure extends Subject{
 	 * @see Figure#getFaces()
 	 * @see Face
 	 */
-	public void tri() {
-		for(Face f : faces) {
-			f.preSort();
+	public void tri(Vecteur vVue,Vecteur vLumiere) {
+		for(final Face f : faces) {
+			f.preSort(vVue,vLumiere);
 		}
 		Collections.sort(faces);
 	}
@@ -178,13 +187,13 @@ public class Figure extends Subject{
 	 * @see Figure#getCenter()
 	 * @see Figure#getExtremePoint()
 	 */
-	public Point center() {
+	public void setCenter() {
 
-		double[] extreme = getExtremePoint();
-		double x = (extreme[0]+extreme[1])/2;
-		double y = (extreme[2]+extreme[3])/2;
-		double z = (extreme[4]+extreme[5])/2;
-		return new Point(x, y, z);
+		final double[] extreme = getExtremePoint();
+		final double x = (extreme[0]+extreme[1])/2;
+		final double y = (extreme[2]+extreme[3])/2;
+		final double z = (extreme[4]+extreme[5])/2;
+		center = new Point(x, y, z);
 	}
 
 	/**
@@ -211,11 +220,11 @@ public class Figure extends Subject{
 	 * 			The value of the angle you want to rotate in Y axes
 	 * @param k
 	 * 			The value of the angle you want to rotate in Z axes
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
 	public void rotate(double i, double j, double k) {
 		toOrigin();
-		Mouvement.rotate(this, i, j, k);
+		MouvementUtils.rotate(this, i, j, k);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -224,11 +233,11 @@ public class Figure extends Subject{
 	 * Rotate the figure on the X axes only
 	 * @param i
 	 * 			The value of the angle you want to rotate
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
 	public void rotateX(double i) {
 		toOrigin();
-		Mouvement.rotateX(this, i);
+		MouvementUtils.rotateX(this, i);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -237,11 +246,11 @@ public class Figure extends Subject{
 	 * Rotate the figure on the Y axes only
 	 * @param d
 	 * 			The value of the angle you want to rotate
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
 	public void rotateY(double d) {
 		toOrigin();
-		Mouvement.rotateY(this, d);
+		MouvementUtils.rotateY(this, d);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -250,11 +259,11 @@ public class Figure extends Subject{
 	 * Rotate the figure on the Z axes only
 	 * @param i
 	 * 			The value of the angle you want to rotate
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
 	public void rotateZ(double i) {
 		toOrigin();
-		Mouvement.rotateZ(this, i);
+		MouvementUtils.rotateZ(this, i);
 		toCenter();
 		this.notifyObservers();
 	}
@@ -262,8 +271,8 @@ public class Figure extends Subject{
 	/**
 	 * Move the figure on (0,0,0)
 	 */
-	private void toOrigin() {
-		Mouvement.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
+	public void toOrigin() {
+		MouvementUtils.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 	}
 	
 	/**
@@ -271,10 +280,10 @@ public class Figure extends Subject{
 	 * 
 	 * @see CanvasFigure
 	 * @see Figure#getCenter()
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
-	private void toCenter() {
-		Mouvement.deplacer(this, center.getX(), center.getY(), center.getZ());
+	public void toCenter() {
+		MouvementUtils.deplacer(this, center.getX(), center.getY(), center.getZ());
 	}
 	/**
 	 * Get the extreme points of the figure
@@ -287,7 +296,7 @@ public class Figure extends Subject{
 		for(int i = 0 ; i < extreme.length ; i++) {
 			extreme[i] = 0;
 		}
-		for(Point p : points) {
+		for(final Point p : points) {
 			if(extreme[0]>p.getX()) extreme[0] = p.getX(); 
 			if(extreme[1]<p.getX()) extreme[1] = p.getX();
 			if(extreme[2]>p.getY()) extreme[2] = p.getY(); 
@@ -307,10 +316,10 @@ public class Figure extends Subject{
 	 * 			The value of the number of time you want to move the figure in the Y axes.
 	 * @param z
 	 * 			The value of the number of time you want to move the figure in the Y axes.
-	 * @see Mouvement
+	 * @see MouvementUtils
 	 */
 	public void deplace(double x, double y, double z) {
-		Mouvement.deplacer(this, x, y, z);
+		MouvementUtils.deplacer(this, x, y, z);
 		center.deplacer(x, y, z);
 		notifyObservers();
 	}

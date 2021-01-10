@@ -2,7 +2,7 @@ package modele.modelisation;
 
 public class Matrix {
 	
-	private Double[][] matrice;
+	private final Double[][] matrice;
 	public static final Matrix MATRICETRANSFORMATION = new Matrix( new Double[][]{
 		{1.0,	0.0,	0.0},
 		{0.0,	1.0,	0.0}});
@@ -26,7 +26,7 @@ public class Matrix {
 	
 	public static void rotateZ(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Matrix matrice = new Matrix(new Double[][]{
+		final Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),	-Math.sin(theta),	0.0},
 			{Math.sin(theta),	Math.cos(theta),	0.0},
 			{0.0,				0.0,				1.0}});	
@@ -36,7 +36,7 @@ public class Matrix {
 	
 	public static void rotateX(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Matrix matrice = new Matrix(new Double[][]{
+		final Matrix matrice = new Matrix(new Double[][]{
 			{1.0,				0.0,						0.0},
 			{0.0,				Math.cos(theta),			-Math.sin(theta)},
 			{0.0,				Math.sin(theta),			Math.cos(theta)}});
@@ -47,7 +47,7 @@ public class Matrix {
 	
 	public static void rotateY(Point point2,double theta) {
 		theta = Math.toRadians(theta);
-		Matrix matrice = new Matrix(new Double[][]{
+		final Matrix matrice = new Matrix(new Double[][]{
 			{Math.cos(theta),		0.0,		-Math.sin(theta)},
 			{0.0,					1.0,		0.0},
 			{Math.sin(theta),		0.0,		Math.cos(theta)}});
@@ -57,7 +57,7 @@ public class Matrix {
 	
 	private static void multiplyMatrice(Matrix matrice, Point point2) {
 		Double[] res = new Double[matrice.length()];
-		Double[] p = new Double[] {point2.getX(),point2.getY(),point2.getZ()};
+		final Double[] p = {point2.getX(),point2.getY(),point2.getZ()};
 		
 		
 		for(int i=0; i<matrice.length();i++) {
@@ -69,7 +69,8 @@ public class Matrix {
 		}
 		point2.setX(res[0]);
 		point2.setY(res[1]);
-		if(res.length==3) point2.setZ(res[2]); 
+		final int nbCoord = 3;
+		if(res.length==nbCoord) point2.setZ(res[2]); 
 	}
 	
 	public static void transformation(Point point2) {

@@ -1,17 +1,12 @@
 package view;
 
-
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import modele.modelisation.Face;
 import modele.modelisation.Figure;
 import modele.modelisation.Matrix;
 import modele.modelisation.Point;
+import modele.modelisation.Vecteur;
 import utils.Observer;
 import utils.Subject;
 /**
@@ -24,20 +19,14 @@ import utils.Subject;
 public class CanvasFigure extends Canvas implements Observer {
 
 	private Figure fig;
-	private Timeline timeline;
 	
-	private boolean rotating;
-
-	private double opacity = 1;
-	private Color canvaFillColor = Color.rgb(145, 196, 240, opacity);
-	private Color figureFillColor = Color.rgb(135, 206, 250, opacity);
+	private TimelineUtils timeline;
 	
+	private final Vecteur vVue = Vecteur.getDirecteur(0,0,1);
+	private final Vecteur vLumiere = Vecteur.getDirecteur(1,1,1); //faut que je le fasse (Sylvain)
 	
-	private Color figureStrokeColor = Color.BLACK;
-	private double figureLineWidth = 0.2;
-
-	private GraphicsContext gc;
-
+	private Painter painter;
+	private View mainWindow;
 	private static final double DEFAULT_WIDTH = 800;
 	private static final double DEFAULT_HEIGHT = 800;
 
@@ -51,26 +40,22 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * 			The height of your {@link Canvas}
 	 */
 	public CanvasFigure(double width, double height) {
-		this.gc = this.getGraphicsContext2D();
+		super();
+		this.painter = new Painter(this);
 		this.setWidth(width);
 		this.setHeight(height);
-
 		coord = new double[2][1];
-		rotating = false;
-		timeline = new Timeline(new KeyFrame(Duration.seconds(TimelineConst.TEMPSDACTUALISATION), e -> {
-			fig.rotate(TimelineConst.XROTATIONVALUE, TimelineConst.YROTATIONVALUE ,TimelineConst.ZROTATIONVALUE);
-			visualUpdate();
-		}));
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(true);
+		timeline = new TimelineUtils(this);
 	}
 	
 	/**
 	 * Create the {@link Canvas} of the {@link Figure} with the default width and height
 	 * <p> DEFAULT_WIDTH = 800 <br> DEFAULT_HEIGHT = 500 </p>
+	 * @param view 
 	 */
-	public CanvasFigure() {
+	public CanvasFigure(View view) {
 		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.mainWindow = view;
 	}
 	
 	/**
@@ -79,37 +64,16 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * 			The new {@link Color} of the background
 	 */
 	public void setCanvaFillColor(Color rgba) {
-		this.canvaFillColor = rgba;
-		visualUpdateLite();
+		painter.setCanvaFillColor(rgba);
 	}
 	
-	/**
-	 * Get the background {@link Color} of the {@link Canvas}
-	 * @return {@link Color}
-			visualUpdate();
-	 * 			 the {@link Color} of the background
-	 */
-	public Color getCanvaFillColor() {
-		return canvaFillColor;
-	}
-
 	/**
 	 * Set the {@link Figure}'s {@link Color}
 	 * @param rgba
 	 * 			The new {@link Color} of the {@link Figure}
 	 */
 	public void setFigureFillColor(Color rgba) {
-		this.figureFillColor = Color.color(rgba.getRed(), rgba.getGreen(), rgba.getBlue(), this.opacity);
-		visualUpdateLite();
-	}
-
-	/**
-	 * Get the {@link Figure}'s {@link Color}
-	 * @return {@link Figure}
-	 * 			the {@link Color} of the {@link Figure}
-	 */
-	public Color getFigureFillColor() {
-		return figureFillColor;
+		painter.setFigureFillColor(rgba);
 	}
 
 	/**
@@ -128,55 +92,23 @@ public class CanvasFigure extends Canvas implements Observer {
 	public void setFigure(Figure fig) {
 		if (this.fig != null)
 			this.fig.detach(this);
-
+		this.mainWindow.updateTitle(fig.getName());
 		this.fig = fig;
 		this.fig.attach(this);
 		this.centerFigure();
 		this.printFigure();
 		this.stopRotation();
 	}
-
-	/**
-	 * Get the edge's width
-	 * @return {@link Double}
-	 * 			the edge's width of the {@link Figure}
-	 */
-	public double getFigureLineWidth() {
-		return this.figureLineWidth;
-	}
 	
-	/**
-	 * Set the edge's width
-	 * @param value
-	 * 			the value of the new edge's width of the {@link Figure}
-	 */
-	public void setFigureLineWidth(double value) {
-		this.figureLineWidth = value;
-		visualUpdateLite();
-	}
-
-	private void printFace(Face f) {
-		this.gc.setFill(figureFillColor);
-		this.gc.setStroke(figureStrokeColor);
-		this.gc.setLineWidth(figureLineWidth);
-		this.gc.fillPolygon(coord[0], coord[1], f.getNbPoints());
-		this.gc.strokePolygon(coord[0], coord[1], f.getNbPoints());
-
-	}
-
-	private void convert3d2d() {
-		for (Point p : fig.getPoints())
-			Matrix.transformation(p);
-	}
-	
-
 	private void initialiseCoordsFromFace(Face face) {
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
 
-		for (int j = 0; j < face.getPoints().size(); j++) {
-			coord[0][j] = face.getPoints().get(j).getX();
-			coord[1][j] = face.getPoints().get(j).getY();
+		int j = 0;
+		for (final Point p : face.getPoints()) { //demeter
+			coord[0][j] = p.getX();
+			coord[1][j] = p.getY();
+			j++;
 		}
 	}
 	
@@ -196,11 +128,9 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#printFigure()
 	 */
 	public void printFigureLite() {
-		for (Face f : fig.getFaces()) {
-			if(f.isUpper()) {
-				initialiseCoordsFromFace(f);
-				printFace(f);
-			}
+		for (final Face f : fig.getFaces()) {
+			initialiseCoordsFromFace(f);
+			painter.printFace(f,coord);
 		}
 	}
 	
@@ -212,7 +142,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 */
 	@Override
 	public void update(Subject subj) {
-		fig.tri();
+		fig.tri(vVue,vLumiere);
 		visualUpdate();
 	}
 
@@ -227,12 +157,9 @@ public class CanvasFigure extends Canvas implements Observer {
 		update(subj);
 	}
 
-	/**
-	 * Clear the {@link Canvas}
-	 */
-	private void clear() {
-		this.gc.setFill(canvaFillColor);
-		this.gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+	private void convert3d2d() {
+		for (final Point p : fig.getPoints())
+			Matrix.transformation(p);
 	}
 
 	/**
@@ -241,7 +168,7 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * @see CanvasFigure#visualUpdateLite()
 	 */
 	private void visualUpdate() {
-		clear();
+		painter.clear(this.getWidth(), this.getHeight());
 		printFigure();
 	}
 	
@@ -250,8 +177,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * <p> use {@link CanvasFigure#printFigureLite()}</p>
 	 * @see CanvasFigure#visualUpdate()
 	 */
-	private void visualUpdateLite() {
-		clear();
+	public void visualUpdateLite() {
+		painter.clear(this.getWidth(), this.getHeight());
 		printFigureLite();
 	}
 
@@ -259,7 +186,9 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * Put the {@link Figure} on the center of the {@link Canvas}
 	 */
 	public void centerFigure() {
-		double[] extreme = fig.getExtremePoint();
+		fig.toOrigin();
+		fig.setCenter();
+		final double[] extreme = fig.getExtremePoint();
 		double ext = 0;
 		for (int i = 0; i < extreme.length - 2; i++) {
 			if (ext < Math.abs(extreme[i]))
@@ -275,36 +204,39 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * Begin the rotation of the {@link Figure}
 	 */
 	public void startRotation() {
-		rotating = true;
 		timeline.play();
 	}
-	
-	/**
-	 * 
-	 * @return {@link boolean}
-	 * 		true if the canva is rotating, false otherwise.
-	 * 		@see CanvasFigure#startRotation()
-	 * 		@see CanvasFigure#stopRotation()
-	 */
-	public boolean isRotating() {
-		return this.rotating;
-	}
+
 	
 	/**
 	 * Stop the rotation of the {@link Figure}
 	 */
 	public void stopRotation() {
-		rotating = false;
 		timeline.stop();
 	}
 
-	public double getFigureOpacity() {
-		return opacity;
+	public Painter getPainter() {
+		return painter;
+	}
+	
+	public boolean isRotating() {
+		return timeline.isRunning();
 	}
 
-	public void setFigureOpacity(double newValue) {
-		this.opacity = newValue;
-		this.setFigureFillColor(this.figureFillColor);
+	public boolean isFigureColored() {
+		return fig.isColored();
 	}
 
+	public void modifyWidth(double d) {
+		this.setWidth(d);
+		this.centerFigure();
+		this.visualUpdateLite();
+	}
+	
+	public void modifyHeight(double d) {
+		this.setHeight(d);
+		this.centerFigure();
+		this.visualUpdateLite();
+	}
+	
 }

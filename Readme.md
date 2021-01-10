@@ -6,29 +6,40 @@
 
 - Description des activités/responsabilités de chaque membre de l'équipe (rappel: les responsabilités doivent être équilibrées)
 
-    Dubois Quentin : 
-        Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modele du MVC.
-        Je me suis aussi occupé de la Rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
-        les autres fonctions intermediaires. (Ces fonctions se trouvant dans les Classes "Matrix" et "Deplacements" qui constituent les
+    Dubois Quentin - Ruendan/Marmotte : 
+        Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modèle du MVC.
+        Je me suis aussi occupé de la rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
+        les autres fonctions intermédiaires. (Ces fonctions se trouvant dans les Classes "Matrix" et "Deplacements" qui constituent les
         concepts Mathématiques.).
-        J'ai finalement implémenté le modèle Observer/Observé (La vue Observant le Modele, et donc les elements de la vue sont des 
+        J'ai finalement implémenté le modèle Observer/Observé (La vue Observant le Modèle, et donc les élements de la vue sont des 
         observers de la classe Figure principalement).
-        Aussi, je me suis chargé de l'edition du jar executable "executable.jar"
-
+        Aussi, je me suis chargé de l'édition du jar executable "executable.jar"
+        J'ai principalement ajouté des features, comme par exemple le fait que l'utilisateur puisse ajouter ses propres fichiers ply, l'affichage d'une nouvelle vue, les paramètres (ces élements se trouvent au dessus de l'explorer).
+        J'ai également fait les erreurs, et leur affichage. Ainsi, quand une erreur est soulevée, un message en lien s'affiche.
+        Pour une meilleur efficacité, j'ai essayé de totalement changer la manière dont les points et les faces étaient modélisées (faire un calcul matriciel au lieu d'une boucle qui prends beaucoup plus de temps. Cet ajout peut etre trouvé sur la branche feature/matriceDePoint. Et Lucas a essayé de faire sa propre implementation).
+        Ensuite, une feature que j'ai voulu ajouter mais que je n'ai cependant pas eu le temps d'ajouter est le fait de faire ses propres scripts. Ainsi, l'utilisateur aurait pu faire des scripts personalisés et executés grâce à un bouton. On pourra trouver les ébauches de ce travail sur la branche feature/personnalScript. 
+        
     Devigne Nathan : 
         Je me suis premièrement occupé de la conceptualisation de l'interface de notre projet afin que l'on ait un modèle en accord avec tout les membres du projet
-        J'ai ensuite réalisé cette interface, avec JavaFX, composée d'un explorateur de fichiers listant nos modèles ainsi que de la fenêtre d'affichage du modèle sélectionné et des boutons de rotation, translation et zoom
-        Une fois tout les éléments créés j'ai organisé les réactions de ceux-ci via les évenements de click et de sélection afin de modifier le modèle affiché, le déplacer, le faire tourner, l'agrandir ou le rétrécir.
-        J'ai également passé un peu de temps sur le style des différents éléments afin de commencer à rendre l'interface ergonomique.
+        Je me suis ensuite occupé de la création d'éléments contenus dans l'interface; la liste des fichiers, les différents boutons et leur placement,
+        la création d'une classe pour simplifier leur création et permettre d'y placer une image, l'ajout de tooltip. J'ai également produit les images présentes dans les boutons de l'application.
+        Après le premier modèle du livrable 1 j'ai redesigné l'interface afin de nous permettre d'ajouter des boutons supplémentaires pour les différentes fonctions à appliquer au modèle.
+        J'ai terminé par ajouter l'icône de l'application avant de rédiger la javadoc ainsi que de produire le diagramme UML.
         
     Hottin Lucas : 
         Je me suis initialement occupé de la conceptualisation de la figure dans la classe Figure et de l'affichage du modèle 3D, j'ai donc fais les fonctions de Translation, de Rotation et de Zoom.
         Au fur et à mesure j'ai créé avec Quentin de nouvelles classes "Matrix" et "Mouvement" pour alléger la classe Figure.
         Avec Sylvain on a travaillé sur l'ordre d'affichage, je me suis donc aidé de la classe Vecteur pour les faire.
         J'ai aussi aidé dans le changement de modèle de l'explorateur.
+        J'ai beaucoup aidé sur l'optimisation en étant derrière mes camarades et non derrière mon écran.
+        Je me suis aussi occupé de pas mal de doc du côté de la modélisation.
+        Avec Quentin on a essayé de convertir la liste de points en matrice mais le manque de temps nous en a empêché donc nous sommes restés sur la version stable de la liste de points.
+        Je me suis aussi occupé de faire les déplacements à la souris, le zoom je l'ai fait avec Sylvain.
 
     Camus Sylvain : 
-        J'ai réalisé du Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs, (même si le système d'ombre n'est pas encore implémenté) j'ai aussi fait enormément de refactoring. 
+        J'ai réalisé le Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs,
+	j'ai aussi fait enormément de refactoring. Incluant notamment la mise en place du pmd. Ainsi que de nombreux fix (redimensionnement du canva, j'en passe)
+	Mise en Place des Ombre, évolution de l'interface graphique, Implémentation du Toggle Switch, Mise en place des Couleur( couleurs sur Point et sur face)
 
 - Toutes précisions qui vous semblent importantes pour la bonne évaluation de votre projet (problème spécifique par exemple une absence prolongée de l'un des membres, réalisation dont vous êtes particulièrement fiers, ...)
     #TODO

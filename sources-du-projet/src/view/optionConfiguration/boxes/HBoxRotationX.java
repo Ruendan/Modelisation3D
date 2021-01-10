@@ -5,9 +5,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.RotationXSpinner;
 
+/**
+ * Label and field for the configuration of X's axis rotation
+ * @author Groupe G1
+ */
 public class HBoxRotationX extends ConfigurationHBox {
 	
 	public HBoxRotationX() {
+		super();
 		this.spinner = new RotationXSpinner();
 		this.label = new Label("Rotation sur X (Mode Auto): ");
 		this.getChildren().addAll(label, spinner);

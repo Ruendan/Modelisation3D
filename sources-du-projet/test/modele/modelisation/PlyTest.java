@@ -4,6 +4,7 @@ package modele.modelisation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import modele.parser.exception.PlyParserException;
 
 public class PlyTest {
 
+	private PlyParser parser;
 	private Ply tested;
 	private List<Point> expectedPoints;
 	private List<Face> expectedFaces;
@@ -24,9 +26,10 @@ public class PlyTest {
 	@BeforeEach
 	public void initialize() {
 		tested = new Ply();
+		parser = PlyParser.getInstance();
 		try {
-			tested = PlyParser.loadPly("cube");
-		} catch (PlyParserException e) {
+			tested = parser.loadPly("cube");
+		} catch (PlyParserException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		

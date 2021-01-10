@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd>
-    <workingSet>Aggregate:Java Main Sources:Java Test Sources:</workingSet>
     <useProjectRuleSet>true</useProjectRuleSet>
-    <ruleSetFile>C:\Users\natht\eclipse-workspace\projetmode-g1\prod-appli\pmd-rules.xml</ruleSetFile>
-    <includeDerivedFiles>false</includeDerivedFiles>
+    <ruleSetFile>C:\Users\Orianna\Documents\DUT\Modélisation\prod-appli\pmd-rules.xml</ruleSetFile>
+    <includeDerivedFiles>true</includeDerivedFiles>
     <violationsAsErrors>false</violationsAsErrors>
-    <fullBuildEnabled>true</fullBuildEnabled>
+    <fullBuildEnabled>false</fullBuildEnabled>
 </pmd>

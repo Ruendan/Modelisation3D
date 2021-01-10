@@ -40,7 +40,7 @@ public class Point {
 		this.y*=multi;
 		this.z*=multi;
 	}
-
+	
 	public Point(double x, double y, double z) {
 		this.x=x;
 		this.y=y;
@@ -116,14 +116,10 @@ public class Point {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Point other = (Point) obj;
-		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-			return false;
-		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-			return false;
-		if (Double.doubleToLongBits(z) != Double.doubleToLongBits(other.z))
-			return false;
-		return true;
+		final Point other = (Point) obj;
+		return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x) && 
+				Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y) &&
+				Double.doubleToLongBits(z) == Double.doubleToLongBits(other.z);
 	}
 	
 	public void setPoint(Double x, Double y, Double z) {
@@ -132,6 +128,4 @@ public class Point {
 		this.z = z;
 	}
 	
-
-
 }

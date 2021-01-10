@@ -15,6 +15,8 @@ public class Ply {
 	private Set<Point> points;
 	private List<Face> faces;
 	
+	private boolean isColored;
+	
 	public String getName() {
 		return this.name;
 	}
@@ -63,11 +65,20 @@ public class Ply {
 		this.comment = comment;
 	}
 
+	public void setColored(boolean value) {
+		isColored = value;
+	}
+	
+	public boolean isColored() {
+		return isColored;
+	}
+	
 	public Ply(int vertex, int nbFace, Set<Point> points, List<Face> faces) {
 		this.vertex = vertex;
 		this.nbFace = nbFace;
 		this.points = points;
 		this.faces = faces;
+		this.isColored = false;
 	}
 
 	public Ply() {}
@@ -76,5 +87,5 @@ public class Ply {
 	public String toString() {
 		return "Ply [vertex=" + vertex + ", face=" + nbFace + ", points=" + points + ", faces=" + faces + "]";
 	}
-	
+
 }

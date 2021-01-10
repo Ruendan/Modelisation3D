@@ -1,17 +1,20 @@
 package modele.modelisation;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Face implements Comparable<Face> {
 	
-	private int nbPoints;
+	private final int nbPoints;
 	private List<Point> points;
 	private Vecteur normal;
 	private Double closest;
+	private double visibility;
 	private double exposition;
 	private boolean isUpper;
-	private static final Vecteur vVue = new Vecteur(0,0,-1);
+	
+	private Color couleur;
 	
 	public Face(int nbPoints,List<Point> points) {
 		this.nbPoints=nbPoints;
@@ -25,7 +28,7 @@ public class Face implements Comparable<Face> {
 		double x = 0;
 		double y = 0;
 		double z = 0;
-		for (Point p : points) {
+		for (final Point p : points) {
 			x+=p.getX();
 			y+=p.getY();
 			z+=p.getZ();
@@ -35,7 +38,7 @@ public class Face implements Comparable<Face> {
 	
 	public double moyenneZ() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getZ();
 		}
 		return res/nbPoints;
@@ -43,7 +46,7 @@ public class Face implements Comparable<Face> {
 	
 	public double moyenneY() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getY();
 		}
 		return res/nbPoints;
@@ -51,44 +54,60 @@ public class Face implements Comparable<Face> {
 
 	public double moyenneX() {
 		double res = 0;
-		for(Point p : points) {
+		for(final Point p : points) {
 			res+=p.getX();
 		}
 		return res/nbPoints;
 	}
 	
-	public void preSort() {
+	public void preSort(Vecteur vVue,Vecteur vLumiere) {
 		setNormal();
+		setVisibility(vVue);
+		setExposition(vLumiere);
 		setClosest();
 	}
 	
 	public void setNormal() {
 		if(points!=null && !points.isEmpty())normal = Vecteur.getNormal(points);
+		
+	}
+	
+	public void setVisibility(Vecteur observateur) {
 		if(normal!=null) {
-			exposition = -vVue.produitScalaire(normal);
-			if(exposition>0)isUpper = true;
+			visibility = -observateur.produitScalaire(normal);
+			if(visibility>0)isUpper = true;
 			else isUpper = false;
 		}
+	}
+	
+	public void setExposition(Vecteur lumiere) {
+		if(normal!=null) {
+			exposition = -lumiere.produitScalaire(normal);
+		}
+	}
+	
+	public double getExposition() {
+		return exposition;
 	}
 	
 	@Override
 	public int compareTo(Face o) {
 		
-		int point = this.closest.compareTo(o.closest);
+		final int point = this.closest.compareTo(o.closest);
 		if(point!=0)return point;
-		Double moyZ1 = normal.getDirZ();
-		Double moyZ2= o.getNormal().getDirZ();
+		final Double moyZ1 = normal.getDirZ();
+		final Double moyZ2= o.getNormal().getDirZ();
 		
 		return moyZ1.compareTo(moyZ2);
 	}
- 
+
 	public void setClosest() {
 		double petit;
 		if(this.getNbPoints()==0)
 			petit = Double.NaN;
-		else petit = points.get(0).getZ();
+		else petit = getPoint(0).getZ();
 		
-		for (Point point : points) {
+		for (final Point point : points) {
 			if(point.getZ()<petit)petit=point.getZ();
 		}
 		this.closest = petit;
@@ -101,6 +120,7 @@ public class Face implements Comparable<Face> {
 	public Vecteur getNormal() {
 		return this.normal;
 	}
+	
 	public boolean isUpper() {
 		return isUpper;
 	}
@@ -108,10 +128,22 @@ public class Face implements Comparable<Face> {
 		return nbPoints;
 	}
 	
+	public Point getPoint(int i) {
+		return points.get(i);
+	}
+	
 	public List<Point> getPoints() {
 		return points;
 	}
 	
+	public Color getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
+
 	@Override
 	public String toString() {
 		return "Face [nbPoints=" + nbPoints + ", points:(" + points + ")";
@@ -133,21 +165,22 @@ public class Face implements Comparable<Face> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Face other = (Face) obj;
+		final Face other = (Face) obj;
 		
 		if (points == null) {
 			if (other.points != null)
 				return false;
 		} else {
 			for(int i=0; i<points.size(); i++) {
-				if(!this.points.get(i).equals(other.getPoints().get(i))) return false;
+				final Point thisPoint = getPoint(i);
+				if(!thisPoint.equals(other.getPoint(i))) return false;  // je ne comprend pas la loi de demeter ici
 			}
 		}
 		return true;
 	}
 
-	public double getExposition() {
-		return exposition;
+	public double getVisibility() {
+		return visibility;
 	}
 	
 }

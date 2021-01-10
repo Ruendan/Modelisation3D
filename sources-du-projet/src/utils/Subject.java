@@ -3,7 +3,12 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Subject {
+/**
+ * Extendable class to convert a class into a Subject
+ * <p>This class is used to convert any other class into a Subject from the Observer Pattern</p>
+ * @author Groupe G1
+ */
+public class Subject {
     protected List<Observer> attached;
 
     public Subject() {
@@ -23,14 +28,14 @@ public abstract class Subject {
     }
 
     public void notifyObservers() {
-        for (Observer o : attached) {
+        for (final Observer o : attached) {
             o.update(this);
         }
     }
 
 
     public void notifyObservers(Object data) {
-        for (Observer o : attached) {
+        for (final Observer o : attached) {
             o.update(this, data);
         }
     }

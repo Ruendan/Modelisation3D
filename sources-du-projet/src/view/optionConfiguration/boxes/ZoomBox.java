@@ -5,9 +5,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.ZoomSpinner;
 
+/**
+ * Label and field for the configuration of zoom
+ * @author Groupe G1
+ */
 public class ZoomBox extends ConfigurationHBox {
 	
 	public ZoomBox() {
+		super();
 		this.spinner = new ZoomSpinner();
 		this.label = new Label("Valeur de Zoom : ");
 		this.getChildren().addAll(label, spinner);
