@@ -43,7 +43,7 @@ public class Rotation extends GridPane{
 		zup = createButton("zUp");
 		zup.setOnAction(e ->fig.rotateZ(ButtonsUtils.getValeurRotation()));
 		
-		zdown = createButton("zUp");
+		zdown = createButton("zDown");
 		zdown.setOnAction(e ->canva.getFigure().rotateZ(-ButtonsUtils.getValeurRotation()));
 		
 		this.setHgap(10);
