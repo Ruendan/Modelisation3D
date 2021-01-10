@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"application"},{"l":"modele.modelisation"},{"l":"modele.parser"},{"l":"modele.parser.exception"},{"l":"utils"},{"l":"view"},{"l":"view.buttons"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"application"},{"l":"modele.modelisation"},{"l":"modele.parser"},{"l":"modele.parser.exception"},{"l":"utils"},{"l":"view.explorer"},{"l":"view.optionConfiguration"},{"l":"view.optionConfiguration.boxes"},{"l":"view.optionConfiguration.controls"}]
