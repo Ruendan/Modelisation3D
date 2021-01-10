@@ -15,7 +15,7 @@
         observers de la classe Figure principalement).
         Aussi, je me suis chargé de l'edition du jar executable "executable.jar"
 
-        -Livrable 2 - 
+        Livrable 2
 
 
         J'ai principalement ajouté des features, comme par exemple le fait que l'utilisateur puisse ajouté ses propres fichiers ply, l'affichage d'une nouvelle vue, les parametres (ces elements se trouvent au dessus de l'explorer).
