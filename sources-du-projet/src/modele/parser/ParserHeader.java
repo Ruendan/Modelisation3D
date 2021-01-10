@@ -12,6 +12,7 @@ import modele.parser.exception.UnsupportedFileFormat;
 public class ParserHeader {
 	
 	private int pointPos;
+	
 	private int xpos;
 	private int ypos;
 	private int zpos;
@@ -27,8 +28,11 @@ public class ParserHeader {
 	private int idx;
 	
 	
-	private int vertex;
+	private int nbVertex;
 	private int face;
+	
+	private VertexElement vertex;
+	
 	
 	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",
 			VERTEX = "vertex", FACE = "face", RED = "red", GREEN = "green", BLUE = "blue";
@@ -42,7 +46,7 @@ public class ParserHeader {
 		pointPos = 0;
 		idx = 0;
 		
-		this.vertex = -1;
+		this.nbVertex = -1;
 		this.face = -1;
 		this.comment = comment;
 		this.lines = lines;
@@ -81,7 +85,6 @@ public class ParserHeader {
 			default:
 				break;
 			}
-			
 		}
 		if(checkHeader(lines))return idx;
 		return -1;
@@ -128,7 +131,7 @@ public class ParserHeader {
 	}
 
 	private boolean handleVertex(String fline) throws PropertyPropertiesError {
-		vertex = getNbVertex(fline);
+		nbVertex = getNbVertex(fline);
 		boolean endVertex = false;
 		String[] line;
 		while(!endVertex) {
@@ -263,13 +266,13 @@ public class ParserHeader {
 	}
 
 	private boolean checkHeader(String[] lines) throws UnsupportedFileFormat, PropertyPropertiesError, ElementPropertiesError {
-		if(lines.length!=(vertex+face+9+comment.size()+extraPropertys+extraElements)) {
-			throw new UnsupportedFileFormat("total"+vertex+face+9+comment.size()+extraPropertys+extraElements);
+		if(lines.length!=(nbVertex+face+9+comment.size()+extraPropertys+extraElements)) {
+			throw new UnsupportedFileFormat("total"+nbVertex+face+9+comment.size()+extraPropertys+extraElements);
 		}
 		if(xpos==-1||ypos==-1||zpos==-1) {
 			throw new PropertyPropertiesError();
 		}
-		if(vertex==-1||face==-1) {
+		if(nbVertex==-1||face==-1) {
 			throw new ElementPropertiesError();
 		}
 		if(pred+pgreen+pblue!=-3)isColored = true;
@@ -282,7 +285,7 @@ public class ParserHeader {
 	
 	
 	public int getVertex() {
-		return vertex;
+		return nbVertex;
 	}
 
 	public List<String> getComment() {
