@@ -17,28 +17,31 @@ public class Rotation extends GridPane{
 	
 	/**
 	 * Create the rotation buttons panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that need to auto-rotate
 	 * @param fig
 	 * 			The {@link Figure} the buttons are linked to
 	 */
 	public Rotation(CanvasFigure canva){
 		super();
+		final Figure fig = canva.getFigure();
 		final Button xup,xdown,yup,ydown,zup,zdown;
 		
 		xup = createButton("xUp");
-		xup.setOnAction(e ->canva.getFigure().rotateX(ButtonsConstants.getValeurRotation()));
+		xup.setOnAction(e ->fig.rotateX(ButtonsConstants.getValeurRotation()));
 		
 		
 		xdown = createButton("xDown");
-		xdown.setOnAction(e ->canva.getFigure().rotateX(-ButtonsConstants.getValeurRotation()));
+		xdown.setOnAction(e ->fig.rotateX(-ButtonsConstants.getValeurRotation()));
 		
 		yup = createButton("yUp");
-		yup.setOnAction(e ->canva.getFigure().rotateY(ButtonsConstants.getValeurRotation()));
+		yup.setOnAction(e ->fig.rotateY(ButtonsConstants.getValeurRotation()));
 		
 		ydown = createButton("yDown");
-		ydown.setOnAction(e ->canva.getFigure().rotateY(-ButtonsConstants.getValeurRotation()));
+		ydown.setOnAction(e ->fig.rotateY(-ButtonsConstants.getValeurRotation()));
 		
 		zup = createButton("zUp");
-		zup.setOnAction(e ->canva.getFigure().rotateZ(ButtonsConstants.getValeurRotation()));
+		zup.setOnAction(e ->fig.rotateZ(ButtonsConstants.getValeurRotation()));
 		
 		zdown = createButton("zUp");
 		zdown.setOnAction(e ->canva.getFigure().rotateZ(-ButtonsConstants.getValeurRotation()));

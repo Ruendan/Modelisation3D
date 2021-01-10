@@ -10,13 +10,13 @@ import view.ButtonsConstants;
 
 /**
  * Creation of moving buttons
- * <p>This class is used to create the moving buttons linked to the {@link Figure}</p>
+ * <p>This class is used to create the translation buttons linked to the {@link Figure}</p>
  * @author Groupe G1
  */
 public class Translation extends GridPane{
 	
 	/**
-	 * Create the moving buttons panel linked to {@link Figure}
+	 * Create the translation buttons panel linked to {@link Figure}
 	 * @param fig
 	 * 			The {@link Figure} the buttons are linked to
 	 */

@@ -6,11 +6,21 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import view.Painter;
 
+/**
+ * Creation of the slider that handle the opacity of the {@link Figure}
+ * <p>This class is used to create the slider that modify the opacity of the {@link Figure}'s faces</p>
+ * @author Groupe G1
+ */
 public class TransparencyPane extends GridPane{
 	
 	private static final double MIN_WIDTH = 0.0;
 	private static final double MAX_WIDTH = 1.0;
 
+	/**
+	 * Create the opacity slider panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that has the faces
+	 */
 	public TransparencyPane(Painter painter) {
 		super();
 		

@@ -6,11 +6,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import view.Painter;
 
+/**
+ * Creation of colors buttons
+ * <p>This class is used to create the buttons that modify the colors in the {@link CanvasFigure}</p>
+ * @author Groupe G1
+ */
 public class ColorPane extends GridPane{
 	
 	private final ColorPicker figureColorPicker, canvaColorPicker;
 	
 
+	/**
+	 * Create the colors buttons panel linked to {@link Figure}
+	 * @param canva
+	 * 			The {@link CanvasFigure} that need to be colored
+	 */
 	public ColorPane(Painter painter) {
 		super();
 		final Label titleCP1, titleCP2;
