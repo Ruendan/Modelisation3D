@@ -11,7 +11,7 @@ import modele.parser.exception.UnsupportedFileFormat;
 
 public class ParserHeader {
 	
-	private int pointPos;
+	private int tempPos;
 	
 	private int xpos;
 	private int ypos;
@@ -20,7 +20,8 @@ public class ParserHeader {
 	private int pred;
 	private int pgreen;
 	private int pblue;
-	private boolean isColored;
+	private boolean isColoredByPoint;
+	private boolean isColoredByFace;
 	
 	private int extraElements;
 	private int extraPropertys;
@@ -31,10 +32,7 @@ public class ParserHeader {
 	private int nbVertex;
 	private int face;
 	
-	private VertexElement vertex;
-	
-	
-	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",
+	private static final String END_HEADER = "end_header", ELEMENT = "element", PROPERTY = "property",LIST = "list",
 			VERTEX = "vertex", FACE = "face", RED = "red", GREEN = "green", BLUE = "blue";
 	private static final int PROPERTY_POS = 1, VALUE_POS = 2, BASICS_LEN = 3;
 	
@@ -43,7 +41,7 @@ public class ParserHeader {
 	private final String[] lines;
 	
 	public ParserHeader(List<String> comment, String[] lines) {
-		pointPos = 0;
+		tempPos = 0;
 		idx = 0;
 		
 		this.nbVertex = -1;
@@ -98,7 +96,8 @@ public class ParserHeader {
 		ypos = -1;
 		zpos = -1;
 		
-		isColored = false;
+		isColoredByPoint = false;
+		isColoredByFace = false;
 		pred = -1;
 		pgreen = -1;
 		pblue = -1;
@@ -156,7 +155,7 @@ public class ParserHeader {
 	
 	private int getNbVertex(String vert) {
 		if(vert.matches("[0-9]+")) {
-			pointPos = idx;
+			tempPos = idx;
 			return Integer.parseInt(vert);
 		}
 		return -1;
@@ -166,7 +165,7 @@ public class ParserHeader {
 		if(line.length==3&&("float".equals(line[1])||"float32".equals(line[1]))) {
 			return handleFloat(line);
 		} else if(line.length==3&&("uchar".equals(line[1]))) {	
-			return handleColor(line);
+			return handlePointColor(line);
 		} else {
 			throw new PropertyPropertiesError("header:vertex");
 		}
@@ -174,13 +173,13 @@ public class ParserHeader {
 	
 	private boolean handleFloat(String[] line) throws PropertyPropertiesError {
 		if(line[2].charAt(0)=='x'&&xpos==-1) {
-			xpos=idx-pointPos-1;
+			xpos=idx-tempPos-1;
 		}
 		else if(line[2].charAt(0)=='y'&&ypos==-1) {
-			ypos=idx-pointPos-1;
+			ypos=idx-tempPos-1;
 		}
 		else if(line[2].charAt(0)=='z'&&zpos==-1) {
-			zpos=idx-pointPos-1;
+			zpos=idx-tempPos-1;
 		}
 		else {
 			throw new PropertyPropertiesError("xyz");
@@ -188,16 +187,17 @@ public class ParserHeader {
 		return true;
 	}
 
-	private boolean handleColor(String[] line) throws PropertyPropertiesError {
+	private boolean handlePointColor(String[] line) throws PropertyPropertiesError {
 		if(RED.equals(line[VALUE_POS])&&pred==-1) {
-			pred=idx-pointPos-1;
+			pred=idx-tempPos-1;
 		} else if(GREEN.equals(line[VALUE_POS])&&pgreen==-1) {
-			pgreen=idx-pointPos-1;
+			pgreen=idx-tempPos-1;
 		} else if(BLUE.equals(line[VALUE_POS])&&pblue==-1) {
-			pblue=idx-pointPos-1;
+			pblue=idx-tempPos-1;
 		} else {
 			throw new PropertyPropertiesError("couleur:"+line[2]);
 		}
+		isColoredByPoint = true;
 		extraPropertys++;
 		return true;
 	}
@@ -229,14 +229,34 @@ public class ParserHeader {
 	}
 
 	private int getNbFace(String face) {
-		if(face.matches("[0-9]+"))return Integer.parseInt(face);
+		if(face.matches("[0-9]+")) {
+			tempPos = idx;
+			return Integer.parseInt(face);
+		}
 		else return -1;
 	}
 
 	private boolean handleFaceProperty(String[] line) throws PropertyPropertiesError {
-		if(!(line.length>3&&"list".equals(line[1]))) {
-			throw new PropertyPropertiesError("header:face");
+		if(line.length>BASICS_LEN&&LIST.equals(line[PROPERTY_POS])) {
+			return true;
+		} else if(line.length==3&&("uchar".equals(line[1]))){
+			return handleFaceColor(line);
 		}
+		throw new PropertyPropertiesError("header:face");
+	}
+
+	private boolean handleFaceColor(String[] line) throws PropertyPropertiesError {
+		if(RED.equals(line[VALUE_POS])&&pred==-1) {
+			pred=idx-tempPos-1;
+		} else if(GREEN.equals(line[VALUE_POS])&&pgreen==-1) {
+			pgreen=idx-tempPos-1;
+		} else if(BLUE.equals(line[VALUE_POS])&&pblue==-1) {
+			pblue=idx-tempPos-1;
+		} else {
+			throw new PropertyPropertiesError("couleur face:"+line[2]);
+		}
+		isColoredByFace = true;
+		extraPropertys++;
 		return true;
 	}
 
@@ -275,15 +295,12 @@ public class ParserHeader {
 		if(nbVertex==-1||face==-1) {
 			throw new ElementPropertiesError();
 		}
-		if(pred+pgreen+pblue!=-3)isColored = true;
-		if((pred==-1||pgreen==-1||pblue==-1)&&isColored) {
+		if((pred==-1||pgreen==-1||pblue==-1)&&(isColoredByPoint^isColoredByFace)) {
 			throw new ElementPropertiesError();
 		}
 		return true;
 	}
 
-	
-	
 	public int getVertex() {
 		return nbVertex;
 	}
@@ -324,8 +341,12 @@ public class ParserHeader {
 		return zpos;
 	}
 	
-	public boolean isColored() {
-		return isColored;
+	public boolean isColoredByPoint() {
+		return isColoredByPoint;
+	}
+
+	public boolean isColoredByFace() {
+		return isColoredByFace;
 	}
 	
 }

@@ -1,6 +1,6 @@
 package modele.parser;
 
-public class VertexElement extends Element {
+public class VertexElement extends PlyElement {
 
 	int xpos = -1;
 	int ypos = -1;

@@ -1,6 +1,6 @@
 package modele.parser;
 
-public class Element {
+public class PlyElement {
 
 	protected String indicatif;
 	
