@@ -48,16 +48,16 @@ public class ParserHeader {
 		this.lines = lines;
 	}
 
-	public boolean handleHeader() throws PlyParserException {
+	public int handleHeader() throws PlyParserException {
 		return handleHeader(lines);
 	}
 	
-	private boolean handleHeader(String[] lines) throws PlyParserException {
+	private int handleHeader(String[] lines) throws PlyParserException {
 		boolean endHeader = false;
 		initGlobal();
 		
-		if(!checkType(lines[0])) return false;
-		if(!checkFormat(lines[1])) return false;
+		if(!checkType(lines[0])) return -1;
+		if(!checkFormat(lines[1])) return -1;
 		idx=1;
 		String[] line;
 		while(!endHeader) {
@@ -73,17 +73,18 @@ public class ParserHeader {
 				break;
 			case "element":
 				if(!handleElement(line)) {
-					return false;
+					return -1;
 				}
 				break;
 			case "property":
-				return false;
+				return -1;
 			default:
 				break;
 			}
 			
 		}
-		return checkHeader(lines);
+		if(checkHeader(lines))return idx;
+		return -1;
 	}
 
 	private void initGlobal() {
