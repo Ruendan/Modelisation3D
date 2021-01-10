@@ -65,8 +65,8 @@ public class Ply {
 		this.comment = comment;
 	}
 
-	public void setColored() {
-		isColored = true;
+	public void setColored(boolean value) {
+		isColored = value;
 	}
 	
 	public boolean isColored() {

@@ -100,12 +100,12 @@ public class Face implements Comparable<Face> {
 		
 		return moyZ1.compareTo(moyZ2);
 	}
- 
+
 	public void setClosest() {
 		double petit;
 		if(this.getNbPoints()==0)
 			petit = Double.NaN;
-		else petit = points.get(0).getZ();
+		else petit = getPoint(0).getZ();
 		
 		for (final Point point : points) {
 			if(point.getZ()<petit)petit=point.getZ();
@@ -120,11 +120,16 @@ public class Face implements Comparable<Face> {
 	public Vecteur getNormal() {
 		return this.normal;
 	}
+	
 	public boolean isUpper() {
 		return isUpper;
 	}
 	public int getNbPoints() {
 		return nbPoints;
+	}
+	
+	public Point getPoint(int i) {
+		return points.get(i);
 	}
 	
 	public List<Point> getPoints() {
@@ -167,8 +172,8 @@ public class Face implements Comparable<Face> {
 				return false;
 		} else {
 			for(int i=0; i<points.size(); i++) {
-				final Point thisPoint = this.points.get(i);
-				if(!thisPoint.equals(other.getPoints().get(i))) return false;  // je ne comprend pas la loi de demeter ici
+				final Point thisPoint = getPoint(i);
+				if(!thisPoint.equals(other.getPoint(i))) return false;  // je ne comprend pas la loi de demeter ici
 			}
 		}
 		return true;
