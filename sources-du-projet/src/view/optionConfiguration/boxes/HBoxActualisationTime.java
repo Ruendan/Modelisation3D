@@ -5,6 +5,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.ActualisationTimeSpinner;
 
+/**
+ * Label and field for the configuration of auto-rotate speed
+ * @author Groupe G1
+ */
 public class HBoxActualisationTime extends ConfigurationHBox {
 	
 	public HBoxActualisationTime() {

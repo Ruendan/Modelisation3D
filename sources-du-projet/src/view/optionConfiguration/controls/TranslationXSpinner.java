@@ -2,6 +2,10 @@ package view.optionConfiguration.controls;
 
 import view.ButtonsConstants;
 
+/**
+ * Spinner for the configuration of X's axis translation
+ * @author Groupe G1
+ */
 public class TranslationXSpinner extends ConfigurationSpinner {
 
 	public TranslationXSpinner() {

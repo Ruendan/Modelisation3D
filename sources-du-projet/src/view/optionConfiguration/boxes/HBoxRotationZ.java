@@ -5,6 +5,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.RotationZSpinner;
 
+/**
+ * Label and field for the configuration of Z's axis rotation
+ * @author Groupe G1
+ */
 public class HBoxRotationZ extends ConfigurationHBox {
 	
 	public HBoxRotationZ() {

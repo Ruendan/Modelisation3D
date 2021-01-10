@@ -5,6 +5,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import view.optionConfiguration.controls.TranslationYSpinner;
 
+/**
+ * Label and field for the configuration of Y's axis translation
+ * @author Groupe G1
+ */
 public class HBoxTranslationY extends ConfigurationHBox {
 	
 	public HBoxTranslationY() {
