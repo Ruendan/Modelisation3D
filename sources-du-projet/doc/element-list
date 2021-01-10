@@ -5,3 +5,8 @@ modele.parser.exception
 utils
 view
 view.buttons
+view.errors
+view.explorer
+view.optionConfiguration
+view.optionConfiguration.boxes
+view.optionConfiguration.controls
