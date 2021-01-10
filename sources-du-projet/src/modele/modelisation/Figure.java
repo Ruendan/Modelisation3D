@@ -43,7 +43,7 @@ public class Figure extends Subject{
 		this.name = ply.getName();
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
-		this.center = center();
+		this.setCenter();
 		this.isColored = ply.isColored();
 		this.initialisation();
 	}
@@ -187,13 +187,13 @@ public class Figure extends Subject{
 	 * @see Figure#getCenter()
 	 * @see Figure#getExtremePoint()
 	 */
-	public Point center() {
+	public void setCenter() {
 
 		final double[] extreme = getExtremePoint();
 		final double x = (extreme[0]+extreme[1])/2;
 		final double y = (extreme[2]+extreme[3])/2;
 		final double z = (extreme[4]+extreme[5])/2;
-		return new Point(x, y, z);
+		center = new Point(x, y, z);
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class Figure extends Subject{
 	/**
 	 * Move the figure on (0,0,0)
 	 */
-	private void toOrigin() {
+	public void toOrigin() {
 		MouvementUtils.deplacer(this, -center.getX(), -center.getY(), -center.getZ());
 	}
 	
@@ -282,7 +282,7 @@ public class Figure extends Subject{
 	 * @see Figure#getCenter()
 	 * @see MouvementUtils
 	 */
-	private void toCenter() {
+	public void toCenter() {
 		MouvementUtils.deplacer(this, center.getX(), center.getY(), center.getZ());
 	}
 	/**

@@ -46,7 +46,6 @@ public class CanvasFigure extends Canvas implements Observer {
 		this.setHeight(height);
 		coord = new double[2][1];
 		timeline = new TimelineUtils(this);
-		
 	}
 	
 	/**
@@ -105,9 +104,11 @@ public class CanvasFigure extends Canvas implements Observer {
 		if ((double) face.getNbPoints() != coord[0].length)
 			coord = new double[2][face.getNbPoints()];
 
-		for (int j = 0; j < face.getPoints().size(); j++) { //demeter
-			coord[0][j] = face.getPoints().get(j).getX();
-			coord[1][j] = face.getPoints().get(j).getY();
+		int j = 0;
+		for (final Point p : face.getPoints()) { //demeter
+			coord[0][j] = p.getX();
+			coord[1][j] = p.getY();
+			j++;
 		}
 	}
 	
@@ -185,6 +186,8 @@ public class CanvasFigure extends Canvas implements Observer {
 	 * Put the {@link Figure} on the center of the {@link Canvas}
 	 */
 	public void centerFigure() {
+		fig.toOrigin();
+		fig.setCenter();
 		final double[] extreme = fig.getExtremePoint();
 		double ext = 0;
 		for (int i = 0; i < extreme.length - 2; i++) {
@@ -222,6 +225,18 @@ public class CanvasFigure extends Canvas implements Observer {
 
 	public boolean isFigureColored() {
 		return fig.isColored();
+	}
+
+	public void modifyWidth(double d) {
+		this.setWidth(d);
+		this.centerFigure();
+		this.visualUpdateLite();
+	}
+	
+	public void modifyHeight(double d) {
+		this.setHeight(d);
+		this.centerFigure();
+		this.visualUpdateLite();
 	}
 	
 }
