@@ -7,17 +7,17 @@
 - Description des activités/responsabilités de chaque membre de l'équipe (rappel: les responsabilités doivent être équilibrées)
 
     Dubois Quentin - Ruendan/Marmotte : 
-        Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modele du MVC.
-        Je me suis aussi occupé de la Rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
-        les autres fonctions intermediaires. (Ces fonctions se trouvant dans les Classes "Matrix" et "Deplacements" qui constituent les
+        Je me suis d'abord occupé de la classe Point, Face, Figure et une partie de la partie Modèle du MVC.
+        Je me suis aussi occupé de la rédaction des tests unitaires, afin d'être certain que les méthodes de Rotation, de Translation, et 
+        les autres fonctions intermédiaires. (Ces fonctions se trouvant dans les Classes "Matrix" et "Deplacements" qui constituent les
         concepts Mathématiques.).
-        J'ai finalement implémenté le modèle Observer/Observé (La vue Observant le Modele, et donc les elements de la vue sont des 
+        J'ai finalement implémenté le modèle Observer/Observé (La vue Observant le Modèle, et donc les élements de la vue sont des 
         observers de la classe Figure principalement).
-        Aussi, je me suis chargé de l'edition du jar executable "executable.jar"
-        J'ai principalement ajouté des features, comme par exemple le fait que l'utilisateur puisse ajouté ses propres fichiers ply, l'affichage d'une nouvelle vue, les parametres (ces elements se trouvent au dessus de l'explorer).
-        J'ai egalement fait les erreurs, et leur affichage. Ainsi, quand une erreur est soulevée, un message en lien s'affiche.
-        Pour une meilleur efficacité, j'ai essayé de totalement changer la manière dont les points et les faces etaient modélisées (faire un calcul matriciel au lieu d'une boucle qui prends beaucoup plus de temps. Cet ajout peut etre trouvé sur la branche feature/matriceDePoint. Et Lucas a essayé de faire sa propre implementation).
-        Ensuite, une feature que j'ai voulu ajouté mais que je n'ai cependant pas eu le temps d'ajouter est le fait de faire ses propres scripts. Ainsi, l'utilisateur aurai pu faire des scripts personalisés et executés grâce à un bouton. On pourra trouver les ebauches de ce travail sur la branche feature/personnalScript. 
+        Aussi, je me suis chargé de l'édition du jar executable "executable.jar"
+        J'ai principalement ajouté des features, comme par exemple le fait que l'utilisateur puisse ajouter ses propres fichiers ply, l'affichage d'une nouvelle vue, les paramètres (ces élements se trouvent au dessus de l'explorer).
+        J'ai également fait les erreurs, et leur affichage. Ainsi, quand une erreur est soulevée, un message en lien s'affiche.
+        Pour une meilleur efficacité, j'ai essayé de totalement changer la manière dont les points et les faces étaient modélisées (faire un calcul matriciel au lieu d'une boucle qui prends beaucoup plus de temps. Cet ajout peut etre trouvé sur la branche feature/matriceDePoint. Et Lucas a essayé de faire sa propre implementation).
+        Ensuite, une feature que j'ai voulu ajouter mais que je n'ai cependant pas eu le temps d'ajouter est le fait de faire ses propres scripts. Ainsi, l'utilisateur aurait pu faire des scripts personalisés et executés grâce à un bouton. On pourra trouver les ébauches de ce travail sur la branche feature/personnalScript. 
         
     Devigne Nathan : 
         Je me suis premièrement occupé de la conceptualisation de l'interface de notre projet afin que l'on ait un modèle en accord avec tout les membres du projet
@@ -31,10 +31,10 @@
         Au fur et à mesure j'ai créé avec Quentin de nouvelles classes "Matrix" et "Mouvement" pour alléger la classe Figure.
         Avec Sylvain on a travaillé sur l'ordre d'affichage, je me suis donc aidé de la classe Vecteur pour les faire.
         J'ai aussi aidé dans le changement de modèle de l'explorateur.
-        J'ai aidé beaucoup sur l'optimisation en étant dérrière mes camarades et non dérrière mon écran.
-        Je me suis aussi occupé de pas mal de la doc du coté de la modélisation.
-        Avec Quentin on a essayé de convertir la liste de point en matrice mais le manque de temps nous en a empéché donc nous sommes resté sur la version stable de la liste de point.
-        Je me suis aussi occupé de faire les déplacement à la souris, le zoom je l'ai fait avec Sylvain.
+        J'ai beaucoup aidé sur l'optimisation en étant derrière mes camarades et non derrière mon écran.
+        Je me suis aussi occupé de pas mal de doc du côté de la modélisation.
+        Avec Quentin on a essayé de convertir la liste de points en matrice mais le manque de temps nous en a empêché donc nous sommes restés sur la version stable de la liste de points.
+        Je me suis aussi occupé de faire les déplacements à la souris, le zoom je l'ai fait avec Sylvain.
 
     Camus Sylvain : 
         J'ai réalisé le Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs,
