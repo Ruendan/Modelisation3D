@@ -27,6 +27,10 @@
         Au fur et à mesure j'ai créé avec Quentin de nouvelles classes "Matrix" et "Mouvement" pour alléger la classe Figure.
         Avec Sylvain on a travaillé sur l'ordre d'affichage, je me suis donc aidé de la classe Vecteur pour les faire.
         J'ai aussi aidé dans le changement de modèle de l'explorateur.
+        J'ai aidé beaucoup sur l'optimisation en étant dérrière mes camarades et non dérrière mon écran.
+        Je me suis aussi occupé de pas mal de la doc du coté de la modélisation.
+        Avec Quentin on a essayé de convertir la liste de point en matrice mais le manque de temps nous en a empéché donc nous sommes resté sur la version stable de la liste de point.
+        Je me suis aussi occupé de faire les déplacement à la souris, le zoom je l'ai fait avec Sylvain.
 
     Camus Sylvain : 
         J'ai réalisé du Parser des fichiers ply !! (qui est entièrement modulable ^^ ), j'ai aussi réalisé toute la partie avec les vecteurs, (même si le système d'ombre n'est pas encore implémenté) j'ai aussi fait enormément de refactoring. 
