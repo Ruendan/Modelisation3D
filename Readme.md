@@ -15,7 +15,12 @@
         observers de la classe Figure principalement).
         Aussi, je me suis chargé de l'edition du jar executable "executable.jar"
 
-        
+        Livrable 2
+
+        J'ai principalement ajouté des features, comme par exemple le fait que l'utilisateur puisse ajouté ses propres fichiers ply, l'affichage d'une nouvelle vue, les parametres (ces elements se trouvent au dessus de l'explorer).
+        J'ai egalement fait les erreurs, et leur affichage. Ainsi, quand une erreur est soulevée, un message en lien s'affiche.
+        Pour une meilleur efficacité, j'ai essayé de totalement changer la manière dont les points et les faces etaient modélisées (faire un calcul matriciel au lieu d'une boucle qui prends beaucoup plus de temps. Cet ajout peut etre trouvé sur la branche feature/matriceDePoint. Et Lucas a essayé de faire sa propre implementation).
+        Ensuite, une feature que j'ai voulu ajouté mais que je n'ai cependant pas eu le temps d'ajouter est le fait de faire ses propres scripts. Ainsi, l'utilisateur aurai pu faire des scripts personalisés et executés grâce à un bouton. On pourra trouver les ebauches de ce travail sur la branche feature/personnalScript. 
 
     Devigne Nathan : 
         Je me suis premièrement occupé de la conceptualisation de l'interface de notre projet afin que l'on ait un modèle en accord avec tout les membres du projet
