@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Creation of buttons attributes
+ * <p>This class is used to be able to refer to the same style/size/... for each buttons we create</p>
+ * @author Groupe G1
+ */
 public class ButtonsConstants {
 	
 	protected static double valeurZoom = 0.05;

@@ -21,6 +21,11 @@ import view.buttons.ButtonsControls;
 import view.buttons.ButtonsOthers;
 import view.explorer.ExplorerLayout;
 
+/**
+ * Creation of the window of the application
+ * <p>This class is used to create the {@link Stage} that will be shown to the user composed with the {@link Explorer}, the {@link ButtonsControls}, the {@link CansFigure} and the {@link ButtinsOthers}</p>
+ * @author Groupe G1
+ */
 public class View extends Stage{
 	
 	private StackPane middle;
@@ -47,10 +52,17 @@ public class View extends Stage{
 	private double x = 0;
 	private double y = 0;
 	
+	/**
+	 * Default constructor that will show the defined model
+	 */
 	public View() throws PlyParserException, FileNotFoundException {
 		this(new Figure(PlyParser.getInstance().loadPly(DEFAULT_MODEL)));
 	}
-	
+	/**
+	 * Constructor that opens the stage with a given model
+	 * @param fig
+	 * 			The {@link Figure} to open the stage with
+	 */
 	public View(Figure fig) {
 		super();
 		display = new CanvasFigure(this);
@@ -76,7 +88,11 @@ public class View extends Stage{
 		this.setMinHeight(SCENE_MIN_HEIGHT);
 		this.show();
 	}
-	
+	/**
+	 * Create the middle part of the stage with the {@link Figure} and the {@link ButtonsControls}
+	 * @param fig
+	 * 			The {@link Figure} to create the middle part with
+	 */
 	private StackPane createMiddle(Figure fig) {
 		final StackPane res = new StackPane();
 		
@@ -111,18 +127,30 @@ public class View extends Stage{
 		
 		return res;
 	}
-	
+	/**
+	 * Update the middle part of the stage
+	 * @param fig
+	 * 			The new {@link Figure} to update the middle with
+	 */
 	public void updateMiddle(Figure f){
 		middle = createMiddle(f);
 		layout.setCenter(middle);
 		
 	}
-	
+	/**
+	 * Update the title of the stage with {@link Figure}'s name
+	 * @param fig
+	 * 			The new {@link Figure}'s name to update the title with
+	 */
 	public void updateTitle(String name) {
 		if(name==null||name.equals(""))this.setTitle(TITRE);
 		this.setTitle(TITRE+" - "+name);
 	}
-	
+	/**
+	 * Get the {@link Figure} actually displayed 
+	 * @param fig
+	 * 			The {@link Figure} that is displayed on the stage
+	 */
 	public Figure getActualFigure() {
 		return this.display.getFigure();
 	}

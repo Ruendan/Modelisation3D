@@ -5,6 +5,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+/**
+ * Creation of timeline attributes
+ * <p>This class is used to store all the timeline's attributes</p>
+ * @author Groupe G1
+ */
 public class OurTimeline {
 	
 	protected static double tempsActualisation = 0.05;
