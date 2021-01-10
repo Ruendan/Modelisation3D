@@ -3,11 +3,6 @@ package modele.modelisation;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator.OfDouble;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import javafx.collections.SetChangeListener;
 
 public class Face implements Comparable<Face> {
 	
@@ -214,18 +209,18 @@ public class Face implements Comparable<Face> {
 	}
 	
 	/**
-	 * Get the {@link javafx.scene.paint.Color} of the face
+	 * Get the {@link Color} of the face
 	 * @return
-	 * 		{@link javafx.scene.paint.Color}
+	 * 		{@link Color}
 	 */
 	public Color getCouleur() {
 		return couleur;
 	}
 
 	/**
-	 * Set the {@link javafx.scene.paint.Color} of the face
+	 * Set the {@link Color} of the face
 	 * @param couleur
-	 * 		The future {@link javafx.scene.paint.Color} of the face
+	 * 		The future {@link Color} of the face
 	 */
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
