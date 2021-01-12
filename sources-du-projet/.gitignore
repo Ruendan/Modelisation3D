@@ -1,6 +1,3 @@
-/bin/
-.project
-.classpath
-.settings
-/build.fxbuild
-
+.idea/
+Skeleton.iml
+target/
