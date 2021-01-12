@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pmd>
-    <useProjectRuleSet>true</useProjectRuleSet>
-    <ruleSetFile>C:\Users\Orianna\Documents\DUT\Modélisation\prod-appli\pmd-rules.xml</ruleSetFile>
-    <includeDerivedFiles>true</includeDerivedFiles>
-    <violationsAsErrors>false</violationsAsErrors>
-    <fullBuildEnabled>false</fullBuildEnabled>
-</pmd>

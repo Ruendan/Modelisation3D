@@ -106,7 +106,7 @@ public class Figure extends Subject{
 	 * 			The figure's name
 	 */
 	public String getName() {
-		return this.name;
+		return this.name.replaceFirst(".ply", "");
 	}
 	
 	public boolean isColored() {
