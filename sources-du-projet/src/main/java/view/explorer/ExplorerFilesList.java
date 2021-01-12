@@ -17,7 +17,7 @@ import view.View;
  */
 public class ExplorerFilesList extends ListView<PlyFile>{
 	
-	private final File lib = new File("./src/main/resources/plys");
+	private final File lib = new File("./resources/plys");
 	private final File[] files = lib.listFiles();
 	
 	/**

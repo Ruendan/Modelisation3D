@@ -22,7 +22,7 @@ public class Ply {
 	}
 	
 	public void setName(String name) {
-		this.name = name.replaceFirst(".ply", "");
+		this.name = name.replaceFirst("\\.ply", "");
 	}
 	
 	public int getVertex() {

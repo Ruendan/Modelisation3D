@@ -73,7 +73,11 @@ public class ToggleSwitch extends Labeled {
 	
 	@Override
     public String getUserAgentStylesheet() {
-        return ToggleSwitch.class.getResource("toggleswitch.css").toExternalForm();
-    }
+		try {
+			return ToggleSwitch.class.getResource("toggleswitch.css").toExternalForm();
+		}catch (Exception e) {
+			return "./resources/view/buttons/toggleswitch.css";
+		}
+	}
 	
 }

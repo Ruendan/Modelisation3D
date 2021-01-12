@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 public class IconConstants {
 
 	private static String fs = File.separator;
-	public static final String BUTTONICONSFOLDER = "./src/main/resources"+fs+"imgs"+fs+"buttons_icons"+fs;
+	public static final String BUTTONICONSFOLDER = "./resources"+fs+"imgs"+fs+"buttons_icons"+fs;
 	public static final String EXTENSION = ".png";
 	
 	public static ImageView createButtonIcon(String imgName) {
