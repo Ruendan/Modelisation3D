@@ -40,7 +40,7 @@ public class Figure extends Subject{
 	 */
 	public Figure(Ply ply) {
 		super();
-		this.name = ply.getName();
+		this.name = ply.getName().replaceFirst(".ply", "");
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
 		this.setCenter();
@@ -106,7 +106,7 @@ public class Figure extends Subject{
 	 * 			The figure's name
 	 */
 	public String getName() {
-		return this.name.replaceFirst(".ply", "");
+		return this.name;
 	}
 	
 	public boolean isColored() {
