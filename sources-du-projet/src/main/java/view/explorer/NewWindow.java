@@ -2,7 +2,8 @@ package view.explorer;
 
 import java.io.FileNotFoundException;
 
-import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.Tooltip;
 import modele.modelisation.Figure;
 import modele.parser.PlyParser;
@@ -16,7 +17,7 @@ import view.View;
  * <p>This class is used to create a new window with the actual {@link Figure} in it</p>
  * @author Groupe G1
  */
-public class NewWindow extends Button{
+public class NewWindow extends SplitMenuButton{
 	
 	/**
 	 * Create the new window button with its tooltip
@@ -24,11 +25,12 @@ public class NewWindow extends Button{
 	 * 			The {@link View} containing the figure
 	 */
 	public NewWindow(View parent) {
-		super("",IconConstants.createButtonIcon("newWindow"));
+		super();
+		getItems().add(getMenuItem(parent));
+		this.setGraphic(IconConstants.createButtonIcon("newWindow"));
 		Tooltip.install(this, new Tooltip("Creer une nouvelle fenetre"));
 		this.setOnAction(e -> {
 			try {
-				System.out.println(parent.getActualFigure());
 				openNewWindow(parent.getActualFigure());
 			} catch (PlyParserException | FileNotFoundException e1) {
 				ErrorSceneUtils.display(e1);
@@ -36,6 +38,14 @@ public class NewWindow extends Button{
 		});
 	}
 	
+	private MenuItem getMenuItem(View parent) {
+		MenuItem boutonCopie = new MenuItem("Copie de la vue");
+		boutonCopie.setOnAction(e -> {
+			new View(parent.getActualFigure());
+		});
+		return boutonCopie;
+	}
+
 	/**
 	 * Show the new window button and load a copy of the previous model
 	 * @param parent
@@ -43,10 +53,9 @@ public class NewWindow extends Button{
 	 */
 	private void openNewWindow(Figure parent) throws PlyParserException, FileNotFoundException {
 		final String figName = parent.getName();
-		
 		final PlyParser parser = PlyParser.getInstance();
 		
-		final Figure newFigure = new Figure(parser.loadPly(figName.substring(0, figName.length()-4))); // Oui
+		final Figure newFigure = new Figure(parser.loadPly(figName.substring(0, figName.length())));
 		new View(newFigure);
 	}
 }

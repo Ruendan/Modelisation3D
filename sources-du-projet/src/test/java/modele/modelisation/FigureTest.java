@@ -69,7 +69,6 @@ class FigureTest {
 		for(Point p : cube.getPoints()) {
 			moyenneAfter+=p.getX();
 		}
-		System.out.println(cube.getNbPoint());
 		assertEquals(10, moyenneAfter/cube.getNbPoint());
 	}
 	

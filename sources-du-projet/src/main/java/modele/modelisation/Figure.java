@@ -40,7 +40,7 @@ public class Figure extends Subject{
 	 */
 	public Figure(Ply ply) {
 		super();
-		this.name = ply.getName().replaceFirst(".ply", "");
+		this.name = ply.getName().replaceFirst("\\.ply", "");
 		this.faces = ply.getFaces();
 		this.points = ply.getPoints();
 		this.setCenter();

@@ -38,7 +38,6 @@ public class ButtonsFactory {
 		case TR:
 			return new Transparency(canva.getPainter());
 		default:
-			System.out.println("Veuillez inserer un type de bouton correct");
 			return null;
 		}
 	}
