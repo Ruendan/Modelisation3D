@@ -38,7 +38,7 @@ public final class PlyParser {
 	}
 	
 	public Ply loadPly(String nom) throws PlyParserException, FileNotFoundException {
-		final String url = "/src/main/resources/plys/";
+		final String url = "/resources/plys/";
 		return loadPly(new File("."+url+nom+".ply"));
 	}
 	
